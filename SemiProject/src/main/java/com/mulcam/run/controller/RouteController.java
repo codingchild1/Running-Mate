@@ -15,7 +15,7 @@ public class RouteController {
 	@Autowired
 	RouteService routeService;
 
-	@GetMapping("/route")
+	@GetMapping("/route_main")
 	public String routemain() {
 		return "route_main";
 	}
@@ -24,7 +24,9 @@ public class RouteController {
 		return "route_sort";
 	}
 	
-	@PostMapping("/route")
+	
+	
+	@PostMapping("/route_main")
 	public String route_main() {
 		return "route_main";
 	}
