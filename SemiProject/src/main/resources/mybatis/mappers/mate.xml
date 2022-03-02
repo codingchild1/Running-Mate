@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.run.dao.MateDAO">
+	<!-- mate전체게시물 조회 -->
+	<select id="mateList" resultType="mate" >
+		<![CDATA[
+			select * from mate order by mate_articleNO
+		]]>
+	</select>
+	
+	<!-- group전체게시물 조회 -->
+		<select id="groupList" resultType="group" >
+		<![CDATA[
+			select * from group1 order by group_articleNO
+		]]>
+	</select>
+	
+	<!-- mate게시물 정보 조회 -->
+	<select id="queryMate" resultType="mate" parameterType="int">
+		<![CDATA[
+			select * from mate where mate_articleNO=#{mate_articleNO}
+		]]>
+	</select>
+	
+	<!-- group게시물 정보 조회 -->
+	<select id="queryGroup" resultType="group" parameterType="int">
+		<![CDATA[
+			select * from group1 where group_articleNO=#{group_articleNO}
+		]]>
+	</select>
+	<!-- mate게시물 수정 -->
+	<update id="updateMate" parameterType="int" >
+		<![CDATA[
+		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_tag=#{mate_tag},
+						mate_date=#{mate_date}, mate_mapinfo=#{mate_mapinfo} where mate_articleNO=#{mate_articleNO}
+		]]>
+	</update>
+	
+	<!-- group게시물 수정 -->
+	<update id="updateGroup" parameterType="int" >
+		<![CDATA[
+		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_ki=#{group_ki},
+						group_il=#{group_ki}, group_tag=#{group_tag}, group_date=#{group_date}, group_area=#{group_area} 
+						where group_articleNO=#{group_articleNO}
+		]]>
+	</update>
+	
+	<!-- mate게시물 삭제 -->
+	<delete id="deleteMate" parameterType="int">
+		<![CDATA[
+			delete from mate where mate_articleNO=#{mate_articleNO}
+		]]>
+	</delete>
+	
+		<!-- group게시물 삭제 -->
+	<delete id="deleteGroup" parameterType="int">
+		<![CDATA[
+			delete from group1 where group_articleNO=#{group_articleNO}
+		]]>
+	</delete>
+	
+		<!-- mate게시물 삭제시 조회수 -1변경 -->
+	<update id="updateMateviews" parameterType="int" >
+		<![CDATA[
+		update mate set mate_views=#{mate_views} where mate_articleNO=#{mate_articleNO}
+		]]>
+	</update>
+	
+		<!-- group게시물 삭제시 조회수 -1변경 -->
+	<update id="updateGroupviews" parameterType="int" >
+		<![CDATA[
+		update group1 set group_views=#{group_views} where group_articleNO=#{group_articleNO}
+		]]>
+	</update>
+	
+	<!-- mate게시물 생성 -->
+	<insert id="insertMate" parameterType="mate">
+		<![CDATA[
+			insert into mate (mate_articleNO,user_id,mate_title,mate_cont,user_img,mate_like,mate_date,mate_views,mate_mapinfo,warning) 
+				values(#{mate_articleNO},#{user_id},#{mate_title},#{mate_cont},#{user_img},#{mate_like},#{mate_date},#{mate_views},#{mate_mapinfo},#{warning})
+		]]>
+	</insert>
+	
+		<!-- group게시물 생성 -->
+	<insert id="insertGroup" parameterType="group">
+		<![CDATA[
+			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_ki,group_il,group_date,group_area,group_views,waring) 
+				values(#{group_articleNO},#{user_id},#{group_title},#{group_cont},#{user_img},#{group_ki},#{group_il},#{group_date},#{group_area},{group_views},{waring})
+		]]>
+	</insert>
+	
+		<!-- 신고접수 -->
+	<insert id="insertReport" parameterType="warning">
+		<![CDATA[
+			insert into report (alert_no,board_type,board_no,comment_ref,comment_seq,alert_cnt,alert_id) 
+				values(#{alert_no},#{board_type},#{board_no},#{comment_ref},#{comment_seq},#{alert_cnt},#{alert_id})
+		]]>
+	</insert>
+	
+	<!-- 참여자 조회 -->
+	
+	<!-- 참여버튼(참여자 수 +1) -->
+<!--  	<update id="like" parameterType="int" >
+		<![CDATA[
+		update mate set mate_like=#{mate_like} where mate_articleNO=#{mate_articleNO}
+		]]> 
+	</update> -->
+	
+	
+</mapper>
