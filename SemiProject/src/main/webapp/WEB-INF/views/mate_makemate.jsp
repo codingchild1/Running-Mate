@@ -31,7 +31,8 @@
     <h1>번개 글쓰기</h1>
     <div style="margin-top: 100px;">
     <div style="display: flex; align-items: center;">
-        <span><img class="profile" src="images/profile.png" id=user_img name="user_img"></span>
+        <span><img class="profile" src="images/profile.png" name="user_img" id="user_img"></span>
+       <!--  <input type="hidden"  value=""> -->
         <span><input type="text" id="user_id" name="user_id" value="닉네임"
             style="height: 20px;border:none; background-color: white;"
             disabled> </span>
@@ -46,7 +47,9 @@
     </div>
     <button id="search2" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; height: 38px; margin-left: 5px;">검색</button>
     </div>
-    <div id="mapinfo" name="mate_mapinfo" style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
+     <div id="mapinfo"  style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
+     <input type="hidden" id="mate_mapinfo" name="mate_mapinfo" value=""> 
+  
     <textarea name="content" id="mate_cont" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
     <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
         <button id="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
@@ -78,7 +81,9 @@
 
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
-	var src = jQuery('#user_img').attr("src");
+	
+    /* var src = jQuery('#user_img').attr("src"); */ 
+	/* $('input[name=user_img]').attr('value',src); */  //이미지주소 관련
 	
 	  $(document).ready(function(){
 		$('#search2').bind("click", function(){
@@ -98,13 +103,14 @@
 	                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	                map.setCenter(coords);
 	                marker.setDraggable(true);
-	                console.log(marker);
 	            }
 	         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 	        	    
 	        	    // 클릭한 위도, 경도 정보를 가져옵니다 
 	        	    var latlng = mouseEvent.latLng; 
-	        	    
+	        	    JSON.stringify(latlng);
+	        	    console.log(typeof latlng);
+	        	    $('input[name=mate_mapinfo]').attr('value',latlng);
 	        	    // 마커 위치를 클릭한 위치로 옮깁니다
 	        	    marker.setPosition(latlng);
 	        	    
@@ -112,20 +118,15 @@
 	        	    message += '경도는 ' + latlng.getLng() + ' 입니다';
 	        	    
 	        	    var resultDiv = document.getElementById('clickLatlng'); 
-	        	     
-	        	   /*  console.log($('#user_img').val());
-	        	    console.log($('#user_id').val());
-	        	    console.log($('#mate_title').val());
-	        	    console.log($('#mate_cont').val());  */
-	        	    /* resultDiv.innerHTML = message; */
+	        	    
 	        	    $('#submit').bind("click", function(){
-	        	    	console.log(latlng.getLat(),latlng.getLng()); 
-	        	    	console.log("맵정보는"+$('#mate_mapinfo')); 
+	        	     /* console.log(latlng.getLat(),latlng.getLng());  */
+	        	    	console.log("맵정보는"+$('#mate_mapinfo').val()); 
 	        	    	console.log($('#user_img').val());
 		        	    console.log($('#user_id').val());
 		        	    console.log($('#mate_title').val());
 		        	    console.log($('#mate_cont').val());
-		        	    console.log(src);
+		        	     /* console.log(src);  */
 		        	    /* resultDiv.innerHTML = message; */
 	        	    });
 	        	    
