@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.mulcam'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	//mapper 찾기
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.1'
+	runtimeOnly 'mysql:mysql-connector-java'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.56'
+	implementation 'javax.servlet:jstl:1.2'
+	implementation 'org.apache.tiles:tiles-jsp:3.0.4'	
+	
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.json:json:20211205'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+	
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
