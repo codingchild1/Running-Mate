@@ -85,6 +85,7 @@
 
 		$(document).ready(function(){
 			$('#search2').bind("click", function(){
+				console.log("클릭버튼 되네요");
 				var search = $('#search').val();
 		        geocoder.addressSearch(search, function(result, status) {
 			
