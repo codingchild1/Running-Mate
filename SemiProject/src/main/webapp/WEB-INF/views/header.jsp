@@ -116,7 +116,7 @@
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="">login</i>
+                        <i class="">로그인</i>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="">회원가입</i>
