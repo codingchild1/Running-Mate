@@ -90,35 +90,39 @@ main, header {
 						<input type="text" name="title" placeholder="제목을 입력하세요"
 							style="border-radius: 5px; width: 100%; padding: 5px" />
 					</div>
-
+				
 					<div class="pt-1">
 						<!-- 2. TEXT 편집 툴을 사용할 textarea -->
 						<form method = "post" action = "today_post" method="">
 						<textarea name="today_contents" id="editor"></textarea>
 					</div>
-			
+				</form>
 				<br>
 				<div class="pt-1 locate">
 					<div class="d-flex justify-content-center">
+					<form action ="/today" method="post" style="display:inline-block"><button id="routes_all">전체보기</button></form>
 						<button class="btn btn-outline-secondary" type="submit"
 							style="width: 100px; height: 30px; padding: 5px"
 							id="today_makeSubmit" name="today_makeSubmit" onClick="alert(myClassicEditor.getData())">
-							제출</button>&nbsp&nbsp&nbsp&nbsp&nbsp
+							제출</button>
+					</form>&nbsp&nbsp&nbsp&nbsp&nbsp
 							
-							
+						<form action ="/today_postcancle" method="post">	
 						<button class="btn btn-outline-secondary" type="submit"
 							style="width: 100px; height: 30px; padding: 5px"
 							id="today_makeCancle" name="today_makeCancle">
 							취소</button>&nbsp&nbsp&nbsp&nbsp&nbsp
-							
-							
+						</form>	
+						
+						<form action ="/today_list" method="post">	
 						<button class="btn btn-outline-secondary" type="submit"
 							style="width: 100px; height: 30px; padding: 5px"
 							id="today_list" name="today_list">
 							목록</button>
+						</form>
 					</div>
 				</div>
-					</form>
+					
 
 	 <script>
         // 3. CKEditor5를 생성할 textarea 지정
