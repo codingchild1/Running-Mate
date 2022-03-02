@@ -119,7 +119,7 @@ main, header {
 					</div>
 				</div>
 					</form>
-	<%@include file ="fotter.jsp" %>
+
 	 <script>
         // 3. CKEditor5를 생성할 textarea 지정
         var myClassicEditor;
@@ -168,5 +168,6 @@ main, header {
 			</main>
 		</div>
 	</section>
+ <%@include file ="fotter.jsp" %>
 </body>
 </html>
