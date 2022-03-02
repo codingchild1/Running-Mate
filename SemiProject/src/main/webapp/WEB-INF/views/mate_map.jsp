@@ -195,6 +195,9 @@
             text-shadow: 1px 1px 2px gray;
             color: white;
         }
+        .more{
+        cursor: pointer;
+        } 
 
     </style>
 </head>
@@ -250,7 +253,7 @@
                 <span><input type="text" id="like" value="13"
                         style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 13px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                         disabled></span>
-                <button id="btn-modal"
+                <button id="btn-modal" class="more"
                     style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                     보기</button>
             </div>
@@ -275,7 +278,7 @@
                 <span><input type="text" id="like" value="13"
                         style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 13px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                         disabled></span>
-                <button id="btn-modal2"
+                <button id="btn-modal2" class="more"
                     style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                     보기</button>
             </div>
@@ -300,7 +303,7 @@
                 <span><input type="text" id="like" value="13"
                         style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 13px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                         disabled></span>
-                <button
+                <button class="more"
                     style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                     보기</button>
             </div>

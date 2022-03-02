@@ -204,12 +204,16 @@
             display: flex;
     flex-direction: column;
    justify-content: center; 
-        }  
+        } 
+       .more{
+        cursor: pointer;
+        } 
     </style>
 </head>
 
 <body>
 <%-- <%@include file ="header.jsp" %> --%>
+<!--  <form id='form' action="main" method="post">  -->
     <div style="width: 1060px; padding: 10px; margin:20px auto;">
     <h1>메이트 구하기</h1>
     <div class="main">
@@ -244,8 +248,8 @@
                     <span><input type="text" id="like" value="13"
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
-                    <button  id="btn-modal"
-                        style="float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
+                    <button  id="btn-modal" class="more"
+                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor=pointer;">더
                         보기</button>
                 </div>
             </div>
@@ -267,7 +271,7 @@
                     <span><input type="text" id="like" value="13"
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
-                    <button  id="btn-modal2"
+                    <button  id="btn-modal2" class="more"
                         style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                         보기</button>
                 </div>
@@ -290,7 +294,7 @@
                     <span><input type="text" id="like" value="13"
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
-                    <button
+                    <button class="more"
                         style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                         보기</button>
                 </div>
@@ -315,7 +319,7 @@
                     <span><input type="text" id="like" value="13"
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
-                    <button
+                    <button class="more"
                         style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                         보기</button>
                 </div>
@@ -338,7 +342,7 @@
                     <span><input type="text" id="like" value="13"
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
-                    <button
+                    <button class="more"
                         style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                         보기</button>
                 </div>
@@ -361,7 +365,7 @@
                     <span><input type="text" id="like" value="13"
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
-                    <button
+                    <button class="more"
                         style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                         보기</button>
                 </div>
@@ -387,7 +391,7 @@
                 <span><input type="text" id="like" value="13"
                         style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                         disabled></span>
-                <button
+                <button class="more"
                     style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                     보기</button>
             </div>
@@ -410,7 +414,7 @@
                 <span><input type="text" id="like" value="13"
                         style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                         disabled></span>
-                <button
+                <button class="more"
                     style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                     보기</button>
             </div>
@@ -433,7 +437,7 @@
                 <span><input type="text" id="like" value="13"
                         style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                         disabled></span>
-                <button
+                <button class="more"
                     style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
                     보기</button>
             </div>
@@ -521,7 +525,8 @@
             </div>
         </div>
     </div>
-</form>
+<!-- </form> -->
+
     <script>
         const modal = document.getElementById("modal")
         function modalOn() {
