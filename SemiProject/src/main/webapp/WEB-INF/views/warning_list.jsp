@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@include file ="header.jsp" %>
 </head>
 <body>
 	<h2>회원목록 조회</h2>

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<%@include file ="header.jsp" %>	
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Latest compiled JavaScript -->
@@ -136,5 +137,6 @@
             }
         });
     </script> 
+    <%@include file ="fotter.jsp" %>
 </body>
 </html>
