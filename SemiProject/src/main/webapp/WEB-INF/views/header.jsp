@@ -16,50 +16,7 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-<!-- <style>
-        #nav-container {
-            background: rgb(0, 0, 0);
-        }
 
-        nav ul {
-            padding-left: 0;
-
-        }
-
-        nav ul li {
-            float: left;
-            list-style: none;
-            font-size: 17px;
-            padding: 2em 3em 2em 0;
-        }
-
-        nav ul li a {
-            color: white;
-            margin: 5px;
-            display: block;
-            text-decoration: none;
-
-        }
-
-        nav ul li a:hover {
-            color: #ae00ff;
-            transition: color 0s ease-in;
-        }
-
-        .clear {
-            clear: both;
-        }
-
-        a.btn {
-            margin: 0 1em;
-        }
-
-        .mypage {
-            float: right;
-        }
-
-        
-    </style> -->
 </head>
 <body>
  <!-- Start Top Nav -->
@@ -90,9 +47,9 @@
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
             <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                <li class="nav-item"><a class="nav-link" href="#">메이트구하기</a></li>
+                <li class="nav-item"><a class="nav-link" href="mate_main">메이트구하기</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">오늘의러닝</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">코스공유</a></li>
+                <li class="nav-item"><a class="nav-link" href="route_main">코스공유</a></li>
                 <li class="nav-item"><a class="nav-link" href="fb_main">자유게시판</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">이벤트</a></li>
                 

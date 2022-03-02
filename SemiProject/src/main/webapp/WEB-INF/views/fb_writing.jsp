@@ -72,9 +72,9 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 				</div>
 			</div>
 			<div class="writebtn">
-				<button type="button" value="취소" class="btn"
+				<button type="button" value="취소" class="btn btn-success"
 					onclick="location.href='fb_main';">취소</button>
-				<button type="submit" value="저장" class="btn">저장</button>
+				<button type="submit" value="저장" class="btn btn-success">저장</button>
 			</div>
 		<!-- </form> -->
 	</div>

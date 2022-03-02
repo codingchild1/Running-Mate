@@ -34,8 +34,8 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 .board_detail tbody th, .board_detail tbody td {padding:10px 15px; border-bottom:1px solid #ccc;}
 .board_detail tbody textarea {width:100%; min-height:500px}
 
-.btn {margin:5px; padding:5px 11px; color:#fff !important; display:inline-block; background-color:#7D7F82; vertical-align:middle; border-radius:0 !important; cursor:pointer; border:none;}
-.btn:hover {background: #6b9ab8; }
+.btn2 {margin:5px; padding:5px 11px; color:#fff !important; display:inline-block; background-color:#7D7F82; vertical-align:middle; border-radius:0 !important; cursor:pointer; border:none;}
+.btn2:hover {background: #6b9ab8; }
 a { text-decoration-line: none;}
 
     </style>
@@ -74,7 +74,7 @@ a { text-decoration-line: none;}
             </tbody>
         </table>
         <div class="writebtn">
-        <a href="fb_writing" class="btn" >글 쓰기</a>
+        <a href="fb_writing" class="btn btn-success" >글 쓰기</a>
         </div>
     </div>
     </Section>

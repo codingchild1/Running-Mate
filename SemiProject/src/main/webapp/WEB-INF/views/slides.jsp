@@ -37,7 +37,7 @@
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <a href="#"><img class="img-fluid" src="/images/메이트구하기.jpg" alt="메이트구하기"></a>
+                            <a href="mate_main"><img class="img-fluid" src="/images/메이트구하기.jpg" alt="메이트구하기"></a>
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">
@@ -78,7 +78,7 @@
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <a href="#"><img class="img-fluid" src="/images/코스공유.jpg" alt="코스공유"></a>
+                            <a href="route_main"><img class="img-fluid" src="/images/코스공유.jpg" alt="코스공유"></a>
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
