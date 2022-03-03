@@ -32,6 +32,8 @@ dependencies {
 	implementation 'org.json:json:20211205'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	
+	//비밀번호 암호화
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
 }
 
 tasks.named('test') {
