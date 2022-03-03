@@ -13,13 +13,24 @@
 <body>
 	<header><%@include file ="header.jsp" %></header>
 	<main style="width: 70%; margin: 0 auto;">
-		<div style="height: 180px;">
-			<h2>나처럼 달려</h2><br>
-			<div id="route_buttons" style="width: 100%; height:60px; display:inline-block; align-items: center;">
-    			<div style="width:100px; height:50px; display:inline-block;"><form action ="/route_main" method="post" style=" display:inline-block"><button id="routes_all">전체보기</button></form></div>
-    			<div style="width:150px; height:50px; display:inline-block;"><form action ="/route_sort" method="post"><button id="routes_sort">지역별/거리별 보기</button></form></div>
-    			<div style="width:120px; height:50px; display:inline-block; float:right;"><form action ="/route_write" method="post"><button id="route_reg">코스등록하기</button></form></div>
-    		</div>
+		<div class="row align-items-center py-3">
+			<div class="col-md-8 text-black">
+        		<h2>나처럼 달려</h2><br><br>
+	            <div id="route_buttons" style="width: 100%; height:60px; display:inline-block; align-items: center;">
+    			<div style="width:150px; height:50px; display:inline-block;">
+    				<form action ="/route_main" method="post" style=" display:inline-block">
+    					<button id="routes_all" class="btn btn-success" style="width:150px;">전체보기</button>
+    				</form></div>
+    			<div style="width:200px; height:50px; display:inline-block;">
+    				<form action ="/route_sort" method="post">
+    					<button id="routes_sort" class="btn btn-success" style="width:200px;">지역별/거리별 보기</button>
+    				</form></div>
+    			<div style="width:150px; height:50px; display:inline-block; float:right;">
+    				<form action ="/route_write" method="post">
+    					<button id="route_reg" class="btn btn-success" style="width:150px;">코스등록하기</button>
+    				</form></div>
+    			</div>
+        	</div>
 		</div>
 		
 		<div id="routes_list" style="width: 100%; height:500px; background-color: blue;">
