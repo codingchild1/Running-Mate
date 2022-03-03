@@ -24,8 +24,8 @@ public interface MateService{
 	int viewsMate(int mate_articleNO)throws Exception; //번개 글 삭제시 조회수 -1변경
 	int viewsGroup(int group_articleNO)throws Exception; //번개 글 삭제시 조회수 -1변경
 	
-	Mate makeMate(Mate mate)throws Exception; //번개 게시물 생성
-	Group makeGroup(Group group)throws Exception; //소모임 게시물 생성
+	void makeMate(Mate mate)throws Exception; //번개 게시물 생성
+	void makeGroup(Group group)throws Exception; //소모임 게시물 생성
 	
 	Warning makeWarning(Warning warning)throws Exception; //신고 접수
 	String ptpInfo(int mate_articleNO) throws Exception;
