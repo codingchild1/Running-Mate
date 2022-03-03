@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+	
 <mapper namespace="com.mulcam.run.dao.BoardDAO">
 <!-- 자유게시판 조회 -->
-	<select id="selectBoardList" resultType="Board" >
+	<select resultType="int" id="selectBoardCount">
+
 		<![CDATA[
-			select * from fb order by fb_articleNO
+			select count(*) from freeboard
 		]]>
 	</select>
 	
 	<!-- 자유게시판 게시물 조회 -->
-	<select id="selectBoard" resultType="Board" parameterType="int">
+	<select resultType="board" id="selectBoardList"	parameterType="int">
 		<![CDATA[
-			select * from fb where fb_articleNO=#{fb_articleNO}
+			select fb_articleNO,writer,fb_title,fb_content,fb_img_url, fb_date, fb_views,warning 
+				from (select @rownum:=@rownum+1 rnum, tot.* 
+					from (select * from freeboard order by fb_articleNO asc) tot, 
+					(select @rownum:=0) temp) sub
+			where rnum between #{startrow} and #{startrow}+9	
 		]]>
-	</select>
+		</select>
 	
 	<!-- 자유게시판 게시글 생성 -->
 	<insert id="insertBoard" parameterType="Board">
