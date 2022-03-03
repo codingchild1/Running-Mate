@@ -37,8 +37,16 @@ public class MateController {
 		return "mate_map";
 	}
 	@GetMapping("/mate_makemate")
-	public String mate_makemate() {
-		return "mate_makemate";
+	public void mate_makemate(@ModelAttribute Mate mate) {
+		try {
+			System.out.println(mate.getUser_id());
+			System.out.println(mate.getMate_title());
+			System.out.println(mate.getUser_img());
+			System.out.println(mate.getMate_mapinfo());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	@GetMapping("/mate_makegroup")
 	public String makegroup() {
