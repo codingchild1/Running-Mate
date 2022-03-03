@@ -86,4 +86,32 @@ public class MemberController {
 		model.addAttribute("cpage", "login");
 		return "member_list";
 	}
+	
+	//mypage
+	@RequestMapping(value="mypage", method=RequestMethod.GET)
+	public String mypage(HttpSession session, Model model) {
+//		
+//		Member mem = (Member)session.getAttribute("member");
+//		String memberId = mem.getId();
+//		
+//		Member memberInfo = memberService.getInfo(memberId);
+//		model.addAttribute("memberInfo", memberInfo);
+		
+		return "mypage";
+	}
+	
+	@RequestMapping(value="passwordChange", method=RequestMethod.GET)
+	public String passwordChange() {
+		return "passwordChange";
+	}
+	
+	@RequestMapping(value="todaylist", method=RequestMethod.GET)
+	public String todaylist() {
+		return "todaylist";
+	}
+		
+	@RequestMapping(value="fblist", method=RequestMethod.GET)
+	public String fblist() {
+		return "fblist";
+	}
 }

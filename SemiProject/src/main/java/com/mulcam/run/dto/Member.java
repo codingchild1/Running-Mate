@@ -1,5 +1,7 @@
 package com.mulcam.run.dto;
 
+import java.util.List;
+
 public class Member {
 	int no;
 	String id;
@@ -77,6 +79,7 @@ public class Member {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	
+	public List<Mypage> contentlist;	
 	
 }
