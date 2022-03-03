@@ -78,7 +78,7 @@
 	<insert id="insertMate" parameterType="mate">
 		<![CDATA[
 			insert into mate (mate_articleNO,user_id,mate_title,mate_cont,user_img,mate_like,mate_date,mate_views,mate_mapinfo,warning) 
-				values(#{mate_articleNO},#{user_id},#{mate_title},#{mate_cont},#{user_img},#{mate_like},#{mate_date},#{mate_views},#{mate_mapinfo},#{warning})
+				values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},false)
 		]]>
 	</insert>
 	
@@ -86,7 +86,7 @@
 	<insert id="insertGroup" parameterType="group">
 		<![CDATA[
 			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_ki,group_il,group_date,group_area,group_views,waring) 
-				values(#{group_articleNO},#{user_id},#{group_title},#{group_cont},#{user_img},#{group_ki},#{group_il},#{group_date},#{group_area},{group_views},{waring})
+				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_ki},#{group_il},now(),#{group_area},{group_views},{waring})
 		]]>
 	</insert>
 	

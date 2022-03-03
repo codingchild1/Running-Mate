@@ -76,18 +76,16 @@ public class MateServiceImipl implements MateService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
-	public Mate makeMate(Mate mate) throws Exception {
-//		mateDAO.insertMate(mate);
-//		return mateDAO.queryMate(mate.getMate_articleNO());
-		return null;
+	public void makeMate(Mate mate) throws Exception {
+		mateDAO.insertMate(mate);
 	}
-
+	
 	@Override
-	public Group makeGroup(Group group) throws Exception {
+	public void makeGroup(Group group) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
