@@ -102,7 +102,7 @@
         		<h2>나처럼 달려</h2><br><br>
 	            <div id="route_buttons" style="width: 100%; height:60px; display:inline-block; align-items: center;">
     			<div style="width:150px; height:50px; display:inline-block;">
-    				<form action ="/route" method="post" style=" display:inline-block">
+    				<form action ="/route_main" method="post" style=" display:inline-block">
     					<button id="routes_all" class="btn btn-success" style="width:150px;">전체보기</button>
     				</form></div>
     			<div style="width:200px; height:50px; display:inline-block;">
