@@ -11,6 +11,7 @@ import com.mulcam.run.dto.Today;
 
 @Service
 public class TodayServiceImpl implements TodayService {
+	
 	@Autowired 
 	TodayDAO todayDAO; 
 	
