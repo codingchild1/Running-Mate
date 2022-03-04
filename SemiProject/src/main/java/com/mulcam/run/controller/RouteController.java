@@ -55,8 +55,8 @@ public class RouteController {
 	public ModelAndView post_routemain() {
 		ModelAndView mv = new ModelAndView("route_main");
 		try {
-			//List<Route> routeslist = routeService.allRoutesList();
-			//mv.addObject("routes", routeslist);
+			List<Route> routeslist = routeService.allRoutesList();
+			mv.addObject("routes", routeslist);
 		}catch(Exception e) {
 		}
 		return mv;
@@ -92,7 +92,7 @@ public class RouteController {
 			route.setRoute_content(content.trim());
 			System.out.println(route.getRoute_content());
 			System.out.println(route.getRoute_content());
-			//routeService.regRoute(route);
+			routeService.regRoute(route);
 			mv.addObject("route", route);
 			
 		} catch (Exception e) {

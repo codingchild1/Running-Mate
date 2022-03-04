@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 </head>
 
 <body>
@@ -34,58 +40,42 @@
 		</div>
 		
 		<div id="routes_list" style="width: 100%; height:500px;">
-        <div id="route_mini" style="width: 32%; height:500px; display: inline-block; border: 1px solid gray; margin: auto 0.5%">
+		<c:forEach items="${routes }" var="route">
+        <div id="route_mini" style="width: 32%; height:500px; display: inline-block; border: 1px solid gray; margin: auto 0.5%" >
             <div id="route_miniHeader">
                 <span id="route_userThumb">
                 	<img id="userImage" style="width:25px; height:25px;">
                 </span>
-                <span id="route_userName"></span>
-                <span id="route_uploadTime" style="float:right;"></span> 
+                <span id="route_userName">${route.user_id }</span>
+                <span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
             </div>
             <div id="route_miniInfo">
                 <div id="route_miniTitle" style="text"></div>
                 <div id="route_miniThumbInfo">
-                    <img id="routeThumbImg" style="width:100%;height:300px; display:block; margin: auto;"/>
-                    <div id="route_miniContent">간단한설명</div>
+                    <img id="routeThumbImg" src="${route.route_thumb }"style="width:100%;height:300px; display:block; margin: auto;"/>
+                    <div id="route_miniContent"></div>
                 </div>
             </div>
             <div id="route_miniFooter">
-                <div id="route_miniFooterLeft" style="display: inline;" style="background-color:black ;">
+                <div id="route_miniFooterLeft" style="display: inline;">
                     <span><img id="route_myLike" src="https://media.istockphoto.com/vectors/red-heart-design-icon-flat-valentines-day-sign-emblem-isolated-on-vector-id1131944419?b=1&k=20&m=1131944419&s=170x170&h=X3hjbz0XmLxyxWtuSMY9rXqlI89mqk1gSvgHHOtVuYA=" style="width: 15px; height:15px;"/></span>
-                    <span id="route_likes">3</span>
+                    <span id="route_likes">${route.route_likes }</span>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn6Horz4J02Of5NG7sPD2ieM6kG0ywqEJI1w&usqp=CAU" style="width:15px; height:15px;">
                     <span id="route_Replies">4</span>
                 </div>
                 <div id="route_miniFooterRight"style="display: inline-block; float:right">
                     <span>조회</span>
-                    <span id="route_myViews">3</span>
+                    <span id="route_myViews">${route.route_views }</span>
                 </div>
             </div>
         </div>
-    </div>
+        </c:forEach>
+    	</div>
 	</main>
 
     <script>
-    	$(function(){ 
-    		function downloadURI(uri, name){
-			      var link = document.createElement("a")
-			      link.download = name;
-			      link.href = uri;
-			      document.body.appendChild(link);
-			      link.click();
-			 }
-    		$("#routes_all").click(function(){
-    			var cloneElements = $("#route_mini").clone();
-         		cloneElements.appendTo("#routes_list");
-         		console.log("click");
-         		
-         		html2canvas($("#routes_list")[0]).then(function(canvas){
-			          var myImage = canvas.toDataURL();
-			          downloadURI(myImage, "route2.png");
-			          console.log("route1.png 저장!");
-			     });
-				
-    		});
+    	$(function(){
+    		
     	});
     	
     </script>
