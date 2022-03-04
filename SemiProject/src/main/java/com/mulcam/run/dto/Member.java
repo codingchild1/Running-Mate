@@ -1,47 +1,27 @@
 package com.mulcam.run.dto;
 
-import java.util.List;
-
-public class Member {
-	int no;
+public class Member { //dto 변경
+	int articleNO;
 	String id;
 	String name;
 	String password;
 	String email;
 	String phone;
-	String address;
-	String joindate;
-	String userimg;
 	public Member() {}
-	public Member(int no, String id, String name, String password, String email, String phone, String address,
-			String joindate, String userimg) {
-		this.no = no;
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.email = email;
-		this.phone = phone;
-		this.address = address;
-		this.joindate = joindate;
-		this.userimg = userimg;
+	public Member(String id, String name, String password, String email, 
+			String phone, int articleNO) {
+		this.articleNO=articleNO;
+		this.id=id;
+		this.name=name;
+		this.password=password;
+		this.email=email;
+		this.phone=phone;
 	}
-	public int getNo() {
-		return no;
+	public int getArticleNO() {
+		return articleNO;
 	}
-	public void setNo(int no) {
-		this.no = no;
-	}
-	public String getUserimg() {
-		return userimg;
-	}
-	public void setUserimg(String userimg) {
-		this.userimg = userimg;
-	}
-	public String getJoindate() {
-		return joindate;
-	}
-	public void setJoindate(String joindate) {
-		this.joindate = joindate;
+	public void setArticleNO(int articleNO) {
+		this.articleNO = articleNO;
 	}
 	public String getId() {
 		return id;
@@ -73,13 +53,8 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	
-	public List<Mypage> contentlist;	
+	
+
 	
 }

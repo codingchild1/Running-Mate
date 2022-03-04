@@ -34,36 +34,5 @@ public class MemberServiceImpl implements MemberService {
 			throw new Exception("비밀번호가 일치하지 않습니다");
 		} else return false;
 	}
-
-	@Override
-	public List<Member> AllMemberList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertMember(Member mem) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteMember(Member mem) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateMember(String phone, String address) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void insertImg(String id, String userimg) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 }
+
