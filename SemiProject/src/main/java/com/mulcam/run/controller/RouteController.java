@@ -44,8 +44,8 @@ public class RouteController {
 	public ModelAndView get_routemain() {
 		ModelAndView mv = new ModelAndView("route_main");
 		try {
-			//List<Route> routeslist = routeService.allRoutesList();
-			//mv.addObject("routes", routeslist);
+			List<Route> routeslist = routeService.allRoutesList();
+			mv.addObject("routes", routeslist);
 		}catch(Exception e) {
 		}
 		return mv;

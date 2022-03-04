@@ -4,10 +4,8 @@
 <mapper namespace="com.mulcam.run.dao.RouteDAO">
 
 	<insert id="insertRoute" parameterType="route">
-		insert into route (route_articleNo, user_id, route_title, route_thumb, route_date, route_views, route_likes,
-			route_content, route_mapinfo, route_area, route_distance, warning)
-		values (#{route_articleNo}, #{user_id}, #{route_title}, #{route_thumb}, now(), #{route_views}, #{route_likes}, 
-			#{route_content}, #{route_mapinfo}, #{route_area}, #{route_distance}, #{warning})
+		insert into route (user_id, route_title, route_thumb, route_content, route_mapinfo, route_area, route_distance)
+		values (#{user_id}, #{route_title}, #{route_thumb},	#{route_content}, #{route_mapinfo}, #{route_area}, #{route_distance})
 	</insert>
 	
 	<select id="routeAllList" resultType="route">
@@ -16,6 +14,10 @@
 
 </mapper>
 <!-- 
+insert into route (route_articleNo, user_id, route_title, route_thumb, route_date, route_views, route_likes,
+			route_content, route_mapinfo, route_area, route_distance, warning)
+		values (#{route_articleNo}, #{user_id}, #{route_title}, #{route_thumb}, now(), #{route_views}, #{route_likes}, 
+			#{route_content}, #{route_mapinfo}, #{route_area}, #{route_distance}, #{warning})
 create table route(
 	route_articleNo int(11) auto_increment not null,
     user_id varchar(100) not null,
