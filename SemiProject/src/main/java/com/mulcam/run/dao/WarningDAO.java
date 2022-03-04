@@ -13,7 +13,7 @@ import com.mulcam.run.dto.Warning;
 public interface WarningDAO {
 	//목록
 	public List<Warning> warningList() throws Exception;
-		//회원 삭제
+	//회원 삭제
 	public void deleteWarning(Warning warning);
 }
 
