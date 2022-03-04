@@ -5,29 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<link rel="apple-touch-icon" href="/assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
 
+	<!-- zag bootstrap -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/img/apple-icon.png">
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
-	<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+	<!-- ckeditor5 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
+	
+	<!-- mapbox -->
 	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
 	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css" type="text/css" />
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
-
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
-	
-	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@grabzit/js@3.5.2/grabzit.min.js"></script>
 
 	<!-- 넓이 높이 조절 -->
 	<style>
@@ -64,6 +65,9 @@
 			</div>
 			<!-- 글 제목 -->
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
+			<!-- ckeditor -->
+			<textarea id="editor" name="content" style="height:600px;"></textarea><br>
+			
 			<p>코스를 그려주세요</p>
 			<div id="map"></div>
 			
@@ -81,6 +85,53 @@
 	
 	<script>
 		$(function(){
+        	ClassicEditor
+        		.create(document.querySelector("#editor"), {
+	        		ckfinder : {
+    	    			uploadUrl : "/upload"
+        			}
+        		}).then(editor=> {
+	        		window.editor=editor;
+    	    	})
+        		.catch((error) => {
+        			console.error(error);
+ 	       	});
+		});
+	</script>
+	
+<script>
+		$(function(){
+			var mapinfo = {};
+			$("#submit").click(function(){
+				$("#form_user_id").attr("value", $("#user_id").html());
+				$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
+				$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+				$("#form_thumb_img").attr("value", $('#thumb_img').attr("src"));
+				$("route_write").submit();
+			});
+			
+			
+			$('#reset').click(function(){
+				
+				console.log($('#thumb_img').attr("src"));
+				$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
+				$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+			    console.log("route_articleNo: service"); 
+				console.log("user_id: "+ $('#form_user_id').val());
+				console.log("route_title: "+ $('#route_title').val());
+				console.log("route_thumb: " ); 
+				console.log($('#thumb_img').src);
+				console.log("route_date: service"); 
+				console.log("route_views: service"); 
+				console.log("route_likes: service"); 
+				console.log("route_content: "); 
+				console.log("route_area: 생략 " ); 
+				console.log("route_distance: "+ $("#route_distance").val());
+				console.log("route_mapinfo: ");
+				console.log($("#route_mapinfo").val());
+				console.log("warning: service" ); 
+			});
+			
 			mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
 		    const map = new mapboxgl.Map({
 		    	container: 'map', // Specify the container ID
@@ -89,7 +140,6 @@
 		      	zoom: 14.5, // Specify the starting zoom
 		    });
 		    
-		    var thumb_img =""
 		    const coordinatesGeocoder = function (query) {
 		    	// Match anything which looks like
 		    	// decimal degrees coordinate pair.
@@ -149,7 +199,6 @@
 		    	})
 		    );
 		    	
-		    var mapinfo = {};
 		    
 		    const draw = new MapboxDraw({
 		    	// Instead of showing all the draw tools, show only the line string and delete tools.
@@ -312,21 +361,7 @@
 	    	
 	    	map.on('draw.delete', removeRoute);	  
 	    	
-			$('#reset').click(function(){
-				
-			    console.log("route_articleNo: service"); 
-				console.log("user_id: "+ $('#user_id').text());
-				console.log("route_title: "+$('#route_title').val());
-				console.log("route_thumb: "); 
-				console.log("route_date: service"); 
-				console.log("route_views: service"); 
-				console.log("route_likes: service"); 
-				console.log("route_content: "); 
-				console.log(mapinfo.matchings[0].geometry);
-				console.log("route_area: " ); 
-				console.log("route_distance: "+ mapinfo.matchings[0].distance);
-				console.log("warning: service" ); 
-			});
+
 		});
 		
 	</script>
