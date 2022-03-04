@@ -36,19 +36,17 @@ public class MateServiceImipl implements MateService {
 
 	@Override
 	public Mate mateInfo(int mate_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mateDAO.queryMate(mate_articleNO);
+		
 	}
 
 	@Override
 	public Group groupInfo(int group_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mateDAO.queryGroup(group_articleNO);
 	}
 
 	@Override
 	public Mate updateMate(int mate_articleNO) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

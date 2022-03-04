@@ -270,20 +270,20 @@
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <input
+                <input name='mate_title'
                     style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value="제목">
+                    value=''>
                 <div class="close-area">X</div>
             </div>
-            <input
+            <input name='user_id'
                 style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value="아이디">
+                value=''>
             <div style="font-size: 13px; float: right;">
                 <span style="margin: 5px; cursor: pointer;">수정</span>
                     <span style="margin: 5px; cursor: pointer;">삭제</span>
                         <span style="margin: 5px; cursor: pointer;">신고</span>
             </div>
-             <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
+             <input name='mate_date' type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''>
             <div class="content">
                 <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
                 <textarea style="width: 352px; height: 190px;"></textarea>
@@ -309,14 +309,14 @@
     <div id="modal2" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <input
+                <input name="group_title"
                     style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value="제목">
+                    value=''>
                 <div class="close-area">X</div>
             </div>
-            <input
+            <input name="user_id"
                 style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value="아이디">
+                value=''>
                
             <div style="font-size: 13px; float: right;">
                 <span style="margin: 5px; cursor: pointer;">수정</span>
@@ -324,7 +324,7 @@
                         <span style="margin: 5px; cursor: pointer;">신고</span>
                         
             </div>
-            <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
+            <input name="group_date" type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''>
             <div class="content">
 <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
                 
@@ -333,8 +333,8 @@
                 </div>
                 <div
                 style="display:flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px;  float: right;position: relative;">
-                <a href="#"><img class="kakao" src="images/kakao.png" style="width: 25px; height: 25px; margin-left: 13px;"></a>
-                <a href="#"><img class="insta" src="images/insta.png" style="width: 25px; height: 25px;"></a>
+                <a id=group_kl href=''><img class="kakao" src="images/kakao.png" style="width: 25px; height: 25px; margin-left: 13px;"></a>
+                <a id=group_il href=''><img class="insta" src="images/insta.png" style="width: 25px; height: 25px;"></a>
                
                 </div>
             </div>
@@ -345,17 +345,19 @@
  	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
     function detailModal(no,type){
-    	no=parseInt(no);
     	if(type=='m'){
-    	 	modal.style.display = "flex";
-    		 $.ajax({
-    			type:"post",
-    			dataType:"number",
-    			async:false,
+    	 modal.style.display = "flex";
+            $.ajax({
+    		type:"post",
+    		dataType:"text",
+    		async:false,
     		url:"http://localhost:8090/Mmodal",
-    		data:no,
+    		data:{"no":no},
     		success: function(data, textStatus){ 
-    			console.log("성공");
+    			 var jdata = JSON.parse(data); 
+     			 $('input[name=mate_title]').attr('value',jdata.mate_title);
+     			 $('input[name=user_id]').attr('value',jdata.user_id);
+     			 $('input[name=mate_date]').attr('value',jdata.mate_date);  
     		},
     		error:function(data, textStatus){
     			alert("실패");
@@ -369,9 +371,14 @@
  			dataType:"text",
  			async:false,
  		url:"http://localhost:8090/Gmodal",
- 		data:no,
+ 		data:{"no":no},
  		success: function(data, textStatus){ 
- 			console.log("성공");
+ 			 var jdata = JSON.parse(data); 
+ 			 $('input[name=group_title]').attr('value',jdata.group_title);
+ 			 $('input[name=user_id]').attr('value',jdata.user_id);
+ 			 $('input[name=group_date]').attr('value',jdata.group_date);
+ 			 $('#group_kl').attr('href',jdata.group_kl);
+ 			 $('#group_il').attr('href',jdata.group_il);
  		},
  		error:function(data, textStatus){
  			alert("실패");
@@ -379,9 +386,6 @@
  		});
     	 
     	}
-    	console.log(typeof no);
-    	 console.log(no+" "+type);
-    	 
     }
         const modal = document.getElementById("modal")
         function modalOn() {

@@ -3,10 +3,13 @@ package com.mulcam.run.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Group;
@@ -40,23 +43,30 @@ public class MateController {
 		return mv;
 	}
 	
+	@ResponseBody
 	@PostMapping("/Mmodal")
-	public void Mmodal() {
-		System.out.println("controller");
+	public ResponseEntity<Mate> Mmodal(@RequestParam(value="no",required = false) int mate_articleNO) {
+		ResponseEntity<Mate> result = null; 
 		try {
-//			mateService.mateInfo(mate_articleNO);
+			Mate mate = mateService.mateInfo(mate_articleNO);
+			result = new ResponseEntity<Mate>(mate, HttpStatus.OK);
 		}catch(Exception e) {
-			e.printStackTrace();
+			result = new ResponseEntity<Mate>(HttpStatus.BAD_REQUEST);
 		}
+		return result;
 	}
+	
+	@ResponseBody
 	@PostMapping("/Gmodal")
-	public void Gmodal(@RequestParam(value="no") int mate_articleNO) {
-		System.out.println("controller");
+	public ResponseEntity<Group> Gmodal(@RequestParam(value="no",required = false) int group_articleNO) {
+		ResponseEntity<Group> result = null; 
 		try {
-			mateService.mateInfo(mate_articleNO);
+			Group group = mateService.groupInfo(group_articleNO);
+			result = new ResponseEntity<Group>(group, HttpStatus.OK);
 		}catch(Exception e) {
-			e.printStackTrace();
+			result = new ResponseEntity<Group>(HttpStatus.BAD_REQUEST);
 		}
+		return result;
 	}
 
 	@GetMapping("/mate_search")
