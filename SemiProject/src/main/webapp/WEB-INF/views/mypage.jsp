@@ -4,9 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String id = (String)request.getAttribute("id");
 	String name = (String)request.getAttribute("name");
-	String phone1 = (String)request.getAttribute("phone1");
-	String phone2 = (String)request.getAttribute("phone2");
-	String phone3 = (String)request.getAttribute("phone3");
+	String phone = (String)request.getAttribute("phone");
 	String eamil = (String)request.getAttribute("eamil");
 %>
 <!DOCTYPE html>
@@ -29,9 +27,7 @@
 		<label>비밀번호 확인</label>
 		<input type="password" name="password" id="passwordchk" /><br>
 		<label>전화번호</label>
-		<input type="text" name="phone1" value="<%=phone1%>" />-
-		<input type="text" name="phone2" value="<%=phone2%>" />-
-		<input type="text" name="phone3" value="<%=phone3%>" /><br>
+		<input type="text" name="phone1" value="<%=phone%>" /><br>
 		<label>이메일</label>
 		<input type="text" name="email" value="<%=eamil %>" /><br>
 		<input type="submit" value="수정" />

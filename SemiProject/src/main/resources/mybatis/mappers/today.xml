@@ -53,3 +53,34 @@
 		 ]]>
 	</insert> -->
 </mapper>
+
+
+<!-- 
+### 2020.03.04 업데이트 ####
+CREATE DATABASE `run` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+use `run`;
+
+CREATE TABLE `today` (
+  `today_articleNo` int NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(100) NOT NULL,
+  `today_title` varchar(255) NOT NULL,
+  `today_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `today_contents` longtext NOT NULL,
+  `today_thumb` varchar(500) DEFAULT NULL,
+  `today_views` int DEFAULT '0',
+  `today_likes` int DEFAULT '0',
+  `warning` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`today_articlNo`),
+  FOREIGN KEY `user_id` REFERENCES USER(USER_ID)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `today` (`today_articlNo`,`user_id`,`today_title`,`today_date`,`today_contents`,`today_thumb`,`today_views`,`today_likes`,`warning`) VALUES (1,'adminUser','제목 220303','2022-03-03 23:24:48','<p>내용 220303</p>',NULL,0,0,0);
+INSERT INTO `today` (`today_articlNo`,`user_id`,`today_title`,`today_date`,`today_contents`,`today_thumb`,`today_views`,`today_likes`,`warning`) VALUES (2,'min','t','2022-03-03 23:24:48','<p>sss</p>',NULL,0,0,0);
+INSERT INTO `today` (`today_articlNo`,`user_id`,`today_title`,`today_date`,`today_contents`,`today_thumb`,`today_views`,`today_likes`,`warning`) VALUES (4,'adminUser','제에목','2022-03-03 23:24:48','<p>내애용</p>',NULL,0,0,0);
+INSERT INTO `today` (`today_articlNo`,`user_id`,`today_title`,`today_date`,`today_contents`,`today_thumb`,`today_views`,`today_likes`,`warning`) VALUES (5,'adminUser','11111','2022-03-03 23:24:48','<p>22222</p>',NULL,0,0,0);
+
+
+
+
+ -->
