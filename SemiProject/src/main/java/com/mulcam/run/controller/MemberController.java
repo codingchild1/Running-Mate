@@ -1,6 +1,5 @@
 package com.mulcam.run.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,57 +15,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Member;
-import com.mulcam.run.service.MemberService;
+import com.mulcam.run.service.MemberServiceImpl;
 
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memberService;
+	MemberServiceImpl memberService;
 	
 	@Autowired
 	HttpSession session;
 	
-	//회원 리스트
-	@GetMapping(value="memberlist")
-	public ModelAndView memlist() {
-		ModelAndView mav = new ModelAndView("member_list");
-		try {
-			List<Member> memberlist = memberService.AllMemberList();
-			mav.addObject("list", memberlist);
-			mav.addObject("cpage", "member_list");
-		} catch(Exception e) {
-			mav.addObject("err", e.getMessage());
-			mav.addObject("cpage", "err");
-		}
-		return mav;
-	}
-	
-	//join	
-	@RequestMapping(value="/join", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView joinful(@ModelAttribute Member mem) {
-		ModelAndView modelAndView=new ModelAndView("join");
-		try {
-			memberService.insertMember(mem);
-			modelAndView.addObject("cpage", "login");
-		} catch(Exception e) {
-			modelAndView.addObject("err", e.getMessage());
-			modelAndView.addObject("cpage", "err");
-		}
-		return modelAndView;
-	}
-	
 	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView login(@RequestParam Map<String,String> info) {
-		ModelAndView modelAndView=new ModelAndView("login");
+		ModelAndView modelAndView=new ModelAndView("mainpage");
 		try {
 			String id=info.get("id");
 			String password=info.get("password");
 			if(memberService.accessMember(id, password)) {
 				session.setAttribute("id", id);
-				modelAndView.addObject("cpage", "join");
+				modelAndView.addObject("cpage", "mypage");
 			} else throw new Exception();
 		} catch(EmptyResultDataAccessException e) {
 			modelAndView.addObject("err", "아이디가 존재하지 않습니다");
@@ -78,40 +49,42 @@ public class MemberController {
 		return modelAndView;
 	}
 	
-	//logout
+	@GetMapping(value="/menu")
+	public String memMenu(HttpServletRequest request, Model model) {
+		String cpage=request.getParameter("cpage");
+		model.addAttribute("cpage", cpage);
+		return "mainpage";
+	}
+	
 	@GetMapping(value="/logout")
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session=request.getSession();
 		session.removeAttribute("id");
 		model.addAttribute("cpage", "login");
-		return "member_list";
+		return "mainpage";
 	}
 	
-	//mypage
-	@RequestMapping(value="mypage", method=RequestMethod.GET)
-	public String mypage(HttpSession session, Model model) {
-//		
-//		Member mem = (Member)session.getAttribute("member");
-//		String memberId = mem.getId();
-//		
-//		Member memberInfo = memberService.getInfo(memberId);
-//		model.addAttribute("memberInfo", memberInfo);
-		
-		return "mypage";
+	@RequestMapping(value="/join", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView join(@ModelAttribute Member mem) {
+		ModelAndView modelAndView=new ModelAndView("mainpage");
+		try {
+			memberService.makeMember(mem);
+			modelAndView.addObject("cpage", "login");
+		} catch(Exception e) {
+			modelAndView.addObject("err", e.getMessage());
+			modelAndView.addObject("cpage", "err");
+		}
+		return modelAndView;
 	}
-	
-	@RequestMapping(value="passwordChange", method=RequestMethod.GET)
-	public String passwordChange() {
-		return "passwordChange";
-	}
-	
-	@RequestMapping(value="todaylist", method=RequestMethod.GET)
-	public String todaylist() {
-		return "todaylist";
-	}
-		
-	@RequestMapping(value="fblist", method=RequestMethod.GET)
-	public String fblist() {
-		return "fblist";
+
+	@ResponseBody
+	@PostMapping(value="/memberoverlap")
+	public String memberOverlap(@RequestParam(value="id", required=true)String id) {
+		boolean overlap=false;
+		try {
+			overlap=memberService.memOverlap(id);
+		} catch(Exception e) {
+		}
+		return String.valueOf(overlap);
 	}
 }

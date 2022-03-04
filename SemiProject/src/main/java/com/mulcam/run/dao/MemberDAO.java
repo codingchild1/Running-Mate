@@ -11,11 +11,10 @@ import com.mulcam.run.dto.Member;
 @Repository("memberDAO")
 public interface MemberDAO {
 	//목록
-	public List<Member> memberList() throws Exception;
-	//입력
-	public void insertMember(Member mem);
-	//회원 삭제
-	public void deleteMember(Member mem);
-	
-	public Member queryMember(String id);
+//	public List<Member> memberList() throws Exception;
+//	//회원 삭제
+//	public void deleteMember(Member mem);
+
+	public Member queryMember(String id) throws Exception;
+	public void insertMember(Member mem) throws Exception;
 }
