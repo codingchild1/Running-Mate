@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +29,8 @@
         }
 
         .container1 {
-            display: flex;
             margin: 20px;
+            width:1060px;
         }
 
         .register {
@@ -39,8 +40,9 @@
             background: white;
             color: #2b2e4a;
             font-size: 14px;
-            margin: 20px;
+            margin: 14px;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            display: inline-block;
         }
 
         .profile {
@@ -230,22 +232,23 @@
         </div>
     </div>
         <div class="container1">
+          <c:forEach items="${mates }" var="mate"> 
             <div class="register">
                 <div
                     style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
+                    <span><img class="profile" src='${mate.user_img }'></span>
                     <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
+                        <span><input type="text" id="title" value='${mate.mate_title }'
                                 style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
                                 disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
+                        <span><input type="text" id="id" value='${mate.user_id }'
                                 style="height: 20px;vertical-align: middle; border:none; background-color: white;"
                                 disabled> </span>
                     </div>
                 </div>
                 <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
                     <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
+                    <span><input type="text" id="like" value='${mate.mate_like }'
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
                     <button  id="btn-modal" class="more"
@@ -253,200 +256,10 @@
                         보기</button>
                 </div>
             </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button  id="btn-modal2" class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
+           </c:forEach> 
         </div>
-        <div class="container1">
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-        </div>
-    
-    <div class="container1">
-        <div class="register">
-            <div
-                style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <span><img class="profile" src="images/profile.png"></span>
-                <div style="margin-left: 10px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;" disabled>
-                    </span>
-                </div>
-            </div>
-            <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
-        <div class="register">
-            <div
-                style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <span><img class="profile" src="images/profile.png"></span>
-                <div style="margin-left: 10px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;" disabled>
-                    </span>
-                </div>
-            </div>
-            <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
-        <div class="register">
-            <div
-                style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <span><img class="profile" src="images/profile.png"></span>
-                <div style="margin-left: 10px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;" disabled>
-                    </span>
-                </div>
-            </div>
-            <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
+        
     </div>
-    <div>
-
-    </div>
-</div>
     <!-- <div id="container2">
         <h2>Lorem Ipsum</h2>
         <div id="lorem-ipsum"></div>

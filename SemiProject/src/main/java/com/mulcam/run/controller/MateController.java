@@ -1,11 +1,11 @@
 package com.mulcam.run.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Mate;
@@ -24,8 +24,17 @@ public class MateController {
 //	}
 
 	@GetMapping("/mate_main")
-	public String mate_main() {
-		return "mate_main";
+	public ModelAndView mate_main() {
+		ModelAndView mv = new ModelAndView();
+		try {
+			List<Mate> mates = mateService.allMateInfo();
+			mv.addObject("mates",mates);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mv;
 	}
 
 	@GetMapping("/mate_search")

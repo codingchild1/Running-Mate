@@ -19,8 +19,7 @@ public class MateServiceImipl implements MateService {
 	
 	@Override
 	public List<Mate> allMateInfo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mateDAO.mateList();
 	}
 
 	@Override
