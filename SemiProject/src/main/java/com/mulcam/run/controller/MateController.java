@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Group;
@@ -37,6 +38,25 @@ public class MateController {
 			e.printStackTrace();
 		}
 		return mv;
+	}
+	
+	@PostMapping("/Mmodal")
+	public void Mmodal() {
+		System.out.println("controller");
+		try {
+//			mateService.mateInfo(mate_articleNO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@PostMapping("/Gmodal")
+	public void Gmodal(@RequestParam(value="no") int mate_articleNO) {
+		System.out.println("controller");
+		try {
+			mateService.mateInfo(mate_articleNO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@GetMapping("/mate_search")

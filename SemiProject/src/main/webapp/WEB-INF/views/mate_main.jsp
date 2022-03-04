@@ -252,7 +252,8 @@
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
                     <button  id="btn-modal" class="more"
-                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor:pointer;">더
+                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor:pointer;"
+                        onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더
                         보기</button>
                 </div>
             </div>
@@ -278,9 +279,9 @@
                 style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
                 value="아이디">
             <div style="font-size: 13px; float: right;">
-                <span style="margin: 5px; cursor: pointer;">수정
-                    <span style="margin: 5px; cursor: pointer;">삭제
-                        <span style="margin: 5px; cursor: pointer;">신고
+                <span style="margin: 5px; cursor: pointer;">수정</span>
+                    <span style="margin: 5px; cursor: pointer;">삭제</span>
+                        <span style="margin: 5px; cursor: pointer;">신고</span>
             </div>
              <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
             <div class="content">
@@ -341,10 +342,51 @@
     </div>
 <!-- </form> -->
 
+ 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+    function detailModal(no,type){
+    	no=parseInt(no);
+    	if(type=='m'){
+    	 	modal.style.display = "flex";
+    		 $.ajax({
+    			type:"post",
+    			dataType:"number",
+    			async:false,
+    		url:"http://localhost:8090/Mmodal",
+    		data:no,
+    		success: function(data, textStatus){ 
+    			console.log("성공");
+    		},
+    		error:function(data, textStatus){
+    			alert("실패");
+    		}
+    		});
+    	
+    	}else{
+    		modal2.style.display = "flex";
+   		 $.ajax({
+ 			type:"post",
+ 			dataType:"text",
+ 			async:false,
+ 		url:"http://localhost:8090/Gmodal",
+ 		data:no,
+ 		success: function(data, textStatus){ 
+ 			console.log("성공");
+ 		},
+ 		error:function(data, textStatus){
+ 			alert("실패");
+ 		}
+ 		});
+    	 
+    	}
+    	console.log(typeof no);
+    	 console.log(no+" "+type);
+    	 
+    }
         const modal = document.getElementById("modal")
         function modalOn() {
             modal.style.display = "flex"
+            
         }
         function isModalOn() {
             return modal.style.display === "flex"
@@ -352,10 +394,6 @@
         function modalOff() {
             modal.style.display = "none"
         }
-        const btnModal = document.getElementById("btn-modal")
-        btnModal.addEventListener("click", e => {
-            modalOn()
-        });
         const closeBtn = modal.querySelector(".close-area")
         closeBtn.addEventListener("click", e => {
             modalOff()
@@ -372,7 +410,7 @@
             }
         });
 
-        /* const modal2 = document.getElementById("modal2")
+         const modal2 = document.getElementById("modal2")
         function modalOn1() {
             modal2.style.display = "flex"
         }
@@ -382,10 +420,7 @@
         function modalOff1() {
             modal2.style.display = "none"
         }
-        const btnModal2 = document.getElementById("btn-modal2")
-        btnModal2.addEventListener("click", e => {
-            modalOn1()
-        })
+        
         const closeBtn2 = modal2.querySelector(".close-area")
         closeBtn2.addEventListener("click", e => {
             modalOff1()
@@ -400,7 +435,7 @@
             if (isModalOn1() && e.key === "Escape") {
                 modalOff1()
             }
-        }); */
+        }); 
         
 </script>
 <%--  <%@include file ="fotter.jsp" %> --%>
