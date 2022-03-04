@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.run.dao.MateDAO;
 import com.mulcam.run.dto.Group;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Warning;
 
@@ -16,6 +17,11 @@ public class MateServiceImipl implements MateService {
 		
 	@Autowired
 	MateDAO mateDAO;
+	
+	@Override
+	public List<GroupAndMate> allpostInfo() throws Exception {
+		return mateDAO.postList();
+	}
 	
 	@Override
 	public List<Mate> allMateInfo() throws Exception {
@@ -104,5 +110,6 @@ public class MateServiceImipl implements MateService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

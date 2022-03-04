@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Group;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.service.MateService;
 
@@ -28,7 +29,7 @@ public class MateController {
 	public ModelAndView mate_main() {
 		ModelAndView mv = new ModelAndView();
 		try {
-			List<Mate> mates = mateService.allMateInfo();
+			List<GroupAndMate> mates = mateService.allpostInfo();
 			mv.addObject("mates",mates);
 			
 		} catch (Exception e) {

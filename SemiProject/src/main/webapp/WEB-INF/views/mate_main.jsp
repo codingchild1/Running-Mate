@@ -232,27 +232,27 @@
         </div>
     </div>
         <div class="container1">
-          <c:forEach items="${mates }" var="mate"> 
+          <c:forEach items="${mates }" var="groupandmate"> 
             <div class="register">
                 <div
                     style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src='${mate.user_img }'></span>
+                    <span><img class="profile" src='${groupandmate.img }'></span>
                     <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value='${mate.mate_title }'
+                        <span><input type="text" id="title" value='${groupandmate.title }'
                                 style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
                                 disabled> </span>
-                        <span><input type="text" id="id" value='${mate.user_id }'
+                        <span><input type="text" id="id" value='${groupandmate.id }'
                                 style="height: 20px;vertical-align: middle; border:none; background-color: white;"
                                 disabled> </span>
                     </div>
                 </div>
                 <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
                     <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value='${mate.mate_like }'
+                    <span><input type="text" id="like" value='${groupandmate.likeno }'
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
                     <button  id="btn-modal" class="more"
-                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor=pointer;">더
+                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor:pointer;">더
                         보기</button>
                 </div>
             </div>
@@ -318,9 +318,10 @@
                 value="아이디">
                
             <div style="font-size: 13px; float: right;">
-                <span style="margin: 5px; cursor: pointer;">수정
-                    <span style="margin: 5px; cursor: pointer;">삭제
-                        <span style="margin: 5px; cursor: pointer;">신고
+                <span style="margin: 5px; cursor: pointer;">수정</span>
+                    <span style="margin: 5px; cursor: pointer;">삭제</span>
+                        <span style="margin: 5px; cursor: pointer;">신고</span>
+                        
             </div>
             <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
             <div class="content">
