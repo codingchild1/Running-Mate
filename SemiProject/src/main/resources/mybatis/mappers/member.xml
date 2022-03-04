@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mulcam.run.dao.MemberDAO">
+	<select id="queryMember" resultType="Member" parameterType="String">
+		<![CDATA[
+			select * from member where id=#{id}
+		]]>
+	</select>
+	<insert id="insertMember" parameterType="Member">
+		<![CDATA[
+			insert into member values(#{id},#{name},#{password},#{email}, #{phone})
+		]]>
+	</insert>
+</mapper>

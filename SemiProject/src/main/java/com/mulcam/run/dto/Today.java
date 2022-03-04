@@ -1,5 +1,6 @@
 package com.mulcam.run.dto;
 
+
 import java.sql.Date;
 
 public class Today {

@@ -59,6 +59,12 @@ public class TodayController {
 		return mav;
 	}
 
+	
+	@GetMapping("/today_make")
+	public String todayMake() {
+		return "today_make";
+	}
+	
 	//3-1.ckeditor5 업로드
 	@ResponseBody
 	@PostMapping("/upload")
@@ -188,6 +194,6 @@ public class TodayController {
 	public String today_list() {
 		return "today";
 	}
-	}
+}
 	
 

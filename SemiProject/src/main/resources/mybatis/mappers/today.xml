@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   	
+<mapper namespace="com.mulcam.demo.dao.TodayDAO">
+
+	<!-- today전체게시물 조회 -->
+	<select id="selectTBoardList" resultType="today" >
+    	<![CDATA[
+			select * from today order by today_articleNo
+    	]]>
+	</select>
+	
+	<!-- today 하나의 게시물 정보 조회 -->
+	<select id="selectBoard" resultType="Today" parameterType="int">
+    	<![CDATA[
+			select * from today where today_articleNo=#{today_articleNo}
+    	]]>
+	</select>
+	
+	<!-- Today게시물 생성  -->
+	<insert id="insertTBoard" parameterType="Today">
+		<![CDATA[
+		insert into today (user_id,today_title,today_contents)
+		values(#{user_id},#{today_title},#{today_contents});
+		 ]]>
+	</insert>
+	
+	<!-- today게시물 수정 -->
+	<update id="updateTBoard" parameterType="int">
+		<![CDATA[
+		update today set today_title = #{today_title},today_date = #{today_date},today_contents=#{today_contents},
+		today_views=#{today_views},today_likes=#{today_likes},today_thumb=#{today_thumb},warning={warning} where today_articlNo = #{today_articlNo}; 
+		 ]]>
+	</update>
+	
+	<!-- today 조회수 수정(+1) -->
+	
+	
+	<!-- today 삭제 -->
+	<delete id="deleteTBoard" parameterType="int">
+		<![CDATA[
+		
+		delete from today where today_articleNO=#{today_articleNO}
+		 ]]>
+	</delete>
+	
+<!-- 	today 신고 
+	<insert id="insertTWarn" parameterType="today">
+		<![CDATA[
+		
+		
+		 ]]>
+	</insert> -->
+</mapper>
