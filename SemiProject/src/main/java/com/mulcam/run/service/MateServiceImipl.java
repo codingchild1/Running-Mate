@@ -83,7 +83,7 @@ public class MateServiceImipl implements MateService {
 	
 	@Override
 	public void makeGroup(Group group) throws Exception {
-		// TODO Auto-generated method stub
+		mateDAO.insertGroup(group);
 		
 	}
 

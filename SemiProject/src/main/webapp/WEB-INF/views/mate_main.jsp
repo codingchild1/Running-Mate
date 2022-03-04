@@ -371,7 +371,7 @@
             }
         });
 
-        const modal2 = document.getElementById("modal2")
+        /* const modal2 = document.getElementById("modal2")
         function modalOn1() {
             modal2.style.display = "flex"
         }
@@ -399,7 +399,7 @@
             if (isModalOn1() && e.key === "Escape") {
                 modalOff1()
             }
-        });
+        }); */
         
 </script>
 <%--  <%@include file ="fotter.jsp" %> --%>

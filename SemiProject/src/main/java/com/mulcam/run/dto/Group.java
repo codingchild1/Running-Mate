@@ -6,7 +6,7 @@ public class Group {
 	String group_title;
 	String group_cont;
 	String user_img;
-	String group_ki;
+	String group_kl;
 	String group_il;
 	String group_date;
 	String group_area;
@@ -15,14 +15,14 @@ public class Group {
 	
 	public Group() {}
 	public Group(String group_articleNO,String user_id, String group_title, String group_cont,
-			String user_img, String group_ki, String group_il,String group_date,
+			String user_img, String group_kl, String group_il,String group_date,
 			String group_area, int group_views, boolean warning) {
 		this.group_articleNO=group_articleNO;
 		this.user_id=user_id;
 		this.group_title=group_title;
 		this.group_cont=group_cont;
 		this.user_img=user_img;
-		this.group_ki=group_ki;
+		this.group_kl=group_kl;
 		this.group_il=group_il;
 		this.group_date=group_date;
 		this.group_area=group_area;
@@ -60,11 +60,11 @@ public class Group {
 	public void setUser_img(String user_img) {
 		this.user_img = user_img;
 	}
-	public String getGroup_ki() {
-		return group_ki;
+	public String getGroup_kl() {
+		return group_kl;
 	}
-	public void setGroup_ki(String group_ki) {
-		this.group_ki = group_ki;
+	public void setGroup_kl(String group_kl) {
+		this.group_kl = group_kl;
 	}
 	public String getGroup_il() {
 		return group_il;

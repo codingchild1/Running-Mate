@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+     <script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
     <style>
     body{
     display: flex;
@@ -24,17 +25,20 @@
 </head>
 <body>
 <%@include file ="header.jsp" %>
+  <form id='form' action="mate_makegroup" method="post"> 
     <div style="width: 940px; padding: 10px; margin:20px auto;">
     <h1>소모임 글쓰기</h1>
     <div style="margin-top: 100px;">
     <div style="display: flex; align-items: center;">
-        <span><img class="profile" src="images/profile.png"></span>
-        <span><input type="text" id="id" value="닉네임"
+        <span><img class="profile" src="images/profile.png" id="user_img2"></span>
+         <input type="hidden" name="user_img" id="user_img" value="닉네임">
+        <span><input type="text" id="user_id" name="user_id" value=""
             style="height: 20px;border:none; background-color: white;"
             disabled> </span>
+            <input type="hidden" id="user_id" name="user_id" value="">
     </div>
     <div style="border-bottom: 1px solid; margin-top: 20px;">
-        <input type="text" id="title"  style="border:none; border-bottom: 2px; height: 30px; font-size: 20px;width: 100%;" placeholder="제목">
+        <input type="text" id="group_title" name="group_title" style="border:none; border-bottom: 2px; height: 30px; font-size: 20px;width: 100%;" placeholder="제목">
     </div>
     <div style="display: flex; align-items: flex-end;">
     <div style="border: 1px solid;padding:2px;width: 210px; margin-top: 20px;">
@@ -44,14 +48,16 @@
     <button id="search2" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem; height: 38px; margin-left: 5px;color: white; ">검색</button>
     </div>
     <div id="mapinfo" style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
-    <textarea name="content" id="editor" style="width: 100%;height: 500px;" placeholder="내용을 입력하세요"></textarea>
+    <input type="hidden" id="group_area" name="group_area" value=""> 
+    
+    <textarea name="content" id="editor" name="group_cont" style="width: 100%;height: 500px;" placeholder="내용을 입력하세요"></textarea>
     <div style="display: flex; margin-top: 20px;">
-        <a href="#"><img class="kakao" src="images/kakao.png" style="width: 30px; height: 30px;"></a>
-        <input type="text"  style="margin-left: 10px;width: 100%;" placeholder="오픈카카오톡 링크를 입력하세요">
+       <img class="kakao" src="images/kakao.png" style="width: 30px; height: 30px;">
+        <input type="text" id="group_kl" name="group_kl" style="margin-left: 10px;width: 100%;" placeholder="오픈카카오톡 링크를 입력하세요">
     </div>
     <div style="display: flex;margin-top: 10px;">
-        <a href="#"><img class="insta" src="images/insta.png" style="width: 30px; height: 30px;"></a>
-        <input type="text" style="margin-left: 10px; width: 100%;" placeholder="인스타 디엠 링크를 입력하세요">
+       <img class="insta" src="images/insta.png" style="width: 30px; height: 30px;">
+        <input type="text" id="group_il" name="group_il" style="margin-left: 10px; width: 100%;" placeholder="인스타 디엠 링크를 입력하세요">
     </div>
     <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
         <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;">작성</button>
@@ -59,14 +65,23 @@
     </div>
     </div>
     </div>
+    </form>
      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+    $(function(){
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+        	.create(document.querySelector("#editor"), {
+        		ckfinder : {
+        			uploadUrl : "/upload"
+        		}
+        	}).then(editor=> {
+        		window.editor=editor;
+        	})
+        	.catch((error) => {
+        		console.error(error);
+        	});
+	});   //에디터
         	
        
             var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -82,6 +97,12 @@
 
         // 주소-좌표 변환 객체를 생성합니다
         var geocoder = new kakao.maps.services.Geocoder();
+        
+     var src = jQuery('#user_img2').attr("src");
+   	 $('input[name=user_img]').attr('value',src);   //이미지주소 관련
+   	 
+   	 var id = "닉네임";
+   	 $('input[name=user_id]').attr('value',"닉네임");  //value에 id값 넣기
 
 		$(document).ready(function(){
 			$('#search2').bind("click", function(){
@@ -90,6 +111,7 @@
 			
 		            // 정상적으로 검색이 완료됐으면 
 		             if (status === kakao.maps.services.Status.OK) {
+		            	 
 		                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
 		                // 결과값으로 받은 위치를 마커로 표시합니다
@@ -100,13 +122,13 @@
 		                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 		                map.setCenter(coords);
 		                marker.setDraggable(true);
-		                console.log(marker);
 		            }
 		         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 		        	    
 		        	    // 클릭한 위도, 경도 정보를 가져옵니다 
 		        	    var latlng = mouseEvent.latLng; 
-		        	    
+		        	    JSON.stringify(latlng);
+		        	    $('input[name=group_area]').attr('value',JSON.stringify(latlng));
 		        	    // 마커 위치를 클릭한 위치로 옮깁니다
 		        	    marker.setPosition(latlng);
 		        	    
@@ -114,11 +136,22 @@
 		        	    message += '경도는 ' + latlng.getLng() + ' 입니다';
 		        	    
 		        	    var resultDiv = document.getElementById('clickLatlng'); 
-		        	    console.log(message);
-		        	    /* resultDiv.innerHTML = message; */
-		        	    
+		        	    $('#submit').bind("click", function(){
+			        	     /* console.log(latlng.getLat(),latlng.getLng());  */
+			        	    	console.log("맵정보는"+$('#group_area').val()); 
+			        	    	console.log($('#user_img').val());
+				        	    console.log($('#user_id').val());
+				        	    console.log($('#group_title').val());
+				        	    console.log($('#group_kl').val());
+				        	    console.log($('#group_il').val());
+				        	    console.log($('#group_cont').val());
+				        	    /* console.log(src) */;  
+				        	    /* resultDiv.innerHTML = message; */
+			        	    });
 		        	});
-		        });  
+		         	 return false; 
+		        }); 
+		        return false; 
 			});
 		});
 		

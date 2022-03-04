@@ -85,8 +85,8 @@
 		<!-- group게시물 생성 -->
 	<insert id="insertGroup" parameterType="group">
 		<![CDATA[
-			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_ki,group_il,group_date,group_area,group_views,waring) 
-				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_ki},#{group_il},now(),#{group_area},{group_views},{waring})
+			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_kl,group_il,group_date,group_area,group_views,warning) 
+				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,false)
 		]]>
 	</insert>
 	

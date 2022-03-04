@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.service.MateService;
 
@@ -63,9 +64,19 @@ public class MateController {
 		}
 		return mv;
 	}
-	 
 	@GetMapping("/mate_makegroup")
-	public String makegroup() {
+	public String mate_makegroup() {
 		return "mate_makegroup";
+	}
+	 
+	@PostMapping("/mate_makegroup")
+	public ModelAndView mate_makegroup2(Group group) {
+		ModelAndView mv = new ModelAndView("redirect:/mate_main");
+		try {
+			mateService.makeGroup(group);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
 	}
 }
