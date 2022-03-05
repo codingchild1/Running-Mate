@@ -126,5 +126,13 @@
 		]]> 
 	</update>
 	
+	<!-- 번개참여시 ptp테이블에 아이디값 저장 -->
+	<insert id="insertptp" parameterType="ptp">
+		<![CDATA[
+			insert into ptp (ptp_no,mate_articleNO,user_id)
+			values(null,#{mate_articleNO},#{user_id})
+		]]>
+	</insert>
 	
+
 </mapper>

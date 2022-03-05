@@ -275,9 +275,9 @@
                     value=''  disabled>
                 <div class="close-area">X</div>
             </div>
-            <input name='user_id'
+            <input name='user_id' id="user_id"
                 style="color:black;border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value=''  disabled>
+                value=''>
             <div style="font-size: 13px; float: right;">
                 <span style="margin: 5px; cursor: pointer;">수정</span>
                     <span style="margin: 5px; cursor: pointer;">삭제</span>
@@ -294,9 +294,10 @@
                         style="position: relative; border: 1px solid; width: 200px; top: -150px; margin: 10px; background-color: #2b2e4a;">
                         <p style="font-size: 13px; margin:2px; padding: 5px;">참여자 목록</p>
                         <div style="margin: 5px;">
-                            <input>
-                            <input>
-                            <input>
+                            <c:forEach items="${ptps }" var="ptp">
+                            <input value='${ptp.user_id }'>
+                            <input type="hidden" id="ptpli" name="ptpli" value=''>
+                            </c:forEach>
                         </div>
                     </div>
                     </div>
@@ -315,9 +316,9 @@
                     value='' disabled>
                 <div class="close-area">X</div>
             </div>
-            <input name="user_id"
+            <input name="user_id2" id="user_id2"
                 style="color:black; border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value='' disabled>
+                value='' >
                
             <div style="font-size: 13px; float: right;">
                 <span style="margin: 5px; cursor: pointer;">수정</span>
@@ -355,11 +356,13 @@
     		url:"http://localhost:8090/Mmodal",
     		data:{"no":no},
     		success: function(data, textStatus){ 
-    			 var jdata = JSON.parse(data); 
+    			 var jdata = JSON.parse(data);
+    			 /* console.log(jdata); */
      			 $('input[name=mate_title]').attr('value',jdata.mate_title);
-     			 $('input[name=user_id]').attr('value',jdata.user_id);
+     			 $('input[name=user_id]').attr('value',jdata.user_id); 
      			 $('input[name=mate_date]').attr('value',jdata.mate_date); 
-     			 $('input[name=ptp]').attr('value',jdata.mate_articleNO);  
+     			 $('input[name=ptp]').attr('value',jdata.mate_articleNO);
+     			 
     		},
     		error:function(data, textStatus){
     			alert("실패");
@@ -443,10 +446,19 @@
             }
         }); 
         
+		function objectifyForm(formArray) {
+        	var returnArray = {};
+        	for (var i =0; i < formArray.length; i++){
+        		returnArray[formArray[i]['name']] = formArray[i]['value'];
+        	}
+        	return returnArray;
+        }
 	   
 	    var bt;
 		$('.ptp').click(function(){
 			if(bt!=0){
+				let formdata = objectifyForm($('#modal').serializeArray());
+				console.log(formdata);
 	            $.ajax({
 	        		type:"post",
 	        		dataType:"text",
@@ -455,6 +467,9 @@
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			  bt = 0; 
+	        			 console.log(data); 
+	        			 console.log($('[name=user_id]').val());
+	          			 console.log($('#user_id').val()); 
 	        			 alert("참여가 완료되었습니다."+bt); 
 	        		},
 	        		error:function(data, textStatus){
@@ -478,6 +493,8 @@
 	        		});
 			}
 		});
+		
+
 </script>
 <%--  <%@include file ="fotter.jsp" %> --%>
 </body>

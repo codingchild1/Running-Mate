@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
 @Mapper
@@ -34,10 +35,17 @@ public interface MateDAO {
 	public void insertGroup(Group group)throws Exception;  //소모임 생성
 	
 	public void insertWarning(Warning warning)throws Exception; //신고 접수
-	public void ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	
-	public void like(int mate_articleNO)throws Exception; //참여버튼(참여자수 +1)
-	public void likeCancel(int mate_articleNO)throws Exception; //참여버튼(참여자수 +1)
+	public void like(int mate_articleNO)throws Exception; //번개참여(참여자수 +1)
+	public void likeCancel(int mate_articleNO)throws Exception; //번개참여취소(참여자수 -1)
+	
+	//연습
+	public void insertptp(Ptp ptp)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
+//	public void insertptp(int mate_articleNO)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
+//	public Ptp queryptp(int ptp_no)throws Exception;
+	
+	public void deleteptp(int mate_articleNO)throws Exception; //번개참여취소시 ptp테이블에 아이디값 삭제
+	public void ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	
 	//게시물 검색
 }

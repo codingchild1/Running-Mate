@@ -9,6 +9,7 @@ import com.mulcam.run.dao.MateDAO;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
 @Service
@@ -106,6 +107,7 @@ public class MateServiceImipl implements MateService {
 	@Override
 	public void like(int mate_articleNO) throws Exception {
 			mateDAO.like(mate_articleNO);
+//			mateDAO.insertptp(mate_articleNO);
 	}
 
 	@Override
@@ -113,5 +115,8 @@ public class MateServiceImipl implements MateService {
 		mateDAO.likeCancel(mate_articleNO);
 	}
 
-
+	@Override
+	public void makePtp(Ptp ptp) throws Exception {
+		mateDAO.insertptp(ptp);
+	}
 }

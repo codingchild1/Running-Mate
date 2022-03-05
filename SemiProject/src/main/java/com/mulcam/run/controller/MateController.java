@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.service.MateService;
 
 @Controller
@@ -70,25 +72,38 @@ public class MateController {
 	}
 //	@ResponseBody
 //	@PostMapping("/Like")
-//	public <T> ResponseEntity<T> Like(@RequestParam(value="no")int mate_articleNO){
-//		ResponseEntity<T> result =null;
+//	public ResponseEntity<String> Like(@RequestParam(value="no")int mate_articleNO,Ptp ptp){
+//		ResponseEntity<String> result =null;
 //		try {
-//			System.out.println(mate_articleNO);
-//			result = mateService.like(mate_articleNO);
+//			System.out.println("controller");
+//			mateService.like(mate_articleNO);
+//			mateService.makePtp(ptp);
+//			System.out.println(ptp.getUser_id());
+//			System.out.println(ptp.getMate_articleNO());
+//			result = new ResponseEntity<String>("참여완료",HttpStatus.OK);
 //		}catch(Exception e) {
 //			
 //		}
 //		return result;
 //	}	
+	
 	@ResponseBody
 	@PostMapping("/Like")
-	public void Like(@RequestParam(value="no")int mate_articleNO){
+	public void Like(@RequestParam(value="no")int mate_articleNO,Ptp ptp){
 		try {
 			mateService.like(mate_articleNO);
+			mateService.makePtp(ptp);
+			System.out.println(ptp.getUser_id());
+			System.out.println(ptp.getMate_articleNO());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+
+	
+	
+	
 	@ResponseBody
 	@PostMapping("/LikeCancel")
 	public void LikeCancel(@RequestParam(value="no")int mate_articleNO){
@@ -135,6 +150,7 @@ public class MateController {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
 		try {
 			mateService.makeGroup(group);
+			System.out.println(group.getUser_id());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
