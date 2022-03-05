@@ -157,9 +157,9 @@
 			<div id="distance_div" style="margin: 0 auto; padding-top: 20px;">
 				<div style="height:50px; margin: 0 auto;" >
 					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">거리</div>
-					<button id="btn_length1" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">~5km</button>
-					<button id="btn_length2" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">5km~20km</button>
-					<button id="btn_length3" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">20km~</button>
+					<div id="btn_length1" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">~5km</div>
+					<div id="btn_length2" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">5km~20km</div>
+					<div id="btn_length3" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">20km~</div>
 				</div>
 			</div><br><br>
 
@@ -268,8 +268,26 @@
 	</main>
 	
 	<script>
+		$("#btn_length1").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length1").attr('class','btn btn-success');
+		});
+		$("#btn_length2").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length2").attr('class','btn btn-success');
+		});
+		$("#btn_length3").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length3").attr('class','btn btn-success');
+		});
+		
 		$(function(){
-			$("btn_length1")
 			var part_ul = $("#part_ul");
 			var specific_ul = $("#specific_ul");
 			
@@ -279,9 +297,8 @@
 			/* 지역 검색창 열기 */
 			$('#area_text').click(function(){
 				$('#select_area').show();
-				
-				//도시 번호
-				area_values[0] = '11';
+				area_values[0] = '11';					//도시 번호
+				areaName = hangjungdong.sido[area_values[0]].codeNm;
 				parts = [];
 				for(var i in hangjungdong.sigugun){
 					if(hangjungdong.sigugun[i].sido==area_values[0]){
@@ -296,17 +313,17 @@
 				}
 			});
 			
+			
 			$(document).on("click",".area_ul li", function(){
-				//도시 번호
-				area_values[0] = $(this).val();	
+				$(".area_li").removeClass("active");
+				$(this).addClass("active");
+				area_values[0] = $(this).val();			//도시 번호
 				parts = [];
-				
 				for(var i in hangjungdong.sigugun){
 					if(hangjungdong.sigugun[i].sido==area_values[0]){
 						parts.push(hangjungdong.sigugun[i]);
 					}
 				}
-				console.log(parts);
 				
 				$("#part_ul li").remove();
 				$("#specific_ul li").remove();
@@ -314,6 +331,7 @@
 					part_ul.append("<li><a>"+Object.values(parts[i])[2]+"</a></li>");
 				}
 			});
+			
 			
 			var specific = [];
 			$(document).on("click",".part_ul li", function(){
@@ -322,15 +340,36 @@
 				
 				specific = [];
 				for(var i in hangjungdong.dong){
-					if(hangjungdong.dong[i].sigugun==area_values[1]){
+					if(hangjungdong.dong[i].sido==area_values[0] && hangjungdong.dong[i].sigugun==area_values[1]){
 						specific.push(hangjungdong.dong[i]);
-						console.log(hangjungdong.dong[i]);
 					}
 				}
-				
 				$("#specific_ul li").remove();
 				for(var i in specific){
 					specific_ul.append("<li><a>"+Object.values(specific[i])[3]+"</a></li>");
+				}
+			});
+			
+			
+			$(document).on("click",".specific_ul li", function(){
+				var index = $(".specific_ul li").index(this);
+				area_values[2] = Object.values(specific[index])[2];
+				
+				var areaName = "";
+				for(var i in hangjungdong.sigugun){
+					if(hangjungdong.sigugun[i].sido==area_values[0] && hangjungdong.sigugun[i].sigugun==area_values[1]){
+						areaName += hangjungdong.sigugun[i].codeNm;
+						break;
+					}
+				}
+				areaName += " ";
+				for(var i in hangjungdong.dong){
+					if(hangjungdong.dong[i].sido==area_values[0] && hangjungdong.dong[i].sigugun==area_values[1]
+						&& hangjungdong.dong[i].dong==area_values[2]){
+						areaName += hangjungdong.dong[i].codeNm;
+						$('#area_text').attr("value", areaName);
+						break;
+					}
 				}
 			});
 		});
