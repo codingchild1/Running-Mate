@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
   <title>Document</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
     <style>
     body{
     display: flex;
@@ -51,7 +52,7 @@
      <div id="mapinfo"  style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
      <input type="hidden" id="mate_mapinfo" name="mate_mapinfo" value=""> 
   
-    <textarea name="content" id="mate_cont" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
+    <textarea name="content" id="editor" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
     <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
         <button id="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
         <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;"><a href="mate_main">취소</a></button>
@@ -59,15 +60,22 @@
     </div>
     </div>
      </form>  
-      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
-     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+	$(function(){
         ClassicEditor
-            .create( document.querySelector( '#mate_cont' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-        	
+        	.create(document.querySelector("#editor"), {
+        		ckfinder : {
+        			uploadUrl : "/upload"
+        		}
+        	}).then(editor=> {
+        		window.editor=editor;
+        	})
+        	.catch((error) => {
+        		console.error(error);
+        	});
+	});   //에디터
        
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
         var mapContainer = document.getElementById('mapinfo'), // 지도를 표시할 div 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +29,8 @@
         }
 
         .container1 {
-            display: flex;
             margin: 20px;
+            width:1060px;
         }
 
         .register {
@@ -39,8 +40,9 @@
             background: white;
             color: #2b2e4a;
             font-size: 14px;
-            margin: 20px;
+            margin: 14px;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            display: inline-block;
         }
 
         .profile {
@@ -230,223 +232,35 @@
         </div>
     </div>
         <div class="container1">
+          <c:forEach items="${mates }" var="groupandmate"> 
             <div class="register">
                 <div
                     style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
+                    <span><img class="profile" src='${groupandmate.img }'></span>
                     <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
+                        <span><input type="text" id="title" value='${groupandmate.title }'
                                 style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
                                 disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
+                        <span><input type="text" id="id" value='${groupandmate.id }'
                                 style="height: 20px;vertical-align: middle; border:none; background-color: white;"
                                 disabled> </span>
                     </div>
                 </div>
                 <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
                     <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
+                    <span><input type="text" id="like" value='${groupandmate.likeno }'
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
                     <button  id="btn-modal" class="more"
-                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor=pointer;">더
+                        style="border:none; float: right; margin-top: 10px; background-color: white;color: rgba(var(--f52,142,142,142),1); cursor:pointer;"
+                        onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더
                         보기</button>
                 </div>
             </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button  id="btn-modal2" class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
+           </c:forEach> 
         </div>
-        <div class="container1">
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-            <div class="register">
-                <div
-                    style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                    <span><img class="profile" src="images/profile.png"></span>
-                    <div style="margin-left: 10px;">
-                        <span><input type="text" id="title" value="제목"
-                                style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                                disabled> </span>
-                        <span><input type="text" id="id" value="닉네임"
-                                style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                                disabled> </span>
-                    </div>
-                </div>
-                <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                    <span><input type="text" id="like" value="13"
-                            style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                            disabled></span>
-                    <button class="more"
-                        style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                        보기</button>
-                </div>
-            </div>
-        </div>
-    
-    <div class="container1">
-        <div class="register">
-            <div
-                style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <span><img class="profile" src="images/profile.png"></span>
-                <div style="margin-left: 10px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;" disabled>
-                    </span>
-                </div>
-            </div>
-            <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
-        <div class="register">
-            <div
-                style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <span><img class="profile" src="images/profile.png"></span>
-                <div style="margin-left: 10px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;" disabled>
-                    </span>
-                </div>
-            </div>
-            <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
-        <div class="register">
-            <div
-                style="margin: 5px ; padding: 5px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <span><img class="profile" src="images/profile.png"></span>
-                <div style="margin-left: 10px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;" disabled>
-                    </span>
-                </div>
-            </div>
-            <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
+        
     </div>
-    <div>
-
-    </div>
-</div>
     <!-- <div id="container2">
         <h2>Lorem Ipsum</h2>
         <div id="lorem-ipsum"></div>
@@ -456,20 +270,20 @@
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <input
+                <input name='mate_title'
                     style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value="제목">
+                    value=''>
                 <div class="close-area">X</div>
             </div>
-            <input
+            <input name='user_id'
                 style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value="아이디">
+                value=''>
             <div style="font-size: 13px; float: right;">
-                <span style="margin: 5px; cursor: pointer;">수정
-                    <span style="margin: 5px; cursor: pointer;">삭제
-                        <span style="margin: 5px; cursor: pointer;">신고
+                <span style="margin: 5px; cursor: pointer;">수정</span>
+                    <span style="margin: 5px; cursor: pointer;">삭제</span>
+                        <span style="margin: 5px; cursor: pointer;">신고</span>
             </div>
-             <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
+             <input name='mate_date' type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''>
             <div class="content">
                 <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
                 <textarea style="width: 352px; height: 190px;"></textarea>
@@ -495,21 +309,22 @@
     <div id="modal2" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <input
+                <input name="group_title"
                     style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value="제목">
+                    value=''>
                 <div class="close-area">X</div>
             </div>
-            <input
+            <input name="user_id"
                 style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value="아이디">
+                value=''>
                
             <div style="font-size: 13px; float: right;">
-                <span style="margin: 5px; cursor: pointer;">수정
-                    <span style="margin: 5px; cursor: pointer;">삭제
-                        <span style="margin: 5px; cursor: pointer;">신고
+                <span style="margin: 5px; cursor: pointer;">수정</span>
+                    <span style="margin: 5px; cursor: pointer;">삭제</span>
+                        <span style="margin: 5px; cursor: pointer;">신고</span>
+                        
             </div>
-            <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
+            <input name="group_date" type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''>
             <div class="content">
 <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
                 
@@ -518,8 +333,8 @@
                 </div>
                 <div
                 style="display:flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px;  float: right;position: relative;">
-                <a href="#"><img class="kakao" src="images/kakao.png" style="width: 25px; height: 25px; margin-left: 13px;"></a>
-                <a href="#"><img class="insta" src="images/insta.png" style="width: 25px; height: 25px;"></a>
+                <a id=group_kl href=''><img class="kakao" src="images/kakao.png" style="width: 25px; height: 25px; margin-left: 13px;"></a>
+                <a id=group_il href=''><img class="insta" src="images/insta.png" style="width: 25px; height: 25px;"></a>
                
                 </div>
             </div>
@@ -527,10 +342,55 @@
     </div>
 <!-- </form> -->
 
+ 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+    function detailModal(no,type){
+    	if(type=='m'){
+    	 modal.style.display = "flex";
+            $.ajax({
+    		type:"post",
+    		dataType:"text",
+    		async:false,
+    		url:"http://localhost:8090/Mmodal",
+    		data:{"no":no},
+    		success: function(data, textStatus){ 
+    			 var jdata = JSON.parse(data); 
+     			 $('input[name=mate_title]').attr('value',jdata.mate_title);
+     			 $('input[name=user_id]').attr('value',jdata.user_id);
+     			 $('input[name=mate_date]').attr('value',jdata.mate_date);  
+    		},
+    		error:function(data, textStatus){
+    			alert("실패");
+    		}
+    		});
+    	
+    	}else{
+    		modal2.style.display = "flex";
+   		 $.ajax({
+ 			type:"post",
+ 			dataType:"text",
+ 			async:false,
+ 		url:"http://localhost:8090/Gmodal",
+ 		data:{"no":no},
+ 		success: function(data, textStatus){ 
+ 			 var jdata = JSON.parse(data); 
+ 			 $('input[name=group_title]').attr('value',jdata.group_title);
+ 			 $('input[name=user_id]').attr('value',jdata.user_id);
+ 			 $('input[name=group_date]').attr('value',jdata.group_date);
+ 			 $('#group_kl').attr('href',jdata.group_kl);
+ 			 $('#group_il').attr('href',jdata.group_il);
+ 		},
+ 		error:function(data, textStatus){
+ 			alert("실패");
+ 		}
+ 		});
+    	 
+    	}
+    }
         const modal = document.getElementById("modal")
         function modalOn() {
             modal.style.display = "flex"
+            
         }
         function isModalOn() {
             return modal.style.display === "flex"
@@ -538,10 +398,6 @@
         function modalOff() {
             modal.style.display = "none"
         }
-        const btnModal = document.getElementById("btn-modal")
-        btnModal.addEventListener("click", e => {
-            modalOn()
-        });
         const closeBtn = modal.querySelector(".close-area")
         closeBtn.addEventListener("click", e => {
             modalOff()
@@ -558,7 +414,7 @@
             }
         });
 
-        const modal2 = document.getElementById("modal2")
+         const modal2 = document.getElementById("modal2")
         function modalOn1() {
             modal2.style.display = "flex"
         }
@@ -568,10 +424,7 @@
         function modalOff1() {
             modal2.style.display = "none"
         }
-        const btnModal2 = document.getElementById("btn-modal2")
-        btnModal2.addEventListener("click", e => {
-            modalOn1()
-        })
+        
         const closeBtn2 = modal2.querySelector(".close-area")
         closeBtn2.addEventListener("click", e => {
             modalOff1()
@@ -586,7 +439,7 @@
             if (isModalOn1() && e.key === "Escape") {
                 modalOff1()
             }
-        });
+        }); 
         
 </script>
 <%--  <%@include file ="fotter.jsp" %> --%>

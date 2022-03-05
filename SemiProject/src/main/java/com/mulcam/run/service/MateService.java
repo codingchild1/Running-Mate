@@ -3,11 +3,12 @@ package com.mulcam.run.service;
 import java.util.List;
 
 import com.mulcam.run.dto.Group;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Warning;
 
 public interface MateService{
-//	List<post> allpostInfo() throws Exception; //전체 게시물 조회
+	List<GroupAndMate> allpostInfo() throws Exception; //전체 게시물 조회
 	
 	List<Mate> allMateInfo() throws Exception; //번개 전체 게시물 조회
 	List<Group> allGroupInfo() throws Exception; //소모임 전체 게시물 조회

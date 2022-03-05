@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.run.dao.MateDAO">
+	
+	<!-- mate and group전체게시물 조회 -->
+	<select id="postList" resultType="GroupAndMate" >
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			order by regdate desc;
+		]]>
+	</select>
+	
 	<!-- mate전체게시물 조회 -->
 	<select id="mateList" resultType="mate" >
 		<![CDATA[
@@ -85,8 +97,8 @@
 		<!-- group게시물 생성 -->
 	<insert id="insertGroup" parameterType="group">
 		<![CDATA[
-			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_ki,group_il,group_date,group_area,group_views,waring) 
-				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_ki},#{group_il},now(),#{group_area},{group_views},{waring})
+			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_kl,group_il,group_date,group_area,group_views,warning) 
+				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,false)
 		]]>
 	</insert>
 	

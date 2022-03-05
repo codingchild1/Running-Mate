@@ -6,13 +6,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.mulcam.run.dto.Group;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Warning;
 
 @Mapper
 @Repository
 public interface MateDAO {
-//	public List<post> postList() throws Exception;  //전체 게시물
+	public List<GroupAndMate> postList() throws Exception;  //전체 게시물
 	
 	public List<Mate> mateList() throws Exception;  //번개 전체조회
 	public List<Group> groupList() throws Exception; //소모임 전체조회
