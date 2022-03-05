@@ -68,6 +68,36 @@ public class MateController {
 		}
 		return result;
 	}
+//	@ResponseBody
+//	@PostMapping("/Like")
+//	public <T> ResponseEntity<T> Like(@RequestParam(value="no")int mate_articleNO){
+//		ResponseEntity<T> result =null;
+//		try {
+//			System.out.println(mate_articleNO);
+//			result = mateService.like(mate_articleNO);
+//		}catch(Exception e) {
+//			
+//		}
+//		return result;
+//	}	
+	@ResponseBody
+	@PostMapping("/Like")
+	public void Like(@RequestParam(value="no")int mate_articleNO){
+		try {
+			mateService.like(mate_articleNO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@ResponseBody
+	@PostMapping("/LikeCancel")
+	public void LikeCancel(@RequestParam(value="no")int mate_articleNO){
+		try {
+			mateService.likeCancel(mate_articleNO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@GetMapping("/mate_search")
 	public String mate_search() {
@@ -110,4 +140,5 @@ public class MateController {
 		}
 		return mv;
 	}
+	
 }

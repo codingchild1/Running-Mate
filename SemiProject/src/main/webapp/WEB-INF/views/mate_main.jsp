@@ -271,19 +271,19 @@
         <div class="modal-window">
             <div class="title">
                 <input name='mate_title'
-                    style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value=''>
+                    style="color:black;border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
+                    value=''  disabled>
                 <div class="close-area">X</div>
             </div>
             <input name='user_id'
-                style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value=''>
+                style="color:black;border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
+                value=''  disabled>
             <div style="font-size: 13px; float: right;">
                 <span style="margin: 5px; cursor: pointer;">수정</span>
                     <span style="margin: 5px; cursor: pointer;">삭제</span>
                         <span style="margin: 5px; cursor: pointer;">신고</span>
             </div>
-             <input name='mate_date' type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''>
+             <input name='mate_date' type="text" style="color:black;height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''  disabled>
             <div class="content">
                 <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
                 <textarea style="width: 352px; height: 190px;"></textarea>
@@ -300,7 +300,8 @@
                         </div>
                     </div>
                     </div>
-                    <button style="margin: 5px; width: 43px;">참여</button>
+                    <button class="ptp" style="margin: 5px; width: 43px;">참여</button>
+                    <input type="hidden" id="ptp" name="ptp" value=''>
                 </div>
             </div>
         </div>
@@ -310,13 +311,13 @@
         <div class="modal-window">
             <div class="title">
                 <input name="group_title"
-                    style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value=''>
+                    style="color:black; border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
+                    value='' disabled>
                 <div class="close-area">X</div>
             </div>
             <input name="user_id"
-                style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value=''>
+                style="color:black; border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
+                value='' disabled>
                
             <div style="font-size: 13px; float: right;">
                 <span style="margin: 5px; cursor: pointer;">수정</span>
@@ -324,7 +325,7 @@
                         <span style="margin: 5px; cursor: pointer;">신고</span>
                         
             </div>
-            <input name="group_date" type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''>
+            <input name="group_date" type="text" style="color:black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value='' disabled>
             <div class="content">
 <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
                 
@@ -357,7 +358,8 @@
     			 var jdata = JSON.parse(data); 
      			 $('input[name=mate_title]').attr('value',jdata.mate_title);
      			 $('input[name=user_id]').attr('value',jdata.user_id);
-     			 $('input[name=mate_date]').attr('value',jdata.mate_date);  
+     			 $('input[name=mate_date]').attr('value',jdata.mate_date); 
+     			 $('input[name=ptp]').attr('value',jdata.mate_articleNO);  
     		},
     		error:function(data, textStatus){
     			alert("실패");
@@ -441,6 +443,41 @@
             }
         }); 
         
+	   
+	    var bt;
+		$('.ptp').click(function(){
+			if(bt!=0){
+	            $.ajax({
+	        		type:"post",
+	        		dataType:"text",
+	        		async:false,
+	        		url:"http://localhost:8090/Like",
+	        		data:{"no":$('#ptp').val()},
+	        		success: function(data, textStatus){
+	        			  bt = 0; 
+	        			 alert("참여가 완료되었습니다."+bt); 
+	        		},
+	        		error:function(data, textStatus){
+	        			alert("실패");
+	        		}
+	        		});
+			}else{
+	            $.ajax({
+	        		type:"post",
+	        		dataType:"text",
+	        		async:false,
+	        		url:"http://localhost:8090/LikeCancel",
+	        		data:{"no":$('#ptp').val()},
+	        		success: function(data, textStatus){
+	        			  bt = 1; 
+	        			 alert("참여가 취소되었습니다."+bt); 
+	        		},
+	        		error:function(data, textStatus){
+	        			alert("실패");
+	        		}
+	        		});
+			}
+		});
 </script>
 <%--  <%@include file ="fotter.jsp" %> --%>
 </body>

@@ -30,7 +30,8 @@ public interface MateService{
 	
 	Warning makeWarning(Warning warning)throws Exception; //신고 접수
 	String ptpInfo(int mate_articleNO) throws Exception;
-	int like() throws Exception; //참여버튼(참여자 수 +1)
+	void like(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
+	void likeCancel(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
 	
 	//게시물 검색
 }

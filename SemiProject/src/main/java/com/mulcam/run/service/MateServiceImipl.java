@@ -104,9 +104,13 @@ public class MateServiceImipl implements MateService {
 	}
 
 	@Override
-	public int like() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public void like(int mate_articleNO) throws Exception {
+			mateDAO.like(mate_articleNO);
+	}
+
+	@Override
+	public void likeCancel(int mate_articleNO) throws Exception {
+		mateDAO.likeCancel(mate_articleNO);
 	}
 
 

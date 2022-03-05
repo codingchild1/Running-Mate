@@ -35,7 +35,9 @@ public interface MateDAO {
 	
 	public void insertWarning(Warning warning)throws Exception; //신고 접수
 	public void ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
-	public void like()throws Exception; //참여버튼(참여자수 +1)
+	
+	public void like(int mate_articleNO)throws Exception; //참여버튼(참여자수 +1)
+	public void likeCancel(int mate_articleNO)throws Exception; //참여버튼(참여자수 +1)
 	
 	//게시물 검색
 }
