@@ -2,27 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    	
-<mapper namespace="com.mulcam.demo.dao.TodayDAO">
+<mapper namespace="com.mulcam.run.dao.TodayDAO">
 
 	<!-- today전체게시물 조회 -->
-	<select id="selectTBoardList" resultType="today" >
+	<select id="selectTBoardCount" resultType="int">
+ 		<![CDATA[
+ 			select count(*) from today
+ 		]]>
+ 	</select>
+	<select id="selectTBoardList" resultType="Today" parameterType="int"  >
     	<![CDATA[
-			select * from today order by today_articleNo
+			select * from today order by user_id limit #{startrow},6
     	]]>
 	</select>
 	
 	<!-- today 하나의 게시물 정보 조회 -->
-	<select id="selectBoard" resultType="Today" parameterType="int">
+	<select id="selectTBoard" resultType="Today" parameterType="int">
     	<![CDATA[
 			select * from today where today_articleNo=#{today_articleNo}
     	]]>
 	</select>
 	
+	<!-- today 조회수 수정(+1) -->
+	 <update id="updateReadCount" parameterType="int">
+ 		<![CDATA[
+ 			update today set today_views=today_views+1 where today_articleNo=#{today_articleNo} 
+ 		]]>
+ 	</update>
+	
+	<!-- today 검색게시물 조회 -->
+	<select id="selectSerchTBoardList" resultType="Today" parameterType="int"  >
+    	<![CDATA[
+			select * from today order by today_articleNo
+    	]]>
+	</select>
+	 	
 	<!-- Today게시물 생성  -->
 	<insert id="insertTBoard" parameterType="Today">
 		<![CDATA[
-		insert into today (user_id,today_title,today_contents)
-		values(#{user_id},#{today_title},#{today_contents});
+		insert into today (user_id,today_title,today_thumb,today_contents)
+		values(#{user_id},#{today_title},#{today_thumb},#{today_contents});
 		 ]]>
 	</insert>
 	
@@ -34,8 +53,7 @@
 		 ]]>
 	</update>
 	
-	<!-- today 조회수 수정(+1) -->
-	
+
 	
 	<!-- today 삭제 -->
 	<delete id="deleteTBoard" parameterType="int">
