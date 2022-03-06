@@ -29,18 +29,17 @@
 
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
-	
+
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>Insert title here</title>
 
-
-<title>Insert title here</title>
 <style>
 main, header, section {
 	display: flex;
@@ -50,6 +49,7 @@ main, header, section {
 
 .ck-editor__editable {
 	min-height: 550px;
+	min-weight: 550px;
 }
 
 .locate {
@@ -57,6 +57,21 @@ main, header, section {
 	top: 870px;
 }
 </style>
+<script>
+        $(function(){
+            ClassicEditor
+            	.create(document.querySelector("#editor"), {
+            		ckfinder : {
+            			uploadUrl : "/upload"
+            		}
+            	}).then(editor=> {
+            		window.editor=editor;
+            	})
+            	.catch((error) => {
+            		console.error(error);
+            	});
+    	});
+		</script>
 </head>
 <body>
 	<%@include file="header.jsp"%>
@@ -77,9 +92,7 @@ main, header, section {
 					<table>
 						<tbody class="container-fluid mt-1">
 							<tr>
-								<td><img
-									src="${pageContext.request.contextPath}/resources/assets/img/user_icon_1.png"
-									class="col" /></td>
+								<td><img src="" class="col" /></td>
 								<td id="user_id" class="col d-flex justify-content-start">${user_id}아이디</td>
 							</tr>
 						</tbody>
@@ -90,15 +103,21 @@ main, header, section {
 			<!--------------------------------------------------게시글 ---------------------------- -->
 			<main role="main" class="container-fluid">
 				<script></script>
-				<form name="todaycontents" method="post" action="/today_contents">
+				<form name="todaycontents" method="post" action="/today_contents"
+					enctype="multipart/form-data">
 					<div class="pt-1">
 						<input type="text" name="today_title" id="today_title"
 							placeholder="제목을 입력하세요"
 							style="border-radius: 5px; width: 100%; padding: 5px" />
 					</div>
+					<div></div>
 
+					<img class="col" src="" id="today_thumb" name="today_thumb"
+						height=100px weight=100px> <input type="file"
+						name="today_file" id="today_file" />
 
-					<textarea name="today_contents" id="editor"></textarea>
+					<textarea class="ck-editor__editable" name="today_contents"
+						id="editor"></textarea>
 					<br>
 
 					<!--컨트롤러 제출 today_post 로 이동  -->
@@ -106,14 +125,13 @@ main, header, section {
 					<div class="d-flex justify-content-center">
 						<button class="btn btn-outline-secondary" type="submit"
 							style="width: 100px; height: 30px; padding: 5px" id="today_post"
-							name="today_post" onClick="alert(myClassicEditor.getData())">
-							제출</button>
+							name="today_post">제출</button>
 						&nbsp&nbsp&nbsp&nbsp&nbsp
 
 
 						<!--컨트롤러 취소  today_postcancle 로 이동  -->
 
-						<button class="btn btn-outline-secondary" type="submit"
+						<button class="btn btn-outline-secondary" type="reset"
 							style="width: 100px; height: 30px; padding: 5px"
 							id="today_postcancle" name="today_postcancle">취소</button>
 						&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -121,36 +139,31 @@ main, header, section {
 
 						<!--컨트롤러 목록 today_list 로 이동  -->
 
-						<button class="btn btn-outline-secondary" type="submit"
+						<button class="btn btn-outline-secondary" type="button"
 							style="width: 100px; height: 30px; padding: 5px" id="today_list"
 							name="today_list">목록</button>
 					</div>
 					<br>
 				</form>
-				
-				
+
+
 			</main>
 		</div>
 	</div>
+<%@include file="fotter.jsp"%>
 
+	<script> 
+	$(function() {
+		$('#today_file').change(function (event) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#today_thumb').attr("src", e.target.result);	
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		});
+	});
 
-
-	<script>
-        // 3. CKEditor5를 생성할 textarea 지정
-        var myClassicEditor;
-        
-        ClassicEditor.create(document.querySelector("#editor"))
-        .then(editor=>{myClassicEditor = editor})
-        .catch((error) => {console.error(error);});
-
-        
-        $(function(){
-    		CKEDITOR.replace("content",{
-    			filebrowserUploadUrl : "/upload"
-    		});
-    	});
-		</script>
-	<%@include file="fotter.jsp"%>
-	</section>
+	
+</script>
 </body>
 </html>
