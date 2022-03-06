@@ -1,6 +1,8 @@
 package com.mulcam.run.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,10 +100,13 @@ public class MateServiceImipl implements MateService {
 		return null;
 	}
 
+//	@Override
+//	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {
+//		return mateDAO.ptpInfo(mate_articleNO);
+//	}
 	@Override
-	public String ptpInfo(int mate_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Ptp ptpInfo(int mate_articleNO) throws Exception {
+		return mateDAO.ptpInfo(mate_articleNO);
 	}
 
 	@Override
@@ -116,7 +121,19 @@ public class MateServiceImipl implements MateService {
 	}
 
 	@Override
-	public void makePtp(Ptp ptp) throws Exception {
-		mateDAO.insertptp(ptp);
+	public void makePtp(int mate_articleNO, String user_id) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("mate_articleNO", mate_articleNO);
+		mateDAO.insertptp(map);
+	}
+
+	@Override
+	public void deletePtp(int mate_articleNO, String user_id) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("mate_articleNO", mate_articleNO);
+		mateDAO.deleteptp(map);
+		
 	}
 }

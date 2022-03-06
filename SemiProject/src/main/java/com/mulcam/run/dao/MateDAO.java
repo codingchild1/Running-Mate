@@ -1,6 +1,7 @@
 package com.mulcam.run.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -40,12 +41,11 @@ public interface MateDAO {
 	public void likeCancel(int mate_articleNO)throws Exception; //번개참여취소(참여자수 -1)
 	
 	//연습
-	public void insertptp(Ptp ptp)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
-//	public void insertptp(int mate_articleNO)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
-//	public Ptp queryptp(int ptp_no)throws Exception;
+	public void insertptp(Map map)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
+	public void deleteptp(Map map)throws Exception; //번개참여취소시 ptp테이블에 아이디값 삭제
 	
-	public void deleteptp(int mate_articleNO)throws Exception; //번개참여취소시 ptp테이블에 아이디값 삭제
-	public void ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
+//	public List<Ptp> ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
+	public Ptp ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	
 	//게시물 검색
 }

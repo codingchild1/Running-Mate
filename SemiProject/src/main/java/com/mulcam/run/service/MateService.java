@@ -33,8 +33,11 @@ public interface MateService{
 	void like(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
 	void likeCancel(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
 	
-	String ptpInfo(int mate_articleNO) throws Exception;
+//	List<Ptp> ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
+	Ptp ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
 	
-	void makePtp(Ptp ptp)throws Exception;
 	//게시물 검색
+
+	void makePtp(int mate_articleNO, String user_id)throws Exception;
+	void deletePtp(int mate_articleNO, String user_id)throws Exception;
 }

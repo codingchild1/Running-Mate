@@ -279,8 +279,8 @@
                 style="color:black;border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
                 value=''>
             <div style="font-size: 13px; float: right;">
-                <span style="margin: 5px; cursor: pointer;">수정</span>
-                    <span style="margin: 5px; cursor: pointer;">삭제</span>
+                <span id="update" style="margin: 5px; cursor: pointer;">수정</span>
+                    <span id="delete" style="margin: 5px; cursor: pointer;">삭제</span>
                         <span style="margin: 5px; cursor: pointer;">신고</span>
             </div>
              <input name='mate_date' type="text" style="color:black;height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''  disabled>
@@ -296,13 +296,13 @@
                         <div style="margin: 5px;">
                             <c:forEach items="${ptps }" var="ptp">
                             <input value='${ptp.user_id }'>
-                            <input type="hidden" id="ptpli" name="ptpli" value=''>
+                            <input type="hidden" id="ptpli" name="ptpli" value='${ptp.user_id }'>
                             </c:forEach>
                         </div>
                     </div>
                     </div>
                     <button class="ptp" style="margin: 5px; width: 43px;">참여</button>
-                    <input type="hidden" id="ptp" name="ptp" value=''>
+                    <input type="hidden" id="ptp" name="ptp" value=>
                 </div>
             </div>
         </div>
@@ -321,9 +321,15 @@
                 value='' >
                
             <div style="font-size: 13px; float: right;">
+           <%--  <c:choose>
+            <c:when test="${empty user_id}"> --%>
                 <span style="margin: 5px; cursor: pointer;">수정</span>
+                <%-- </c:when>
+                <c:otherwise> --%>
                     <span style="margin: 5px; cursor: pointer;">삭제</span>
+              <%--   </c:otherwise> --%>
                         <span style="margin: 5px; cursor: pointer;">신고</span>
+          <%--   </c:choose> --%>
                         
             </div>
             <input name="group_date" type="text" style="color:black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value='' disabled>
@@ -362,13 +368,26 @@
      			 $('input[name=user_id]').attr('value',jdata.user_id); 
      			 $('input[name=mate_date]').attr('value',jdata.mate_date); 
      			 $('input[name=ptp]').attr('value',jdata.mate_articleNO);
-     			 
     		},
     		error:function(data, textStatus){
     			alert("실패");
     		}
     		});
-    	
+            /*  $.ajax({     참여자 리스트
+        		type:"post",
+        		dataType:"text",
+        		async:false,
+        		url:"http://localhost:8090/ptplist",
+        		data:{"no":no},
+        		success: function(data, textStatus){ 
+        			console.log(data);
+        			 var jdata = JSON.parse(data);
+        			  console.log(jdata); 
+        		},
+        		error:function(data, textStatus){
+        			alert("실패");
+        		}
+        		});  */
     	}else{
     		modal2.style.display = "flex";
    		 $.ajax({
@@ -384,6 +403,7 @@
  			 $('input[name=group_date]').attr('value',jdata.group_date);
  			 $('#group_kl').attr('href',jdata.group_kl);
  			 $('#group_il').attr('href',jdata.group_il);
+ 			 
  		},
  		error:function(data, textStatus){
  			alert("실패");
@@ -445,20 +465,10 @@
                 modalOff1()
             }
         }); 
-        
-		function objectifyForm(formArray) {
-        	var returnArray = {};
-        	for (var i =0; i < formArray.length; i++){
-        		returnArray[formArray[i]['name']] = formArray[i]['value'];
-        	}
-        	return returnArray;
-        }
 	   
 	    var bt;
 		$('.ptp').click(function(){
 			if(bt!=0){
-				let formdata = objectifyForm($('#modal').serializeArray());
-				console.log(formdata);
 	            $.ajax({
 	        		type:"post",
 	        		dataType:"text",
@@ -467,9 +477,6 @@
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			  bt = 0; 
-	        			 console.log(data); 
-	        			 console.log($('[name=user_id]').val());
-	          			 console.log($('#user_id').val()); 
 	        			 alert("참여가 완료되었습니다."+bt); 
 	        		},
 	        		error:function(data, textStatus){

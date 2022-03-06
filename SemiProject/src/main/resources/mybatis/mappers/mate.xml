@@ -112,12 +112,19 @@
 	
 	<!-- 참여자 조회 -->
 	
-	<!-- 참여버튼 (like +1) -->
+ 	<!-- 참여버튼 (like +1) -->
   	<update id="like" parameterType="int">
 		<![CDATA[
 		update mate set mate_like=mate_like+1 where mate_articleNO=#{mate_articleNO}
 		]]> 
-	</update>
+	</update> 
+	
+		<!-- 참여버튼 (like +1) -->
+<!--   	<select id="like" parameterType="int">
+		<![CDATA[
+		select count(*) from ptp where mate_articleNO=#{mate_articleNO}
+		]]> 
+	</select> -->
 	
 	<!-- 참여버튼취소 (like -1) -->
 	<update id="likeCancel" parameterType="int">
@@ -127,12 +134,25 @@
 	</update>
 	
 	<!-- 번개참여시 ptp테이블에 아이디값 저장 -->
-	<insert id="insertptp" parameterType="ptp">
+	<insert id="insertptp" parameterType="map">
 		<![CDATA[
 			insert into ptp (ptp_no,mate_articleNO,user_id)
 			values(null,#{mate_articleNO},#{user_id})
 		]]>
 	</insert>
+	
+	<!-- 번개참여취소시 ptp테이블에 삭제 -->
+		<insert id="deleteptp" parameterType="map">
+		<![CDATA[
+			delete from ptp where user_id=#{user_id} and mate_articleNO=#{mate_articleNO}
+		]]>
+	</insert>
+	
+	<select id="ptpInfo" resultType="ptp" parameterType="int">
+		<![CDATA[
+			select * from ptp where mate_articleNO=#{mate_articleNO}
+		]]>
+	</select>
 	
 
 </mapper>

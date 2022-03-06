@@ -2,6 +2,9 @@ package com.mulcam.run.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +21,16 @@ import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.service.MateService;
+import com.mysql.cj.Session;
 
 @Controller
 public class MateController {
 
 	@Autowired
 	MateService mateService;
+	
+	@Autowired
+	HttpSession session;
 
 //	@GetMapping(value="/")
 //	public String bankmain(Model model) {
@@ -48,12 +55,28 @@ public class MateController {
 	@ResponseBody
 	@PostMapping("/Mmodal")
 	public ResponseEntity<Mate> Mmodal(@RequestParam(value="no",required = false) int mate_articleNO) {
-		ResponseEntity<Mate> result = null; 
+		ResponseEntity<Mate> result = null;
+//		ModelAndView mv = new ModelAndView();
 		try {
+//			List<Ptp> ptps = mateService.ptpInfo(mate_articleNO);
+//			mv.addObject("ptps",ptps);
+//			System.out.println(ptps);
 			Mate mate = mateService.mateInfo(mate_articleNO);
 			result = new ResponseEntity<Mate>(mate, HttpStatus.OK);
 		}catch(Exception e) {
 			result = new ResponseEntity<Mate>(HttpStatus.BAD_REQUEST);
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("/ptplist")
+	public ResponseEntity<Ptp> ptplist(@RequestParam(value="no",required = false) int mate_articleNO) {
+		ResponseEntity<Ptp> result = null; 
+		try {
+			Ptp ptp = mateService.ptpInfo(mate_articleNO);
+			result = new ResponseEntity<Ptp>(ptp, HttpStatus.OK);
+		}catch(Exception e) {
 		}
 		return result;
 	}
@@ -89,12 +112,12 @@ public class MateController {
 	
 	@ResponseBody
 	@PostMapping("/Like")
-	public void Like(@RequestParam(value="no")int mate_articleNO,Ptp ptp){
+	public void Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
 		try {
+			HttpSession session = request.getSession();
+			String user_id = (String) session.getAttribute("id");
 			mateService.like(mate_articleNO);
-			mateService.makePtp(ptp);
-			System.out.println(ptp.getUser_id());
-			System.out.println(ptp.getMate_articleNO());
+			mateService.makePtp(mate_articleNO,user_id);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -106,9 +129,12 @@ public class MateController {
 	
 	@ResponseBody
 	@PostMapping("/LikeCancel")
-	public void LikeCancel(@RequestParam(value="no")int mate_articleNO){
+	public void LikeCancel(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
 		try {
+			HttpSession session = request.getSession();
+			String user_id = (String) session.getAttribute("id");
 			mateService.likeCancel(mate_articleNO);
+			mateService.deletePtp(mate_articleNO, user_id);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
