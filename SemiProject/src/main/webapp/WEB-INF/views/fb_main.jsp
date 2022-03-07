@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <script type="text/javascript" src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>자유게시판</title>
     
