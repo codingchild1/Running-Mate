@@ -63,19 +63,22 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+    
+    //ckeditor
 	$(function(){
         ClassicEditor
         	.create(document.querySelector("#editor"), {
         		ckfinder : {
         			uploadUrl : "/upload"
         		}
+        	
         	}).then(editor=> {
         		window.editor=editor;
         	})
         	.catch((error) => {
         		console.error(error);
         	});
-	});   //에디터
+	});   
        
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
         var mapContainer = document.getElementById('mapinfo'), // 지도를 표시할 div 
@@ -151,54 +154,7 @@
 		return false;
 		});
 	});  
-/* 	$('#submit').submit(function(){
-		$('#search2').bind("click", function(){
-			var search = $('#search').val();
-	        geocoder.addressSearch(search, function(result, status) {
-	        	
-	            // 정상적으로 검색이 완료됐으면 
-	             if (status === kakao.maps.services.Status.OK) {
 
-	                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-	                // 결과값으로 받은 위치를 마커로 표시합니다
-	                var marker = new kakao.maps.Marker({
-	                    map: map,
-	                    position: coords
-	                });
-	                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	                map.setCenter(coords);
-	                marker.setDraggable(true);
-	                console.log(marker);
-	            }
-	         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-	        	    
-	        	    // 클릭한 위도, 경도 정보를 가져옵니다 
-	        	    var latlng = mouseEvent.latLng; 
-	        	    
-	        	    // 마커 위치를 클릭한 위치로 옮깁니다
-	        	    marker.setPosition(latlng);
-	        	    
-	        	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-	        	    message += '경도는 ' + latlng.getLng() + ' 입니다';
-	        	    
-	        	    var resultDiv = document.getElementById('clickLatlng'); 
-	        	   /*  console.log(message); 
-	        	    console.log($('#user_img').val());
-	        	    console.log($('#user_id').val());
-	        	    console.log($('#mate_title').val());
-	        	    console.log($('#mate_cont').val());  */
-	        	    /* resultDiv.innerHTML = message; */
-	        	    
-	        	/* });
-	        });  
-		});
-		console.log(message); 
- 	    console.log($('#user_img').val());
- 	    console.log($('#user_id').val());
- 	    console.log($('#mate_title').val());
- 	    console.log($('#mate_cont').val()); 
-	});  */
 
         </script>
  <%@include file ="fotter.jsp" %>
