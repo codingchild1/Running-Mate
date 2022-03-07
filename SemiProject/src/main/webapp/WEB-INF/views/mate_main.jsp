@@ -432,12 +432,14 @@
  		data:{"no":no},
  		success: function(data, textStatus){ 
  			 var jdata = JSON.parse(data); 
- 			 /* console.log(jdata.user_id) */
+			  var map = JSON.parse(jdata.group_area);
  			 $('input[name=group_title]').attr('value',jdata.group_title);
  			 $('input[name=user_id]').attr('value',jdata.user_id);
  			 $('input[name=group_date]').attr('value',jdata.group_date);
  			 $('#group_kl').attr('href',jdata.group_kl);
  			 $('#group_il').attr('href',jdata.group_il);
+ 			  $('input[name=mapinfo]').attr('value',map.La); 
+			 $('input[name=mapinfo2]').attr('value',map.Ma);  
  			var La = $('#mapinfo').val();
  			var Ma = $('#mapinfo2').val(); 
  			var mapContainer = document.getElementById('staticMap2'), // 지도를 표시할 div 
