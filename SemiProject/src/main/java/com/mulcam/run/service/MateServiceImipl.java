@@ -1,6 +1,8 @@
 package com.mulcam.run.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.mulcam.run.dao.MateDAO;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
 @Service
@@ -97,17 +100,40 @@ public class MateServiceImipl implements MateService {
 		return null;
 	}
 
+//	@Override
+//	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {
+//		return mateDAO.ptpInfo(mate_articleNO);
+//	}
 	@Override
-	public String ptpInfo(int mate_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Ptp ptpInfo(int mate_articleNO) throws Exception {
+		return mateDAO.ptpInfo(mate_articleNO);
 	}
 
 	@Override
-	public int like() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public void like(int mate_articleNO) throws Exception {
+			mateDAO.like(mate_articleNO);
+//			mateDAO.insertptp(mate_articleNO);
 	}
 
+	@Override
+	public void likeCancel(int mate_articleNO) throws Exception {
+		mateDAO.likeCancel(mate_articleNO);
+	}
 
+	@Override
+	public void makePtp(int mate_articleNO, String user_id) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("mate_articleNO", mate_articleNO);
+		mateDAO.insertptp(map);
+	}
+
+	@Override
+	public void deletePtp(int mate_articleNO, String user_id) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("mate_articleNO", mate_articleNO);
+		mateDAO.deleteptp(map);
+		
+	}
 }
