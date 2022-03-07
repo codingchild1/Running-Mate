@@ -52,7 +52,7 @@
             <div id="route_miniInfo">
                 <div id="route_miniTitle" style="text"></div>
                 <div id="route_miniThumbInfo">
-                    <img id="routeThumbImg" src="${route.route_thumb }"style="width:100%;height:300px; display:block; margin: auto;"/>
+                    <div id="routeThumbImg" style="width:100%;height:300px; display:block; margin: auto;"></div>
                     <div id="route_miniContent"></div>
                 </div>
             </div>

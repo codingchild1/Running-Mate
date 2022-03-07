@@ -85,11 +85,12 @@
 	<script>
 	//map script
 	$(function(){
+		var route_center = ${route.route_center };
 		mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
 		const map = new mapboxgl.Map({
 			container: 'map', // Specify the container ID
 		    style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
-		    center: [126.66,37.458699], // Specify the starting position
+		    center: [route_center.longitude,route_center.latitude], // Specify the starting position
 		    zoom: 14.5, // Specify the starting zoom
 		});
 		

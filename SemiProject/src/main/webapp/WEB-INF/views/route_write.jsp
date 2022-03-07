@@ -29,41 +29,23 @@
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css" type="text/css" />
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a41b354b6f502722e91503736b4d238&libraries=services"></script>
+	
 
 	<!-- 넓이 높이 조절 -->
 	<style>
 	#map {
         top: 0;
         bottom: 0;
-        width: 100%;
         height: 500px;
       }
 	.ck-editor__editable {
+		max-width:100%;
 	    min-height: 500px;
 	}
 	</style>
 </head>
 <body>
-	
-<div id="base">
-</div>
-<button id="somethingBtn">somethingBtn</button>
-<script>
-$(document).on('click', '#somethingBtn', function(){
-	$('#base').append('<input type="text" name="ptplist" value=""><br>');
-    var idx = $('input[name="ptplist"]').index(this);
-    console.log(idx);
-    $('input[name="ptplist"]').eq(idx).val("hello");
-});
-/*
-for(let i of jdata) {
-	console.log(i)
-	$('.list').append('<input type="text" name="ptplist" value=""><br>');
-	var idx = $('input[name="ptplist"]').index(this);
-	$('input[name=ptplist]').eq(idx).val(i.user_id));
-}
-*/
-</script>
 	<header><%@include file ="header.jsp" %></header>
 	<main style="width: 70%; margin: 0 auto;">
 		<div class="row align-items-center py-3">
@@ -86,14 +68,14 @@ for(let i of jdata) {
 			<!-- 글 제목 -->
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
 			<!-- ckeditor -->
-			<textarea id="editor" name="content" style="height:600px;"></textarea><br>
+			<textarea id="editor" name="content"></textarea><br>
 			
 			<p id="test">코스를 그려주세요</p>
-			<div id="map"></div>
+			<div id="map""></div>
 			
 			<input type="hidden" id="form_user_id" name="user_id">
-			<input type="hidden" id="form_thumb_img" name="route_thumb">
-			<input type="hidden" id="mapinfo" name="mapinfo">
+			<input type="hidden" id="route_center" name="route_center">
+			<input type="hidden" id="route_area" name="route_area">
 			<input type="hidden" id="route_mapinfo" name="route_mapinfo">
 			<input type="hidden" id="route_distance" name="route_distance">
 			
@@ -103,7 +85,7 @@ for(let i of jdata) {
 			</div>
 		</form></div>
 	</main>
-	
+
 	<script>
 		$(function(){
         	ClassicEditor
@@ -122,41 +104,121 @@ for(let i of jdata) {
 	
 	<script>
 	$(function(){
-		$("#submit").click(function(){
-			$("#form_user_id").attr("value", $("#user_id").html());
-			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
-			$("#mapinfo").attr("value", JSON.stringify(mapinfo));
-			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-			$("#form_thumb_img").attr("value", $('#thumb_img').attr("src"));
-			$("route_write").submit();
-		});
+		/*var geocoder = new kakao.maps.services.Geocoder();
+		
+		var callback = function(result, status){
+			if (status === kakao.maps.services.Status.OK) {
+				//console.log('지역 명칭 : ' + result[0].address_name);
+			   	//console.log('행정구역 코드 : ' + result[0].code);
+			   	for(var i = 0; i < result.length; i++) {
+		            // 행정동의 region_type 값은 'H' 이므로
+		            if (result[i].region_type === 'H') {
+		              	//areaName = result[i].address_name;
+		            	//return JSON.stringify(result[i].address_name);
+		            	break;
+		     	}
+			}
+		};
+		
+		function searchAddrFromCoords(longitude, latitude, callback) {
+		    // 좌표로 행정동 주소 정보를 요청합니다
+		    geocoder.coord2RegionCode(longitude, latitude, callback);
+		    return callback;
+		}
+		var areaName = "";
+		function displayCenterInfo(result, status) {
+		    if (status === kakao.maps.services.Status.OK) {
+		        for(var i = 0; i < result.length; i++) {
+		            // 행정동의 region_type 값은 'H' 이므로
+		            if (result[i].region_type === 'H') {
+		              	//areaName = result[i].address_name;
+		            	return JSON.stringify(result[i].address_name);
+		            	break;
+		            }
+		        }
+		    }    
+		}
+		*/
+		$("#submit").click(function(){	
+			/*console.log(geocoder.coord2RegionCode(center_lo, center_la, callback));
+			alert("2");
+			alert(areaName);
+			console.log(center_lo +", "+ center_la);
+			*/
+			/*
+			geocoder.coord2RegionCode(center_lo, center_la, callback);
 			
-		$('#reset').click(function(){
-			console.log($('#thumb_img').attr("src"));
+			var geocoder = new kakao.maps.services.Geocoder();
+			var callback = function(result, status) {
+			    if (status === kakao.maps.services.Status.OK) {
+			        for(var i = 0; i < result.length; i++) {
+			            // 행정동의 region_type 값은 'H' 이므로
+			            if (result[i].region_type === 'H') {
+			              	//areaName = result[i].address_name;
+			            	//return JSON.stringify(result[i].address_name);
+			            	alert("1");
+			            	alert(result[i].address_name);
+			            	//break;
+			            }
+			     	}
+			    }
+			};
+
+			
+			alert("2");
+			alert(callback[0].address_name);
+			alert(JSON.stringify(callback[0].address_name));
+			
+			$("#form_user_id").attr("value", $("#user_id").html());
+			$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
+			//$("#route_area").attr("value", areaName);
+			
+		    $("#route_area").attr("value", areaName);		               
+			
 			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
 			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-			console.log("route_articleNo: service"); 
-			console.log("user_id: "+ $('#form_user_id').val());
-			console.log("route_title: "+ $('#route_title').val());
-			console.log("route_thumb: " ); 
-			console.log($('#thumb_img').src);
-			console.log("route_date: service"); 
-			console.log("route_views: service"); 
-			console.log("route_likes: service"); 
-			console.log("route_content: "); 
-			console.log("route_area: 생략 " ); 
-			console.log("route_distance: "+ $("#route_distance").val());
-			console.log("route_mapinfo: ");
-			console.log($("#route_mapinfo").val());
-			console.log("warning: service" ); 
+			*/
+			
+			$.ajax({
+				async:false,
+				type:"post",
+				url:"http://localhost:8090/route/routeCoords",
+				traditional:true,
+				data: {"longitude" : center_lo, "latitude" : center_la},
+				dataType:"text",
+				success:function(data){
+					$("#form_user_id").attr("value", $("#user_id").html());
+					$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
+					$("#route_area").attr("value", data);
+					$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
+					$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+					
+					$("#route_write").submit();
+				}
+			});
+			
 		});
 		
+		$("#re").click(function(){
+			//searchAddrFromCoords([center_lo, center_la], displayCenterInfo);
+			//searchAddrFromCoords(center_lo, center_la, displayCenterInfo);
+			console.log(center_lo +", "+ center_la);
+			
+			$("#form_user_id").attr("value", $("#user_id").html());
+			$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
+			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
+			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+			
+			console.log($("#route_area").val());
+			//$("#route_write").submit();
+		});
+			
 		var mapinfo = {};
+		var center_lo, center_la;
 		mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
-		navigator.geolocation.getCurrentPosition(function(pos) {
+		navigator.geolocation.getCurrentPosition(function(pos) {	// 현재 위치 정보 얻기
 		    var latitude = pos.coords.latitude;
 		    var longitude = pos.coords.longitude;
-		    console.log(longitude, latitude);
 		    getMap(longitude, latitude);
 		});
 		
@@ -167,55 +229,10 @@ for(let i of jdata) {
 		      	center: [longitude, latitude], // Specify the starting position
 		      	zoom: 14.5, // Specify the starting zoom
 		    });
-			const coordinatesGeocoder = function (query) {
-		    	const matches = query.match(
-		    		/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
-		    	);
-		    	if (!matches) {
-		    		return null;
-		    	}
-		    	 
-		    	function coordinateFeature(lng, lat) {
-		    		return {
-		    			center: [lng, lat],
-		    			geometry: {
-		    				type: 'Point',
-		    				coordinates: [lng, lat]
-		    			},
-		    			place_name: 'Lat: ' + lat + ' Lng: ' + lng,
-		    			place_type: ['coordinate'],
-		    			properties: {},
-		    			type: 'Feature'
-		    		};
-		    	}
-		    	 
-		    	const coord1 = Number(matches[1]);
-		    	const coord2 = Number(matches[2]);
-		    	const geocodes = [];
-		    	 
-		    	if (coord1 < -90 || coord1 > 90) {
-		    		// must be lng, lat
-		    		geocodes.push(coordinateFeature(coord1, coord2));
-		    	}
-		    	 
-		    	if (coord2 < -90 || coord2 > 90) {
-		    		// must be lat, lng
-		    		geocodes.push(coordinateFeature(coord2, coord1));
-		    	}
-		    	 
-		    	if (geocodes.length === 0) {
-		    		// else could be either lng, lat or lat, lng
-		    		geocodes.push(coordinateFeature(coord1, coord2));
-		    		geocodes.push(coordinateFeature(coord2, coord1));
-		    	}
-		    	return geocodes;
-		    };
-		    
-		 	// 지역검색 geocoder controller 추가
+			
 		    map.addControl(
 		    	new MapboxGeocoder({
 		    		accessToken: mapboxgl.accessToken,
-		    		localGeocoder: coordinatesGeocoder,
 		    		zoom: 14.5,
 		    		placeholder: '지역검색',
 		    		mapboxgl: mapboxgl,
@@ -225,16 +242,13 @@ for(let i of jdata) {
 			
 			// mapbox draw 기능!
 		    const draw = new MapboxDraw({
-		    	// Instead of showing all the draw tools, show only the line string and delete tools.
-		    	displayControlsDefault: false,
+		    	displayControlsDefault: false,		// Instead of showing all the draw tools, show only the line string and delete tools.
 		    	controls: {
 		    		line_string: true,
 		    	    trash: true
-		    	},
-		    	// Set the draw mode to draw LineStrings by default.
-		    	defaultMode: 'draw_line_string',
-		    		styles: [
-		    	    // Set the line style for the user-input coordinates.
+		    	},	
+		    	defaultMode: 'draw_line_string',	// Set the draw mode to draw LineStrings by default.
+		    		styles: [						// Set the line style for the user-input coordinates.
 		    	    {
 		    	    	id: 'gl-draw-line',
 		    	      	type: 'line',
@@ -250,9 +264,8 @@ for(let i of jdata) {
 		    	        	'line-opacity': 0.7
 		    	      	}
 		    	    },
-		    	    // Style the vertex point halos.
-		    	    {
-		    	    	id: 'gl-draw-polygon-and-line-vertex-halo-active',
+		    	    {								
+		    	    	id: 'gl-draw-polygon-and-line-vertex-halo-active',	// Style the vertex point halos.
 		    	      	type: 'circle',
 		    	      	filter: [
 			    	        'all',
@@ -265,9 +278,8 @@ for(let i of jdata) {
 		    	        	'circle-color': '#FFF'
 		    	      	}
 		    	    },
-		    	    // Style the vertex points.
 		    	    {
-		    	    	id: 'gl-draw-polygon-and-line-vertex-active',
+		    	    	id: 'gl-draw-polygon-and-line-vertex-active',	// Style the vertex points.
 		    	      	type: 'circle',
 		    	      	filter: [
 		    	        	'all',
@@ -283,7 +295,7 @@ for(let i of jdata) {
 		    		]
 		    });
 			
-			//draw 기능 추가!
+			//draw 기능 추가! update/delete 기능 on
 		    map.addControl(draw);
 		    map.on('draw.create', updateRoute);
 	    	map.on('draw.update', updateRoute);
@@ -291,16 +303,12 @@ for(let i of jdata) {
 			
 		 	// Use the coordinates you drew to make the Map Matching API request
 	    	function updateRoute() {
-	    		// Set the profile
-	    	  	const profile = 'walking';
-	    	  	// Get the coordinates that were drawn on the map
-	    	  	const data = draw.getAll();
+	    	  	const profile = 'walking';				// Set the profile
+	    	  	const data = draw.getAll();				// Get the coordinates that were drawn on the map
 	    	  	const lastFeature = data.features.length - 1;
 	    	  	const coords = data.features[lastFeature].geometry.coordinates;
-	    	  	// Format the coordinates
-	    	  	const newCoords = coords.join(';');
-	    	  	// Set the radius for each coordinate pair to 25 meters
-	    	  	const radius = coords.map(() => 25);
+	    	  	const newCoords = coords.join(';');	
+	    	  	const radius = coords.map(() => 25);	// Set the radius for each coordinate pair to 25 meters
 	    	  	getMatch(newCoords, radius, profile);
 	    	}
 
@@ -308,18 +316,12 @@ for(let i of jdata) {
 	    	// Make a Map Matching request
 	    	async function getMatch(coordinates, radius, profile) {
 	    		console.log(coordinates+" " + radius + " "+profile);
-	    	  	// Separate the radiuses with semicolons
 	    	  	const radiuses = radius.join(';');
-				const url = "https://api.mapbox.com/matching/v5/mapbox/"+profile+"/"+coordinates+"?geometries=geojson&radiuses="+radiuses+"&steps=true&access_token="+mapboxgl.accessToken;
-	    	  	console.log(url);
-	    	  
-	    	  	// Create the query
-	    	  	const query = await fetch(
-	    			url,
-	    	    	{ method: 'GET', headers: {"Access-Control-Allow-Origin":"*"} }
-		    	  );
-		   	  	//, mode: 'no-cors' 
-	    	  	console.log(query);
+				const url = "https://api.mapbox.com/matching/v5/mapbox/"+profile+"/"+coordinates+"?geometries=geojson&radiuses="+radiuses+"&steps=true&access_token="+mapboxgl.accessToken;	    	  
+	    	  	const query = await fetch(	// Create the query
+	    	  			url,
+	    	    		{ method: 'GET', headers: {"Access-Control-Allow-Origin":"*"} }	//mode: 'no-cors' 
+		    		);
 	    	  	const response = await query.json();
 	    	  
 	    	  	// Handle errors
@@ -330,25 +332,26 @@ for(let i of jdata) {
 	    	    	return;
 	    	  	}
 	    	  	mapinfo = response;
-	    	  	console.log(mapinfo.matchings[0]);
-	    	  	console.log("hello");
-	    	  	console.log(response.matchings[0].distance);
-	    	  	// Get the coordinates from the response
-	    	  	const coords = response.matchings[0].geometry;
-	    	  	console.log(coords);
+	    	  	const coords = response.matchings[0].geometry;	// Get the coordinates from the response
+	    	  	
+	    	  	// geometry의 중심 좌표 구하기
+	    	  	var lo=0, la=0;
+	    	  	for(var coord of coords.coordinates){
+	    	  		lo += coord[0];
+	    	  		la += coord[1];
+	    	  	}
+	    	  	center_lo = lo/coords.coordinates.length;
+	    	  	center_la = la/coords.coordinates.length;	    	  	
 	    	  
-	    	  	// Code from the next step will go here
 	    	  	addRoute(coords);
 	    	}
 	    	
 	    	// Draw the Map Matching route as a new layer on the map
 	    	function addRoute(coords) {
-	    		// If a route is already loaded, remove it
-	    	  	if (map.getSource('route')) {
+	    	  	if (map.getSource('route')) {	// If a route is already loaded, remove it
 	    	    	map.removeLayer('route');
 	    	    	map.removeSource('route');
-	    	  	} else {
-	    	    // Add a new layer to the map
+	    	  	} else {						// Add a new layer to the map
 	    	    	map.addLayer({
 	    	    		id: 'route',
 	    	      		type: 'line',
