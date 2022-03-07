@@ -247,7 +247,7 @@
                     </div>
                 </div>
                 <div style="margin: 5px ; margin-top: 25px; padding: 5px; vertical-align: middle;">
-                    <span><img class="heart" src="images/하트.png" style="width: 30px; height: 30px;"></span>
+                    <span><img class="heart" src="images/ptp2.png" style="width: 30px; height: 30px;"></span>
                     <span><input type="text" id="like" value='${groupandmate.likeno }'
                             style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
                             disabled></span>
@@ -285,7 +285,9 @@
             </div>
              <input name='mate_date' type="text" style="color:black;height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value=''  disabled>
             <div class="content">
-                <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
+                 <div id="staticMap" style="width:210px; height:200px; border:1px solid black;"></div>
+                <input id="mapinfo"  name="mapinfo" type="hidden" value=''>
+                <input id="mapinfo2"  name="mapinfo2" type="hidden" value=''>
                 <textarea style="width: 352px; height: 190px;"></textarea>
                 <div 
                     style="display:flex; flex-direction: row-reverse; margin: 7px; margin-right: 0px;  float: right;position: relative;height: 32px;">
@@ -293,11 +295,8 @@
                         <div class="ptplist"
                         style="position: relative; border: 1px solid; width: 200px; top: -150px; margin: 10px; background-color: #2b2e4a;">
                         <p style="font-size: 13px; margin:2px; padding: 5px;">참여자 목록</p>
-                        <div style="margin: 5px;">
-                            <c:forEach items="${ptps }" var="ptp">
-                            <input value='${ptp.user_id }'>
-                            <input type="hidden" id="ptpli" name="ptpli" value='${ptp.user_id }'>
-                            </c:forEach>
+                        <div class="list" style="margin: 5px;">
+                            <input type="hidden" id="ptpli" name="ptpli" value=''>
                         </div>
                     </div>
                     </div>
@@ -316,7 +315,7 @@
                     value='' disabled>
                 <div class="close-area">X</div>
             </div>
-            <input name="user_id2" id="user_id2"
+            <input name="user_id" id="user_id"
                 style="color:black; border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
                 value='' >
                
@@ -334,8 +333,10 @@
             </div>
             <input name="group_date" type="text" style="color:black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value='' disabled>
             <div class="content">
-<div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
-                
+<!-- <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div> -->
+                <div id="staticMap2" style="width:210px; height:200px; border:1px solid black;"></div>
+                <input id="mapinfo" name="mapinfo" type="hidden" value=''>
+                <input id="mapinfo2" name="mapinfo2" type="hidden" value=''>
                 <textarea style="width: 352px; height: 190px;"></textarea>
                 <div>
                 </div>
@@ -349,9 +350,10 @@
         </div>
     </div>
 <!-- </form> -->
-
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script> 
  	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+
     function detailModal(no,type){
     	if(type=='m'){
     	 modal.style.display = "flex";
@@ -363,31 +365,63 @@
     		data:{"no":no},
     		success: function(data, textStatus){ 
     			 var jdata = JSON.parse(data);
-    			 /* console.log(jdata); */
+    			/*   console.log(jdata);
+    			  console.log(jdata.mate_mapinfo); */
+    			  var map = JSON.parse(jdata.mate_mapinfo);
+    			  /* console.log(map.La);
+    			  console.log(map.Ma); */
      			 $('input[name=mate_title]').attr('value',jdata.mate_title);
      			 $('input[name=user_id]').attr('value',jdata.user_id); 
      			 $('input[name=mate_date]').attr('value',jdata.mate_date); 
      			 $('input[name=ptp]').attr('value',jdata.mate_articleNO);
+     			 $('input[name=mapinfo]').attr('value',map.La); 
+     			 $('input[name=mapinfo2]').attr('value',map.Ma); 
+     			 /*  console.log($('#mapinfo').val());
+     			  console.log($('#mapinfo2').val());  */
+     			var La = $('#mapinfo').val();
+     			var Ma = $('#mapinfo2').val();
+     			var mapContainer = document.getElementById('staticMap'), // 지도를 표시할 div 
+     		    mapOption = { 
+     		        center: new kakao.maps.LatLng(Ma, La), // 지도의 중심좌표
+     		        level: 3 // 지도의 확대 레벨
+     		    };
+
+     		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+     		// 마커가 표시될 위치입니다 
+     		var markerPosition  = new kakao.maps.LatLng(Ma, La); 
+
+     		// 마커를 생성합니다
+     		var marker = new kakao.maps.Marker({
+     		    position: markerPosition
+     		});
+
+     		// 마커가 지도 위에 표시되도록 설정합니다
+     		marker.setMap(map);
     		},
     		error:function(data, textStatus){
     			alert("실패");
     		}
     		});
-            /*  $.ajax({     참여자 리스트
+              $.ajax({     
         		type:"post",
         		dataType:"text",
         		async:false,
         		url:"http://localhost:8090/ptplist",
         		data:{"no":no},
         		success: function(data, textStatus){ 
-        			console.log(data);
         			 var jdata = JSON.parse(data);
-        			  console.log(jdata); 
+        			 for(let i of jdata) {
+        					$('.list').append('<input type="text" name="ptplist" value=""><br>');
+        					var idx = $('input[name="ptplist"]').index(this);
+        					$('input[name=ptplist]').eq(idx).val(i.user_id);
+        				}
+        		
         		},
         		error:function(data, textStatus){
         			alert("실패");
         		}
-        		});  */
+        		});  
     	}else{
     		modal2.style.display = "flex";
    		 $.ajax({
@@ -398,12 +432,32 @@
  		data:{"no":no},
  		success: function(data, textStatus){ 
  			 var jdata = JSON.parse(data); 
+ 			 /* console.log(jdata.user_id) */
  			 $('input[name=group_title]').attr('value',jdata.group_title);
  			 $('input[name=user_id]').attr('value',jdata.user_id);
  			 $('input[name=group_date]').attr('value',jdata.group_date);
  			 $('#group_kl').attr('href',jdata.group_kl);
  			 $('#group_il').attr('href',jdata.group_il);
- 			 
+ 			var La = $('#mapinfo').val();
+ 			var Ma = $('#mapinfo2').val(); 
+ 			var mapContainer = document.getElementById('staticMap2'), // 지도를 표시할 div 
+ 		    mapOption = { 
+ 		        center: new kakao.maps.LatLng(Ma, La), // 지도의 중심좌표
+ 		        level: 3 // 지도의 확대 레벨
+ 		    };
+
+ 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+ 		// 마커가 표시될 위치입니다 
+ 		var markerPosition  = new kakao.maps.LatLng(Ma, La); 
+
+ 		// 마커를 생성합니다
+ 		var marker = new kakao.maps.Marker({
+ 		    position: markerPosition
+ 		});
+
+ 		// 마커가 지도 위에 표시되도록 설정합니다
+ 		marker.setMap(map);
  		},
  		error:function(data, textStatus){
  			alert("실패");
@@ -415,7 +469,6 @@
         const modal = document.getElementById("modal")
         function modalOn() {
             modal.style.display = "flex"
-            
         }
         function isModalOn() {
             return modal.style.display === "flex"
@@ -500,8 +553,14 @@
 	        		});
 			}
 		});
+		var Ma = $('#mapinfo').val();
+		var La = $('#mapinfo2').val();
+		  console.log($('#mapinfo').val());
+		  console.log(La);
 		
 
+	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+	// marker.setMap(null); 
 </script>
 <%--  <%@include file ="fotter.jsp" %> --%>
 </body>

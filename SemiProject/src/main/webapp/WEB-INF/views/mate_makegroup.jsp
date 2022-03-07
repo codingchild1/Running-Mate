@@ -50,7 +50,7 @@
     <div id="mapinfo" style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
     <input type="hidden" id="group_area" name="group_area" value=""> 
     
-    <textarea name="content" id="editor" name="group_cont" style="width: 100%;height: 500px;" placeholder="내용을 입력하세요"></textarea>
+    <textarea id="editor" name="group_cont" style="width: 100%;height: 500px;" placeholder="내용을 입력하세요"></textarea>
     <div style="display: flex; margin-top: 20px;">
        <img class="kakao" src="images/kakao.png" style="width: 30px; height: 30px;">
         <input type="text" id="group_kl" name="group_kl" style="margin-left: 10px;width: 100%;" placeholder="오픈카카오톡 링크를 입력하세요">

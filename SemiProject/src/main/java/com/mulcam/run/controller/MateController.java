@@ -43,6 +43,7 @@ public class MateController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			List<GroupAndMate> mates = mateService.allpostInfo();
+			
 			mv.addObject("mates",mates);
 			
 		} catch (Exception e) {
@@ -71,12 +72,14 @@ public class MateController {
 	
 	@ResponseBody
 	@PostMapping("/ptplist")
-	public ResponseEntity<Ptp> ptplist(@RequestParam(value="no",required = false) int mate_articleNO) {
-		ResponseEntity<Ptp> result = null; 
+	public ResponseEntity<List<Ptp>> ptplist(@RequestParam(value="no",required = false) int mate_articleNO) {
+		ResponseEntity<List<Ptp>> result = null; 
 		try {
-			Ptp ptp = mateService.ptpInfo(mate_articleNO);
-			result = new ResponseEntity<Ptp>(ptp, HttpStatus.OK);
+			 List<Ptp> ptp = mateService.ptpInfo(mate_articleNO);
+//			Ptp ptp = mateService.ptpInfo(mate_articleNO);
+			result = new ResponseEntity<List<Ptp>>(ptp, HttpStatus.OK);
 		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

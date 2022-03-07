@@ -52,7 +52,7 @@
      <div id="mapinfo"  style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
      <input type="hidden" id="mate_mapinfo" name="mate_mapinfo" value=""> 
   
-    <textarea name="content" id="editor" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
+    <textarea id="editor" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
     <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
         <button id="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
         <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;"><a href="mate_main">취소</a></button>
@@ -119,7 +119,8 @@
 	         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 	        	    
 	        	    // 클릭한 위도, 경도 정보를 가져옵니다 
-	        	    var latlng = mouseEvent.latLng; 
+	        	    var latlng = mouseEvent.latLng;
+	        	   /*  console.log(latLng); */
 	        	    JSON.stringify(latlng);
 	        	    console.log("좌표: " + JSON.stringify(latlng));
 	        	    console.log(typeof latlng);
@@ -129,6 +130,7 @@
 	        	    
 	        	    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
 	        	    message += '경도는 ' + latlng.getLng() + ' 입니다';
+	        	    console.log(message);
 	        	    
 	        	    var resultDiv = document.getElementById('clickLatlng'); 
 	        	    

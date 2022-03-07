@@ -100,14 +100,15 @@ public class MateServiceImipl implements MateService {
 		return null;
 	}
 
-//	@Override
-//	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {
-//		return mateDAO.ptpInfo(mate_articleNO);
-//	}
 	@Override
-	public Ptp ptpInfo(int mate_articleNO) throws Exception {
+	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {
 		return mateDAO.ptpInfo(mate_articleNO);
 	}
+	
+//	@Override
+//	public Ptp ptpInfo(int mate_articleNO) throws Exception {
+//		return mateDAO.ptpInfo(mate_articleNO);
+//	}
 
 	@Override
 	public void like(int mate_articleNO) throws Exception {
