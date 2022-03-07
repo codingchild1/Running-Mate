@@ -290,7 +290,7 @@ body {
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
 			<div style="font-size: 13px; float: right;">
-				<span id="update" style="margin: 5px; cursor: pointer;">수정</span> <span
+				<span id="update" style="margin: 5px; cursor: pointer;"><a href="mate_updatemate" style="text-decoration-line: none;color: black;">수정</a></span> <span
 					id="delete" style="margin: 5px; cursor: pointer;">삭제</span> <span
 					style="margin: 5px; cursor: pointer;">신고</span>
 			</div>
@@ -339,7 +339,7 @@ body {
 			<div style="font-size: 13px; float: right;">
 				<%--  <c:choose>
             <c:when test="${empty user_id}"> --%>
-				<span style="margin: 5px; cursor: pointer;">수정</span>
+				<span style="margin: 5px; cursor: pointer;"><a href="mate_updategroup" style="text-decoration-line: none;color: black;">수정</a></span>
 				<%-- </c:when>
                 <c:otherwise> --%>
 				<span style="margin: 5px; cursor: pointer;">삭제</span>
@@ -359,7 +359,7 @@ body {
 				<!-- <textarea id="group_cont" name="group_cont"
 					style="width: 352px; height: 190px;"></textarea> -->
 					<div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div>
-				<div></div>
+				<!-- <div></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px; float: right; position: relative;">
 					<a id=group_kl href=''><img class="kakao"

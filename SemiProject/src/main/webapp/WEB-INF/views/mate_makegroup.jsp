@@ -81,9 +81,9 @@ input:focus {
 				</div>
 				<div
 					style="display: flex; align-items: center; margin-right: 55px; justify-content: center; margin-top: 50px;">
-					<button
+					<button id="sunmit"
 						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
-					<button
+					<button 
 						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">
 						<a href="main" style="text-decoration-line: none;">취소</a>
 					</button>

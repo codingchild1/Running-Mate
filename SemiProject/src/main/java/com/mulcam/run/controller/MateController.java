@@ -126,10 +126,6 @@ public class MateController {
 		}
 	}
 	
-
-	
-	
-	
 	@ResponseBody
 	@PostMapping("/LikeCancel")
 	public void LikeCancel(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
@@ -184,6 +180,15 @@ public class MateController {
 			e.printStackTrace();
 		}
 		return mv;
+	}
+	@GetMapping("/mate_updatemate")
+	public String mate_updatemate() {
+		return "mate_updatemate";
+	}
+	
+	@GetMapping("/mate_updategroup")
+	public String mate_updategroup() {
+		return "mate_updategroup";
 	}
 	
 }
