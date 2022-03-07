@@ -8,6 +8,7 @@
 		<mapper resource="mybatis/mappers/today.xml"/>
 		<mapper resource="mybatis/mappers/member.xml"/>
 		<mapper resource="mybatis/mappers/route.xml"/>
+		<mapper resource="mybatis/mappers/warning.xml" />
 	</mappers>
 </configuration>
 
