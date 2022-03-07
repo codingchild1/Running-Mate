@@ -30,6 +30,10 @@ import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.TodayService;
 
+import com.mulcam.run.dto.PageInfo;
+import com.mulcam.run.dto.Today;
+import com.mulcam.run.service.TodayService;
+
 @Controller
 public class TodayController {
 
@@ -153,8 +157,7 @@ public class TodayController {
 			// 테스트를 위한 임시 유저 아이디
 			String user_id = "adminUser";
 			
-			Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),null, 0, 0, today_contents, user_id, null);
-			//Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),today_contents);
+			Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),today_contents);
 			System.out.println(today_title);  // DB저장
 			System.out.println(today_contents.trim());  // DB저장, 반드시 trim()
 			try {
@@ -233,5 +236,5 @@ public class TodayController {
 		}
 }
 
-	
 
+	

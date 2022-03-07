@@ -15,22 +15,19 @@ public class Today {
 	boolean warning;
 	
 	public Today() {}
-	public Today(String today_articleNo, String user_id,
-			String today_title, Date today_date, int today_views, int today_likes, 
-			String today_thumb, String today_contents, Boolean warning) {
-		this.today_articleNo = today_articleNo; 
+
+	/*
+	 * public Today( String user_id, String today_title, String today_thumb, String
+	 * today_contents) { //this.today_articleNo = today_articleNo; this.user_id =
+	 * user_id; this.today_title = today_title; //this.today_date = today_date;
+	 * //this.today_views = today_views; //this.today_likes = today_likes;
+	 * this.today_thumb = today_thumb; this.today_contents = today_contents;
+	 * //this.warning = warning; }
+	 */
+	public Today(String user_id, String today_title,String today_thumb, String today_contents) {
 		this.user_id = user_id;
 		this.today_title = today_title; 
-		this.today_date = today_date; 
-		this.today_views = today_views; 
-		this.today_likes = today_likes;
 		this.today_thumb = today_thumb; 
-		this.today_contents = today_contents; 
-		this.warning = warning;
-	}
-	public Today(String user_id, String today_title, String today_contents) {
-		this.user_id = user_id;
-		this.today_title = today_title; 
 		this.today_contents = today_contents; 
 		
 	}
