@@ -38,5 +38,6 @@
     email varchar(255) not null,
     phone varchar(255) not null,
     joindate date not null,
+    adminCK int not null,
     primary key(articleNO)
 ); -->
