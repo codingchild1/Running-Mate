@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <script type="text/javascript" src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>자유게시판</title>
     
     <style>
@@ -38,6 +41,11 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 .btn2:hover {background: #6b9ab8; }
 a { text-decoration-line: none;}
 
+#pageList {
+	margin: auto;
+	width: 1000px;
+	text-align: center;
+}
     </style>
     
 </head>
@@ -46,9 +54,11 @@ a { text-decoration-line: none;}
 <%@include file ="header.jsp" %>
 <%@include file ="slides.jsp" %>
     
-<Section>
+<Section class="top">
     <div class="container2">
         <h2>게시글 목록</h2>
+        <c:choose>
+	<c:when test="${articleList!=null && pageInfo.listCount>0 }">
         <table class="board_list">
             <colgroup>
                 <col width="*%"/>
@@ -65,19 +75,63 @@ a { text-decoration-line: none;}
                 </tr>
             </thead>
 			<tbody>
-                <tr>
-                    <td><a href="fb_detail" onclick="제목" style="text-decoration-line: none; color: black;">제목입니다.</a></td>
-                    <td class="title">작성자</td>
-                    <td>2022-02-27</td>
-                </tr> 
+                <c:forEach var="article" items="${articleList }">
+				<tr>
+
+				<td>
+
+				<a href="./boarddetail?fb_title=${article.fb_title}&page=${pageInfo.page}">
+					${article.fb_title} 
+				</a>
+				</td>
+				<td>${article.writer }</td>
+				<td>${article.fb_date }</td>
+				<td>${article.fb_views }</td>
+				</tr>
+			</c:forEach>
 
             </tbody>
         </table>
+			<section id=pageList>
+			<c:choose>
+				<c:when test="${pageInfo.page<=1}">
+					[이전]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="boardlist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<c:choose>
+					<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+					<c:otherwise>
+						<a href="boardlist?page=${i}">[${i }]</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+					[다음]
+				</c:when>
+				<c:otherwise>
+					<a href="boardlist?page=${pageInfo.page+1}">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+			</section>
+		</c:when>
+		<c:otherwise>
+		<section id="emptyArea">등록된 글이 없습니다.</section>
+	</c:otherwise>
+	</c:choose>
+	
         <div class="writebtn">
-        <a href="fb_writing" class="btn btn-success" >글 쓰기</a>
+        <button class="btn btn-success" onclick="getBoardList()">글 쓰기</button>
         </div>
     </div>
+    
     </Section>
     <%@include file ="fotter.jsp" %>
+    
+
 </body>
 </html>

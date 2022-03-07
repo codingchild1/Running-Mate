@@ -10,7 +10,9 @@ import com.mulcam.run.dto.Board;
 @Mapper
 @Repository
 public interface BoardDAO {
-	public List<Board> selectBoardList() throws Exception; // 게시글 목록 불러오기
+	List<Board> selectBoardList(int startrow) throws Exception; // 게시글 목록 불러오기
+	int selectBoardCount() throws Exception;
+	
 	public Board selectBoard(int fb_no) throws Exception;  // 게시물 상세보기
 	public void insertBoard(Board board) throws Exception; // 게시글 작성
 	public void updateFbViews(int fb_no) throws Exception; // 조회수

@@ -41,14 +41,11 @@
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">
-                                <h1 class="h1 text-success"><b>Zay</b> eCommerce</h1>
-                                <h3 class="h2">Tiny and Perfect eCommerce Template</h3>
+                                <h1 class="h1 text-success"><b>메이트 구하기</b></h1>
+                                <h3 class="h2">친구 구합니다.</h3>
                                 <p>
-                                    Zay Shop is an eCommerce HTML5 CSS template with latest version of Bootstrap 5 (beta 1). 
-                                    This template is 100% free provided by <a rel="sponsored" class="text-success" href="https://templatemo.com" target="_blank">TemplateMo</a> website. 
-                                    Image credits go to <a rel="sponsored" class="text-success" href="https://stories.freepik.com/" target="_blank">Freepik Stories</a>,
-                                    <a rel="sponsored" class="text-success" href="https://unsplash.com/" target="_blank">Unsplash</a> and
-                                    <a rel="sponsored" class="text-success" href="https://icons8.com/" target="_blank">Icons 8</a>.
+                                    함께 달릴 친구가 필요하신가요?<br>
+                                    바로 지금 여기서 손 쉽게 친구를 구할 수 있습니다.<br> <b style="color: green">메이트 구하기</b> 지금 바로 모임에 참여해서 꿈을 실천하세요. 
                                 </p>
                             </div>
                         </div>
@@ -63,12 +60,12 @@
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
-                                <h1 class="h1">Proident occaecat</h1>
-                                <h3 class="h2">Aliquip ex ea commodo consequat</h3>
+                                <h1 class="h1 text-success"><b>오늘의 러닝</b> </h1>
+                                <h3 class="h2">인증합니다</h3>
                                 <p>
-                                    You are permitted to use this Zay CSS template for your commercial websites. 
-                                    You are <strong>not permitted</strong> to re-distribute the template ZIP file in any kind of template collection websites.
-                                </p>
+                                    당신은 오늘 목표를 달성 했나요?<br>
+                                    만약 목표를 달성했다면 인증하고 자랑해주세요.<br> <b style="color: green">오늘의 러닝</b> 남들에게 나의 이야기를 공유하고 추억을 남겨보세요. 
+                                                                    </p>
                             </div>
                         </div>
                     </div>
@@ -82,11 +79,11 @@
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
-                                <h1 class="h1">Repr in voluptate</h1>
-                                <h3 class="h2">Ullamco laboris nisi ut </h3>
+                                <h1 class="h1 text-success"><b>코스 공유</b> </h1>
+                                <h3 class="h2">코스 공유해요.</h3>
                                 <p>
-                                    We bring you 100% free CSS templates for your websites. 
-                                    If you wish to support TemplateMo, please make a small contribution via PayPal or tell your friends about our website. Thank you.
+                                    색다른 코스로 달리길 원하시나요? <br>
+                                    다른 사람들이 공유하는 색다른 길을 찾아보세요.<br> <b style="color: green">코스 공유</b> 내가 추천하는 코스가 있다면 직접 추천하고 남들과 함께 해보세요.
                                 </p>
                             </div>
                         </div>
@@ -101,11 +98,11 @@
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
-                                <h1 class="h1">Repr in voluptate</h1>
-                                <h3 class="h2">Ullamco laboris nisi ut </h3>
+                                <h1 class="h1 text-success"><b>자유게시판</b> </h1>
+                                <h3 class="h2">의견을 나눠봐요.</h3>
                                 <p>
-                                    We bring you 100% free CSS templates for your websites. 
-                                    If you wish to support TemplateMo, please make a small contribution via PayPal or tell your friends about our website. Thank you.
+                                    필요한 정보가 있으신가요?<br>
+                                    여기 다른 사람들이 남긴 지식을 찾아보세요.<br> <b style="color: green">자유게시판</b> 만약 원하는 정보가 없다면 직접 물어보세요.
                                 </p>
                             </div>
                         </div>
@@ -120,11 +117,11 @@
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
-                                <h1 class="h1">Repr in voluptate</h1>
-                                <h3 class="h2">Ullamco laboris nisi ut </h3>
+                                <h1 class="h1 text-success"><b>이벤트</b></h1>
+                                <h3 class="h2">이벤트 참여하세요.</h3>
                                 <p>
-                                    We bring you 100% free CSS templates for your websites. 
-                                    If you wish to support TemplateMo, please make a small contribution via PayPal or tell your friends about our website. Thank you.
+                                    그냥 달리기만 하는건 질린다고요?<br>
+                                    다양한 이벤트에 참여해서 색다른 목표를 가져보세요.<br> <b style="color: green">이벤트</b> 좋은 이벤트 많습니다.<br>한 번씩 들렸다가세요~~
                                 </p>
                             </div>
                         </div>

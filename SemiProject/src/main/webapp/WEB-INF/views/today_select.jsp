@@ -7,17 +7,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
 	rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>Insert title here</title>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 <script>
 	$(function(){
         ClassicEditor.create(document.querySelector("#editor"))
@@ -28,9 +33,9 @@
         	console.error(error);
         });
 	});
-</script>	
+</script>
 <style>
-main{
+main {
 	display: flex;
 	justify-content: center;
 	float: center;
@@ -39,8 +44,9 @@ main{
 	border: 1px solid red;
 	margin-top: 10px;
 }
-#editor{
-float:right;
+
+#editor {
+	float: right;
 }
 
 #today_delete, #today_modify, #warning {
@@ -70,7 +76,8 @@ header {
 					<div class="row">
 						<div class="container fluid border">
 							<ul class="list-inline shop-top-menu pb-3 pt-1">
-								<li>제목<input name="today_title" id="today_title" size="150" value='${title }'></li>	
+								<li>제목<input name="today_title" id="today_title" size="150"
+									value='${title }'></li>
 							</ul>
 							<table>
 								<tbody class="container mt-1">
@@ -112,10 +119,11 @@ header {
 				<!--------------------------------------------------게시글 ---------------------------- -->
 				<main>
 					<table class="container-fluid">
-					  <div id="editor"></div><br>
+						<div id="editor"></div>
+						<br>
 					</table>
 				</main>
-					
+
 
 				<table>
 					<tr>
@@ -145,6 +153,18 @@ header {
 	    	      location.href="today";
 	    	      });
 	    	  });
+		 
+	      //ckeditor 작성내용 보여주는부분
+  		$(function(){
+	      ClassicEditor.create(document.querySelector("#editor"))
+		     .then(editor=>{
+  		editor.setData('${content}');
+  		    })
+		   .catch((error) => {
+		   	console.error(error);
+		    });
+		});
+    
 	    	   
 	      //수정 버튼
 	    	  $(function(){$("#today_modify").click(function(){
@@ -160,16 +180,9 @@ header {
 	    	      document.form1.submit();
 	    	      });
 	    	  });
-	      //ckeditor 작성내용 보여주는부분
-	    		$(function(){
-	    			CKEDITOR.replace("today_contents",{
-	    				filebrowserUploadUrl : "/upload"
-	    			});
-	    			//db에서 읽어온 content 내용을 ck에디터에 다시 입혀주는 작업 
-	    			//setDate는 태그의 내용까지 그대로 넣어주는것, content는 id 값
-	    			CKEDITOR.instances.content.setData('${today_contents}');
-	    		});
 	      
+	      
+
 	    	   
 	    	  //삭제 버튼
 	    	  $(function(){$("#today_delete").click(function(){

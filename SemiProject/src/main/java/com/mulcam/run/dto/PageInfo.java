@@ -31,10 +31,11 @@ public class PageInfo {
 		this.endPage = endPage;
 	}
 	public int getListCount() {
-		//한곳에 들어가는 data 개수
 		return listCount;
 	}
 	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
+	
 }
+

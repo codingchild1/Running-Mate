@@ -5,6 +5,7 @@ import java.util.List;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
 public interface MateService{
@@ -29,8 +30,14 @@ public interface MateService{
 	void makeGroup(Group group)throws Exception; //소모임 게시물 생성
 	
 	Warning makeWarning(Warning warning)throws Exception; //신고 접수
-	String ptpInfo(int mate_articleNO) throws Exception;
-	int like() throws Exception; //참여버튼(참여자 수 +1)
+	void like(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
+	void likeCancel(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
+	
+//	List<Ptp> ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
+	Ptp ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
 	
 	//게시물 검색
+
+	void makePtp(int mate_articleNO, String user_id)throws Exception;
+	void deletePtp(int mate_articleNO, String user_id)throws Exception;
 }

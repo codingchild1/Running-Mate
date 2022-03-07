@@ -1,22 +1,15 @@
 package com.mulcam.run.dto;
 
-public class Member { //dto 변경
+import java.sql.Date;
+
+public class Member { 
 	int articleNO;
 	String id;
 	String name;
 	String password;
 	String email;
 	String phone;
-	public Member() {}
-	public Member(String id, String name, String password, String email, 
-			String phone, int articleNO) {
-		this.articleNO=articleNO;
-		this.id=id;
-		this.name=name;
-		this.password=password;
-		this.email=email;
-		this.phone=phone;
-	}
+	Date joindate;
 	public int getArticleNO() {
 		return articleNO;
 	}
@@ -53,8 +46,12 @@ public class Member { //dto 변경
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public Date getJoindate() {
+		return joindate;
+	}
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
+	}
 	
-	
-
 	
 }
