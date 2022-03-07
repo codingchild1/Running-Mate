@@ -9,7 +9,7 @@ public class Mate {
 	String mate_cont;
 	String user_img;
 	int mate_like;
-	Timestamp mate_date;
+	String mate_date;
 	int mate_views;
 	String mate_mapinfo;
 	boolean warning;
@@ -17,7 +17,7 @@ public class Mate {
 	public Mate() {}
 	public Mate(int mate_articleNO,String user_id, String mate_title,
 			String mate_cont, String user_img,int mate_like,
-			Timestamp mate_date, int mate_views, String mate_mapinfo, boolean warning) {
+			String mate_date, int mate_views, String mate_mapinfo, boolean warning) {
 		this.mate_articleNO=mate_articleNO;
 		this.user_id=user_id;
 		this.mate_title=mate_title;
@@ -66,10 +66,10 @@ public class Mate {
 	public void setMate_like(int mate_like) {
 		this.mate_like = mate_like;
 	}
-	public Timestamp getMate_date() {
+	public String getMate_date() {
 		return mate_date;
 	}
-	public void setMate_date(Timestamp mate_date) {
+	public void setMate_date(String mate_date) {
 		this.mate_date = mate_date;
 	}
 	public int getMate_views() {

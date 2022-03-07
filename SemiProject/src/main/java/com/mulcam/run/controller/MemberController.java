@@ -31,7 +31,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView login(@RequestParam Map<String,String> info) {
-		ModelAndView modelAndView=new ModelAndView("mainPage");
+		ModelAndView modelAndView=new ModelAndView("mainpage");
 		try {
 			String id=info.get("id");
 			String password=info.get("password");
@@ -53,7 +53,7 @@ public class MemberController {
 	public String memMenu(HttpServletRequest request, Model model) {
 		String cpage=request.getParameter("cpage");
 		model.addAttribute("cpage", cpage);
-		return "main";
+		return "mainpage";
 	}
 	
 	@GetMapping(value="/logout")
@@ -61,12 +61,12 @@ public class MemberController {
 		HttpSession session=request.getSession();
 		session.removeAttribute("id");
 		model.addAttribute("cpage", "login");
-		return "main";
+		return "mainpage";
 	}
 	
 	@RequestMapping(value="/join", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView join(@ModelAttribute Member mem) {
-		ModelAndView modelAndView=new ModelAndView("mainPage");
+		ModelAndView modelAndView=new ModelAndView("mainpage");
 		try {
 			memberService.makeMember(mem);
 			modelAndView.addObject("cpage", "login");

@@ -1,13 +1,19 @@
 package com.mulcam.run.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.run.dto.Group;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.service.MateService;
 
@@ -24,8 +30,43 @@ public class MateController {
 //	}
 
 	@GetMapping("/mate_main")
-	public String mate_main() {
-		return "mate_main";
+	public ModelAndView mate_main() {
+		ModelAndView mv = new ModelAndView();
+		try {
+			List<GroupAndMate> mates = mateService.allpostInfo();
+			mv.addObject("mates",mates);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping("/Mmodal")
+	public ResponseEntity<Mate> Mmodal(@RequestParam(value="no",required = false) int mate_articleNO) {
+		ResponseEntity<Mate> result = null; 
+		try {
+			Mate mate = mateService.mateInfo(mate_articleNO);
+			result = new ResponseEntity<Mate>(mate, HttpStatus.OK);
+		}catch(Exception e) {
+			result = new ResponseEntity<Mate>(HttpStatus.BAD_REQUEST);
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping("/Gmodal")
+	public ResponseEntity<Group> Gmodal(@RequestParam(value="no",required = false) int group_articleNO) {
+		ResponseEntity<Group> result = null; 
+		try {
+			Group group = mateService.groupInfo(group_articleNO);
+			result = new ResponseEntity<Group>(group, HttpStatus.OK);
+		}catch(Exception e) {
+			result = new ResponseEntity<Group>(HttpStatus.BAD_REQUEST);
+		}
+		return result;
 	}
 
 	@GetMapping("/mate_search")
@@ -54,9 +95,19 @@ public class MateController {
 		}
 		return mv;
 	}
-	 
 	@GetMapping("/mate_makegroup")
-	public String makegroup() {
+	public String mate_makegroup() {
 		return "mate_makegroup";
+	}
+	 
+	@PostMapping("/mate_makegroup")
+	public ModelAndView mate_makegroup2(Group group) {
+		ModelAndView mv = new ModelAndView("redirect:/mate_main");
+		try {
+			mateService.makeGroup(group);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
 	}
 }

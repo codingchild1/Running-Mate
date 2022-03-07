@@ -49,7 +49,7 @@
             <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                 <li class="nav-item"><a class="nav-link" href="mate_main">메이트구하기</a></li>
                 <li class="nav-item"><a class="nav-link" href="today">오늘의러닝</a></li>
-                <li class="nav-item"><a class="nav-link" href="route_main">코스공유</a></li>
+                <li class="nav-item"><a class="nav-link" href="route">코스공유</a></li>
                 <li class="nav-item"><a class="nav-link" href="fb_main">자유게시판</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">이벤트</a></li>
                 

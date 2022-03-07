@@ -2,6 +2,7 @@ package com.mulcam.run.service;
 
 import java.util.List;
 
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 
 public interface TodayService {
@@ -12,11 +13,13 @@ public interface TodayService {
 	//5.삭제 (delete)
 	//6.신고 (insert warn) 
 		
-	List<Today> getSerchBoardList() throws Exception; 
-	List<Today> getSelectBoard() throws Exception; 
+
+	Today getTBoard(int today_articleNo) throws Exception; 
+	List<Today> getTBoardList(int page, PageInfo pageInfo) throws Exception;
 	void setInputList(Today tboard) throws Exception; 
 	void modifyBoard(Today tboard) throws Exception; 
 	void removeBoard(Today tboard) throws Exception;
 	void inputWarn(boolean a) throws Exception;
+	List<Today> getSerchBoardList() throws Exception; 
 
 }

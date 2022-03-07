@@ -10,7 +10,18 @@
 	</select>
 	<insert id="insertMember" parameterType="Member">
 		<![CDATA[
-			insert into member values(#{id},#{name},#{password},#{email}, #{phone})
+			insert into member(id, name, password, email, phone) values(#{id}, #{name}, #{password}, #{email}, #{phone})
+
 		]]>
 	</insert>
 </mapper>
+
+<!-- create table member(
+	articleNO int(11) auto_increment not null,
+    id varchar(100) not null,
+    name varchar(100) not null,
+	password varchar(255) not null,
+    email varchar(255) not null,
+    phone varchar(255) not null,
+    primary key(articleNO)
+); -->

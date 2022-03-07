@@ -38,13 +38,6 @@
   </div>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script>
-	$(function(){
-      	var responseMessage = "<c:out value="${message}" />";
-      	if(responseMessage != ""){
-         	 alert(responseMessage)
-     	 }
-  	}) 
-
 	 let id = "<c:out value='${id}'/>";
 	 let cpage = "<c:out value='${cpage}'/>";
 	 let page_id='#'+cpage;
@@ -62,6 +55,7 @@
     	$(page_id).addClass('active');
 	 }
   </script>
+ 집에가고싶다
 
 </body>
 </html>
