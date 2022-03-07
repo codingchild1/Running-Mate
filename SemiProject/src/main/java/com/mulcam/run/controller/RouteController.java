@@ -86,13 +86,16 @@ public class RouteController {
 	}
 	
 	@PostMapping(value="/route_reg")
-	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content) {
+	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content,
+			@RequestParam("mapinfo") String mapinfo) {
 		ModelAndView mv = new ModelAndView("route_post");
 		try {			
-			route.setRoute_content(content.trim());
-			System.out.println(route.getRoute_content());
-			System.out.println(route.getRoute_content());
-			routeService.regRoute(route);
+			//route.setRoute_content(content.trim());
+			////System.out.println(route.getRoute_content());
+			//System.out.println(route.getRoute_content());
+			//routeService.regRoute(route);
+			System.out.println(content);
+			System.out.println(mapinfo);
 			mv.addObject("route", route);
 			
 		} catch (Exception e) {

@@ -44,6 +44,26 @@
 	</style>
 </head>
 <body>
+	
+<div id="base">
+</div>
+<button id="somethingBtn">somethingBtn</button>
+<script>
+$(document).on('click', '#somethingBtn', function(){
+	$('#base').append('<input type="text" name="ptplist" value=""><br>');
+    var idx = $('input[name="ptplist"]').index(this);
+    console.log(idx);
+    $('input[name="ptplist"]').eq(idx).val("hello");
+});
+/*
+for(let i of jdata) {
+	console.log(i)
+	$('.list').append('<input type="text" name="ptplist" value=""><br>');
+	var idx = $('input[name="ptplist"]').index(this);
+	$('input[name=ptplist]').eq(idx).val(i.user_id));
+}
+*/
+</script>
 	<header><%@include file ="header.jsp" %></header>
 	<main style="width: 70%; margin: 0 auto;">
 		<div class="row align-items-center py-3">
@@ -68,11 +88,12 @@
 			<!-- ckeditor -->
 			<textarea id="editor" name="content" style="height:600px;"></textarea><br>
 			
-			<p>코스를 그려주세요</p>
+			<p id="test">코스를 그려주세요</p>
 			<div id="map"></div>
 			
 			<input type="hidden" id="form_user_id" name="user_id">
 			<input type="hidden" id="form_thumb_img" name="route_thumb">
+			<input type="hidden" id="mapinfo" name="mapinfo">
 			<input type="hidden" id="route_mapinfo" name="route_mapinfo">
 			<input type="hidden" id="route_distance" name="route_distance">
 			
@@ -99,50 +120,54 @@
 		});
 	</script>
 	
-<script>
-		$(function(){
-			var mapinfo = {};
-			$("#submit").click(function(){
-				$("#form_user_id").attr("value", $("#user_id").html());
-				$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
-				$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-				$("#form_thumb_img").attr("value", $('#thumb_img').attr("src"));
-				$("route_write").submit();
-			});
+	<script>
+	$(function(){
+		$("#submit").click(function(){
+			$("#form_user_id").attr("value", $("#user_id").html());
+			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
+			$("#mapinfo").attr("value", JSON.stringify(mapinfo));
+			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+			$("#form_thumb_img").attr("value", $('#thumb_img').attr("src"));
+			$("route_write").submit();
+		});
 			
-			
-			$('#reset').click(function(){
-				
-				console.log($('#thumb_img').attr("src"));
-				$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
-				$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-			    console.log("route_articleNo: service"); 
-				console.log("user_id: "+ $('#form_user_id').val());
-				console.log("route_title: "+ $('#route_title').val());
-				console.log("route_thumb: " ); 
-				console.log($('#thumb_img').src);
-				console.log("route_date: service"); 
-				console.log("route_views: service"); 
-				console.log("route_likes: service"); 
-				console.log("route_content: "); 
-				console.log("route_area: 생략 " ); 
-				console.log("route_distance: "+ $("#route_distance").val());
-				console.log("route_mapinfo: ");
-				console.log($("#route_mapinfo").val());
-				console.log("warning: service" ); 
-			});
-			
-			mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
-		    const map = new mapboxgl.Map({
+		$('#reset').click(function(){
+			console.log($('#thumb_img').attr("src"));
+			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
+			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+			console.log("route_articleNo: service"); 
+			console.log("user_id: "+ $('#form_user_id').val());
+			console.log("route_title: "+ $('#route_title').val());
+			console.log("route_thumb: " ); 
+			console.log($('#thumb_img').src);
+			console.log("route_date: service"); 
+			console.log("route_views: service"); 
+			console.log("route_likes: service"); 
+			console.log("route_content: "); 
+			console.log("route_area: 생략 " ); 
+			console.log("route_distance: "+ $("#route_distance").val());
+			console.log("route_mapinfo: ");
+			console.log($("#route_mapinfo").val());
+			console.log("warning: service" ); 
+		});
+		
+		var mapinfo = {};
+		mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
+		navigator.geolocation.getCurrentPosition(function(pos) {
+		    var latitude = pos.coords.latitude;
+		    var longitude = pos.coords.longitude;
+		    console.log(longitude, latitude);
+		    getMap(longitude, latitude);
+		});
+		
+		function getMap(longitude, latitude){
+			const map = new mapboxgl.Map({
 		    	container: 'map', // Specify the container ID
 		      	style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
-		      	center: [127.035812,37.570149], // Specify the starting position
+		      	center: [longitude, latitude], // Specify the starting position
 		      	zoom: 14.5, // Specify the starting zoom
 		    });
-		    
-		    const coordinatesGeocoder = function (query) {
-		    	// Match anything which looks like
-		    	// decimal degrees coordinate pair.
+			const coordinatesGeocoder = function (query) {
 		    	const matches = query.match(
 		    		/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
 		    	);
@@ -183,23 +208,22 @@
 		    		geocodes.push(coordinateFeature(coord1, coord2));
 		    		geocodes.push(coordinateFeature(coord2, coord1));
 		    	}
-		    	 
 		    	return geocodes;
 		    };
-		    	 
-		    // Add the control to the map.
+		    
+		 	// 지역검색 geocoder controller 추가
 		    map.addControl(
 		    	new MapboxGeocoder({
 		    		accessToken: mapboxgl.accessToken,
 		    		localGeocoder: coordinatesGeocoder,
-		    		zoom: 4,
-		    		placeholder: 'Try: -40, 170',
+		    		zoom: 14.5,
+		    		placeholder: '지역검색',
 		    		mapboxgl: mapboxgl,
 		    		reverseGeocode: true
 		    	})
 		    );
-		    	
-		    
+			
+			// mapbox draw 기능!
 		    const draw = new MapboxDraw({
 		    	// Instead of showing all the draw tools, show only the line string and delete tools.
 		    	displayControlsDefault: false,
@@ -258,13 +282,14 @@
 		    	    }
 		    		]
 		    });
-		    
-		 	// Add the draw tool to the map.
-	    	//map.addControl(draw);
-		 	map.addControl(
-		 		draw
-		    );
-	    	// Use the coordinates you drew to make the Map Matching API request
+			
+			//draw 기능 추가!
+		    map.addControl(draw);
+		    map.on('draw.create', updateRoute);
+	    	map.on('draw.update', updateRoute);
+	    	map.on('draw.delete', removeRoute);	  
+			
+		 	// Use the coordinates you drew to make the Map Matching API request
 	    	function updateRoute() {
 	    		// Set the profile
 	    	  	const profile = 'walking';
@@ -305,7 +330,7 @@
 	    	    	return;
 	    	  	}
 	    	  	mapinfo = response;
-	    	  	console.log(mapinfo);
+	    	  	console.log(mapinfo.matchings[0]);
 	    	  	console.log("hello");
 	    	  	console.log(response.matchings[0].distance);
 	    	  	// Get the coordinates from the response
@@ -314,11 +339,7 @@
 	    	  
 	    	  	// Code from the next step will go here
 	    	  	addRoute(coords);
-	    	  	
 	    	}
-	    	
-	    	map.on('draw.create', updateRoute);
-	    	map.on('draw.update', updateRoute);
 	    	
 	    	// Draw the Map Matching route as a new layer on the map
 	    	function addRoute(coords) {
@@ -357,13 +378,9 @@
 	    		if (!map.getSource('route')) return;
 	    	  	map.removeLayer('route');
 	    	  	map.removeSource('route');
-	    	}
-	    	
-	    	map.on('draw.delete', removeRoute);	  
-	    	
-
-		});
-		
+	    	}		    
+		}
+	});
 	</script>
 
 </body>
