@@ -34,5 +34,17 @@ public class MemberServiceImpl implements MemberService {
 			throw new Exception("비밀번호가 일치하지 않습니다");
 		} else return false;
 	}
-}
 
+	@Override
+	public List<Member> memberList() {
+		return memberDAO.memberList();
+	}
+	
+	//
+	@Override
+	public Member queryById(String id) throws Exception {
+		return memberDAO.queryMember(id);
+	}
+
+
+}

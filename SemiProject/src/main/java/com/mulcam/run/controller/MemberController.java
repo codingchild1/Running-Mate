@@ -38,6 +38,12 @@ public class MemberController {
 			if(memberService.accessMember(id, password)) {
 				session.setAttribute("id", id);
 				modelAndView.addObject("cpage", "mypage");
+				
+				//
+				Member member = memberService.queryById(id);
+				//
+				modelAndView.addObject("member", member);
+
 			} else throw new Exception();
 		} catch(EmptyResultDataAccessException e) {
 			modelAndView.addObject("err", "아이디가 존재하지 않습니다");
@@ -63,8 +69,12 @@ public class MemberController {
 		model.addAttribute("cpage", "login");
 		return "mainpage";
 	}
+	@GetMapping(value="/join")
+	public String joinForm() {
+		return "join";
+	}
 	
-	@RequestMapping(value="/join", method= {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping(value="/join")
 	public ModelAndView join(@ModelAttribute Member mem) {
 		ModelAndView modelAndView=new ModelAndView("mainpage");
 		try {
@@ -76,7 +86,12 @@ public class MemberController {
 		}
 		return modelAndView;
 	}
-
+	
+	@RequestMapping(value="/mypage", method= {RequestMethod.GET, RequestMethod.POST})
+	public String mypage() {
+		return "mypage";
+	}
+	
 	@ResponseBody
 	@PostMapping(value="/memberoverlap")
 	public String memberOverlap(@RequestParam(value="id", required=true)String id) {
