@@ -63,7 +63,7 @@ public class RouteServiceImpl implements RouteService {
 
 	@Override
 	public void updateRoutePost(Route route) throws Exception {
-		// TODO Auto-generated method stub
+		routeDAO.updateRoute(route);
 		
 	}
 

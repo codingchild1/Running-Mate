@@ -21,6 +21,6 @@ public interface RouteDAO {
 	//public void updateViews();				//update 조회수
 	//public List<Route> selectBest3();			//select 기준 = 내 위치 orderby 3
 	public void insertRoute(Route route);		//insert 코스
-	//public void updateRoute(Route route);		//update 코스
+	public void updateRoute(Route route);		//update 코스
 	public void deleteRoute(int articleNo);					//delete 코스
 }
