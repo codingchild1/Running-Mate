@@ -76,7 +76,7 @@ main, header, section {
 </head>
 <body>
 	<%@include file="header.jsp"%>
-	<%@include file="slides.jsp"%>
+
 
 
 	<div class="container py-5">

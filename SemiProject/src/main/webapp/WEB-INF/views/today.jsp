@@ -91,7 +91,7 @@ body {
 </style>
 </head>
 <body>
-	<%@include file="header.jsp"%>
+
 	<%@include file="slides.jsp"%> 
 
 
