@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mulcam.run.dao.RouteDAO">
-
+<mapper namespace="com.mulcam.run.dao.RouteDAO">	
+	<select id="selectRouteCount" resultType="int">
+		<![CDATA[
+			select count(*) from route
+		]]>
+	</select>
+		
 	<insert id="insertRoute" parameterType="route">
 		insert into route (user_id, route_title, route_content, route_center, route_area, route_mapinfo, route_distance)
 		values (#{user_id}, #{route_title}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
 	</insert>
 	
-	<select id="routeAllList" resultType="route">
-		select * from route
+	<select id="selectRouteList" resultType="route" parameterType="int">
+		<![CDATA[
+			select * from (select @rownum:=@rownum+1 rnum, tot.* 
+				from (select *from route order by route_date DESC) tot, (select @rownum:=0) temp) sub
+			where rnum between #{startrow} and #{startrow}+8
+		]]>
 	</select>
+	
 
 </mapper>
 <!-- 

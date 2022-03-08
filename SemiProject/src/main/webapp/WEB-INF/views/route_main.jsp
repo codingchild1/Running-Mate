@@ -39,8 +39,10 @@
         	</div>
 		</div>
 		
-		<div id="routes_list" style="width: 100%; height:500px;">
-		<c:forEach items="${routes }" var="route">
+		<c:choose>
+		<c:when test="${routeslist!=null && pageInfo.listCount>0 }">
+		<div id="routes_list" style="width: 100%;">
+		<c:forEach items="${routeslist }" var="route">
         <div id="route_mini" style="width: 32%; height:500px; display: inline-block; border: 1px solid gray; margin: auto 0.5%" >
             <div id="route_miniHeader">
                 <span id="route_userThumb">
@@ -52,7 +54,9 @@
             <div id="route_miniInfo">
                 <div id="route_miniTitle" style="text"></div>
                 <div id="route_miniThumbInfo">
-                    <div id="routeThumbImg" style="width:100%;height:300px; display:block; margin: auto;"></div>
+                    <div id="routeThumbImg" style="width:100%;height:300px; display:block; margin: auto;">
+                    	<div id="map" style="width:100%;height:300px; background-color:pink"></div>
+                    </div>
                     <div id="route_miniContent"></div>
                 </div>
             </div>
@@ -71,10 +75,48 @@
         </div>
         </c:forEach>
     	</div>
+    	
+    	<div id="pageList" style="height:300px; background-color:yellow;">
+			<c:choose>
+				<c:when test="${pageInfo.page<=1}">
+					[이전]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="route?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<c:choose>
+					<c:when test="${pageInfo.page==i }">
+						[${i }]
+					</c:when>
+					<c:otherwise>
+						<a href="route?page=${i}">[${i }]</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+					[다음]
+				</c:when>
+				<c:otherwise>
+					<a href="route?page=${pageInfo.page+1}">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		</c:when>	
+		<c:otherwise>
+			<section id="emptyArea">등록된 글이 없습니다.</section>
+		</c:otherwise>
+		</c:choose>
 	</main>
 
     <script>
     	$(function(){
+    		
+    		var divs = $("#routes_list #route_mini");
+    		var r =  ${routeslist};
+    		console.log(r);
     		
     	});
     	

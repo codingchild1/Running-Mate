@@ -10,7 +10,8 @@ import com.mulcam.run.dto.Route;
 @Mapper
 @Repository("routeDAO")
 public interface RouteDAO {
-	public List<Route> routeAllList(); 			//select 전체 코스 게시물
+	public int selectRouteCount() throws Exception;
+	public List<Route> selectRouteList(int startrow) throws Exception; 			//select 전체 코스 게시물
 	////public Route queryRoute();				//select  코스 게시물
 	//public List<Route> selectRoute();			//select 코스 게시물 list 기준 by 지역 & 거리
 	//public void updateViews();				//update 조회수

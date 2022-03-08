@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.service.RouteService;
 
@@ -48,30 +49,39 @@ public class RouteController {
 	
 	@Autowired
 	private ServletContext servletContext;	
-	
+	/*
 	@GetMapping("/route")
-	public ModelAndView get_routemain() {
+	public ModelAndView routemain() {
 		ModelAndView mv = new ModelAndView("route_main");
+		PageInfo pageInfo = new PageInfo();
 		try {
-			List<Route> routeslist = routeService.allRoutesList();
-			mv.addObject("routes", routeslist);
-		}catch(Exception e) {
+			List<Route> routeslist = routeService.getRoutesList(1, pageInfo);
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("routeslist", routeslist);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
+	}
+	*/
+	@RequestMapping(value="/route", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routelist(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
+		ModelAndView mv = new ModelAndView("route_main");
+		PageInfo pageInfo = new PageInfo();
+		System.out.println("요청은 됨");
+		try {
+			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
+			System.out.println();
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("routeslist", routeslist);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("routeslist", null);
 		}
 		return mv;
 	}
 	
-	@PostMapping("/route")
-	public ModelAndView post_routemain() {
-		ModelAndView mv = new ModelAndView("route_main");
-		try {
-			List<Route> routeslist = routeService.allRoutesList();
-			mv.addObject("routes", routeslist);
-		}catch(Exception e) {
-		}
-		return mv;
-	}
-
-
 	@GetMapping("/route_sort")
 	public String route_sort() {
 		return "route_sort";
@@ -112,8 +122,6 @@ public class RouteController {
 	@PostMapping(value="/route/routeCoords")
 	public static String coordToAddr(@RequestParam("longitude") double longitude, @RequestParam("latitude") double latitude){
 		String url = "https://dapi.kakao.com/v2/local/geo/coord2address.json?x="+longitude+"&y="+latitude;
-		System.out.println(longitude + " , " + latitude);
-		
 		String addr = "";
 		try{
 			addr = getRegionAddress(getJSONData(url));
@@ -128,13 +136,10 @@ public class RouteController {
 	private static String getJSONData(String apiUrl) throws Exception {
 		HttpURLConnection conn = null;
     	StringBuffer response = new StringBuffer();
-    	 
-    	//인증키 - KakaoAK하고 한 칸 띄워주셔야해요!
-    	String auth = "KakaoAK " + "d341cf154a7d7bd2b3ee9b196481d4be";
-
+    	String auth = "KakaoAK " + "d341cf154a7d7bd2b3ee9b196481d4be";	//인증키
+    	
     	//URL 설정
         URL url = new URL(apiUrl);
-         
         conn = (HttpURLConnection) url.openConnection();
         
         //Request 형식 설정
@@ -154,10 +159,8 @@ public class RouteController {
         } else if (responseCode == 500) {
             System.out.println("500:: 서버 에러, 문의 필요");
         } else { // 성공 후 응답 JSON 데이터받기
-        	 
         	 Charset charset = Charset.forName("UTF-8");
              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), charset));
-             
              String inputLine;
              while ((inputLine = br.readLine()) != null) {
              	response.append(inputLine); 
