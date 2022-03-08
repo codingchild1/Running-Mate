@@ -16,7 +16,7 @@
 			// 취소
 			$(".cencle").on("click", function(){
 				
-				location.href = "join";
+				location.href = "main";
 						    
 			})
 		
@@ -43,8 +43,13 @@
 		})
 	</script>
 	<body>
+	<header><%@include file ="mypageheader.jsp" %></header>
 		<section id="container">
 			<form action="updatemypage" method="post">
+				<div>
+					<label class="control-label" for="memberthumb">프로필</label>
+					<img src="/fileview/${member.memberthumb }" width="100px" height="100px"  />
+				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="id">아이디</label>
 					<input class="form-control" type="text" id="id" name="id" value="${member.id }" readonly="readonly"/>
