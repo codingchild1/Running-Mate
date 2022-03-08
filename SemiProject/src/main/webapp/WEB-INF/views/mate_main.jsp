@@ -289,8 +289,8 @@ body {
 			<input name='user_id' id="user_id"
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
-			<div style="font-size: 13px; float: right;">
-				<form action="mate_updatemate" method="get"><span id="update" style="margin: 5px;"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정'></span> </form>
+			<div style="font-size: 13px; float: right;display: flex;">
+				<form action="mate_updatemate" method="get"><span ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
 				<span
 					id="delete" style="margin: 5px; cursor: pointer;">삭제</span> <span
 					style="margin: 5px; cursor: pointer;">신고</span>
@@ -338,10 +338,10 @@ body {
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
 
-			<div style="font-size: 13px; float: right;">
+			<div style="font-size: 13px; float: right;display: flex;">
 				<%--  <c:choose>
             <c:when test="${empty user_id}"> --%>
-				<form action="mate_updategroup" method="get"><span id="update" style="margin: 5px;"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정'></span> </form>
+				<form action="mate_updategroup" method="get"><span><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
 				<%-- </c:when>
                 <c:otherwise> --%>
 				<span style="margin: 5px; cursor: pointer;">삭제</span>
@@ -406,8 +406,8 @@ body {
     		data:{"no":no},
     		success: function(data, textStatus){ 
     			 var jdata = JSON.parse(data);
-    			   console.log(jdata);
-    			  console.log(jdata.mate_mapinfo);  
+    			 /*   console.log(jdata);
+    			  console.log(jdata.mate_mapinfo);   */
     			  var map = JSON.parse(jdata.mate_mapinfo);
     			  /* console.log(map.La);
     			  console.log(map.Ma); */
@@ -420,7 +420,7 @@ body {
      			 $('input[name=mapinfo3]').attr('value',jdata.mate_mapinfo); 
      			 /*  console.log(jdata.mate_mapinfo);
      			  console.log(jdata.mate_cont); */
-     			  $("#mate_cont").val(jdata.mate_cont);
+     			 /*  $("#mate_cont").val(jdata.mate_cont); */
      			/*   console.log($('#mate_cont').val());   */
      			var La = $('#mapinfo').val();
      			var Ma = $('#mapinfo2').val();
@@ -586,9 +586,9 @@ body {
 	        		url:"http://localhost:8090/Like",
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
-	        			if(data==false) {
+	        			if(data=='false') {
 	        				alert("참여가 완료되었습니다.");
-	        			} else {
+	        			} else{
 	        				alert("참여가 취소되었습니다.");
 	        			}
 	        		},
@@ -596,7 +596,6 @@ body {
 	        			alert("실패");
 	        		}
         		});
-			
 		});
 
 </script>

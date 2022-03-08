@@ -144,25 +144,10 @@ public class MateServiceImipl implements MateService {
 		map.put("user_id", user_id);
 		map.put("mate_articleNO", mate_articleNO);
 		Ptp ptp = mateDAO.ptpInfo2(map);
-		System.out.println(ptp);
-		System.out.println("넘어온값"+mate_articleNO);
-		System.out.println("넘어온값"+user_id);
-		System.out.println("쿼리문 값"+ptp.getMate_articleNO());
-		System.out.println("쿼리문 값"+ptp.getUser_id());
-		if(mate_articleNO==ptp.getMate_articleNO()&&user_id.equals(ptp.getUser_id())) {
-			return false;
-//		} else if(ptp==null||mate_articleNO==ptp.getMate_articleNO()&&!user_id.equals(ptp.getUser_id())) {
-//		}
-//		} else 
-		}return true;
+		if(ptp==null||mate_articleNO==ptp.getMate_articleNO()&&!user_id.equals(ptp.getUser_id())) return false;
+		return true;
 	}
 
-//	@Override
-//	public com.mulcam.run.dto.Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-		
 
 //	@Override
 //	public Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {

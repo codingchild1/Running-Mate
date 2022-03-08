@@ -99,27 +99,11 @@ public class MateController {
 		}
 		return result;
 	}
-//	@ResponseBody
-//	@PostMapping("/Like")
-//	public ResponseEntity<String> Like(@RequestParam(value="no")int mate_articleNO,Ptp ptp){
-//		ResponseEntity<String> result =null;
-//		try {
-//			System.out.println("controller");
-//			mateService.like(mate_articleNO);
-//			mateService.makePtp(ptp);
-//			System.out.println(ptp.getUser_id());
-//			System.out.println(ptp.getMate_articleNO());
-//			result = new ResponseEntity<String>("참여완료",HttpStatus.OK);
-//		}catch(Exception e) {
-//			
-//		}
-//		return result;
-//	}	
 	
 	@ResponseBody
 	@PostMapping("/Like")
-	public Boolean Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
-		Boolean islike = null;
+	public boolean Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+		boolean islike = false;
 		try {
 			HttpSession session = request.getSession();
 			String user_id = (String) session.getAttribute("id");
@@ -131,29 +115,12 @@ public class MateController {
 				mateService.like(mate_articleNO);
 				mateService.makePtp(mate_articleNO,user_id);
 			}
-//			islike= mateService.likequery(mate_articleNO, user_id);
-		}catch(NullPointerException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return islike;
 	}
 	
-//	@ResponseBody
-//	@PostMapping("/LikeCancel")
-//	public void LikeCancel(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
-//		try {
-//			HttpSession session = request.getSession();
-//			String user_id = (String) session.getAttribute("id");
-//			mateService.likeCancel(mate_articleNO);
-//			mateService.deletePtp(mate_articleNO, user_id);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 	@GetMapping("/mate_search")
 	public String mate_search() {
 		return "mate_search";
