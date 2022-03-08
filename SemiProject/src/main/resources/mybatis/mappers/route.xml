@@ -2,12 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.run.dao.RouteDAO">	
+
 	<select id="selectRouteCount" resultType="int">
 		<![CDATA[
 			select count(*) from route
 		]]>
 	</select>
-		
+	
+	<select id="queryRoute" parameterType="int" resultType="route">
+		<![CDATA[
+			select * from route where route_articleNo=#{articleNo} limit 1
+		]]>
+	</select>
+			
 	<insert id="insertRoute" parameterType="route">
 		insert into route (user_id, route_title, route_content, route_center, route_area, route_mapinfo, route_distance)
 		values (#{user_id}, #{route_title}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
@@ -21,8 +28,27 @@
 		]]>
 	</select>
 	
+		<select id="queryByDistance" parameterType="int" resultType="route">
+		<![CDATA[
+			select * from route where route_distance between #{distance[0]} and #{distance[1]}
+		]]>
+	</select>
+	
+	<update id="updateViews" parameterType="int">
+		<![CDATA[
+			update route set route_views=route_views+1 where route_articleNo=#{articleNo }
+		]]>
+	</update>
 
+	<delete id="deleteRoute" parameterType="int">
+		<![CDATA[
+			delete from route where route_articleNo=#{articleNo }
+		]]>
+	</delete>
+	
 </mapper>
+
+
 <!-- 
 create table route(
 	route_articleNo int(11) auto_increment not null,

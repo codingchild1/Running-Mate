@@ -63,7 +63,7 @@
 						style="width:100%; object-fit:cover;">
 				</div>
 				<!-- 사용자 ID -->
-				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >김길동</div>
+				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >${id}</div>
 			</div>
 			<!-- 글 제목 -->
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
@@ -199,20 +199,6 @@
 			
 		});
 		
-		$("#re").click(function(){
-			//searchAddrFromCoords([center_lo, center_la], displayCenterInfo);
-			//searchAddrFromCoords(center_lo, center_la, displayCenterInfo);
-			console.log(center_lo +", "+ center_la);
-			
-			$("#form_user_id").attr("value", $("#user_id").html());
-			$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
-			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
-			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-			
-			console.log($("#route_area").val());
-			//$("#route_write").submit();
-		});
-			
 		var mapinfo = {};
 		var center_lo, center_la;
 		mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
@@ -386,5 +372,6 @@
 	});
 	</script>
 
+	
 </body>
 </html>

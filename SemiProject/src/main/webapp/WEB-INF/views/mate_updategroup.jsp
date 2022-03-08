@@ -34,17 +34,18 @@ input:focus {
 			<h1>소모임 글쓰기</h1>
 			<div style="margin-top: 100px;">
 				<div style="display: flex; align-items: center;">
-					<span><img class="profile" src="images/profile.png" id="user_img2"></span> 
-					<input type="hidden" name="user_img" id="user_img" value="닉네임"> <span>
-					<input type="text" id="user_id" name="user_id" value=""
+					<span><img class="profile" src='${group.user_img }' id="user_img2"></span> 
+					<input type="hidden" name="user_img" id="user_img" value=""> <span>
+					<input type="text" id="user_id" name="user_id" value='${group.user_id }'
 						style="height: 20px; border: none; background-color: white;"
 						disabled> </span> 
 					<input type="hidden" id="user_id" name="user_id" value="">
+					     <input type="hidden" id="mate_articleNO" name="mate_articleNO" value='${group.group_articleNO }'>
 				</div>
 				<div style="border-bottom: 1px solid; margin-top: 20px;">
 					<input type="text" id="group_title" name="group_title"
 						style="border: none; border-bottom: 2px; height: 30px; font-size: 20px; width: 100%;"
-						placeholder="제목">
+						placeholder="제목" value="${group.group_title }">
 				</div>
 				<div style="display: flex; align-items: flex-end;">
 					<div
@@ -60,7 +61,7 @@ input:focus {
 				</div>
 				<div id="mapinfo"
 					style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
-				<input type="hidden" id="group_area" name="group_area" value="">
+				<input type="hidden" id="group_area" name="group_area" value='${group.group_area }'>
 
 				<textarea id="editor" name="group_cont"
 					style="width: 100%; height: 500px;" placeholder="내용을 입력하세요"></textarea>
@@ -69,14 +70,14 @@ input:focus {
 						style="width: 30px; height: 30px;"> <input type="text"
 						id="group_kl" name="group_kl"
 						style="margin-left: 10px; width: 100%;"
-						placeholder="오픈카카오톡 링크를 입력하세요">
+						placeholder="오픈카카오톡 링크를 입력하세요" value='${group.group_kl }'>
 				</div>
 				<div style="display: flex; margin-top: 10px;">
 					<img class="insta" src="images/insta.png"
 						style="width: 30px; height: 30px;"> <input type="text"
 						id="group_il" name="group_il"
 						style="margin-left: 10px; width: 100%;"
-						placeholder="인스타 디엠 링크를 입력하세요">
+						placeholder="인스타 디엠 링크를 입력하세요" value='${group.group_il }'>
 				</div>
 				<div
 					style="display: flex; align-items: center; margin-right: 55px; justify-content: center; margin-top: 50px;">
@@ -124,8 +125,8 @@ input:focus {
         // 주소-좌표 변환 객체를 생성합니다
         var geocoder = new kakao.maps.services.Geocoder();
         
-    // var src = jQuery('#user_img2').attr("src");
-   	// $('input[name=user_img]').attr('value',src);   //이미지주소 관련
+     var src = jQuery('#user_img2').attr("src");
+   	 $('input[name=user_img]').attr('value',src);   //이미지주소 관련
    	 
    	// var id = "닉네임";
    	 //$('input[name=user_id]').attr('value',"닉네임");  //value에 id값 넣기

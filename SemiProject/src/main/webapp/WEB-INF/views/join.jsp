@@ -27,9 +27,10 @@
 </head>
 <body>
    <div class="container mt-3">
-        <h5 class='title'>회원 가입</h5>
-        <form id='form' action="join" method="post">
-        	
+        <h5 class='title'>회원가입</h5>
+        <form id='form' action="join" method="post" enctype="multipart/form-data">
+        		<img id="memberthumb" name="memberthumb" src="" width=100px height=100px /><br>
+        		<input type="file" name="profile" id="profile"/><br>
             <div class="input-group mb-2">
                 <span class="input-group-text title">이름</span>
                 <input type="text" class="form-control" id="name" name="name"><br>
@@ -53,7 +54,7 @@
             </div>
             <div class="input-group mb-2">
                 <span class="input-group-text title">전화번호</span>
-                <input type="text" class="form-control" id="email" name="phone">
+                <input type="text" class="form-control" id="phone" name="phone">
             </div>                 
             <div class="d-grid">
                 <input type="submit" id="submit" class="btn btn-primary btn-block" value='회원가입'>
@@ -62,6 +63,18 @@
     </div> 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+    	
+	    $(function() {
+			$('#profile').change(function (event) {
+				var reader = new FileReader();
+				console.log(event);
+				reader.onload = function(e) {
+					$('#memberthumb').attr("src", e.target.result);	
+				};
+				reader.readAsDataURL(event.target.files[0]);
+			});
+		}); 
+    	
     	$('#memidoverlap').click(function () {
     		if($('#id').val()==""){
 				alert("아이디를 입력하세요.");
@@ -84,7 +97,8 @@
 					}
 				}
 			});
-		});
+    	});
+
         $('#form').submit(function() {
             let name = $('#name').val();
             if(name=='') {
