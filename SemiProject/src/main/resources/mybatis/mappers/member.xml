@@ -14,11 +14,6 @@
 
 		]]>
 	</insert>
-	<select id="memberList" parameterType="Member" resultType="com.mulcam.run.dto.Member">
-		<![CDATA[
-			select id, name, password, email, phone from member order by name
-		]]>
-	</select>
 </mapper>
 
 <!-- create table member(
