@@ -290,10 +290,10 @@ body {
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
 			<div style="font-size: 13px; float: right;display: flex;">
-				<form action="mate_updatemate" method="get"><span ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
+				<form action="mate_updatemate" method="get"><span ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
 				<span
-					id="delete" style="margin: 5px; cursor: pointer;">삭제</span> <span
-					style="margin: 5px; cursor: pointer;">신고</span>
+					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span> 
+					<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
 			</div>
 			<input name='mate_date' type="text"
 				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba(123, 173, 213, 0.70);"
@@ -344,9 +344,9 @@ body {
 				<form action="mate_updategroup" method="get"><span><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
 				<%-- </c:when>
                 <c:otherwise> --%>
-				<span style="margin: 5px; cursor: pointer;">삭제</span>
+				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span>
 				<%--   </c:otherwise> --%>
-				<span style="margin: 5px; cursor: pointer;">신고</span>
+				<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
 				<%--   </c:choose> --%>
 
 			</div>
@@ -597,6 +597,39 @@ body {
 	        		}
         		});
 		});
+		
+		//게시물 삭제 기능ajax
+ 		$('.delete').click(function(){
+			 $.ajax({
+	        		type:"post",
+	        		dataType:"text",
+	        		async:false,
+	        		url:"http://localhost:8090/deletemate",
+	        		data:{"no":$('#ptp').val()},
+	        		success: function(data, textStatus){
+	        			alert("성공적으로 삭제되었습니다.");
+	        		},
+	        		error:function(data, textStatus){
+	        			alert("실패");
+	        		}
+     		});
+		}); 
+		$('.delete2').click(function(){
+			 $.ajax({
+	        		type:"post",
+	        		dataType:"text",
+	        		async:false,
+	        		url:"http://localhost:8090/deletegroup",
+	        		data:{"no":$('#ptp').val()},
+	        		success: function(data, textStatus){
+	        			alert("성공적으로 삭제되었습니다.");
+	        		},
+	        		error:function(data, textStatus){
+	        			alert("실패");
+	        		}
+    		});
+		});
+		
 
 </script>
 	<%--  <%@include file ="fotter.jsp" %> --%>
