@@ -43,6 +43,7 @@ public class MateController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			List<GroupAndMate> mates = mateService.allpostInfo();
+			
 			mv.addObject("mates",mates);
 			
 		} catch (Exception e) {
@@ -71,12 +72,14 @@ public class MateController {
 	
 	@ResponseBody
 	@PostMapping("/ptplist")
-	public ResponseEntity<Ptp> ptplist(@RequestParam(value="no",required = false) int mate_articleNO) {
-		ResponseEntity<Ptp> result = null; 
+	public ResponseEntity<List<Ptp>> ptplist(@RequestParam(value="no",required = false) int mate_articleNO) {
+		ResponseEntity<List<Ptp>> result = null; 
 		try {
-			Ptp ptp = mateService.ptpInfo(mate_articleNO);
-			result = new ResponseEntity<Ptp>(ptp, HttpStatus.OK);
+			 List<Ptp> ptp = mateService.ptpInfo(mate_articleNO);
+//			Ptp ptp = mateService.ptpInfo(mate_articleNO);
+			result = new ResponseEntity<List<Ptp>>(ptp, HttpStatus.OK);
 		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -122,10 +125,6 @@ public class MateController {
 			e.printStackTrace();
 		}
 	}
-	
-
-	
-	
 	
 	@ResponseBody
 	@PostMapping("/LikeCancel")
@@ -181,6 +180,15 @@ public class MateController {
 			e.printStackTrace();
 		}
 		return mv;
+	}
+	@GetMapping("/mate_updatemate")
+	public String mate_updatemate() {
+		return "mate_updatemate";
+	}
+	
+	@GetMapping("/mate_updategroup")
+	public String mate_updategroup() {
+		return "mate_updategroup";
 	}
 	
 }

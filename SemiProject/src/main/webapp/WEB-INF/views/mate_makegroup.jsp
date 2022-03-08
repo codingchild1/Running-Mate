@@ -1,74 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
-     <script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
-    <style>
-    body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-        }
-        .profile {
-            width: 30px;
-            height: 30px;
-            border-radius: 70%;
-        }
-        input:focus{
-            outline: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Document</title>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
+<style>
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.profile {
+	width: 30px;
+	height: 30px;
+	border-radius: 70%;
+}
+
+input:focus {
+	outline: none;
+}
+</style>
 </head>
 <body>
-<%@include file ="header.jsp" %>
-  <form id='form' action="mate_makegroup" method="post"> 
-    <div style="width: 940px; padding: 10px; margin:20px auto;">
-    <h1>소모임 글쓰기</h1>
-    <div style="margin-top: 100px;">
-    <div style="display: flex; align-items: center;">
-        <span><img class="profile" src="images/profile.png" id="user_img2"></span>
-         <input type="hidden" name="user_img" id="user_img" value="닉네임">
-        <span><input type="text" id="user_id" name="user_id" value=""
-            style="height: 20px;border:none; background-color: white;"
-            disabled> </span>
-            <input type="hidden" id="user_id" name="user_id" value="">
-    </div>
-    <div style="border-bottom: 1px solid; margin-top: 20px;">
-        <input type="text" id="group_title" name="group_title" style="border:none; border-bottom: 2px; height: 30px; font-size: 20px;width: 100%;" placeholder="제목">
-    </div>
-    <div style="display: flex; align-items: flex-end;">
-    <div style="border: 1px solid;padding:2px;width: 210px; margin-top: 20px;">
-        <span><img class="search" src="images/search.png" style="width: 20px; height: 20px; float: left; margin-left: 5px;margin-top: 5px;"></span>
-    <input class="search" id="search" type="text" style="width: 170px;height: 30px; margin-left: 5px; border: none;" placeholder="주소를 입력하세요">
-    </div>
-    <button id="search2" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem; height: 38px; margin-left: 5px;color: white; ">검색</button>
-    </div>
-    <div id="mapinfo" style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
-    <input type="hidden" id="group_area" name="group_area" value=""> 
-    
-    <textarea name="content" id="editor" name="group_cont" style="width: 100%;height: 500px;" placeholder="내용을 입력하세요"></textarea>
-    <div style="display: flex; margin-top: 20px;">
-       <img class="kakao" src="images/kakao.png" style="width: 30px; height: 30px;">
-        <input type="text" id="group_kl" name="group_kl" style="margin-left: 10px;width: 100%;" placeholder="오픈카카오톡 링크를 입력하세요">
-    </div>
-    <div style="display: flex;margin-top: 10px;">
-       <img class="insta" src="images/insta.png" style="width: 30px; height: 30px;">
-        <input type="text" id="group_il" name="group_il" style="margin-left: 10px; width: 100%;" placeholder="인스타 디엠 링크를 입력하세요">
-    </div>
-    <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
-        <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;">작성</button>
-        <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;"><a href="main" style="text-decoration-line: none;">취소</a></button>
-    </div>
-    </div>
-    </div>
-    </form>
-     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
-     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
+	<%@include file="header.jsp"%>
+	<form id='form' action="mate_makegroup" method="post">
+		<div style="width: 940px; padding: 10px; margin: 20px auto;">
+			<h1>소모임 글쓰기</h1>
+			<div style="margin-top: 100px;">
+				<div style="display: flex; align-items: center;">
+					<span><img class="profile" src="images/profile.png"
+						id="user_img2"></span> <input type="hidden" name="user_img"
+						id="user_img" value="닉네임"> <span><input type="text"
+						id="user_id" name="user_id" value=""
+						style="height: 20px; border: none; background-color: white;"
+						disabled> </span> <input type="hidden" id="user_id"
+						name="user_id" value="">
+				</div>
+				<div style="border-bottom: 1px solid; margin-top: 20px;">
+					<input type="text" id="group_title" name="group_title"
+						style="border: none; border-bottom: 2px; height: 30px; font-size: 20px; width: 100%;"
+						placeholder="제목">
+				</div>
+				<div style="display: flex; align-items: flex-end;">
+					<div
+						style="border: 1px solid; padding: 2px; width: 210px; margin-top: 20px;">
+						<span><img class="search" src="images/search.png"
+							style="width: 20px; height: 20px; float: left; margin-left: 5px; margin-top: 5px;"></span>
+						<input class="search" id="search" type="text"
+							style="width: 170px; height: 30px; margin-left: 5px; border: none;"
+							placeholder="주소를 입력하세요">
+					</div>
+					<button id="search2"
+						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; height: 38px; margin-left: 5px; color: white;">검색</button>
+				</div>
+				<div id="mapinfo"
+					style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
+				<input type="hidden" id="group_area" name="group_area" value="">
+
+				<textarea id="editor" name="group_cont"
+					style="width: 100%; height: 500px;" placeholder="내용을 입력하세요"></textarea>
+				<div style="display: flex; margin-top: 20px;">
+					<img class="kakao" src="images/kakao.png"
+						style="width: 30px; height: 30px;"> <input type="text"
+						id="group_kl" name="group_kl"
+						style="margin-left: 10px; width: 100%;"
+						placeholder="오픈카카오톡 링크를 입력하세요">
+				</div>
+				<div style="display: flex; margin-top: 10px;">
+					<img class="insta" src="images/insta.png"
+						style="width: 30px; height: 30px;"> <input type="text"
+						id="group_il" name="group_il"
+						style="margin-left: 10px; width: 100%;"
+						placeholder="인스타 디엠 링크를 입력하세요">
+				</div>
+				<div
+					style="display: flex; align-items: center; margin-right: 55px; justify-content: center; margin-top: 50px;">
+					<button id="sunmit"
+						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
+					<button 
+						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">
+						<a href="main" style="text-decoration-line: none;">취소</a>
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+    //ckeditor
     $(function(){
         ClassicEditor
         	.create(document.querySelector("#editor"), {
@@ -81,7 +108,7 @@
         	.catch((error) => {
         		console.error(error);
         	});
-	});   //에디터
+	});   
         	
        
             var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -154,10 +181,8 @@
 		        return false; 
 			});
 		});
-		
-       
   
         </script>
-         <%@include file ="fotter.jsp" %>
+	<%@include file="fotter.jsp"%>
 </body>
 </html>

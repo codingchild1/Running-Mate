@@ -44,8 +44,8 @@ public interface MateDAO {
 	public void insertptp(Map map)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
 	public void deleteptp(Map map)throws Exception; //번개참여취소시 ptp테이블에 아이디값 삭제
 	
-//	public List<Ptp> ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
-	public Ptp ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
+	public List<Ptp> ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
+//	public Ptp ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	
 	//게시물 검색
 }
