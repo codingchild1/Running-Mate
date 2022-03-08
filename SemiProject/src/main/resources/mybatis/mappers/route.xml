@@ -7,6 +7,12 @@
 			select count(*) from route
 		]]>
 	</select>
+	
+	<select id="queryRoute" parameterType="int" resultType="route">
+		<![CDATA[
+			select * from route where route_articleNo=#{articleNo} limit 1
+		]]>
+	</select>
 		
 	<insert id="insertRoute" parameterType="route">
 		insert into route (user_id, route_title, route_content, route_center, route_area, route_mapinfo, route_distance)

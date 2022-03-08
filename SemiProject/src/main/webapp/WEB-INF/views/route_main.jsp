@@ -14,6 +14,13 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    
+    <style>
+     a:link { color:black; text-decoration: none;}
+     a:visited { color: black; text-decoration: none;}
+	 a:hover { color: black; text-decoration: none;}
+
+	</style>
 </head>
 
 <body>
@@ -43,6 +50,7 @@
 		<c:when test="${routeslist!=null && pageInfo.listCount>0 }">
 		<div id="routes_list" style="width: 100%;">
 		<c:forEach items="${routeslist }" var="route">
+		<a href="routepost?articleNo=${route.route_articleNo}">
         <div id="route_mini" style="width: 32%; height:500px; display: inline-block; border: 1px solid gray; margin: auto 0.5%" >
             <div id="route_miniHeader">
                 <span id="route_userThumb">
@@ -54,9 +62,7 @@
             <div id="route_miniInfo">
                 <div id="route_miniTitle" style="text"></div>
                 <div id="route_miniThumbInfo">
-                    <div id="routeThumbImg" style="width:100%;height:300px; display:block; margin: auto;">
-                    	<div id="map" style="width:100%;height:300px; background-color:pink"></div>
-                    </div>
+                    <div id="map" style="width:100%;height:300px; display:block; margin: auto;"></div>
                     <div id="route_miniContent"></div>
                 </div>
             </div>
@@ -73,6 +79,7 @@
                 </div>
             </div>
         </div>
+        </a>
         </c:forEach>
     	</div>
     	
@@ -113,11 +120,6 @@
 
     <script>
     	$(function(){
-    		
-    		var divs = $("#routes_list #route_mini");
-    		var r =  ${routeslist};
-    		console.log(r);
-    		
     	});
     	
     </script>

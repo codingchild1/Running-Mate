@@ -72,9 +72,9 @@ public class RouteController {
 		System.out.println("요청은 됨");
 		try {
 			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
-			System.out.println();
 			mv.addObject("pageInfo", pageInfo);
 			mv.addObject("routeslist", routeslist);
+			mv.addObject("count", routeslist.size());
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("routeslist", null);
@@ -82,9 +82,21 @@ public class RouteController {
 		return mv;
 	}
 	
-	@GetMapping("/route_sort")
-	public String route_sort() {
-		return "route_sort";
+	
+	//<a href="routepost?articleNo=${route.route_articleNo}">
+	
+	@RequestMapping(value="/routepost", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routePost(@RequestParam(value="articleNo",required=true) int articleNo) {
+		ModelAndView mv = new ModelAndView("route_post");
+		try {
+			Route posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		
+		return mv;
 	}
 	
 	

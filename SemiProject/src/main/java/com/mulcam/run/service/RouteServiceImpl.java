@@ -40,6 +40,9 @@ public class RouteServiceImpl implements RouteService {
 		return routeDAO.selectRouteList(startrow);
 	}	
 	
-	
+	@Override
+	public Route getRouteInfo(int articleNo) throws Exception{
+		return routeDAO.queryRoute(articleNo);
+	}
 	
 }
