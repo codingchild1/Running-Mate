@@ -281,18 +281,21 @@ body {
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">
 			<div class="title">
-				<input name='mate_title'
+				<input name='mate_title' id="mate_title" 
 					style="color: black; border: none; font-size: 20px; font-weight: bold; background-color: rgba(123, 173, 213, 0.70); margin-top: 20px;"
-					value='' disabled>
+					value='' >
 				<div class="close-area">X</div>
 			</div>
 			<input name='user_id' id="user_id"
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
-			<div style="font-size: 13px; float: right;">
-				<span id="update" style="margin: 5px; cursor: pointer;"><a href="mate_updatemate" style="text-decoration-line: none;color: black;">수정</a></span> <span
-					id="delete" style="margin: 5px; cursor: pointer;">삭제</span> <span
-					style="margin: 5px; cursor: pointer;">신고</span>
+			<div style="font-size: 13px; float: right;display: flex;">
+				<form action="mate_updatemate" method="get"><span ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
+				<%-- <c:if > --%>
+				<span
+					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span> 
+					<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
+			<%-- 	</c:if> --%>
 			</div>
 			<input name='mate_date' type="text"
 				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba(123, 173, 213, 0.70);"
@@ -302,9 +305,12 @@ body {
 					style="width: 210px; height: 200px; border: 1px solid black;"></div>
 				<input id="mapinfo" name="mapinfo" type="hidden" value=''> <input
 					id="mapinfo2" name="mapinfo2" type="hidden" value=''>
-				<!-- <textarea id="mate_cont" name="mate_cont"
-					style="width: 352px; height: 190px;"></textarea> -->
-				<div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div>
+					<input id="mapinfo3" name="mapinfo3" type="hidden" value=''>
+				 <textarea id="editor" name="mate_cont"
+					style="width: 352px; height: 190px;"></textarea> 
+				<input id="mate_cont" name="mate_cont" type="hidden" value=''> 
+					
+				<!-- <div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin: 7px; margin-right: 0px; float: right; position: relative; height: 32px;">
 					<div class="info" style="margin: 5px; width: 43px;">
@@ -318,7 +324,7 @@ body {
 						</div>
 					</div>
 					<button class="ptp" style="margin: 5px; width: 43px;">참여</button>
-					<input type="hidden" id="ptp" name="ptp" value=>
+					
 				</div>
 			</div>
 		</div>
@@ -327,7 +333,7 @@ body {
 	<div id="modal2" class="modal-overlay">
 		<div class="modal-window">
 			<div class="title">
-				<input name="group_title"
+				<input name="group_title" id="group_title"
 					style="color: black; border: none; font-size: 20px; font-weight: bold; background-color: rgba(123, 173, 213, 0.70); margin-top: 20px;"
 					value='' disabled>
 				<div class="close-area">X</div>
@@ -336,15 +342,15 @@ body {
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
 
-			<div style="font-size: 13px; float: right;">
+			<div style="font-size: 13px; float: right;display: flex;">
 				<%--  <c:choose>
             <c:when test="${empty user_id}"> --%>
-				<span style="margin: 5px; cursor: pointer;"><a href="mate_updategroup" style="text-decoration-line: none;color: black;">수정</a></span>
+				<form action="mate_updategroup" method="get"><span><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
 				<%-- </c:when>
                 <c:otherwise> --%>
-				<span style="margin: 5px; cursor: pointer;">삭제</span>
+				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span>
 				<%--   </c:otherwise> --%>
-				<span style="margin: 5px; cursor: pointer;">신고</span>
+				<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
 				<%--   </c:choose> --%>
 
 			</div>
@@ -356,9 +362,11 @@ body {
 					style="width: 210px; height: 200px; border: 1px solid black;"></div>
 				<input id="mapinfo" name="mapinfo" type="hidden" value=''> <input
 					id="mapinfo2" name="mapinfo2" type="hidden" value=''>
-				<!-- <textarea id="group_cont" name="group_cont"
-					style="width: 352px; height: 190px;"></textarea> -->
-					<div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div>
+					<input id="mapinfo3" name="mapinfo3" type="hidden" value=''>
+				 <textarea id="editor2" 
+					style="width: 352px; height: 190px;"></textarea> 
+					 <input id="group_cont" name="group_cont" type="hidden" value=''> 
+					<!-- <div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div> -->
 				<!-- <div></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px; float: right; position: relative;">
@@ -380,15 +388,24 @@ body {
 	<script>
 	
 	// ckeditor
-	$(function(){
-        ClassicEditor.create(document.querySelector("#editor"))
-        .then(editor=>{
-        	editor.setData('${content}');
-        })
-        .catch((error) => {
-        	console.error(error);
-        });
-	});
+/*            	$(function(){
+                ClassicEditor.create(document.querySelector("#editor"))
+                .then(editor=>{
+                	editor.setData("$('#mate_cont').val()");
+                })
+                .catch((error) => {
+                	console.error(error);
+                });
+        	}) ; */
+
+        	/*  ClassicEditor.create(document.querySelector("#editor"), {
+      	    	  initialData : jdata.mate_cont
+      	      }).then(editor=> {
+            		window.editor=editor;
+            		})
+      		   .catch((error) => {
+      		   	console.error(error);
+      		    }); */
 	
 	//더보기 클릭시 모달창 띄어주는 코드
     function detailModal(no,type){
@@ -403,8 +420,8 @@ body {
     		data:{"no":no},
     		success: function(data, textStatus){ 
     			 var jdata = JSON.parse(data);
-    			/*   console.log(jdata);
-    			  console.log(jdata.mate_mapinfo); */
+    			 /*   console.log(jdata);
+    			  console.log(jdata.mate_mapinfo);   */
     			  var map = JSON.parse(jdata.mate_mapinfo);
     			  /* console.log(map.La);
     			  console.log(map.Ma); */
@@ -414,9 +431,22 @@ body {
      			 $('input[name=ptp]').attr('value',jdata.mate_articleNO);
      			 $('input[name=mapinfo]').attr('value',map.La); 
      			 $('input[name=mapinfo2]').attr('value',map.Ma); 
-     			  console.log(jdata.mate_cont);
-     			  $("#mate_cont").val(jdata.mate_cont);
+     			 $('input[name=mapinfo3]').attr('value',jdata.mate_mapinfo); 
+     			 $('input[name=mate_cont]').val(jdata.mate_cont); 
+     			 /*  console.log(jdata.mate_mapinfo);
+     			  console.log(jdata.mate_cont); */
      			  console.log($('#mate_cont').val());  
+     	          
+     	                ClassicEditor.create(document.querySelector("#editor"))
+     	                .then(editor=>{
+     	                	editor.setData($('#mate_cont').val());
+     	                })
+     	                .catch((error) => {
+     	                	console.error(error);
+     	                });
+     	        	
+     	      	     
+     	   
      			var La = $('#mapinfo').val();
      			var Ma = $('#mapinfo2').val();
      			
@@ -456,7 +486,7 @@ body {
         		success: function(data, textStatus){ 
         			 var jdata = JSON.parse(data);
         			 for(let i of jdata) {
-        					$('.list').append('<input type="text" name="ptplist" value=""><br>');
+        					$('.list').replaceWith('<input type="text" name="ptplist" value=""><br>');
         					var idx = $('input[name="ptplist"]').index(this);
         					$('input[name=ptplist]').eq(idx).val(i.user_id);
         				}
@@ -466,6 +496,7 @@ body {
         			alert("실패");
         		}
         		}); 
+
             //소모임 모달폼 ajax
     	}else{
     		modal2.style.display = "flex";
@@ -481,10 +512,23 @@ body {
  			 $('input[name=group_title]').attr('value',jdata.group_title);
  			 $('input[name=user_id]').attr('value',jdata.user_id);
  			 $('input[name=group_date]').attr('value',jdata.group_date);
+ 			 $('input[name=ptp]').attr('value',jdata.group_articleNO);
  			 $('#group_kl').attr('href',jdata.group_kl);
  			 $('#group_il').attr('href',jdata.group_il);
- 			  $('input[name=mapinfo]').attr('value',map.La); 
+ 			 $('input[name=mapinfo]').attr('value',map.La); 
 			 $('input[name=mapinfo2]').attr('value',map.Ma);  
+			 $("#group_cont").val(jdata.group_cont); 
+			 
+	           
+ 	                ClassicEditor.create(document.querySelector("#editor2"))
+ 	                .then(editor=>{
+ 	                	editor.setData($('#group_cont').val());
+ 	                })
+ 	                .catch((error) => {
+ 	                	console.error(error);
+ 	                });
+ 	        	
+			 
  			var La = $('#mapinfo').val();
  			var Ma = $('#mapinfo2').val(); 
  			
@@ -572,7 +616,6 @@ body {
         //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
 	    var bt;
 		$('.ptp').click(function(){
-			if(bt!=0){
 	            $.ajax({
 	        		type:"post",
 	        		dataType:"text",
@@ -580,30 +623,51 @@ body {
 	        		url:"http://localhost:8090/Like",
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
-	        			  bt = 0; 
-	        			 alert("참여가 완료되었습니다."+bt); 
+	        			if(data=='false') {
+	        				alert("참여가 완료되었습니다.");
+	        			} else{
+	        				alert("참여가 취소되었습니다.");
+	        			}
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
 	        		}
-	        		});
-			}else{
-	            $.ajax({
+        		});
+		});
+		
+		//게시물 삭제 기능ajax
+ 		$('.delete').click(function(){
+			 $.ajax({
 	        		type:"post",
 	        		dataType:"text",
 	        		async:false,
-	        		url:"http://localhost:8090/LikeCancel",
+	        		url:"http://localhost:8090/deletemate",
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
-	        			  bt = 1; 
-	        			 alert("참여가 취소되었습니다."+bt); 
+	        			alert("성공적으로 삭제되었습니다.");
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
 	        		}
-	        		});
-			}
+     		});
+		}); 
+		$('.delete2').click(function(){
+			 $.ajax({
+	        		type:"post",
+	        		dataType:"text",
+	        		async:false,
+	        		url:"http://localhost:8090/deletegroup",
+	        		data:{"no":$('#ptp').val()},
+	        		success: function(data, textStatus){
+	        			alert("성공적으로 삭제되었습니다.");
+	        		},
+	        		error:function(data, textStatus){
+	        			alert("실패");
+	        		}
+    		});
 		});
+		
+
 </script>
 	<%--  <%@include file ="fotter.jsp" %> --%>
 </body>

@@ -17,11 +17,11 @@ public interface MateService{
 	Mate mateInfo(int mate_articleNO) throws Exception;  //번개 정보 조회
 	Group groupInfo(int group_articleNO) throws Exception; //소모임 정보 조회
 	
-	Mate updateMate(int mate_articleNO) throws Exception; //번개 게시물 수정
-	Group updateGroup(int group_articleNO) throws Exception;// 소모임 게시물 수정
+	void updateMate(Mate mate) throws Exception; //번개 게시물 수정
+	void updateGroup(Group group) throws Exception;// 소모임 게시물 수정
 	
-	Mate removeMate(Mate mate) throws Exception; //번개 게시물 삭제
-	Group removeGroup(Group group) throws Exception; //소모임 게시물 삭제
+	void removeMate(int mate_articleNO) throws Exception; //번개 게시물 삭제
+	void removeGroup(int group_articleNO) throws Exception; //소모임 게시물 삭제
 	
 	int viewsMate(int mate_articleNO)throws Exception; //번개 글 삭제시 조회수 -1변경
 	int viewsGroup(int group_articleNO)throws Exception; //번개 글 삭제시 조회수 -1변경
@@ -40,4 +40,7 @@ public interface MateService{
 
 	void makePtp(int mate_articleNO, String user_id)throws Exception;
 	void deletePtp(int mate_articleNO, String user_id)throws Exception;
+
+	Boolean likequery(int mate_articleNO, String user_id)throws Exception;
+//	Ptp ptpInfo(int mate_articleNO, String user_id)throws Exception;
 }
