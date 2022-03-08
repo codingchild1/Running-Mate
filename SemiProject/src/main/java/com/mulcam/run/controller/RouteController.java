@@ -46,30 +46,11 @@ public class RouteController {
 	
 	@Autowired
 	RouteService routeService;
-	
-	@Autowired
-	private ServletContext servletContext;	
-	/*
-	@GetMapping("/route")
-	public ModelAndView routemain() {
-		ModelAndView mv = new ModelAndView("route_main");
-		PageInfo pageInfo = new PageInfo();
-		try {
-			List<Route> routeslist = routeService.getRoutesList(1, pageInfo);
-			mv.addObject("pageInfo", pageInfo);
-			mv.addObject("routeslist", routeslist);
-		} catch(Exception e) {
-			e.printStackTrace();
-			mv.addObject("err", e.getMessage());
-		}
-		return mv;
-	}
-	*/
+
 	@RequestMapping(value="/route", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView routelist(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
+	public ModelAndView routeMain(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView("route_main");
 		PageInfo pageInfo = new PageInfo();
-		System.out.println("요청은 됨");
 		try {
 			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
 			mv.addObject("pageInfo", pageInfo);
@@ -83,37 +64,48 @@ public class RouteController {
 	}
 	
 	
-	//<a href="routepost?articleNo=${route.route_articleNo}">
-	
 	@RequestMapping(value="/routepost", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routePost(@RequestParam(value="articleNo",required=true) int articleNo) {
 		ModelAndView mv = new ModelAndView("route_post");
 		try {
+			routeService.updateRoutePostView(articleNo);
 			Route posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
 		}
-		
 		return mv;
 	}
 	
 	
-
-	@PostMapping("/route_sort")
-	public String routesort() { 
-		return "route_sort";
+	@RequestMapping(value="/routeModify", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routeModify(@RequestParam(value="articleNo",required=true) int articleNo) {
+		ModelAndView mv = new ModelAndView("route_modify");
+		try {
+			Route posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);
+			mv.addObject("update", "update");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
 	}
 	
-	@PostMapping("/route_post")
-	public String routepost() { 
-		return "route_post";
-	}
-	
-	@PostMapping("/route_write")
-	public String routewrite() { 
-		return "route_write";
+	@RequestMapping(value="/route_modify", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content) {
+		ModelAndView mv = new ModelAndView("route_post");
+		try {
+			route.setRoute_content(content.trim());
+			//Route posted = routeService.updateRoutePost(route);
+			//mv.addObject("route", posted);
+			//mv.addObject("update", "update");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
 	}
 	
 	@PostMapping(value="/route_reg")
@@ -128,6 +120,27 @@ public class RouteController {
 			e.printStackTrace();
 		}
 		return mv;
+	}
+	
+	@PostMapping("/route_sort")
+	public String route_sort() {
+		return "route_sort";
+	}
+	@PostMapping("/route_write")
+	public String route_write() {
+		return "route_write";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/sortRoutes")
+	public List<Route> sortRoutes(@RequestParam("area") String area, @RequestParam("distance") int distance[]) {
+		List<Route> routeslist = null;
+		try {
+			routeslist = routeService.getSortedRoutes(area, distance);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return routeslist;
 	}
 	
 	@ResponseBody

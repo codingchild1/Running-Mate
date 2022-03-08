@@ -38,11 +38,15 @@
     				<form action ="/route_sort" method="post">
     					<button id="routes_sort" class="btn btn-success" style="width:200px;">지역별/거리별 보기</button>
     				</form></div>
-    			<div style="width:150px; height:50px; display:inline-block; float:right;">
+	            <div style="width:150px; height:50px; display:inline-block; float:right;">
     				<form action ="/route_write" method="post">
-    					<button id="route_reg" class="btn btn-success" style="width:150px;">코스등록하기</button>
+    					<c:if test="${!empty id }">
+    						<button id="route_reg" class="btn btn-success" style="width:150px;">코스등록하기</button>
+    					</c:if>
     				</form></div>
     			</div>
+          		
+    			
         	</div>
 		</div>
 		
@@ -120,6 +124,7 @@
 
     <script>
     	$(function(){
+    		console.log(${id});
     	});
     	
     </script>

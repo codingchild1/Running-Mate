@@ -44,5 +44,27 @@ public class RouteServiceImpl implements RouteService {
 	public Route getRouteInfo(int articleNo) throws Exception{
 		return routeDAO.queryRoute(articleNo);
 	}
+
+	@Override
+	public List<Route> getSortedRoutes(String area, int[] distance) throws Exception {
+		List<Route> sortedRouteLists = null;
+		if(area!="" && distance[1]!=0) {
+			//sortedRouteLists = 
+		} else if(distance[1]!=0) {
+			sortedRouteLists = routeDAO.queryByDistance(distance);
+		}
+		return sortedRouteLists;
+	}
+
+	@Override
+	public void updateRoutePostView(int articleNO) throws Exception {
+		routeDAO.updateViews(articleNO);
+	}
+
+	@Override
+	public void updateRoutePost(Route route) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

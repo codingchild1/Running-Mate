@@ -13,6 +13,12 @@
 			select * from route where route_articleNo=#{articleNo} limit 1
 		]]>
 	</select>
+	
+	<select id="queryByDistance" parameterType="int" resultType="route">
+		<![CDATA[
+			select * from route where route_distance between #{distance[0]} and #{distance[1]}
+		]]>
+	</select>
 		
 	<insert id="insertRoute" parameterType="route">
 		insert into route (user_id, route_title, route_content, route_center, route_area, route_mapinfo, route_distance)
@@ -26,6 +32,12 @@
 			where rnum between #{startrow} and #{startrow}+8
 		]]>
 	</select>
+	
+	<update id="updateViews" parameterType="int">
+		<![CDATA[
+			update route set route_views=route_views+1 where route_articleNo=#{articleNo }
+		]]>
+	</update>
 	
 
 </mapper>

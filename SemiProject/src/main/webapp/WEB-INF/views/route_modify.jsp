@@ -54,7 +54,7 @@
             	<p>나만의 러닝 코스를 공유해주세요!</p>
         	</div>
 		</div>
-		<div><form id="route_write" action="/route_reg" method="post">
+		<div><form id="route_modify" action="/route_modify" method="post">
 			<div id="user_info" style="height:80px; display: flex; align-items: center;">
 				<div style="height:40px; width:40px; overflow:hidden;">
 					<!-- 썸네일 이미지 -->
@@ -66,12 +66,12 @@
 				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >${id}</div>
 			</div>
 			<!-- 글 제목 -->
-			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
+			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="${route.route_title} "/><br>
 			<!-- ckeditor -->
 			<textarea id="editor" name="content"></textarea><br>
 			
 			<p id="test">코스를 그려주세요</p>
-			<div id="map""></div>
+			<div id="map"></div>
 			
 			<input type="hidden" id="form_user_id" name="user_id">
 			<input type="hidden" id="route_center" name="route_center">
@@ -80,105 +80,28 @@
 			<input type="hidden" id="route_distance" name="route_distance">
 			
 			<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
-				<button id="submit" style="width:15%; display:inline-block;" class="btn btn-dark">등록</button>
+				<button id="submit" style="width:15%; display:inline-block;" class="btn btn-dark">수정</button>
 				<button id="reset" type="reset" style="width:15%; display:inline-block;" class="btn btn-dark">취소</button>
 			</div>
 		</form></div>
 	</main>
 
 	<script>
-		$(function(){
-        	ClassicEditor
-        		.create(document.querySelector("#editor"), {
-	        		ckfinder : {
-    	    			uploadUrl : "/upload"
-        			}
-        		}).then(editor=> {
-	        		window.editor=editor;
-    	    	})
-        		.catch((error) => {
-        			console.error(error);
- 	       	});
-		});
+	$(function(){
+    	ClassicEditor.create(document.querySelector("#editor"))
+	    .then(editor=>{
+    		editor.setData('${route.route_content }');
+    	})
+        .catch((error) => {
+	    	console.error(error);
+    	});
+	});
 	</script>
 	
 	<script>
 	$(function(){
-		/*var geocoder = new kakao.maps.services.Geocoder();
-		
-		var callback = function(result, status){
-			if (status === kakao.maps.services.Status.OK) {
-				//console.log('지역 명칭 : ' + result[0].address_name);
-			   	//console.log('행정구역 코드 : ' + result[0].code);
-			   	for(var i = 0; i < result.length; i++) {
-		            // 행정동의 region_type 값은 'H' 이므로
-		            if (result[i].region_type === 'H') {
-		              	//areaName = result[i].address_name;
-		            	//return JSON.stringify(result[i].address_name);
-		            	break;
-		     	}
-			}
-		};
-		
-		function searchAddrFromCoords(longitude, latitude, callback) {
-		    // 좌표로 행정동 주소 정보를 요청합니다
-		    geocoder.coord2RegionCode(longitude, latitude, callback);
-		    return callback;
-		}
-		var areaName = "";
-		function displayCenterInfo(result, status) {
-		    if (status === kakao.maps.services.Status.OK) {
-		        for(var i = 0; i < result.length; i++) {
-		            // 행정동의 region_type 값은 'H' 이므로
-		            if (result[i].region_type === 'H') {
-		              	//areaName = result[i].address_name;
-		            	return JSON.stringify(result[i].address_name);
-		            	break;
-		            }
-		        }
-		    }    
-		}
-		*/
-		$("#submit").click(function(){	
-			/*console.log(geocoder.coord2RegionCode(center_lo, center_la, callback));
-			alert("2");
-			alert(areaName);
-			console.log(center_lo +", "+ center_la);
-			*/
-			/*
-			geocoder.coord2RegionCode(center_lo, center_la, callback);
-			
-			var geocoder = new kakao.maps.services.Geocoder();
-			var callback = function(result, status) {
-			    if (status === kakao.maps.services.Status.OK) {
-			        for(var i = 0; i < result.length; i++) {
-			            // 행정동의 region_type 값은 'H' 이므로
-			            if (result[i].region_type === 'H') {
-			              	//areaName = result[i].address_name;
-			            	//return JSON.stringify(result[i].address_name);
-			            	alert("1");
-			            	alert(result[i].address_name);
-			            	//break;
-			            }
-			     	}
-			    }
-			};
 
-			
-			alert("2");
-			alert(callback[0].address_name);
-			alert(JSON.stringify(callback[0].address_name));
-			
-			$("#form_user_id").attr("value", $("#user_id").html());
-			$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
-			//$("#route_area").attr("value", areaName);
-			
-		    $("#route_area").attr("value", areaName);		               
-			
-			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
-			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-			*/
-			
+		$("#submit").click(function(){	
 			$.ajax({
 				async:false,
 				type:"post",
@@ -192,7 +115,6 @@
 					$("#route_area").attr("value", data);
 					$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
 					$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-					
 					$("#route_write").submit();
 				}
 			});
