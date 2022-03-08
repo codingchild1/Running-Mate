@@ -18,7 +18,6 @@ import com.mulcam.run.dto.Warning;
 public class MateServiceImipl implements MateService {
 
 		
-	private static final Ptp Ptp = null;
 	@Autowired
 	MateDAO mateDAO;
 	
@@ -60,15 +59,13 @@ public class MateServiceImipl implements MateService {
 	}
 
 	@Override
-	public Mate removeMate(Mate mate) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public void removeMate(int mate_articleNO) throws Exception {
+		mateDAO.deleteMate(mate_articleNO);
 	}
 
 	@Override
-	public Group removeGroup(Group group) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public void removeGroup(int group_articleNO) throws Exception {
+		mateDAO.deleteGroup(group_articleNO);
 	}
 
 	@Override

@@ -35,12 +35,6 @@ public class MateController {
 	@Autowired
 	HttpSession session;
 
-//	@GetMapping(value="/")
-//	public String bankmain(Model model) {
-//		model.addAttribute("cpage", "main");
-//		return "main2";
-//	}
-
 	@GetMapping("/mate_main")
 	public ModelAndView mate_main() {
 		ModelAndView mv = new ModelAndView();
@@ -206,6 +200,27 @@ public class MateController {
 			e.printStackTrace();
 		}
 		return mv;
+	}
+	@ResponseBody
+	@PostMapping("/deletemate")
+	public void deletemate(@RequestParam(value="no")int mate_articleNO) {
+		try {
+			System.out.println(mate_articleNO);
+			mateService.removeMate(mate_articleNO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/deletegroup")
+	public void deletegroup(@RequestParam(value="no")int group_articleNO) {
+		try {
+			System.out.println(group_articleNO);
+			mateService.removeGroup(group_articleNO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
