@@ -46,6 +46,10 @@ a { text-decoration-line: none;}
 	width: 1000px;
 	text-align: center;
 }
+
+.writebtn{
+	text-align: right;
+}
     </style>
     
 </head>
@@ -80,7 +84,7 @@ a { text-decoration-line: none;}
 
 				<td>
 
-				<a href="./boarddetail?fb_title=${article.fb_title}&page=${pageInfo.page}">
+				<a href="./fb_detail?fb_articleNo=${article.fb_articleNo}&page=${pageInfo.page}">
 					${article.fb_title} 
 				</a>
 				</td>
@@ -98,14 +102,14 @@ a { text-decoration-line: none;}
 					[이전]&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="boardlist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+					<a href="fb_main?page=${pageInfo.page-1}">[이전]</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
 					<c:when test="${pageInfo.page==i }">[${i }]</c:when>
 					<c:otherwise>
-						<a href="boardlist?page=${i}">[${i }]</a>
+						<a href="fb_main?page=${i}">[${i }]</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -114,7 +118,7 @@ a { text-decoration-line: none;}
 					[다음]
 				</c:when>
 				<c:otherwise>
-					<a href="boardlist?page=${pageInfo.page+1}">[다음]</a>
+					<a href="fb_main?page=${pageInfo.page+1}">[다음]</a>
 				</c:otherwise>
 			</c:choose>
 			</section>
@@ -125,7 +129,7 @@ a { text-decoration-line: none;}
 	</c:choose>
 	
         <div class="writebtn">
-        <button class="btn btn-success" onclick="getBoardList()">글 쓰기</button>
+        <button class="btn btn-success" onclick="location.href='fb_writing'">글 쓰기</button>
         </div>
     </div>
     

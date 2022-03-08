@@ -10,6 +10,17 @@ public class Member {
 	String email;
 	String phone;
 	Date joindate;
+	String memberthumb;
+	
+	public Member() {}
+	public Member(String id, String name, String password, String email, String phone, String memberthumb) {
+		this.id=id;
+		this.name=name;
+		this.password=password;
+		this.email=email;
+		this.phone=phone;
+		this.memberthumb=memberthumb;
+	}
 	public int getArticleNO() {
 		return articleNO;
 	}
@@ -51,6 +62,12 @@ public class Member {
 	}
 	public void setJoindate(Date joindate) {
 		this.joindate = joindate;
+	}
+	public String getMemberthumb() {
+		return memberthumb;
+	}
+	public void setMember_thumb(String member_thumb) {
+		this.memberthumb = memberthumb;
 	}
 	
 	

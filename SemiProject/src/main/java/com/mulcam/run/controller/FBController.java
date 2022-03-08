@@ -46,10 +46,22 @@ public class FBController {
 		return mv;
 	}
 	
+	/* 게시글 상세 보기 */
 	@GetMapping(value="/fb_detail")
-	public String Fb_detail() {
-		return "fb_detail";
-		
+	public ModelAndView boardDetail(@RequestParam(value="fb_articleNo") int fb_articleNo,
+			@RequestParam(value="page") int page) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			Board board = boardService.getBoard(fb_articleNo);
+			mv.addObject("article", board);
+			mv.addObject("page", page);
+			mv.setViewName("/fb_detail");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+			mv.setViewName("/board/err");
+		}
+		return mv;
 	}
 	
 	@GetMapping(value="/fb_writing")
@@ -58,9 +70,32 @@ public class FBController {
 	}
 	
 	
-	@PostMapping(value="fb_delete")
-	public String Fb_delete() {
-		return "redirect:/fb_main";
+	/* 삭제 */
+	@GetMapping(value="/fb_delete")
+	public ModelAndView deleteform(@RequestParam(value="fb_articleNo", required=false, defaultValue = "1") int fb_articleNo,
+			@RequestParam(value="page", required=false, defaultValue = "1") int page) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("fb_articleNo", fb_articleNo);
+		mv.addObject("page", page);
+		mv.setViewName("fb_delete");
+		return mv;
+	}
+	
+
+	@PostMapping(value="/fb_delete")
+	public ModelAndView boarddelete(@RequestParam(value="fb_articleNo") int fb_articleNo,
+			@RequestParam(value="page") int page) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			boardService.removeBoard(fb_articleNo);
+			mv.addObject("page", page);
+			mv.setViewName("redirect:/fb_main");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+			mv.setViewName("/err");	
+		}
+		return mv;
 	}
 	
 	@PostMapping(value="fb_modify")
