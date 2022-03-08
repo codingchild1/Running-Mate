@@ -7,10 +7,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
 	rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>Insert title here</title>
@@ -20,395 +24,174 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.profile {
+	width: 50px;
+	height: 50px;
+	border-radius: 70%;
+}
+body {
+	margin: 0 auto;
+}
+.outer {
+	width:1100px;
+	margin: 0 auto;
+}
+.content {
+	width:1100px;
+	height: 700px;
+	margin: 0 auto;
+}
+.title {
+	width:1100px;
+	margin: 0 auto;
+}
+#to-title {
+	text-align: center;
+}
+.cards {
+	width:1100px;
+	margin: 0 auto;
+}
+/* .register {
+	width: 350px;
+	height: 350px;
+	padding: 8px 8px;
+	background: white;
+	color: #2b2e4a;
+	font-size: 14px;
+	margin: 14px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	display: inline-block;
+} */
+#container1 {
+	width:820px;
+	margin: 0 auto;
+	height: 700px;
+	padding-top: 50px;
+}
+
+.mycard {
+            width: 250px;
+            height: 250px;
+            margin: 10px;
+            float: left;
+}
+.mycard:nth-child(3n+1) {
+        clear: both;
+}
+#paging {
+	width:820px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.search {
+	text-align: center;
+}
 </style>
 </head>
 <body>
-	<!-- Start Content -->
-	<%@include file ="header.jsp" %>
-	<%@include file ="slides.jsp" %>
-	
-	<div class="container py-5">
-		
+
+	<%@include file="slides.jsp"%> 
 
 
-			<div class="col-lg-1 border">첫번째컬럼</div>
-			<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
-			<div class="col-lg-11 border">
+		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
+		<!-- <div class="col-lg-11 center border"> -->
+		<div class="outer">
 
-				<div class="row">
-					<div class="col-md-6">
-						<ul class="list-inline shop-top-menu pb-3 pt-1">
-							<li class="list-inline-item">
-								<h1 class="display-5 fw-bold">오늘의 런닝</h1>
-							</li>
-						</ul>
-					</div>
-
-					<div class="col-md-6 mt-2">
-						<div class="d-flex">
-							<ul class="list-inline shop-top-menu pb-3 pt-1">
-								<li class="list-inline-item">
-									<form class="d-flex" id="formsearch" name="formsearch"
-										action="" method="post">
-										<input class="form-control" type="search"
-											style="width: 250px; height: 40px;" placeholder="Search"
-											aria-label="Search" /> <i class="bi-search" type="submit"></i>
-									</form>
-								</li>
-								<li class="list-inline-item">
-									<button class="btn btn-outline-secondary" id="todayMake"
-										name="todayMake" type="button"
-										style="width: 80px; height: 40px;">글쓰기</button>
-								</li>
-							</ul>
-						</div>
-					</div>
+			<div class="title">
+				<div>
+					<h1 class="display-5 fw-bold" id="to-title">오늘의 런닝</h1>
 				</div>
 
-
+				<div class="search">
+						<input class="" type="text"	style="width: 250px; height: 40px;" placeholder="Search" aria-label="Search" />
+						<button class="btn btn-outline-secondary" id="todaySearch" name="todayMake" type="button" style="width: 80px; height: 40px;">검색</button>
+						&nbsp&nbsp
+						<button class="btn btn-outline-secondary" id="todayMake" name="todayMake" type="button" style="width: 80px; height: 40px;">글쓰기</button>
+				</div>
+			</div>
+			<div class="content">
 				<!---------------페이지 내용------------------------------------------------ -->
-		<c:choose>
-		<c:when test="${todayList!=null && pageInfo.listCount>0 }">
-				<div class="col-lg-10 border">
-					<section class="pt-4">
-						<div class="container px-lg-4">
-							
-								<!--1행 1열-->
-							<c:forEach var="tboard" items="${todayList }">
-								<div class="col" style="width: 18rem; height: 18rem">
-								
-								<!-- 회원이미지, 아이디, 날짜/시간 -->
-									<header	class="d-flex border feature bg-white bg-gradient rounded-3 mb-4 mt-n4">
-										<div class="d-flex justify-content-start">
-											<span class="col-lg"> <img
-												src=""
-												class="col-lg-6 d-flex flex-row" />유저이미지 <span id="user_id">${tboard.user_id}</span>
-											</span>
-										</div>
-										<span class="col-lg d-flex justify-content-end"
-											id="today_date" name="today_name">${tboard.today_date}</span>
-
-									</header>
-
-									<!--타이틀-->
-									<div class="d-inline-block d-flex justify-content-start border"
-										id="today_title" name="today_title">${tboard.today_title }</div>
-									<!--썸네일-->
-									<body class="card bg-white border-0 h-100">
-										<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-											<div
-												class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
-											<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-												<img
-													src="${pageContext.request.contextPath}/resources/img/1.gif"
-													id="today_thumb" name="today_thumb" />${tboard.today_thumb }
-											</div>
-										</div>
-									</body>
-									<!-- 조회, 좋아요, 숫자 -->
-									<footer>
-										<div class="card bg-white border h-100">
-											<span class="col-lg d-flex justify-content-start"> <i
-												class="bi bi-heart"></i>&nbsp <i class="bi bi-chat"></i>
-											</span> <span class="col-lg d-flex justify-content-end">조회&nbsp
-
-												<span class="d-flex justify-content-end align-bottom"
-												id="today_views" name="today_views">${tboard.today_views}</span>
-											</span>
-										</div>
-									</footer>
-								</div>
-						   </c:forEach>
-								
-								<!--1행2열-->
-								<!-- Page Features-->
-							<c:forEach var="tboard" items="${todayList }">
-								<div class="col" style="width: 18rem; height: 18rem">
-								
-								<!-- 회원이미지, 아이디, 날짜/시간 -->
-									<header	class="d-flex border feature bg-white bg-gradient rounded-3 mb-4 mt-n4">
-										<div class="d-flex justify-content-start">
-											<span class="col-lg"> <img
-												src=""
-												class="col-lg-6 d-flex flex-row" />유저이미지 <span id="user_id">${tboard.user_id}아이디</span>
-											</span>
-										</div>
-										<span class="col-lg d-flex justify-content-end"
-											id="today_date" name="today_name">${tboard.today_date}날짜/시간</span>
-
-									</header>
-
-									<!--타이틀-->
-									<div class="d-inline-block d-flex justify-content-start border"
-										id="today_title" name="today_title">${tboard.today_title }타이틀</div>
-									<!--썸네일-->
-									<body class="card bg-white border-0 h-100">
-										<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-											<div
-												class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
-											<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-												<img
-													src="${pageContext.request.contextPath}/resources/img/1.gif"
-													id="today_thumb" name="today_thumb" />${tboard.today_thumb }
-											</div>
-										</div>
-									</body>
-									<!-- 조회, 좋아요, 숫자 -->
-									<footer>
-										<div class="card bg-white border h-100">
-											<span class="col-lg d-flex justify-content-start"> <i
-												class="bi bi-heart"></i>&nbsp <i class="bi bi-chat"></i>
-											</span> <span class="col-lg d-flex justify-content-end">조회&nbsp
-
-												<span class="d-flex justify-content-end align-bottom"
-												id="today_views" name="today_views">${tboard.today_views}</span>
-											</span>
-										</div>
-									</footer>
-								</div>
-						   </c:forEach>
-								
-						 
-						 
-								<!--1행3열-->
-								<!-- Page Features-->
-						<c:forEach var="tboard" items="${todayList }">
-								<div class="col" style="width: 18rem; height: 18rem">
-								
-								<!-- 회원이미지, 아이디, 날짜/시간 -->
-									<header	class="d-flex border feature bg-white bg-gradient rounded-3 mb-4 mt-n4">
-										<div class="d-flex justify-content-start">
-											<span class="col-lg"> <img
-												src=""
-												class="col-lg-6 d-flex flex-row" />유저이미지 <span id="user_id">${tboard.user_id}아이디</span>
-											</span>
-										</div>
-										<span class="col-lg d-flex justify-content-end"
-											id="today_date" name="today_name">${tboard.today_date}날짜/시간</span>
-
-									</header>
-
-									<!--타이틀-->
-									<div class="d-inline-block d-flex justify-content-start border"
-										id="today_title" name="today_title">${tboard.today_title }타이틀</div>
-									<!--썸네일-->
-									<body class="card bg-white border-0 h-100">
-										<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-											<div
-												class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
-											<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-												<img
-													src="${pageContext.request.contextPath}/resources/img/1.gif"
-													id="today_thumb" name="today_thumb" />${tboard.today_thumb }
-											</div>
-										</div>
-									</body>
-									<!-- 조회, 좋아요, 숫자 -->
-									<footer>
-										<div class="card bg-white border h-100">
-											<span class="col-lg d-flex justify-content-start"> <i
-												class="bi bi-heart"></i>&nbsp <i class="bi bi-chat"></i>
-											</span> <span class="col-lg d-flex justify-content-end">조회&nbsp
-
-												<span class="d-flex justify-content-end align-bottom"
-												id="today_views" name="today_views">${tboard.today_views}</span>
-											</span>
-										</div>
-									</footer>
-								</div>
-						   </c:forEach>
-								
-
-							<!--여백사이즈-->
-							<div class="row bg-white" style="height: 5rem">&nbsp</div>
-							
-								<!--2행 1열-->
-							<c:forEach var="tboard" items="${todayList }">
-								<div class="col" style="width: 18rem; height: 18rem">
-								
-								<!-- 회원이미지, 아이디, 날짜/시간 -->
-									<header	class="d-flex border feature bg-white bg-gradient rounded-3 mb-4 mt-n4">
-										<div class="d-flex justify-content-start">
-											<span class="col-lg"> <img
-												src=""
-												class="col-lg-6 d-flex flex-row" />유저이미지 <span id="user_id">${tboard.user_id}아이디</span>
-											</span>
-										</div>
-										<span class="col-lg d-flex justify-content-end"
-											id="today_date" name="today_name">${tboard.today_date}날짜/시간</span>
-
-									</header>
-
-									<!--타이틀-->
-									<div class="d-inline-block d-flex justify-content-start border"
-										id="today_title" name="today_title">${tboard.today_title }타이틀</div>
-									<!--썸네일-->
-									<body class="card bg-white border-0 h-100">
-										<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-											<div
-												class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
-											<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-												<img
-													src="${pageContext.request.contextPath}/resources/img/1.gif"
-													id="today_thumb" name="today_thumb" />${tboard.today_thumb }
-											</div>
-										</div>
-									</body>
-									<!-- 조회, 좋아요, 숫자 -->
-									<footer>
-										<div class="card bg-white border h-100">
-											<span class="col-lg d-flex justify-content-start"> <i
-												class="bi bi-heart"></i>&nbsp <i class="bi bi-chat"></i>
-											</span> <span class="col-lg d-flex justify-content-end">조회&nbsp
-
-												<span class="d-flex justify-content-end align-bottom"
-												id="today_views" name="today_views">${tboard.today_views}</span>
-											</span>
-										</div>
-									</footer>
-								</div>
-						   </c:forEach>
-								
-								
-								<!--2행2열-->
-								<!-- Page Features-->
-							<c:forEach var="tboard" items="${todayList }">
-								<div class="col" style="width: 18rem; height: 18rem">
-								
-								<!-- 회원이미지, 아이디, 날짜/시간 -->
-									<header	class="d-flex border feature bg-white bg-gradient rounded-3 mb-4 mt-n4">
-										<div class="d-flex justify-content-start">
-											<span class="col-lg"> <img
-												src=""
-												class="col-lg-6 d-flex flex-row" />유저이미지 <span id="user_id">${tboard.user_id}아이디</span>
-											</span>
-										</div>
-										<span class="col-lg d-flex justify-content-end"
-											id="today_date" name="today_name">${tboard.today_date}날짜/시간</span>
-
-									</header>
-
-									<!--타이틀-->
-									<div class="d-inline-block d-flex justify-content-start border"
-										id="today_title" name="today_title">${tboard.today_title }타이틀</div>
-									<!--썸네일-->
-									<body class="card bg-white border-0 h-100">
-										<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-											<div
-												class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
-											<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-												<img
-													src="${pageContext.request.contextPath}/resources/img/1.gif"
-													id="today_thumb" name="today_thumb" />${tboard.today_thumb }
-											</div>
-										</div>
-									</body>
-									<!-- 조회, 좋아요, 숫자 -->
-									<footer>
-										<div class="card bg-white border h-100">
-											<span class="col-lg d-flex justify-content-start"> <i
-												class="bi bi-heart"></i>&nbsp <i class="bi bi-chat"></i>
-											</span> <span class="col-lg d-flex justify-content-end">조회&nbsp
-
-												<span class="d-flex justify-content-end align-bottom"
-												id="today_views" name="today_views">${tboard.today_views}</span>
-											</span>
-										</div>
-									</footer>
-								</div>
-						   </c:forEach>
-								
-						 
-						 
-								<!--2행3열-->
-								<!-- Page Features-->
-							<c:forEach var="tboard" items="${todayList }">
-								<div class="col" style="width: 18rem; height: 18rem">
-								
-								<!-- 회원이미지, 아이디, 날짜/시간 -->
-									<header	class="d-flex border feature bg-white bg-gradient rounded-3 mb-4 mt-n4">
-										<div class="d-flex justify-content-start">
-											<span class="col-lg"> <img
-												src=""
-												class="col-lg-6 d-flex flex-row" />유저이미지 <span id="user_id">${tboard.user_id}아이디</span>
-											</span>
-										</div>
-										<span class="col-lg d-flex justify-content-end"
-											id="today_date" name="today_name">${tboard.today_date}날짜/시간</span>
-
-									</header>
-
-									<!--타이틀-->
-									<div class="d-inline-block d-flex justify-content-start border"
-										id="today_title" name="today_title">${tboard.today_title }타이틀</div>
-									<!--썸네일-->
-									<body class="card bg-white border-0 h-100">
-										<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-											<div
-												class="feature bg-primary bg-gradient text-white rounded-3 mb-4 mt-n4"></div>
-											<div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-												<img
-													src="${pageContext.request.contextPath}/resources/img/1.gif"
-													id="today_thumb" name="today_thumb" />${tboard.today_thumb }
-											</div>
-										</div>
-									</body>
-									<!-- 조회, 좋아요, 숫자 -->
-									<footer>
-										<div class="card bg-white border h-100">
-											<span class="col-lg d-flex justify-content-start"> <i
-												class="bi bi-heart"></i>&nbsp <i class="bi bi-chat"></i>
-											</span> <span class="col-lg d-flex justify-content-end">조회&nbsp
-
-												<span class="d-flex justify-content-end align-bottom"
-												id="today_views" name="today_views">${tboard.today_views}</span>
-											</span>
-										</div>
-									</footer>
-								</div>
-						   </c:forEach>
-								
-
-							<!--여백사이즈-->
-							<div class="row bg-white" style="height: 5rem">&nbsp</div>
-					</div>		
-				</section>
-			</div>				
-	<!--페이징-->
-		<section id="pageList">
-			<c:choose>
-				<c:when test="${pageInfo.page<=1}">
-					[pre]&nbsp;
-				</c:when>
-				<c:otherwise>
-					<a href="boardlist?page=${pageInfo.page-1}">[pre]</a>&nbsp;
-				</c:otherwise>
-			</c:choose>
-			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
-					<c:when test="${pageInfo.page==i }">[${i }]</c:when>
-					<c:otherwise>
-						<a href="boardlist?page=${i}">[${i }]</a>
-					</c:otherwise>
+					<c:when test="${todayList!=null && pageInfo.listCount>0 }">
+						<div class="" id="container1"> 
+									<!--1행 1열-->
+									<c:forEach var="tboard" items="${todayList}">
+										<div class="border mycard" >
+
+										<!-- 회원이미지, 아이디, 날짜/시간 -->
+										<header	class="border">
+											<div class="">
+												<span class="col-lg">
+													<span><img class="profile" src='images/user_icon_1.png' width=10px height=10px>i</span> <span id="user_id">${tboard.user_id}</span>
+												</span>
+											</div>
+											<span class="" id="today_date">${tboard.today_date}</span>
+											 <input type="hidden" id="today_articleNo" name="today_articleNo" value="${tboard.today_articleNo}">
+										</header>
+
+										<!--타이틀-->
+										<div class="border" id="today_title">${tboard.today_title }</div>
+										<!--썸네일-->
+										<section class="bg-white">
+													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
+															id="today_thumb" name="today_thumb"  width="120px" height="120px" /></a>
+										</section>
+
+										<!-- 조회, 좋아요, 숫자 -->
+										<footer class="d-flex">
+											<span class="d-flex justify-content-start">
+												<img class="heart" src="images/하트.png" style="width: 30px; height: 30px;">
+											</span>
+											<span>
+												<input type="text" id="today_likes" value='${tboard.today_likes}'
+													style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
+													disabled>
+											</span>
+											<span class="d-flex justify-content-end" id="today_views">${tboard.today_views}
+											</span>
+										</footer>
+										</div>
+									</c:forEach>
+						</div>
+					</c:when>
 				</c:choose>
-			</c:forEach>
-			<c:choose>
-				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[next]
-				</c:when>
-				<c:otherwise>
-					<a href="boardlist?page=${pageInfo.page+1}">[next]</a>
-				</c:otherwise>
-			</c:choose>
-		</section>
-	</c:when>	
-	<c:otherwise>
-		<section id="emptyArea">등록된 글이 없습니다.</section>
-	</c:otherwise>
-	</c:choose>
+				<div id="paging">
+					<c:choose>
+						<c:when test="${pageInfo.page<=1}">
+							[pre]&nbsp;
+						</c:when>
+						<c:otherwise>
+						<a href="today?page=${pageInfo.page-1}">[pre]</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+						<c:choose>
+							<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+							<c:otherwise>
+								<a href="today?page=${i}">[${i }]</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+						[next]
+						</c:when>
+						<c:otherwise>
+						<a href="today?page=${pageInfo.page+1}">[next]</a>
+						</c:otherwise>
+					</c:choose>				
+				</div>	
+			</div>
+			
+		
+		</div>
+	<br>	<br>	<br>
 	
-	  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
+		
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script>
 	console.log(${pageInfo.page});
 /* 		$(function(){
 			$("#todayMake").click(function(){
@@ -426,11 +209,12 @@
 			$('#todayMake').on('click',function(){
 				location.href="today_make";
 			});
+			
+
 		});
 		
 
 	</script>
-	<%@include file ="fotter.jsp" %>
-	
+		<%@include file="fotter.jsp"%>
 </body>
 </html>

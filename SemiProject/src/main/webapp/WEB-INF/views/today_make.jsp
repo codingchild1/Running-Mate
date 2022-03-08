@@ -49,7 +49,8 @@ main, header, section {
 
 .ck-editor__editable {
 	min-height: 550px;
-	min-weight: 550px;
+	min-width: 550px;
+	max-width:100%;
 }
 
 .locate {
@@ -71,11 +72,11 @@ main, header, section {
             		console.error(error);
             	});
     	});
-		</script>
+</script>
 </head>
 <body>
 	<%@include file="header.jsp"%>
-	<%@include file="slides.jsp"%>
+
 
 
 	<div class="container py-5">
@@ -93,7 +94,7 @@ main, header, section {
 						<tbody class="container-fluid mt-1">
 							<tr>
 								<td><img src="" class="col" /></td>
-								<td id="user_id" class="col d-flex justify-content-start">${user_id}아이디</td>
+								<td id="user_id" class="col d-flex justify-content-start">${tboard.user_id}아이디</td>
 							</tr>
 						</tbody>
 					</table>
@@ -113,7 +114,7 @@ main, header, section {
 					<div></div>
 
 					<img class="col" src="" id="today_thumb" name="today_thumb"
-						height=100px weight=100px> <input type="file"
+						height="100px" width="100px"> <input type="file"
 						name="today_file" id="today_file" />
 
 					<textarea class="ck-editor__editable" name="today_contents"

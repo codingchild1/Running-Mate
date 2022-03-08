@@ -12,7 +12,7 @@
  	</select>
 	<select id="selectTBoardList" resultType="Today" parameterType="int"  >
     	<![CDATA[
-			select * from today order by user_id limit #{startrow},6
+			select * from today order by today_date desc limit #{startrow},6
     	]]>
 	</select>
 	
