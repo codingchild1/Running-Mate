@@ -23,13 +23,13 @@ public interface MateDAO {
 	public Mate queryMate(int mate_articleNO) throws Exception; //번개 조회,정보
 	public Group queryGroup(int group_articleNO) throws Exception; //소모임 조회,정보
 	
-	public void updateMate(int mate_articleNO)throws Exception;  //번개 글,내용수정
-	public void updateGroup(int group_articleNO)throws Exception; //소모임 글,내용수정
+	public void updateMate(Mate mate)throws Exception;  //번개 글,내용수정
+	public void updateGroup(Group group)throws Exception; //소모임 글,내용수정
 	
 	public void deleteMate(int mate_articleNO) throws Exception;  //번개 삭제
 	public void deleteGroup(int group_articleNO) throws Exception; //소모임 삭제
 	
-	public void updateMateviews(int mate_articleNO) throws Exception; //번개 글 삭제시 조회수 -1변경
+	public void updateMateviews(Mate mate) throws Exception; //번개 글 삭제시 조회수 -1변경
 	public void updateGroupviews(int group_articleNO) throws Exception; //번개 글 삭제시 조회수 -1변경
 	
 	public void insertMate(Mate mate)throws Exception; //번개 생성
@@ -45,7 +45,7 @@ public interface MateDAO {
 	public void deleteptp(Map map)throws Exception; //번개참여취소시 ptp테이블에 아이디값 삭제
 	
 	public List<Ptp> ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
-//	public Ptp ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
+	public Ptp ptpInfo2(Map map)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	
 	//게시물 검색
 }

@@ -18,6 +18,7 @@ import com.mulcam.run.dto.Warning;
 public class MateServiceImipl implements MateService {
 
 		
+	private static final Ptp Ptp = null;
 	@Autowired
 	MateDAO mateDAO;
 	
@@ -49,14 +50,13 @@ public class MateServiceImipl implements MateService {
 	}
 
 	@Override
-	public Mate updateMate(int mate_articleNO) throws Exception {
-		return null;
+	public void updateMate(Mate mate) throws Exception {
+		mateDAO.updateMate(mate);
 	}
 
 	@Override
-	public Group updateGroup(int group_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateGroup(Group group) throws Exception {
+		mateDAO.updateGroup(group);
 	}
 
 	@Override
@@ -137,4 +137,40 @@ public class MateServiceImipl implements MateService {
 		mateDAO.deleteptp(map);
 		
 	}
+
+	@Override
+	public Boolean likequery(int mate_articleNO, String user_id) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("mate_articleNO", mate_articleNO);
+		Ptp ptp = mateDAO.ptpInfo2(map);
+		System.out.println(ptp);
+		System.out.println("넘어온값"+mate_articleNO);
+		System.out.println("넘어온값"+user_id);
+		System.out.println("쿼리문 값"+ptp.getMate_articleNO());
+		System.out.println("쿼리문 값"+ptp.getUser_id());
+		if(mate_articleNO==ptp.getMate_articleNO()&&user_id.equals(ptp.getUser_id())) {
+			return false;
+//		} else if(ptp==null||mate_articleNO==ptp.getMate_articleNO()&&!user_id.equals(ptp.getUser_id())) {
+//		}
+//		} else 
+		}return true;
+	}
+
+//	@Override
+//	public com.mulcam.run.dto.Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+		
+
+//	@Override
+//	public Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {
+//		Map<String,Object> ptp = new HashMap<>();
+//		ptp.put("mate_articleNO",mate_articleNO);
+//		ptp.put("user_id",user_id);
+//		if(ptp==null) throw new Exception("정보 없음");
+//		return (com.mulcam.run.dto.Ptp) ptp;
+//	}
 }
+

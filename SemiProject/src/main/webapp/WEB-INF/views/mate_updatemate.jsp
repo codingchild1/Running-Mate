@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,20 +28,21 @@
 <body>
 <%@include file ="header.jsp" %>
 
-    <form id='form' action="mate_makemate" method="post"> 
+    <form id='form' action="mate_updatemate" method="post"> 
     <div style="width: 940px; padding: 10px;margin:20px auto;">
     <h1>번개 글쓰기</h1>
     <div style="margin-top: 100px;">
     <div style="display: flex; align-items: center;">
-        <span><img class="profile" src="images/profile.png" id="user_img2"></span>
-         <input type="hidden" name="user_img" id="user_img" value="닉네임">   
-        <span><input type="text" id="user_id" name="user_id" value=""
+        <span><img class="profile" src='${mate.user_img }' id="user_img2"></span>
+         <input type="hidden" name="user_img" id="user_img" value="">   
+        <span><input type="text" id="user_id" name="user_id" value='${mate.user_id }'
             style="height: 20px;border:none; background-color: white;"
             disabled> </span>
-            <input type="hidden" id="user_id" name="user_id" value="">
+            <input type="hidden" id="user_id" name="user_id" value=''>
+             <input type="hidden" id="mate_articleNO" name="mate_articleNO" value='${mate.mate_articleNO }'>
     </div>
     <div style="border-bottom: 1px solid; margin-top: 20px;">
-        <input type="text" id="mate_title" name="mate_title" style="border:none; border-bottom: 2px; height: 30px; font-size: 20px;width: 100%;" placeholder="제목">
+        <input type="text" id="mate_title" name="mate_title" style="border:none; border-bottom: 2px; height: 30px; font-size: 20px;width: 100%;" placeholder="제목" value='${mate.mate_title }'>
     </div>
     <div style="display: flex; align-items: flex-end;">
     <div style="border: 1px solid;padding:2px;width: 210px; margin-top: 20px;">
@@ -50,7 +52,7 @@
     <button id="search2" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; height: 38px; margin-left: 5px;">검색</button>
     </div>
      <div id="mapinfo"  style="border: 1px solid; width: 250px; height: 250px; margin-top: 20px;"></div>
-     <input type="hidden" id="mate_mapinfo" name="mate_mapinfo" value=""> 
+     <input type="hidden" id="mate_mapinfo" name="mate_mapinfo" value='${mate.mate_mapinfo }'> 
   
     <textarea id="editor" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
     <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
@@ -94,11 +96,11 @@
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 	
-     //var src = jQuery('#user_img2').attr("src");
-	 //$('input[name=user_img]').attr('value',src);   //이미지주소 관련
+     var src = jQuery('#user_img2').attr("src");
+	 $('input[name=user_img]').attr('value',src);   //이미지주소 관련
 	 
-	 //var id = "닉네임";
-	// $('input[name=user_id]').attr('value',"닉네임");  //value에 id값 넣기
+	// var id = "닉네임";
+	 //$('input[name=user_id]').attr('value',"닉네임");  //value에 id값 넣기
 	 
 	  $(document).ready(function(){
 		$('#search2').bind("click", function(){
@@ -120,7 +122,7 @@
 	                marker.setDraggable(true);
 	            }
 	         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-	        	    
+	         		 console.log($('#mate_title').val());
 	        	    // 클릭한 위도, 경도 정보를 가져옵니다 
 	        	    var latlng = mouseEvent.latLng;
 	        	   /*  console.log(latLng); */
@@ -135,19 +137,17 @@
 	        	    message += '경도는 ' + latlng.getLng() + ' 입니다';
 	        	    console.log(message);
 	        	    
-	        	    var resultDiv = document.getElementById('clickLatlng'); 
-	        	    
+	        	    var resultDiv = document.getElementById('clickLatlng');
 	        	    $('#submit').bind("click", function(){
-	        	     /* console.log(latlng.getLat(),latlng.getLng());  */
-	        	    	console.log("맵정보는"+$('#mate_mapinfo').val()); 
-	        	    	console.log($('#user_img').val());
-		        	    console.log($('#user_id').val());
-		        	    console.log($('#mate_title').val());
-		        	    console.log($('#mate_cont').val());
-		        	    console.log(src);  
-		        	    /* resultDiv.innerHTML = message; */
-	        	    });
-	        	    
+		        	     /* console.log(latlng.getLat(),latlng.getLng());  */
+		        	    	console.log("맵정보는"+$('#mate_mapinfo').val()); 
+		        	    	console.log($('#user_img').val());
+			        	    console.log($('#user_id').val());
+			        	    console.log($('#mate_title').val());
+			        	    console.log($('#mate_cont').val());
+			        	    console.log(src);  
+			        	    /* resultDiv.innerHTML = message; */
+		        	    });
 	        	 });
 		 return false; 
 	        });  

@@ -42,18 +42,18 @@
 		]]>
 	</select>
 	<!-- mate게시물 수정 -->
-	<update id="updateMate" parameterType="int" >
+	<update id="updateMate" parameterType="mate" >
 		<![CDATA[
-		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_tag=#{mate_tag},
-						mate_date=#{mate_date}, mate_mapinfo=#{mate_mapinfo} where mate_articleNO=#{mate_articleNO}
+		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_date=now(), 
+		mate_mapinfo=#{mate_mapinfo} where mate_articleNO=#{mate_articleNO}
 		]]>
 	</update>
 	
 	<!-- group게시물 수정 -->
-	<update id="updateGroup" parameterType="int" >
+	<update id="updateGroup" parameterType="group" >
 		<![CDATA[
-		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_ki=#{group_ki},
-						group_il=#{group_ki}, group_tag=#{group_tag}, group_date=#{group_date}, group_area=#{group_area} 
+		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
+						group_il=#{group_ki}, group_date=now(), group_area=#{group_area} 
 						where group_articleNO=#{group_articleNO}
 		]]>
 	</update>
@@ -151,6 +151,12 @@
 	<select id="ptpInfo" resultType="ptp" parameterType="int">
 		<![CDATA[
 			select * from ptp where mate_articleNO=#{mate_articleNO}
+		]]>
+	</select>
+	
+		<select id="ptpInfo2" resultType="ptp" parameterType="map">
+		<![CDATA[
+			select * from ptp where mate_articleNO=#{mate_articleNO} and user_id=#{user_id}
 		]]>
 	</select>
 	

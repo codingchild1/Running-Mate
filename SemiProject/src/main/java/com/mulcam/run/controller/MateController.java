@@ -5,12 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -115,29 +118,41 @@ public class MateController {
 	
 	@ResponseBody
 	@PostMapping("/Like")
-	public void Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+	public Boolean Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+		Boolean islike = null;
 		try {
 			HttpSession session = request.getSession();
 			String user_id = (String) session.getAttribute("id");
-			mateService.like(mate_articleNO);
-			mateService.makePtp(mate_articleNO,user_id);
-		}catch(Exception e) {
+			islike= mateService.likequery(mate_articleNO, user_id);
+			if (islike == true) {
+				mateService.likeCancel(mate_articleNO);
+				mateService.deletePtp(mate_articleNO, user_id);
+			} else {
+				mateService.like(mate_articleNO);
+				mateService.makePtp(mate_articleNO,user_id);
+			}
+//			islike= mateService.likequery(mate_articleNO, user_id);
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return islike;
 	}
 	
-	@ResponseBody
-	@PostMapping("/LikeCancel")
-	public void LikeCancel(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
-		try {
-			HttpSession session = request.getSession();
-			String user_id = (String) session.getAttribute("id");
-			mateService.likeCancel(mate_articleNO);
-			mateService.deletePtp(mate_articleNO, user_id);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@ResponseBody
+//	@PostMapping("/LikeCancel")
+//	public void LikeCancel(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+//		try {
+//			HttpSession session = request.getSession();
+//			String user_id = (String) session.getAttribute("id");
+//			mateService.likeCancel(mate_articleNO);
+//			mateService.deletePtp(mate_articleNO, user_id);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@GetMapping("/mate_search")
 	public String mate_search() {
@@ -181,14 +196,49 @@ public class MateController {
 		}
 		return mv;
 	}
+	
 	@GetMapping("/mate_updatemate")
-	public String mate_updatemate() {
+	public String mate_updatemate(@RequestParam("ptp")int mate_articleNO, Model model) {
+		try {
+			Mate mate = mateService.mateInfo(mate_articleNO);
+			model.addAttribute("mate",mate);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "mate_updatemate";
 	}
+	@PostMapping("/mate_updatemate")
+	public ModelAndView mate_updatemate2(Mate mate) {
+		ModelAndView mv = new ModelAndView("redirect:/mate_main");
+		try{
+			mateService.updateMate(mate);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
 	
 	@GetMapping("/mate_updategroup")
-	public String mate_updategroup() {
+	public String mate_updategroup(@RequestParam("ptp")int group_articleNO, Model model) {
+		try {
+		 Group group = mateService.groupInfo(group_articleNO);
+			model.addAttribute(group);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "mate_updategroup";
+	}
+	
+	@PostMapping("/mate_updategroup")
+	public ModelAndView mate_updategroup2(Group group) {
+		ModelAndView mv = new ModelAndView("redirect:/mate_main");
+		try{
+			mateService.updateGroup(group);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
 	}
 	
 }
