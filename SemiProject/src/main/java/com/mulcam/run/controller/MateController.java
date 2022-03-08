@@ -94,6 +94,7 @@ public class MateController {
 		return result;
 	}
 	
+	//좋아요 기능
 	@ResponseBody
 	@PostMapping("/Like")
 	public boolean Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
