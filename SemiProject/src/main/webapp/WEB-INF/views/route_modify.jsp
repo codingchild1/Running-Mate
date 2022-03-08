@@ -73,6 +73,7 @@
 			<p id="test">코스를 그려주세요</p>
 			<div id="map"></div>
 			
+			<input type="hidden" id="form_articleNo" name="route_articleNo">
 			<input type="hidden" id="form_user_id" name="user_id">
 			<input type="hidden" id="route_center" name="route_center">
 			<input type="hidden" id="route_area" name="route_area">
@@ -88,6 +89,19 @@
 
 	<script>
 	$(function(){
+		ClassicEditor
+		.create(document.querySelector("#editor"), {
+    		ckfinder : {
+    			uploadUrl : "/upload"
+			}
+		}).then(editor=> {
+			editor.setData('${route.route_content }');
+    	})
+		.catch((error) => {
+			console.error(error);
+    	});
+		
+		/*
     	ClassicEditor.create(document.querySelector("#editor"))
 	    .then(editor=>{
     		editor.setData('${route.route_content }');
@@ -95,6 +109,7 @@
         .catch((error) => {
 	    	console.error(error);
     	});
+		*/
 	});
 	</script>
 	
@@ -110,6 +125,7 @@
 				data: {"longitude" : center_lo, "latitude" : center_la},
 				dataType:"text",
 				success:function(data){
+					$("#form_articleNo").attr("value", ${route.route_articleNo} );
 					$("#form_user_id").attr("value", $("#user_id").html());
 					$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
 					$("#route_area").attr("value", data);
