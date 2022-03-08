@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <%@include file ="header.jsp" %>
@@ -24,51 +27,28 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/러닝.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
 
-                            
-                            <p class="card-text">
-                                도심시티런 5km 달렸습니다!
-                            </p>
-                            <p class="text-muted">♥ (25)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
+<c:forEach items="${BestList }" var="best">
+	<div class="col-12 col-md-4 mb-4">
+		<div class="card h-100">
+			<a href="#">
+				<img src="${best.today_thumb }" class="card-img-top" alt="...">
+			</a>
+			<div class="card-body">
+				<p class="card-text">
+					${best.today_title }
+				</p>
+				<p class="text-muted">
+					♥ (${best.today_likes })
+				</p>
+			</div>
+		</div>
+	</div>
+</c:forEach>
+			
+ 
 
-                            
-                            <p class="card-text">
-                                지속주~윈드 스프린트훈련~
-                            </p>
-                            <p class="text-muted">♥ (22)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-
-                           
-                            <p class="card-text">
-                                오늘도 잘 달렸습니다^^
-                            </p>
-                            <p class="text-muted">♥ (18)</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
