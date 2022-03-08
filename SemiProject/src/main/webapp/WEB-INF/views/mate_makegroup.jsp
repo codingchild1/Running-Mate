@@ -37,10 +37,10 @@ input:focus {
 					<span><img class="profile" src="images/profile.png"
 						id="user_img2"></span> <input type="hidden" name="user_img"
 						id="user_img" value="닉네임"> <span><input type="text"
-						id="user_id" name="user_id" value=""
+						id="user_id" name="user_id" value='${id }'
 						style="height: 20px; border: none; background-color: white;"
 						disabled> </span> <input type="hidden" id="user_id"
-						name="user_id" value="">
+						name="user_id" value='${id }'>
 				</div>
 				<div style="border-bottom: 1px solid; margin-top: 20px;">
 					<input type="text" id="group_title" name="group_title"
@@ -128,8 +128,8 @@ input:focus {
      var src = jQuery('#user_img2').attr("src");
    	 $('input[name=user_img]').attr('value',src);   //이미지주소 관련
    	 
-   	 var id = "닉네임";
-   	 $('input[name=user_id]').attr('value',"닉네임");  //value에 id값 넣기
+   	/*  var id = "닉네임";
+   	 $('input[name=user_id]').attr('value',"닉네임"); */  //value에 id값 넣기
 
 		$(document).ready(function(){
 			$('#search2').bind("click", function(){

@@ -132,9 +132,12 @@ public class MateController {
 
 
 	@PostMapping("/mate_makemate")
-	public ModelAndView mate_makemate2(Mate mate) {
+	public ModelAndView mate_makemate2(Mate mate,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
 		try {
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
+			mv.addObject("id",id);
 			mateService.makeMate(mate);
 		} catch (Exception e) {
 			e.printStackTrace();

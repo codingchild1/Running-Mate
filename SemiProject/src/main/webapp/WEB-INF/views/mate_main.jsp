@@ -290,7 +290,7 @@ body {
 				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
 				value=''>
 			<div style="font-size: 13px; float: right;display: flex;">
-				<form action="mate_updatemate" method="get"><span ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
+				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
 				<%-- <c:if > --%>
 				<span
 					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span> 
@@ -343,15 +343,9 @@ body {
 				value=''>
 
 			<div style="font-size: 13px; float: right;display: flex;">
-				<%--  <c:choose>
-            <c:when test="${empty user_id}"> --%>
-				<form action="mate_updategroup" method="get"><span><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
-				<%-- </c:when>
-                <c:otherwise> --%>
+				<form action="mate_updategroup" method="get"><span id="update2"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
 				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span>
-				<%--   </c:otherwise> --%>
 				<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
-				<%--   </c:choose> --%>
 
 			</div>
 			<input name="group_date" type="text"
@@ -435,7 +429,16 @@ body {
      			 $('input[name=mate_cont]').val(jdata.mate_cont); 
      			 /*  console.log(jdata.mate_mapinfo);
      			  console.log(jdata.mate_cont); */
-     			  console.log($('#mate_cont').val());  
+     			  /* console.log($('#mate_cont').val());  */
+     			 var uid = '<%=(String)session.getAttribute("id")%>';
+     			  if($('#user_id').val()==uid){
+     				 $('#delete').show();
+     				 $('#update').show();
+     			  }else{
+     				 $('#delete').hide();
+     				 $('#update').hide();
+     			  } 
+     			  
      	          
      	                ClassicEditor.create(document.querySelector("#editor"))
      	                .then(editor=>{
@@ -519,6 +522,14 @@ body {
 			 $('input[name=mapinfo2]').attr('value',map.Ma);  
 			 $("#group_cont").val(jdata.group_cont); 
 			 
+			 var uid = '<%=(String)session.getAttribute("id")%>';
+			  if($('#user_id').val()==uid){
+  				 $('#delete2').show();
+  				 $('#update2').show();
+  			  }else{
+  				 $('#delete2').hide();
+  				 $('#update2').hide();
+  			  }
 	           
  	                ClassicEditor.create(document.querySelector("#editor2"))
  	                .then(editor=>{
