@@ -76,7 +76,7 @@
         </c:forEach>
     	</div>
     	
-    	<div id="pageList" style="height:300px; background-color:yellow;">
+    	<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
 			<c:choose>
 				<c:when test="${pageInfo.page<=1}">
 					[이전]&nbsp;
