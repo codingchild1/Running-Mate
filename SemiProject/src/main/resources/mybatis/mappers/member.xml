@@ -10,24 +10,10 @@
 	</select>
 	<insert id="insertMember" parameterType="Member">
 		<![CDATA[
-			insert into member(id, name, password, email, phone, joindate, adminCK) values(#{id}, #{name}, #{password}, #{email}, #{phone}, sysdate(), 0)
+			insert into member(id, name, password, email, phone, joindate, adminCK, memberthumb) values(#{id}, #{name}, #{password}, #{email}, #{phone}, sysdate(), 0, #{memberthumb})
 
 		]]>
 	</insert>
-	<select id="memberList" parameterType="Member" resultType="com.mulcam.run.dto.Member">
-		<![CDATA[
-			select id, name, password, email, phone from member order by name
-		]]>
-	</select>
-	<delete id="delmember" parameterType="Member">
-		<![CDATA[
-			delete * from member where id=#{id}
-		]]>
-	</delete>
-	<update id="updatemypage" parameterType="Member">
-		update member set password=#{password}, email=#{email}, phone=#{phone}
-		where id = #{id} and name=#{name}
-	</update>
 </mapper>
 
 <!-- create table member(
@@ -38,6 +24,11 @@
     email varchar(255) not null,
     phone varchar(255) not null,
     joindate date not null,
-    adminCK int not null,
+    adminCk int not null,
+    memberthumb varchar(100) default null,
     primary key(articleNO)
-); -->
+);
+
+insert into member values(1, 'admin', 'admin', 'admin', 'admin', 'admin', sysdate(), 1);
+
+ -->

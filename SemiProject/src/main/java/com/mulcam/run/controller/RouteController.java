@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.service.RouteService;
 
@@ -45,53 +46,80 @@ public class RouteController {
 	
 	@Autowired
 	RouteService routeService;
-	
-	@Autowired
-	private ServletContext servletContext;	
-	
-	@GetMapping("/route")
-	public ModelAndView get_routemain() {
+
+	@RequestMapping(value="/route", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routeMain(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView("route_main");
+		PageInfo pageInfo = new PageInfo();
 		try {
-			List<Route> routeslist = routeService.allRoutesList();
-			mv.addObject("routes", routeslist);
-		}catch(Exception e) {
+			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
+			
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("routeslist", routeslist);
+			mv.addObject("count", routeslist.size());
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("routeslist", null);
 		}
 		return mv;
 	}
 	
-	@PostMapping("/route")
-	public ModelAndView post_routemain() {
-		ModelAndView mv = new ModelAndView("route_main");
+	
+	@RequestMapping(value="/routepost", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routePost(@RequestParam(value="articleNo",required=true) int articleNo) {
+		ModelAndView mv = new ModelAndView("route_post");
 		try {
-			List<Route> routeslist = routeService.allRoutesList();
-			mv.addObject("routes", routeslist);
-		}catch(Exception e) {
+			routeService.updateRoutePostView(articleNo);
+			Route posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
 		}
 		return mv;
 	}
-
-
-	@GetMapping("/route_sort")
-	public String route_sort() {
-		return "route_sort";
+	
+	
+	@RequestMapping(value="/routeModify", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routeModify(@RequestParam(value="articleNo",required=true) int articleNo) {
+		ModelAndView mv = new ModelAndView("route_modify");
+		try {
+			Route posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);
+			mv.addObject("update", "update");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/routeDelete", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routeDelete(@RequestParam(value="articleNo",required=true) int articleNo) {
+		ModelAndView mv = new ModelAndView("route_err");
+		try {
+			routeService.removeRouteBoard(articleNo);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
 	}
 	
 	
-
-	@PostMapping("/route_sort")
-	public String routesort() { 
-		return "route_sort";
-	}
-	
-	@PostMapping("/route_post")
-	public String routepost() { 
-		return "route_post";
-	}
-	
-	@PostMapping("/route_write")
-	public String routewrite() { 
-		return "route_write";
+	@RequestMapping(value="/route_modify", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content) {
+		ModelAndView mv = new ModelAndView("route_post");
+		try {
+			route.setRoute_content(content.trim());
+			//Route posted = routeService.updateRoutePost(route);
+			//mv.addObject("route", posted);
+			//mv.addObject("update", "update");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
 	}
 	
 	@PostMapping(value="/route_reg")
@@ -108,12 +136,31 @@ public class RouteController {
 		return mv;
 	}
 	
+	@PostMapping("/route_sort")
+	public String route_sort() {
+		return "route_sort";
+	}
+	@PostMapping("/route_write")
+	public String route_write() {
+		return "route_write";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/sortRoutes")
+	public List<Route> sortRoutes(@RequestParam("area") String area, @RequestParam("distance") int distance[]) {
+		List<Route> routeslist = null;
+		try {
+			routeslist = routeService.getSortedRoutes(area, distance);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return routeslist;
+	}
+	
 	@ResponseBody
 	@PostMapping(value="/route/routeCoords")
 	public static String coordToAddr(@RequestParam("longitude") double longitude, @RequestParam("latitude") double latitude){
 		String url = "https://dapi.kakao.com/v2/local/geo/coord2address.json?x="+longitude+"&y="+latitude;
-		System.out.println(longitude + " , " + latitude);
-		
 		String addr = "";
 		try{
 			addr = getRegionAddress(getJSONData(url));
@@ -128,13 +175,10 @@ public class RouteController {
 	private static String getJSONData(String apiUrl) throws Exception {
 		HttpURLConnection conn = null;
     	StringBuffer response = new StringBuffer();
-    	 
-    	//인증키 - KakaoAK하고 한 칸 띄워주셔야해요!
-    	String auth = "KakaoAK " + "d341cf154a7d7bd2b3ee9b196481d4be";
-
+    	String auth = "KakaoAK " + "d341cf154a7d7bd2b3ee9b196481d4be";	//인증키
+    	
     	//URL 설정
         URL url = new URL(apiUrl);
-         
         conn = (HttpURLConnection) url.openConnection();
         
         //Request 형식 설정
@@ -154,10 +198,8 @@ public class RouteController {
         } else if (responseCode == 500) {
             System.out.println("500:: 서버 에러, 문의 필요");
         } else { // 성공 후 응답 JSON 데이터받기
-        	 
         	 Charset charset = Charset.forName("UTF-8");
              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), charset));
-             
              String inputLine;
              while ((inputLine = br.readLine()) != null) {
              	response.append(inputLine); 

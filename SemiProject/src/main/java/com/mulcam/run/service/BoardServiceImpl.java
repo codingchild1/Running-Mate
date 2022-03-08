@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mulcam.run.dao.BoardDAO;
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.PageInfo;
+import com.mulcam.run.dto.Today;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -36,10 +37,36 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.selectBoardList(startrow);
 	}
 
+	/* 게시글 상세 보기 */
 	@Override
-	public Board getBoard(int fb_no) throws Exception {
+	public Board getBoard(int fb_articleNo) throws Exception {
+		boardDAO.updateReadCount(fb_articleNo);
+		return boardDAO.selectBoard(fb_articleNo);
+	}
+
+	/* 게시글 삭제 */
+	@Override
+	public void removeBoard(int fb_articleNo) throws Exception {
+
+			boardDAO.deleteBoard(fb_articleNo);
+		}
+		
+
+
+	
+	
+	
+	@Override
+	public Board getContBoard(Board board) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void modifyBoard(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -48,25 +75,11 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
+	/* 최고의 러너 */
 	@Override
-	public Board getContBoard(Board board) throws Exception {
+	public List<Today> best3() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return boardDAO.bestrun();
 	}
-
-	@Override
-	public void removeBoard(int fb_no) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void modifyBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
 	
 }

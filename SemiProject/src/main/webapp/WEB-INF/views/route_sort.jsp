@@ -118,7 +118,6 @@
 		</div>
 		
 		<fieldset style="padding-bottom: 30px; border: 1px solid gray;">
-		<form>
 			<div id="area_div" style="margin: 0 auto; padding-top: 20px;">
 				<div style="height:50px; margin: 0 auto;" >
 					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">지역</div>
@@ -164,10 +163,55 @@
 			</div><br><br>
 
 			<div style="margin: 0 auto; text-align:center;">
-				<input type="submit" value="검색" style="width:15%; height:40px; text-align : center; line-height: 20px;"/>
+				<input id="submit" value="검색" style="width:15%; height:40px; text-align : center; line-height: 20px;" value="검색"/>
 			</div>
-		</form>
 		</fieldset>
+		
+		<script>
+		$("#btn_length1").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length1").attr('class','btn btn-success');
+		});
+		$("#btn_length2").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length2").attr('class','btn btn-success');
+		});
+		$("#btn_length3").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length3").attr('class','btn btn-success');
+		});
+		$("#submit").click(function(){
+			var distance;
+			if($("#btn_length1").hasClass("btn btn-success")===true){
+				distance = [0, 5000];
+			}else if($("#btn_length2").hasClass("btn btn-success")===true){
+				distance = [5000, 20000];
+			}else if($("#btn_length3").hasClass("btn btn-success")===true){
+				distance = [20000, 100000];
+			} else{
+				distance = [0, 0];
+			}
+			
+			
+			$.ajax({
+				async:false,
+				type:"post",
+				url:"http://localhost:8090/sortRoutes",
+				traditional:true,
+				data: {"area": "", "distance" : distance},
+				dataType:"text",
+				success:function(data){
+					console.log(data);
+				}
+			});
+		});
+		</script>
 		
 		<h2 style="display:inline-block">추천코스</h2>  <h4 style="display:inline-block">동작구</h4>
 		<div id="routes_list" style="width: 90%; height:400px; margin-left: 5%; margin-right: 5%;">
@@ -252,7 +296,7 @@
 	                </div>
     	        </div>
         	    <div id="route_miniFooter">
-            	    <div id="route_miniFooterLeft" style="display: inline;" style="background-color:black ;">
+            	    <div id="route_miniFooterLeft" style="display: inline;" style="background-color:black;">
                 	    <span><img id="route_myLike" src="https://media.istockphoto.com/vectors/red-heart-design-icon-flat-valentines-day-sign-emblem-isolated-on-vector-id1131944419?b=1&k=20&m=1131944419&s=170x170&h=X3hjbz0XmLxyxWtuSMY9rXqlI89mqk1gSvgHHOtVuYA=" style="width: 15px; height:15px;"/></span>
                     	<span id="route_likes">3</span>
 	                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn6Horz4J02Of5NG7sPD2ieM6kG0ywqEJI1w&usqp=CAU" style="width:15px; height:15px;">
@@ -268,24 +312,7 @@
 	</main>
 	
 	<script>
-		$("#btn_length1").click(function(){
-			$("#btn_length1").removeClass("btn btn-success");
-			$("#btn_length2").removeClass("btn btn-success");
-			$("#btn_length3").removeClass("btn btn-success");
-			$("#btn_length1").attr('class','btn btn-success');
-		});
-		$("#btn_length2").click(function(){
-			$("#btn_length1").removeClass("btn btn-success");
-			$("#btn_length2").removeClass("btn btn-success");
-			$("#btn_length3").removeClass("btn btn-success");
-			$("#btn_length2").attr('class','btn btn-success');
-		});
-		$("#btn_length3").click(function(){
-			$("#btn_length1").removeClass("btn btn-success");
-			$("#btn_length2").removeClass("btn btn-success");
-			$("#btn_length3").removeClass("btn btn-success");
-			$("#btn_length3").attr('class','btn btn-success');
-		});
+		
 		
 		$(function(){
 			var part_ul = $("#part_ul");

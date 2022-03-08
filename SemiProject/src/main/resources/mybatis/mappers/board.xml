@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.mulcam.run.dao.BoardDAO">
-<!-- 자유게시판 조회 -->
+	<!-- 자유게시판 조회 -->
 	<select resultType="int" id="selectBoardCount">
 
 		<![CDATA[
 			select count(*) from freeboard
 		]]>
 	</select>
-	
+
 	<!-- 자유게시판 게시물 조회 -->
-	<select resultType="board" id="selectBoardList"	parameterType="int">
+	<select resultType="board" id="selectBoardList"
+		parameterType="int">
 		<![CDATA[
 			select fb_articleNO,writer,fb_title,fb_content,fb_img_url, fb_date, fb_views,warning 
 				from (select @rownum:=@rownum+1 rnum, tot.* 
@@ -20,8 +21,48 @@
 					(select @rownum:=0) temp) sub
 			where rnum between #{startrow} and #{startrow}+9	
 		]]>
-		</select>
+	</select>
+
+	<!-- 자유게시판 상세 보기 -->
+	<select id="selectBoard" resultType="board" parameterType="int">
+		<![CDATA[
+			select * from freeboard where fb_articleNO=#{fb_articleNO}
+		]]>
+	</select>
+
+	<!-- 조회수 -->
+	<update id="updateReadCount" parameterType="int">
+		<![CDATA[
+			update freeboard set fb_views=fb_views+1 where fb_articleNO=#{fb_articleNO}
+		]]>
+	</update>
+
+	<!-- 게시물 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		<![CDATA[
+			delete from freeboard where fb_articleNO=#{fb_articleNO}
+		]]>
+	</delete>
+
 	
+	<!-- 최고의 러너 -->
+	<select id="bestrun" resultType="Today">
+		<![CDATA[
+			select * from today order by today_likes desc limit 3;
+		]]>
+	</select>
+
+
+
+	
+
+
+
+
+
+
+
+
 	<!-- 자유게시판 게시글 생성 -->
 	<insert id="insertBoard" parameterType="Board">
 		<![CDATA[
@@ -29,107 +70,18 @@
 				values(#{fb_articleNO},#{writer},#{fb_title},#{fb_content},#{fb_img_url},#{fb_date},#{fb_views},#{warning})
 		]]>
 	</insert>
-	
-	<update id="updateFbViews" parameterType="int" >
+
+	<update id="updateFbViews" parameterType="int">
 		<![CDATA[
 		update fb set fb_views=#{fb_views} where fb_articleNO=#{fb_articleNO}
 		]]>
 	</update>
-	
-	<!-- 게시물 삭제 -->
-	<delete id="deleteBoard" parameterType="int">
-		<![CDATA[
-			delete from fb where fb_articleNO=#{fb_articleNO}
-		]]>
-	</delete>
-	
+
+
 	<!-- 게시물 수정 -->
-	<update id="updateBoard" parameterType="int" >
+	<update id="updateBoard" parameterType="int">
 		<![CDATA[
 		update fb set fb_title=#{fb_title},fb_content=#{fb_content}, fb_date=#{fb_date} where fb_articleNO=#{fb_articleNO}
 		]]>
 	</update>
 </mapper>
-
-<!-- board.xml의 네임스페이스를 지정 [select id가 중복되는 것을 방지하는 목적] -->
-<!-- <mapper namespace="com.mulcam.board2.dao.BoardDAO">
-
-
-	<select resultType="integer" id="selectMaxBoardNum">
-
-		<![CDATA[
-			select max(board_num) from board
-		]]>
-	</select>
-
-
-	<insert id="insertBoard" parameterType="board">
-
-		<![CDATA[
-			insert into board
-			(board_num,board_name,board_pass,board_subject,board_content,board_filename,board_re_ref,board_re_lev,
-				board_re_seq,board_readcount,board_date) 
-			values (#{board_num},#{board_name},#{board_pass},#{board_subject},#{board_content},#{board_filename},
-				#{board_re_ref},#{board_re_lev},#{board_re_seq},#{board_readcount},now())
-		]]>
-	</insert>
-
-
-	<select resultType="int" id="selectBoardCount">
-
-		<![CDATA[
-			select count(*) from board
-		]]>
-	</select>
-
-
-	<select resultType="board" id="selectBoardList"
-		parameterType="int">
-
-		<![CDATA[
-			select BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,BOARD_CONTENT, BOARD_FILENAME, BOARD_RE_REF,BOARD_RE_LEV,BOARD_RE_SEQ,BOARD_READCOUNT,BOARD_DATE 
-				from (select @rownum:=@rownum+1 rnum, tot.* 
-					from (select * from board order by BOARD_RE_REF desc,BOARD_RE_SEQ asc) tot, 
-					(select @rownum:=0) temp) sub
-			where rnum between #{startrow} and #{startrow}+9	
-		]]>
-	</select>
-
-	<select id="selectBoard" resultType="board" parameterType="int">
-		<![CDATA[
-			select * from board where BOARD_NUM=#{boardNum}
-		]]>
-	</select>
-
-	<update id="updateReadCount" parameterType="int">
-		<![CDATA[
-			update board set board_readcount=board_readcount+1 where board_num=#{boardNum}
-		]]>
-	</update>
-	
-	<update id="updateBoardReSeq" parameterType="board">
-		<![CDATA[
-			update board set board_re_seq=board_re_seq+1 
-			where board_re_ref=#{board_re_ref} and board_re_seq>#{board_re_seq}
-		]]>
-	</update>
-	
-	<select id="selectPassword" resultType="string" parameterType="int">
-		<![CDATA[
-			select board_pass from board where board_num=#{boardNum}
-		]]>
-	</select>
-	
-	<update id="updateBoard" parameterType="board">
-		<![CDATA[
-			update board set board_subject=#{board_subject}, board_content=#{board_content}
-			where board_num=#{board_num}
-		]]>
-	</update>
-	
-	<delete id="deleteBoard" parameterType="int">
-		<![CDATA[
-			delete from board where board_num=#{boardNum}
-		]]>
-	</delete>
-</mapper> -->
