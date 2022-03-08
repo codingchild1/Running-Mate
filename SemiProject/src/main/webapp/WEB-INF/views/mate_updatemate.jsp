@@ -75,12 +75,12 @@
         		}
         	
         	}).then(editor=> {
-        		window.editor=editor;
+        		editor.setData('${mate.mate_cont}');
         	})
         	.catch((error) => {
         		console.error(error);
         	});
-	});   
+	  }); 
        
         var infowindow = new kakao.maps.InfoWindow({zIndex:1});
         var mapContainer = document.getElementById('mapinfo'), // 지도를 표시할 div 

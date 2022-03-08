@@ -35,12 +35,6 @@ public class MateController {
 	@Autowired
 	HttpSession session;
 
-//	@GetMapping(value="/")
-//	public String bankmain(Model model) {
-//		model.addAttribute("cpage", "main");
-//		return "main2";
-//	}
-
 	@GetMapping("/mate_main")
 	public ModelAndView mate_main() {
 		ModelAndView mv = new ModelAndView();

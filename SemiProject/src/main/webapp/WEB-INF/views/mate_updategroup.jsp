@@ -96,19 +96,20 @@ input:focus {
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
     //ckeditor
-    $(function(){
+	$(function(){
         ClassicEditor
         	.create(document.querySelector("#editor"), {
         		ckfinder : {
         			uploadUrl : "/upload"
         		}
+        	
         	}).then(editor=> {
-        		window.editor=editor;
+        		editor.setData('${group.group_cont}');
         	})
         	.catch((error) => {
         		console.error(error);
         	});
-	});   
+	  });  
         	
        
             var infowindow = new kakao.maps.InfoWindow({zIndex:1});
