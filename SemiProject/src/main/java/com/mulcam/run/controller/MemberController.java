@@ -101,15 +101,9 @@ public class MemberController {
 		}
 
 		
-		Member mem = new Member(name, id, password, email, phone, file.getOriginalFilename());
-//		System.out.println(id);  // DB저장
-//		System.out.println(today_contents.trim());  // DB저장, 반드시 trim()
+		Member mem = new Member(id, name, password, email, phone, file.getOriginalFilename());
 		try {
 			memberService.makeMember(mem);
-//			model.addAttribute("memberthumb", file.getOriginalFilename());
-//			model.addAttribute("title", today_title);
-//			model.addAttribute("content", today_contents.trim());
-//			return "/login";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
