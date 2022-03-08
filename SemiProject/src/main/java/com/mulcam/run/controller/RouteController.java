@@ -53,6 +53,7 @@ public class RouteController {
 		PageInfo pageInfo = new PageInfo();
 		try {
 			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
+			
 			mv.addObject("pageInfo", pageInfo);
 			mv.addObject("routeslist", routeslist);
 			mv.addObject("count", routeslist.size());
@@ -92,6 +93,19 @@ public class RouteController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value="/routeDelete", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView routeDelete(@RequestParam(value="articleNo",required=true) int articleNo) {
+		ModelAndView mv = new ModelAndView("route_err");
+		try {
+			routeService.removeRouteBoard(articleNo);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
+	}
+	
 	
 	@RequestMapping(value="/route_modify", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content) {

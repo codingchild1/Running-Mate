@@ -66,5 +66,10 @@ public class RouteServiceImpl implements RouteService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void removeRouteBoard(int articleNo) throws Exception {
+		routeDAO.deleteRoute(articleNo);
+	}
 	
 }

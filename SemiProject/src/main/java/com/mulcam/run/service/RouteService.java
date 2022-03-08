@@ -13,4 +13,6 @@ public interface RouteService {
 	public List<Route> getSortedRoutes(String area, int distance[]) throws Exception;
 	public void updateRoutePostView(int articleNO) throws Exception;
 	public void updateRoutePost(Route route) throws Exception;
+	
+	public void removeRouteBoard(int articleNo) throws Exception;
 }
