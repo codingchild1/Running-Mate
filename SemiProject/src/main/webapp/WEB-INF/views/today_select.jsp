@@ -23,7 +23,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
-<script>
+<!-- <script>
 	$(function(){
         ClassicEditor.create(document.querySelector("#editor"))
         .then(editor=>{
@@ -33,7 +33,7 @@
         	console.error(error);
         });
 	});
-</script>
+</script> -->
 <style>
 main {
 	display: flex;
@@ -45,8 +45,10 @@ main {
 	margin-top: 10px;
 }
 
-#editor {
-	float: right;
+.ck-editor__editable {
+	min-height: 550px;
+	min-width: 1200px;
+	max-width:100%;
 }
 
 #today_delete, #today_modify, #warning {
@@ -76,16 +78,16 @@ header {
 					<div class="row">
 						<div class="container fluid border">
 							<ul class="list-inline shop-top-menu pb-3 pt-1">
-								<li>제목<input name="today_title" id="today_title" size="150"
-									value='${title }'></li>
+								<li><input name="today_title" id="today_title" size="150"
+									value='${todayselect.today_title}'></li>
 							</ul>
 							<table>
 								<tbody class="container mt-1">
 									<tr>
 										<td><img
-											src="${pageContext.request.contextPath}/resources/img/1.gif"
+											src=""
 											class="col" /></td>
-										<td id="user_id" class="col d-flex justify-content-start">아이디</td>
+										<td id="user_id" class="col d-flex justify-content-start">${todayselect.user_id}아이디</td>
 
 									</tr>
 								</tbody>
@@ -94,10 +96,10 @@ header {
 
 						<div class="row mt-1">
 							<table class="container d-flex">
-								<td class="col">날짜/시간</td>
+								<td class="col">${todayselect.today_date}날짜/시간</td>
 								<td class="col pl-5">&nbsp&nbsp
-									<button type="button" class="col gap-1 rounded btn btn-white"
-										id="today_views" name="today_views" disabled>조회</button>
+									<button type="text" class="col gap-1 rounded btn btn-white"
+										id="today_views" name="today_views" disabled> ${todayselect.today_views}</button>
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -112,12 +114,41 @@ header {
 										id="warning" name="warning">신고</button>
 								</td>
 							</table>
-						</div>
+						</div> 
+						
+						
+						
+<%-- 			글쓴이와 관리자만 삭제수정/ 사용자는 신고기능만 보이게.....그런데 작동이.....		
+
+				<div class="row mt-1">
+							<table class="container d-flex">
+								<td>${todayselect.today_date}날짜/시간</td>
+									<button class="col gap-1 rounded btn btn-white"	id="today_views" name="today_views" disabled> ${todayselect.today_views}조회 </button>
+										<tr>
+										<td>
+									<c:choose>
+											<c:when test= ${loginUserid =="testUser" || loginUserid =="admin") }>
+												<button type="button" class="col gap-1 rounded btn btn-white" id="today_delete" name="today_delete">삭제</button>
+												<button type="button" class="col gap-1 rounded btn btn-white" id="today_modify" name="today_modify">수정</button>	
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="col gap-1 rounded btn btn-white" id="warning" name="warning">신고</button>		
+											</c:otherwise>
+									</c:choose>
+									</td>
+								</tr>
+							</table>
+						</div> --%>
+						
 					</div>
 				</header>
 
 				<!--------------------------------------------------게시글 ---------------------------- -->
 				<main>
+					<img class="col" src="/thumbfileview/${todayselect.today_thumb}" id="today_thumb" name="today_thumb"
+						height="100px" width="100px"> ${todayselect.today_thumb}<input type="file"
+						name="today_file" id="today_file" />
+				
 					<table class="container-fluid">
 						<div id="editor"></div>
 						<br>
@@ -128,7 +159,7 @@ header {
 				<table>
 					<tr>
 						<td class="d-flex mt-2"></td>
-						<i class="bi bi-heart d-flex justify-content-center mt-2"></i>
+						<i class="bi bi-heart d-flex justify-content-center mt-2">${todayselect.today_likes}</i>
 					</tr>
 				</table>
 
@@ -156,17 +187,19 @@ header {
 		 
 	      //ckeditor 작성내용 보여주는부분
   		$(function(){
-	      ClassicEditor.create(document.querySelector("#editor"))
-		     .then(editor=>{
-  		editor.setData('${content}');
-  		    })
+	      ClassicEditor.create(document.querySelector("#editor"), {
+	    	  initialData : '${todayselect.today_contents}'
+	      }).then(editor=> {
+      		window.editor=editor;
+      		})
 		   .catch((error) => {
 		   	console.error(error);
 		    });
 		});
     
+	    
 	    	   
-	      //수정 버튼
+	  /*     //수정 버튼
 	    	  $(function(){$("#today_modify").click(function(){
 	    	      //첨부파일 이름들을 폼에 추가
 	    	      var str="";
@@ -191,7 +224,7 @@ header {
 	    	          document.form1.submit();
 	    	          }
 	    	      });
-	    	  });
+	    	  }); */
 		</script>
 	<%@include file="fotter.jsp"%>
 
