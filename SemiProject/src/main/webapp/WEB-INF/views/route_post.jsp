@@ -68,7 +68,7 @@
 		</div>
 	</main>
 	
-		<script>
+	<script>
 		//editor script
 		$(function(){
 	        ClassicEditor.create(document.querySelector("#content"))
@@ -83,170 +83,57 @@
 	
 	
 	<script>
-		//map script
-		$(function(){
-			mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
-			console.log(${route.route_mapinfo});
-		    const map = new mapboxgl.Map({
-		    	container: 'map', // Specify the container ID
-		      	style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
-		      	center: [127.035812,37.570149], // Specify the starting position
-		      	zoom: 14.5, // Specify the starting zoom
-		    });
-		    
-		    const coordinatesGeocoder = function (query) {
-		    	// Match anything which looks like
-		    	// decimal degrees coordinate pair.
-		    	const matches = query.match(
-		    		/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
-		    	);
-		    	if (!matches) {
-		    		return null;
-		    	}
-		    	 
-		    	function coordinateFeature(lng, lat) {
-		    		return {
-		    			center: [lng, lat],
-		    			geometry: {
-		    				type: 'Point',
-		    				coordinates: [lng, lat]
-		    			},
-		    			place_name: 'Lat: ' + lat + ' Lng: ' + lng,
-		    			place_type: ['coordinate'],
-		    			properties: {},
-		    			type: 'Feature'
-		    		};
-		    	}
-		    	 
-		    	const coord1 = Number(matches[1]);
-		    	const coord2 = Number(matches[2]);
-		    	const geocodes = [];
-		    	 
-		    	if (coord1 < -90 || coord1 > 90) {
-		    		// must be lng, lat
-		    		geocodes.push(coordinateFeature(coord1, coord2));
-		    	}
-		    	 
-		    	if (coord2 < -90 || coord2 > 90) {
-		    		// must be lat, lng
-		    		geocodes.push(coordinateFeature(coord2, coord1));
-		    	}
-		    	 
-		    	if (geocodes.length === 0) {
-		    		// else could be either lng, lat or lat, lng
-		    		geocodes.push(coordinateFeature(coord1, coord2));
-		    		geocodes.push(coordinateFeature(coord2, coord1));
-		    	}
-		    	 
-		    	return geocodes;
-		    };
-		    	 
-		    // Add the control to the map.
-		    map.addControl(
-		    	new MapboxGeocoder({
-		    		accessToken: mapboxgl.accessToken,
-		    		localGeocoder: coordinatesGeocoder,
-		    		zoom: 4,
-		    		placeholder: 'Try: -40, 170',
-		    		mapboxgl: mapboxgl,
-		    		reverseGeocode: true
-		    	})
-		    );
-		    
-		    map.addControl(draw);
-		    
-		    const draw = new MapboxDraw({
-		    	// Instead of showing all the draw tools, show only the line string and delete tools.
-		    	displayControlsDefault: false,
-		    	controls: {
-		    		line_string: true,
-		    	    trash: true
-		    	},
-		    	// Set the draw mode to draw LineStrings by default.
-		    	defaultMode: 'draw_line_string',
-		    		styles: [
-		    	    // Set the line style for the user-input coordinates.
-		    	    {
-		    	    	id: 'gl-draw-line',
-		    	      	type: 'line',
-		    	      	filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
-		    	      	layout: {
-		    	        	'line-cap': 'round',
-		    	        	'line-join': 'round'
-		    	      	},
-		    	      	paint: {
-			    	        'line-color': '#438EE4',
-			    	        'line-dasharray': [0.2, 2],
-		    	        	'line-width': 4,
-		    	        	'line-opacity': 0.7
-		    	      	}
-		    	    },
-		    	    // Style the vertex point halos.
-		    	    {
-		    	    	id: 'gl-draw-polygon-and-line-vertex-halo-active',
-		    	      	type: 'circle',
-		    	      	filter: [
-			    	        'all',
-			    	        ['==', 'meta', 'vertex'],
-			    	        ['==', '$type', 'Point'],
-		    		        ['!=', 'mode', 'static']
-		    		    ],
-		    	   		paint: {
-		    	        	'circle-radius': 12,
-		    	        	'circle-color': '#FFF'
-		    	      	}
-		    	    },
-		    	    // Style the vertex points.
-		    	    {
-		    	    	id: 'gl-draw-polygon-and-line-vertex-active',
-		    	      	type: 'circle',
-		    	      	filter: [
-		    	        	'all',
-		    	        	['==', 'meta', 'vertex'],
-		    	        	['==', '$type', 'Point'],
-		    	        	['!=', 'mode', 'static']
-		    	      	],
-		    	      	paint: {
-		    	        	'circle-radius': 8,
-		    	        	'circle-color': '#438EE4'
-		    	      	}
-		    	    }
-		    		]
-		    });
-		    
-		    map.on('draw.create', addRoute(${route.route_mapinfo}));
-		    
-		    function addRoute(coords) {
-	    		// If a route is already loaded, remove it
-	    	  	if (map.getSource('route')) {
-	    	    	map.removeLayer('route');
-	    	    	map.removeSource('route');
-	    	  	} else {
-	    	    // Add a new layer to the map
-	    	    	map.addLayer({
-	    	    		id: 'route',
-	    	      		type: 'line',
-	    	      		source: {
-			    	    	type: 'geojson',
-			    	        data: {
-	    			        	type: 'Feature',
-	    		          		properties: {},
-	    	    	      		geometry: coords
-	    	        		}
-	    	      		},
-		    	      	layout: {
-		    	        	'line-join': 'round',
-	    		        	'line-cap': 'round'
-	    		      	},
-	    	    	  	paint: {
-		    	    	    'line-color': '#03AA46',
-		    	        	'line-width': 8,
-		    		        'line-opacity': 0.8
-		    		    }
-	    		    });
-	    		}
-	    	}
+	//map script
+	$(function(){
+		var route_center = ${route.route_center };
+		mapboxgl.accessToken = 'pk.eyJ1IjoidmhxbHRrZmtkMjQiLCJhIjoiY2wwMDZ3eG92MDA2MzNjcnlpNmEzN3YydCJ9.eu7sOlz2memREpbstyzmjA';
+		const map = new mapboxgl.Map({
+			container: 'map', // Specify the container ID
+		    style: 'mapbox://styles/mapbox/streets-v11', // Specify which map style to use
+		    center: [route_center.longitude,route_center.latitude], // Specify the starting position
+		    zoom: 14.5, // Specify the starting zoom
 		});
+		
+		var mapinfo = ${route.route_mapinfo};
+		if (map.getLayer('route')) {
+			map.removeLayer('route');
+		}
+		if (map.getSource('route')) {
+			map.removeSource('route');
+		}
+		
+		const draw = new MapboxDraw({
+    		displayControlsDefault: false,
+    		defaultMode: 'draw_line_string',
+    		styles:[
+    			{
+    	    		id: 'route',
+    	      		type: 'line',
+    	      		source: {
+    	    	    	type: 'geojson',
+    	    	        data: {
+    			        	type: 'Feature',
+    		          		properties: {},
+    	    	      		geometry: mapinfo
+    	        		}
+    	      		},
+    		      	layout: {
+    		        	'line-join': 'round',
+    		        	'line-cap': 'round'
+    		      	},
+    	    	  	paint: {
+    		    	    'line-color': '#03AA46',
+    		        	'line-width': 8,
+    			        'line-opacity': 0.8
+    			    }
+    			}
+    		]
+    	})
+
+    	map.addControl(draw);
+		
+		
+	});
 	</script>
 </body>
 </html>

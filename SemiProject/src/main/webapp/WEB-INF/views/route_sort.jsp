@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="/js/hangjungdong.js" type="text/javascript"></script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/hangjungdong.js"></script>
 
     <link rel="apple-touch-icon" href="/assets/img/apple-icon.png">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
@@ -18,82 +18,82 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-<style>
-    ul.area_ul {
-        list-style-type: none; 
-        /* list 앞에 나타나는 총알을 없애줌 */
-        margin: 0px;
-        padding :0px;
-        overflow: auto;
-        background-color: #f3f3f3;
-        border: 1px solid #e7e7e7;  
-    }
-    li.area_li {
-    	height:40px;
-        float: left;
-        font-size:8px; 
-        text-align: center;
-        display: block;
-        color: #666;
-        padding: 4px 12px;
-        text-decoration: none;
-    }
-    li.area_li a:hover:not(.active){
-        text-decoration: underline;
-    }
+	<style>
+   		ul.area_ul {
+        	list-style-type: none; 
+	        /* list 앞에 나타나는 총알을 없애줌 */
+    	    margin: 0px;
+        	padding :0px;
+	        overflow: auto;
+    	    background-color: #f3f3f3;
+        	border: 1px solid #e7e7e7;  
+	    }
+    	li.area_li {
+    		height:40px;
+	        float: left;
+    	    font-size:8px; 
+        	text-align: center;
+	        display: block;
+    	    color: #666;
+        	padding: 4px 12px;
+        	text-decoration: none;
+	    }
+    	li.area_li a:hover:not(.active){
+        	text-decoration: underline;
+	    }
     
-    ul.part_ul {
-        list-style-type: none; 
-        margin: 0px;
-        padding :0px;
-        overflow: auto;
-    }    
-    ul.part_ul li {
-        float: left;
-        font-size:8px; 
-        display: block;
-        width: 117px;
-        color: #666;
-        padding: 8px 12px;
-        text-decoration: none; 
-    }  
-    ul.part_ul li a:hover:not(.active){
-      	text-decoration: underline;
-    }
+    	/* 구 */
+    	ul.part_ul {
+        	list-style-type: none; 
+        	margin: 0px;
+        	padding :0px;
+        	overflow: auto;
+    	}    
+    	ul.part_ul li {
+       		float: left;
+	        font-size:8px; 
+    	    display: block;
+        	width: 117px;
+	        color: #666;
+    	    padding: 8px 12px;
+        	text-decoration: none; 
+	    }  
+    	ul.part_ul li a:hover:not(.active){
+      		text-decoration: underline;
+    	}
     
+    	/* 동 */
+    	ul.specific_ul {
+        	list-style-type: none; 
+        	margin: 0px;
+        	padding :0px;
+        	overflow: auto;
+        	background-color: #e9e9e9;
+    	}    
+	    ul.specific_ul li {
+    	    float: left;
+        	font-size: 1em; 
+	        display: block;
+    	    width: 120px;
+        	color: #666;
+	        padding: 4px 4px;
+    	    text-decoration: none; 
+	    }  
+    	ul.specific_ul li a:hover:not(.active){
+      		text-decoration: underline;
+	    }
     
-    ul.specific_ul {
-        list-style-type: none; 
-        margin: 0px;
-        padding :0px;
-        overflow: auto;
-    }    
-    ul.specificl_ul li {
-        float: left;
-        font-size:8px; 
-        display: block;
-        width: 117px;
-        color: #666;
-        padding: 8px 12px;
-        text-decoration: none; 
-    }  
-    ul.specific_ul li a:hover:not(.active){
-      	text-decoration: underline;
-    }
-    
-    
-    .active{
-        color: white;
-        background-color: #4caf50;
-    }
-    table th {
- 	 	width: 350px;
-  		padding: 10px;
-  		vertical-align: top;
-	}
-</style>
+    	.active{
+        	color: white;
+        	background-color: #4caf50;
+    	}
+    	table th {
+ 	 		width: 350px;
+	  		padding: 10px;
+  			vertical-align: top;
+		}
+	</style>
 </head>
-
 <body>
 	<header><%@include file ="header.jsp" %></header>
 	<main style="width: 70%; margin: 0 auto;">
@@ -156,10 +156,10 @@
 			</div>
 			<div id="distance_div" style="margin: 0 auto; padding-top: 20px;">
 				<div style="height:50px; margin: 0 auto;" >
-					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">지역</div>
-					<button style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">~5km</button>
-					<button style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">5km~20km</button>
-					<button style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">20km~</button>
+					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">거리</div>
+					<div id="btn_length1" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">~5km</div>
+					<div id="btn_length2" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">5km~20km</div>
+					<div id="btn_length3" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">20km~</div>
 				</div>
 			</div><br><br>
 
@@ -267,8 +267,26 @@
     	</div>
 	</main>
 	
-
 	<script>
+		$("#btn_length1").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length1").attr('class','btn btn-success');
+		});
+		$("#btn_length2").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length2").attr('class','btn btn-success');
+		});
+		$("#btn_length3").click(function(){
+			$("#btn_length1").removeClass("btn btn-success");
+			$("#btn_length2").removeClass("btn btn-success");
+			$("#btn_length3").removeClass("btn btn-success");
+			$("#btn_length3").attr('class','btn btn-success');
+		});
+		
 		$(function(){
 			var part_ul = $("#part_ul");
 			var specific_ul = $("#specific_ul");
@@ -279,11 +297,9 @@
 			/* 지역 검색창 열기 */
 			$('#area_text').click(function(){
 				$('#select_area').show();
-				
-				//도시 번호
-				area_values[0] = '11';
+				area_values[0] = '11';					//도시 번호
+				areaName = hangjungdong.sido[area_values[0]].codeNm;
 				parts = [];
-				
 				for(var i in hangjungdong.sigugun){
 					if(hangjungdong.sigugun[i].sido==area_values[0]){
 						parts.push(hangjungdong.sigugun[i]);
@@ -297,17 +313,17 @@
 				}
 			});
 			
+			
 			$(document).on("click",".area_ul li", function(){
-				//도시 번호
-				area_values[0] = $(this).val();	
+				$(".area_li").removeClass("active");
+				$(this).addClass("active");
+				area_values[0] = $(this).val();			//도시 번호
 				parts = [];
-				
 				for(var i in hangjungdong.sigugun){
 					if(hangjungdong.sigugun[i].sido==area_values[0]){
 						parts.push(hangjungdong.sigugun[i]);
 					}
 				}
-				console.log(parts);
 				
 				$("#part_ul li").remove();
 				$("#specific_ul li").remove();
@@ -315,6 +331,7 @@
 					part_ul.append("<li><a>"+Object.values(parts[i])[2]+"</a></li>");
 				}
 			});
+			
 			
 			var specific = [];
 			$(document).on("click",".part_ul li", function(){
@@ -323,80 +340,97 @@
 				
 				specific = [];
 				for(var i in hangjungdong.dong){
-					if(hangjungdong.dong[i].sigugun==area_values[1]){
+					if(hangjungdong.dong[i].sido==area_values[0] && hangjungdong.dong[i].sigugun==area_values[1]){
 						specific.push(hangjungdong.dong[i]);
-						console.log(hangjungdong.dong[i]);
 					}
 				}
-				
 				$("#specific_ul li").remove();
 				for(var i in specific){
 					specific_ul.append("<li><a>"+Object.values(specific[i])[3]+"</a></li>");
 				}
-				
 			});
 			
+			
+			$(document).on("click",".specific_ul li", function(){
+				var index = $(".specific_ul li").index(this);
+				area_values[2] = Object.values(specific[index])[2];
+				
+				var areaName = "";
+				for(var i in hangjungdong.sigugun){
+					if(hangjungdong.sigugun[i].sido==area_values[0] && hangjungdong.sigugun[i].sigugun==area_values[1]){
+						areaName += hangjungdong.sigugun[i].codeNm;
+						break;
+					}
+				}
+				areaName += " ";
+				for(var i in hangjungdong.dong){
+					if(hangjungdong.dong[i].sido==area_values[0] && hangjungdong.dong[i].sigugun==area_values[1]
+						&& hangjungdong.dong[i].dong==area_values[2]){
+						areaName += hangjungdong.dong[i].codeNm;
+						$('#area_text').attr("value", areaName);
+						break;
+					}
+				}
+			});
 		});
 	</script>
 	
  	<script>
   	$(function(){
   		jQuery(document).ready(function(){
-  		  //sido option 추가
-  		  jQuery.each(hangjungdong.sido, function(idx, code){
-  		    //append를 이용하여 option 하위에 붙여넣음
-  		    jQuery('#sido').append(fn_option(code.sido, code.codeNm));
-  		  });
+  			//sido option 추가
+  			jQuery.each(hangjungdong.sido, function(idx, code){
+  		    	//append를 이용하여 option 하위에 붙여넣음
+  		    	jQuery('#sido').append(fn_option(code.sido, code.codeNm));
+  		 	});
 
-  		  //sido 변경시 시군구 option 추가
-  		  jQuery('#sido').change(function(){
-  		    jQuery('#sigugun').show();
-  		    jQuery('#sigugun').empty();
-  		    jQuery('#sigugun').append(fn_option('','선택')); //
-  		    jQuery.each(hangjungdong.sigugun, function(idx, code){
-  		      if(jQuery('#sido > option:selected').val() == code.sido)
-  		        jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm));
-  		    });
+  		  	//sido 변경시 시군구 option 추가
+  		 	jQuery('#sido').change(function(){
+  		 		jQuery('#sigugun').show();
+  		    	jQuery('#sigugun').empty();
+  		    	jQuery('#sigugun').append(fn_option('','선택')); //
+  		    	jQuery.each(hangjungdong.sigugun, function(idx, code){
+  		    		if(jQuery('#sido > option:selected').val() == code.sido)
+  		        	jQuery('#sigugun').append(fn_option(code.sigugun, code.codeNm));
+  		    	});
 
-  		    //세종특별자치시 예외처리
-  		    //옵션값을 읽어 비교
-  		    if(jQuery('#sido option:selected').val() == '36'){
-  		      jQuery('#sigugun').hide();
-  		      //index를 이용해서 selected 속성(attr)추가
-  		      //기본 선택 옵션이 최상위로 index 0을 가짐
-  		      jQuery('#sigugun option:eq(1)').attr('selected', 'selected');
-  		      //trigger를 이용해 change 실행
-  		      jQuery('#sigugun').trigger('change');
-  		    }
-  		  });
+  		    	//세종특별자치시 예외처리 - 옵션값을 읽어 비교
+  		    	if(jQuery('#sido option:selected').val() == '36'){
+  		    		jQuery('#sigugun').hide();
+  		      		//index를 이용해서 selected 속성(attr)추가
+  		      		//기본 선택 옵션이 최상위로 index 0을 가짐
+  		      		jQuery('#sigugun option:eq(1)').attr('selected', 'selected');
+  		      		//trigger를 이용해 change 실행
+  		      		jQuery('#sigugun').trigger('change');
+  		    	}
+  			});
 
-  		  //시군구 변경시 행정동 옵션추가
-  		  jQuery('#sigugun').change(function(){
-  		    //option 제거
-  		    jQuery('#dong').empty();
-  		    jQuery.each(hangjungdong.dong, function(idx, code){
-  		      if(jQuery('#sido > option:selected').val() == code.sido && jQuery('#sigugun > option:selected').val() == code.sigugun)
-  		        jQuery('#dong').append(fn_option(code.dong, code.codeNm));
-  		    });
-  		    //option의 맨앞에 추가
-  		    jQuery('#dong').prepend(fn_option('','선택'));
-  		    //option중 선택을 기본으로 선택
-  		    jQuery('#dong option:eq("")').attr('selected', 'selected');
+  		 	//시군구 변경시 행정동 옵션추가
+  			jQuery('#sigugun').change(function(){
+  		 		//option 제거
+  				jQuery('#dong').empty();
+  		    	jQuery.each(hangjungdong.dong, function(idx, code){
+  		    		if(jQuery('#sido > option:selected').val() == code.sido && jQuery('#sigugun > option:selected').val() == code.sigugun)
+  		        	jQuery('#dong').append(fn_option(code.dong, code.codeNm));
+  		    	});
+  		    	//option의 맨앞에 추가
+  		    	jQuery('#dong').prepend(fn_option('','선택'));
+  		    	//option중 선택을 기본으로 선택
+  		    	jQuery('#dong option:eq("")').attr('selected', 'selected');
+  			});
 
-  		  });
+  			jQuery('#dong').change(function(){
+  				var sido = jQuery('#sido option:selected').val();
+  		    	var sigugun = jQuery('#sigugun option:selected').val();
+  		    	var dong = jQuery('#dong option:selected').val();
+  		    	var dongCode = sido + sigugun + dong + '00';
 
-  		  jQuery('#dong').change(function(){
-  		    var sido = jQuery('#sido option:selected').val();
-  		    var sigugun = jQuery('#sigugun option:selected').val();
-  		    var dong = jQuery('#dong option:selected').val();
-  		    var dongCode = sido + sigugun + dong + '00';
+  		    	//동네예보 URL
+  		    	var url = 'https://www.weather.go.kr/weather/process/timeseries-dfs-body-ajax.jsp?myPointCode=' + dongCode + '&unit=K';
 
-  		    //동네예보 URL
-  		    var url = 'https://www.weather.go.kr/weather/process/timeseries-dfs-body-ajax.jsp?myPointCode=' + dongCode + '&unit=K';
-
-  		    //iframe으로 결과 보기
-  		    fn_iframe(url);
-  		  });
+  		    	//iframe으로 결과 보기
+  				fn_iframe(url);
+  			});
   		});
 
   		function fn_option(code, name){
