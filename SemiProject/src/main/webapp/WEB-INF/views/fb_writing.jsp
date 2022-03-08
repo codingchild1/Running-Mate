@@ -11,7 +11,7 @@
 <title>글 쓰기</title>
 
 <style>
-    html{overflow:scorll;}
+       html{overflow:scorll;}
 h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {
 	margin:0; outline:0; border:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent;
 }
@@ -21,7 +21,7 @@ input{vertical-align:middle;}
 input:focus {outline:0;}
 caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visibility:hidden; font-size:0; line-height:0;}
 
-.container {max-width:1024px; margin:30px auto;}
+.container2 {max-width:1024px; margin:30px auto;}
 .board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
 .board_list thead th:first-child {background-image:none;}
 .board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}
@@ -37,8 +37,9 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 .board_detail tbody th, .board_detail tbody td {padding:10px 15px; border-bottom:1px solid #ccc;}
 .board_detail tbody textarea {width:100%; min-height:500px}
 
-.btn {margin:5px; padding:5px 11px; color:#fff !important; display:inline-block; background-color:#7D7F82; vertical-align:middle; border-radius:0 !important; cursor:pointer; border:none;}
-.btn:hover {background: #6b9ab8; }
+.btn2 {margin:5px; padding:5px 11px; color:#fff !important; display:inline-block; background-color:#7D7F82; vertical-align:middle; border-radius:0 !important; cursor:pointer; border:none;}
+.btn2:hover {background: #6b9ab8; }
+a { text-decoration-line: none;}
     
 
 .ck.ck-editor {
