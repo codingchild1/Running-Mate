@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -38,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
+import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.RouteService;
 
 
@@ -46,7 +48,13 @@ public class RouteController {
 	
 	@Autowired
 	RouteService routeService;
+	
+	@Autowired
+	LikesService likesService;
 
+	@Autowired
+	HttpSession session;
+	
 	@RequestMapping(value="/route", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routeMain(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView("route_main");
@@ -71,6 +79,8 @@ public class RouteController {
 		try {
 			routeService.updateRoutePostView(articleNo);
 			Route posted = routeService.getRouteInfo(articleNo);
+			String user_id = (String) session.getAttribute("id");
+			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
 			mv.addObject("route", posted);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -86,7 +96,7 @@ public class RouteController {
 		try {
 			Route posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);
-			mv.addObject("update", "update");
+			//mv.addObject("update", "update");
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -111,10 +121,13 @@ public class RouteController {
 	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content) {
 		ModelAndView mv = new ModelAndView("route_post");
 		try {
+			int articleNo = route.getRoute_articleNo();
+			System.out.println(route.getRoute_articleNo());
 			route.setRoute_content(content.trim());
-			//Route posted = routeService.updateRoutePost(route);
-			//mv.addObject("route", posted);
-			//mv.addObject("update", "update");
+			routeService.updateRoutePost(route);
+			routeService.updateRoutePostView(articleNo);
+			Route posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());

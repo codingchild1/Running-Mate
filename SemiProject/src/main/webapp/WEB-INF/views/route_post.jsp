@@ -46,7 +46,7 @@
 </head>
 <body>
 	<header><%@include file ="header.jsp" %></header>
-	<main style="width: 70%; margin: 0 auto;">
+	<main style="width: 70%; margin: 0 auto; margin-bottom:50px;">
 		<div class="row align-items-center py-3">
 			<div class="col-md-8 text-black">
         		<h2>나처럼 달려</h2>
@@ -67,7 +67,11 @@
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
 			
 			<textarea id="content" name="content" ></textarea><br>
-			<div id="map" style="width: 100%; height:300px;"></div>
+			<div id="map" style="width: 100%; height:300px; margin-bottom:50px;"></div>
+		</div>
+		<div id="likes" style="text-align:center; ">
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh1mkMnO3AgTGvD0YyOB1kpzY_FYwQ6uvl4A&usqp=CAU" style="height:50px;" />
+			<hr>
 		</div>
 	</main>
 	
@@ -82,19 +86,8 @@
     	    	console.error(error);
         	});
 		});
-	</script>
-	
-	
-	<script>
-	/*function delete_check(url){
-		var answer;
-		answr = confirm("정말 게시글을 삭제하시겠습니까?");
-		if(answer == true){
-			loation = url;	
-		}
-	}*/
-	
-	
+	</script>	
+	<script>	
 	//map script
 	$(function(){
 		var route_center = ${route.route_center };
