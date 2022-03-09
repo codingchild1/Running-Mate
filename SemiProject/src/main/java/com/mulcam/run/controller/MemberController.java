@@ -92,7 +92,7 @@ public class MemberController {
 	public String join(@RequestParam(value="profile") MultipartFile file,
 			@RequestParam("name") String name, @RequestParam("id") String id, @RequestParam("password") String password, @RequestParam("email") String email, @RequestParam("phone")
 		String phone, Model model) {
-		String path = servletContext.getRealPath("/upload/");
+		String path = servletContext.getRealPath("/profile/");
 		File destFile = new File(path+file.getOriginalFilename());
 		try {
 			file.transferTo(destFile);
@@ -102,6 +102,8 @@ public class MemberController {
 
 		
 		Member mem = new Member(id, name, password, email, phone, file.getOriginalFilename());
+		Member member = new Member();
+
 		try {
 			memberService.makeMember(mem);
 		} catch (Exception e) {
@@ -127,11 +129,57 @@ public class MemberController {
 		return String.valueOf(overlap);
 	}
 	
-	@GetMapping(value="memberlist")
+	@GetMapping(value="/memberlist")
 	public String memberList(Model model) {
 		List<Member> list = memberService.memberList();
 		model.addAttribute("list", list);
 		return "memberlist";
+	}
+	@RequestMapping(value="/memberdelete", method={RequestMethod.GET, RequestMethod.POST})
+	public String deleteMember(HttpServletRequest request) {
+		
+		String[] ajaxMsg = request.getParameterValues("valueArr");
+		int size = ajaxMsg.length;
+		for(int i=0; i<size;i++) {
+			memberService.delete(ajaxMsg[i]);
+		}
+		return "redirect:memberlist";
+	}
+	
+	@GetMapping(value="/profileview/{filename}")
+	public void fileview(@PathVariable String filename,
+			HttpServletRequest request, HttpServletResponse response) {
+	/*현재 /fileview/board/${file.originalFilename } 경로로 요청이 들어왔는데,
+	${file.originalFilename }은 URL에 변수를 담은 템플릿변수에 해당한다. 이를 filename이라는 변수로 받은 것이고
+	요청을 처리하는 메서드에서 이를 파라미터로 받아서 처리해야하기 때문에 PathVaribale이라는 어노테이션을 사용한다. */
+		String path=servletContext.getRealPath("/profile/");
+		File file=new File(path+filename); 
+		String sfilename=null;
+		FileInputStream fis=null;
+		try {
+			if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+				sfilename=URLEncoder.encode(file.getName(), "UTF-8");
+			} else {
+				sfilename=new String(file.getName().getBytes("UTF-8"), "ISO-8859-1");
+			}
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/octet-stream; charest=UTF-8");
+//			response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+			OutputStream out=response.getOutputStream();
+			fis=new FileInputStream(file);
+			FileCopyUtils.copy(fis, out); 
+			out.flush(); 
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fis!=null) {
+				try{
+					fis.close(); 
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

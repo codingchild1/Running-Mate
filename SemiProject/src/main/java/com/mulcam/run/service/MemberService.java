@@ -10,4 +10,5 @@ public interface MemberService {
 	boolean accessMember(String id, String password) throws Exception;
 	public List<Member> memberList();
 	Member queryById(String id) throws Exception;
+	public void delete(String id);
 }

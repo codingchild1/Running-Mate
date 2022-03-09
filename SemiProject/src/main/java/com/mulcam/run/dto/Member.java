@@ -3,7 +3,6 @@ package com.mulcam.run.dto;
 import java.sql.Date;
 
 public class Member { 
-	int articleNO;
 	String id;
 	String name;
 	String password;
@@ -21,12 +20,7 @@ public class Member {
 		this.phone=phone;
 		this.memberthumb=memberthumb;
 	}
-	public int getArticleNO() {
-		return articleNO;
-	}
-	public void setArticleNO(int articleNO) {
-		this.articleNO = articleNO;
-	}
+
 	public String getId() {
 		return id;
 	}
@@ -66,7 +60,7 @@ public class Member {
 	public String getMemberthumb() {
 		return memberthumb;
 	}
-	public void setMember_thumb(String member_thumb) {
+	public void setMemberthumb(String memberthumb) {
 		this.memberthumb = memberthumb;
 	}
 	

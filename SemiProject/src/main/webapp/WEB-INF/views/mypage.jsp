@@ -48,7 +48,7 @@
 			<form action="updatemypage" method="post">
 				<div>
 					<label class="control-label" for="memberthumb">프로필</label>
-					<img src="/fileview/${member.memberthumb }" width="100px" height="100px"  />
+					<img src="/profileview/${member.memberthumb }" width="100px" height="100px"  />
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="id">아이디</label>

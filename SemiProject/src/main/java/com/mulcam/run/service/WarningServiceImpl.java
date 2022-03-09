@@ -17,15 +17,14 @@ public class WarningServiceImpl implements WarningService {
 	@Override
 	public List<Warning> AllWarninglist() throws Exception {
 		// TODO Auto-generated method stub
-		return warningDAO.warningList();
+		return warningDAO.AllWarninglist();
 	}
 
 
 	@Override
-	public void deleteWarning(Warning warning) throws Exception {
+	public void delete(String warningid) {
 		// TODO Auto-generated method stub
-		warningDAO.deleteWarning(warning);
+		warningDAO.delete(warningid);
 	}
-
 	
 }
