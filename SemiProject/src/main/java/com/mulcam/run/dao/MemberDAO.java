@@ -13,4 +13,5 @@ public interface MemberDAO {
 	public Member queryMember(String id) throws Exception;
 	public void insertMember(Member mem) throws Exception;
 	public List<Member> memberList();
+	public void delete(String id);
 }

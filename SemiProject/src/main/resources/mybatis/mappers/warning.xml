@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mulcam.run.dao.WarningDAO">
-
-
+	<select id="AllWarninglist" parameterType="Warning"  resultType="com.mulcam.run.dto.Warning">
+		<![CDATA[
+			select warningid, boardtype, warningdate, warningcnt from warning
+		]]>
+	</select>
+	<delete id="delete" parameterType="String">
+		<![CDATA[
+			delete from warning where warningid=#{warningid}
+		]]>
+	</delete>
 </mapper>
+
+<!-- 
+create table warning(
+	warningno int(11) auto_increment not null,
+    boardtype varchar(100) not null,
+    boardno int(100) not null,
+    warningcnt int(100) not null,
+    warningid varchar(100) not null,
+    warningdate date not null,
+    primary key(warningno)
+);
+ -->
