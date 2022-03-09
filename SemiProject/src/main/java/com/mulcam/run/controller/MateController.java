@@ -256,23 +256,5 @@ public class MateController {
 			e.printStackTrace();
 		}
 	}
-//	if(type==번개) {
-//		if(type2==제목) {
-//			matesr.1
-//		}else if(type2==내용) {
-//			matese.2
-//		}else {
-//			mateser.3
-//		}
-//	}else {
-//		if(type2==제목) {
-//			matesr.1
-//		}else if(type2==내용) {
-//			matese.2
-//		}else {
-//			mateser.3
-//		}
-//	}
-	
-	
+
 }
