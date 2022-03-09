@@ -128,21 +128,6 @@ public class MateController {
 		return mv;
 	}
 	
-//	@GetMapping("/mate_searchinfo")
-//	public String searchinfo(@RequestParam(value="type") String type,
-//							@RequestParam(value="option") String option,
-//							@RequestParam(value="input") String input,Model model) {
-//		try {
-//			List<GroupAndMate> mates = mateService.searchInfo(type, option, input);
-//			model.addAttribute("mates",mates);
-//			model.addAttribute("input",input);
-//			System.out.println(mates);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		return "mate_search";
-//	}
-	
 	@GetMapping("/mate_searchinfo")
 	public String searchinfo(@RequestParam(value="type") String type,
 							@RequestParam(value="option") String option,
