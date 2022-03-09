@@ -24,14 +24,12 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
 	<style>
 		.ck-editor__editable {
-	    min-height: 500px;
+			min-height: 550px;
+			min-width: 300px;
 		}
-		#map {
-        	top: 0;
-       	 	bottom: 0;
-        	width: 100%;
-        	height: 500px;
-      	}
+		.ck.ck-reset.ck-editor.ck-rounded-corners {
+    		width: 45%;
+		}
 	</style>
 	
 	<!-- mapbox -->
@@ -66,14 +64,60 @@
 			</div>
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
 			
-			<textarea id="content" name="content" ></textarea><br>
-			<div id="map" style="width: 100%; height:300px; margin-bottom:50px;"></div>
+			<textarea id="content" name="content" style="width:45%; display:inline-block"></textarea><br>
+			<div id="map" style="width: 45%; height:500px; margin-bottom:50px; display:inline-block"></div>
 		</div>
-		<div id="likes" style="text-align:center; ">
-			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh1mkMnO3AgTGvD0YyOB1kpzY_FYwQ6uvl4A&usqp=CAU" style="height:50px;" />
-			<hr>
+		<div id="likes" style="text-align:center;"><br>
+		<c:choose>
+			<c:when test="${likes eq true }">
+			<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " /></c:when>
+			<c:when test="${likes eq false }">
+			<img id="nolike" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " /></c:when>
+		</c:choose>
+			<br><br><hr>
 		</div>
 	</main>
+	
+	<script>
+	$(function(){
+		console.log(${likes});
+		console.log(!${likes});
+		
+		$("#like").click(function(){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/likes",
+				data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
+				dataType:"text",
+				success:function(data){
+					console.log("like " + data);
+					if(data===${likes}){
+						$("#like").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+					} else if(data===!${likes}){
+						$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+					}
+				}
+			});
+		});
+		$("#nolike").click(function(){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/likes",
+				data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
+				dataType:"text",
+				success:function(data){
+					console.log("nolike " + data);
+					if(data===!${likes}){
+						$("#nolike").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+					} else if(data===${likes}){
+						$("#nolike").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+					}
+				}
+			});
+		});
+		
+	});
+	</script>
 	
 	<script>
 		//editor script
@@ -133,11 +177,8 @@
     			    }
     			}
     		]
-    	})
-
+    	});
     	map.addControl(draw);
-		
-		
 	});
 	</script>
 	

@@ -82,6 +82,7 @@ public class RouteController {
 			String user_id = (String) session.getAttribute("id");
 			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
 			mv.addObject("route", posted);
+			mv.addObject("likes", likes);
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -168,6 +169,27 @@ public class RouteController {
 			e.printStackTrace();
 		}
 		return routeslist;
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/likes")
+	public boolean likes(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
+		boolean likes = false;
+		try {
+			// 현재 게시물에 like에 대한 정보 확인
+			likes = likesService.getLikesTF(user_id, board_type, board_no);
+			if(likes == false) {
+				likesService.insertLikes(user_id, board_type, board_no);
+				likes = true;
+			} else {
+				likesService.deleteLikes(user_id, board_type, board_no);
+				likes = false;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(likes);
+		return likes;
 	}
 	
 	@ResponseBody
