@@ -1,17 +1,22 @@
 package com.mulcam.run.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,22 +37,13 @@ public class MateController {
 	@Autowired
 	HttpSession session;
 
-//	@GetMapping(value="/")
-//	public String bankmain(Model model) {
-//		model.addAttribute("cpage", "main");
-//		return "main2";
-//	}
-
 	@GetMapping("/mate_main")
 	public ModelAndView mate_main() {
 		ModelAndView mv = new ModelAndView();
 		try {
 			List<GroupAndMate> mates = mateService.allpostInfo();
-			
 			mv.addObject("mates",mates);
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return mv;
@@ -78,6 +74,7 @@ public class MateController {
 			 List<Ptp> ptp = mateService.ptpInfo(mate_articleNO);
 //			Ptp ptp = mateService.ptpInfo(mate_articleNO);
 			result = new ResponseEntity<List<Ptp>>(ptp, HttpStatus.OK);
+			System.out.println(result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -96,51 +93,61 @@ public class MateController {
 		}
 		return result;
 	}
-//	@ResponseBody
-//	@PostMapping("/Like")
-//	public ResponseEntity<String> Like(@RequestParam(value="no")int mate_articleNO,Ptp ptp){
-//		ResponseEntity<String> result =null;
-//		try {
-//			System.out.println("controller");
-//			mateService.like(mate_articleNO);
-//			mateService.makePtp(ptp);
-//			System.out.println(ptp.getUser_id());
-//			System.out.println(ptp.getMate_articleNO());
-//			result = new ResponseEntity<String>("참여완료",HttpStatus.OK);
-//		}catch(Exception e) {
-//			
-//		}
-//		return result;
-//	}	
 	
+	//좋아요 기능
 	@ResponseBody
 	@PostMapping("/Like")
-	public void Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+	public boolean Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+		boolean islike = false;
 		try {
 			HttpSession session = request.getSession();
 			String user_id = (String) session.getAttribute("id");
-			mateService.like(mate_articleNO);
-			mateService.makePtp(mate_articleNO,user_id);
-		}catch(Exception e) {
+			islike= mateService.likequery(mate_articleNO, user_id);
+			if (islike == true) {
+				mateService.likeCancel(mate_articleNO);
+				mateService.deletePtp(mate_articleNO, user_id);
+			} else {
+				mateService.like(mate_articleNO);
+				mateService.makePtp(mate_articleNO,user_id);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return islike;
 	}
 	
-	@ResponseBody
-	@PostMapping("/LikeCancel")
-	public void LikeCancel(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+	@GetMapping("/mate_search")
+	public ModelAndView mate_search() {
+		ModelAndView mv = new ModelAndView();
 		try {
-			HttpSession session = request.getSession();
-			String user_id = (String) session.getAttribute("id");
-			mateService.likeCancel(mate_articleNO);
-			mateService.deletePtp(mate_articleNO, user_id);
+			List<GroupAndMate> mates = mateService.allpostInfo();
+			mv.addObject("mates",mates);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	@GetMapping("/mate_searchinfo")
+	public String searchinfo(@RequestParam(value="type") String type,
+							@RequestParam(value="option") String option,
+							@RequestParam(value="input") String input,Model model) {
+		try {
+			System.out.println(type);
+			if(type.equals("all")) {
+				List<GroupAndMate> mates = mateService.searchInfoAll(option, input);
+				model.addAttribute("mates",mates);
+				model.addAttribute("input",input);
+				System.out.println("전체");
+			}else {
+				List<GroupAndMate> mates = mateService.searchInfo(type, option, input);
+				model.addAttribute("mates",mates);
+				model.addAttribute("input",input);
+				System.out.println("부분");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@GetMapping("/mate_search")
-	public String mate_search() {
 		return "mate_search";
 	}
 
@@ -156,9 +163,12 @@ public class MateController {
 
 
 	@PostMapping("/mate_makemate")
-	public ModelAndView mate_makemate2(Mate mate) {
+	public ModelAndView mate_makemate2(Mate mate,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
 		try {
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
+			mv.addObject("id",id);
 			mateService.makeMate(mate);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -181,14 +191,70 @@ public class MateController {
 		}
 		return mv;
 	}
+	
 	@GetMapping("/mate_updatemate")
-	public String mate_updatemate() {
+	public String mate_updatemate(@RequestParam("ptp")int mate_articleNO, Model model) {
+		try {
+			Mate mate = mateService.mateInfo(mate_articleNO);
+			model.addAttribute("mate",mate);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "mate_updatemate";
 	}
+	@PostMapping("/mate_updatemate")
+	public ModelAndView mate_updatemate2(Mate mate) {
+		ModelAndView mv = new ModelAndView("redirect:/mate_main");
+		try{
+			mateService.updateMate(mate);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
 	
 	@GetMapping("/mate_updategroup")
-	public String mate_updategroup() {
+	public String mate_updategroup(@RequestParam("ptp")int group_articleNO, Model model) {
+		try {
+		 Group group = mateService.groupInfo(group_articleNO);
+			model.addAttribute(group);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "mate_updategroup";
 	}
 	
+	@PostMapping("/mate_updategroup")
+	public ModelAndView mate_updategroup2(Group group) {
+		ModelAndView mv = new ModelAndView("redirect:/mate_main");
+		try{
+			mateService.updateGroup(group);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	@ResponseBody
+	@PostMapping("/deletemate")
+	public void deletemate(@RequestParam(value="no")int mate_articleNO) {
+		try {
+			System.out.println(mate_articleNO);
+			mateService.removeMate(mate_articleNO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/deletegroup")
+	public void deletegroup(@RequestParam(value="no")int group_articleNO) {
+		try {
+			System.out.println(group_articleNO);
+			mateService.removeGroup(group_articleNO);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

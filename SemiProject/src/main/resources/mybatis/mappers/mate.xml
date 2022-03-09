@@ -42,18 +42,18 @@
 		]]>
 	</select>
 	<!-- mate게시물 수정 -->
-	<update id="updateMate" parameterType="int" >
+	<update id="updateMate" parameterType="mate" >
 		<![CDATA[
-		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_tag=#{mate_tag},
-						mate_date=#{mate_date}, mate_mapinfo=#{mate_mapinfo} where mate_articleNO=#{mate_articleNO}
+		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_date=now(), 
+		mate_mapinfo=#{mate_mapinfo} where mate_articleNO=#{mate_articleNO}
 		]]>
 	</update>
 	
 	<!-- group게시물 수정 -->
-	<update id="updateGroup" parameterType="int" >
+	<update id="updateGroup" parameterType="group" >
 		<![CDATA[
-		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_ki=#{group_ki},
-						group_il=#{group_ki}, group_tag=#{group_tag}, group_date=#{group_date}, group_area=#{group_area} 
+		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
+						group_il=#{group_ki}, group_date=now(), group_area=#{group_area} 
 						where group_articleNO=#{group_articleNO}
 		]]>
 	</update>
@@ -154,5 +154,33 @@
 		]]>
 	</select>
 	
+		<select id="ptpInfo2" resultType="ptp" parameterType="map">
+		<![CDATA[
+			select * from ptp where mate_articleNO=#{mate_articleNO} and user_id=#{user_id}
+		]]>
+	</select>
+	
+	<!-- mate and group전체게시물 검색기반 조회 -->
+ 	 <select id="searchList" resultType="GroupAndMate" parameterType="map">
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where type=#{type} and ${option} like concat('%',#{input},'%')
+			order by regdate desc;
+		]]>
+	</select> 
+	<!-- mate and group전체게시물 검색기반 조회(전체) -->
+	 	 <select id="searchListAll" resultType="GroupAndMate" parameterType="map">
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where ${option} like concat('%',#{input},'%')
+			order by regdate desc;
+		]]>
+	</select>  
 
 </mapper>

@@ -30,210 +30,266 @@ import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.TodayService;
 
-import com.mulcam.run.dto.PageInfo;
-import com.mulcam.run.dto.Today;
-import com.mulcam.run.service.TodayService;
 
 @Controller
 public class TodayController {
 
-		@Autowired
-		TodayService todayService;
-		
-		@Autowired
-		private ServletContext servletContext;
 
-		// 1. 오늘의 러닝 메인페이지, today_list
-		@GetMapping("/today")
-		public ModelAndView today_list(@RequestParam(value="page", required=false, defaultValue="1") int page) {
-			ModelAndView mav=new ModelAndView();
-			PageInfo pageInfo=new PageInfo();
-			try {
-				List<Today> todayList=todayService.getTBoardList(page, pageInfo);
-				mav.addObject("pageInfo", pageInfo);
-				mav.addObject("todayList", todayList);
-				mav.setViewName("today");
-			} catch(Exception e) {
-				e.printStackTrace();
-				mav.addObject("err", e.getMessage());
-				mav.setViewName("err");
+	@Autowired
+	TodayService todayService;
+	
+	@Autowired
+	private ServletContext servletContext;
+
+	// 1. 오늘의 러닝 메인페이지, today_list
+	@GetMapping("/today")
+	public ModelAndView today_list(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		ModelAndView mav=new ModelAndView();
+		PageInfo pageInfo=new PageInfo();
+		try {
+			List<Today> todayList=todayService.getTBoardList(page, pageInfo);
+			mav.addObject("pageInfo", pageInfo);
+			mav.addObject("todayList", todayList);
+			mav.setViewName("today");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mav.addObject("err", e.getMessage());
+			mav.setViewName("err");
+		}
+		return mav;
+	}
+
+	// 2.전체페이지 검색정보(search) ajax 로 구현
+	@ResponseBody
+	@PostMapping("/today_serch")
+	public ModelAndView searchInfo(@ModelAttribute Today tbaord) {
+		ModelAndView mav = new ModelAndView("today");
+		// ajax 로 구현
+		return mav;
+	}
+
+	
+	@GetMapping("/today_make")
+	public String todayMake() {
+		return "today_make";
+	}
+	
+	//3-1.ckeditor5 업로드
+	@ResponseBody
+	@PostMapping("/upload")
+	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
+		System.out.println(file.getOriginalFilename()+"---------------------");
+		String path = servletContext.getRealPath("/upload/");
+		String filename = file.getOriginalFilename();
+		File destFile = new File(path+filename);
+		Map<String, Object> json = new HashMap<>();
+		try {
+			file.transferTo(destFile);
+			json.put("uploaded", 1);
+			json.put("fileName", filename);
+			json.put("url", "/fileview/"+filename);
+		} catch(IOException e) {
+			e.printStackTrace();
+		} 
+		return json;
+	}
+	
+	//이미지가 바라보는 url 
+	@GetMapping(value="/fileview/{filename}")
+	public void fileview(@PathVariable String filename, 
+			HttpServletRequest request, HttpServletResponse response)
+	{
+		String path = servletContext.getRealPath("/upload/");
+		File file = new File(path+filename);
+		String sfilename = null;
+		FileInputStream fis = null;
+		
+		try {
+			if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+				sfilename = URLEncoder.encode(file.getName(), "utf-8");
+			} else {
+				sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
 			}
-			return mav;
-		}
-
-		// 2.전체페이지 검색정보(search) ajax 로 구현
-		@ResponseBody
-		@PostMapping("/today_serch")
-		public ModelAndView searchInfo(@ModelAttribute Today tbaord) {
-			ModelAndView mav = new ModelAndView("today");
-			// ajax 로 구현
-			return mav;
-		}
-
-		
-		@GetMapping("/today_make")
-		public String todayMake() {
-			return "today_make";
-		}
-		
-		//3-1.ckeditor5 업로드
-		@ResponseBody
-		@PostMapping("/upload")
-		public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
-			System.out.println(file.getOriginalFilename()+"---------------------");
-			String path = servletContext.getRealPath("/upload/");
-			String filename = file.getOriginalFilename();
-			File destFile = new File(path+filename);
-			Map<String, Object> json = new HashMap<>();
-			try {
-				file.transferTo(destFile);
-				json.put("uploaded", 1);
-				json.put("fileName", filename);
-				json.put("url", "/fileview/"+filename);
-			} catch(IOException e) {
-				e.printStackTrace();
-			} 
-			return json;
-		}
-		
-		/*
-		 * @ResponseBody
-		 * 
-		 * @PostMapping("/fileupload") public void
-		 * fileupload1(@RequestParam(value="today_file") MultipartFile file) {
-		 * 
-		 * }
-		 */
-		
-		//이미지가 바라보는 url 
-		@GetMapping(value="/fileview/{filename}")
-		public void fileview(@PathVariable String filename, 
-				HttpServletRequest request, HttpServletResponse response)
-		{
-			String path = servletContext.getRealPath("/upload/");
-			File file = new File(path+filename);
-			String sfilename = null;
-			FileInputStream fis = null;
-			
-			try {
-				if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
-					sfilename = URLEncoder.encode(file.getName(), "utf-8");
-				} else {
-					sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
-				}
-				response.setCharacterEncoding("utf-8");
-				response.setContentType("application/octet-stream;charset=utf-8");
-				//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
-				response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
-				OutputStream out = response.getOutputStream();
-				fis= new FileInputStream(file);
-				FileCopyUtils.copy(fis, out);
-				out.flush();
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(fis!=null) {
-					try {
-						fis.close();
-					} catch(Exception e) {}
-				}
-			}		
-		}	
-		
-		// 4. 글쓰기등록요청
-		//에디터내용 쓰고 제목과 content내용 model 에 넣어서 
-		@PostMapping("/today_contents")
-		public String todayContents(@RequestParam("today_title") String today_title,
-				@RequestParam("today_contents")String today_contents,@RequestParam(value="today_file") MultipartFile file, Model model) {
-			String path = servletContext.getRealPath("/thumb/");
-			File destFile = new File(path+file.getOriginalFilename());
-			try {
-				file.transferTo(destFile);
-			} catch(IOException e) {
-				e.printStackTrace();
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/octet-stream;charset=utf-8");
+			//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
+			response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+			OutputStream out = response.getOutputStream();
+			fis= new FileInputStream(file);
+			FileCopyUtils.copy(fis, out);
+			out.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch(Exception e) {}
 			}
-
-			
-			// 테스트를 위한 임시 유저 아이디
-			String user_id = "adminUser";
-			
-			Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),today_contents);
-			System.out.println(today_title);  // DB저장
-			System.out.println(today_contents.trim());  // DB저장, 반드시 trim()
-			try {
-				todayService.setInputList(Tboard);
-				model.addAttribute("today_thumb", file.getOriginalFilename());
-				model.addAttribute("title", today_title);
-				model.addAttribute("content", today_contents.trim());
-				return "/today";
-			} catch (Exception e) {
-				e.printStackTrace();
+		}		
+	}	
+	
+	//이미지가 바라보는 url 
+	@GetMapping(value="/thumbfileview/{filename}")
+	public void thumbfileview(@PathVariable String filename, 
+			HttpServletRequest request, HttpServletResponse response)
+	{
+		String path = servletContext.getRealPath("/thumb/");
+		File file = new File(path+filename);
+		String sfilename = null;
+		FileInputStream fis = null;
+		
+		try {
+			if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+				sfilename = URLEncoder.encode(file.getName(), "utf-8");
+			} else {
+				sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
 			}
-			return "/today_make";
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/octet-stream;charset=utf-8");
+			//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
+			response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+			OutputStream out = response.getOutputStream();
+			fis= new FileInputStream(file);
+			FileCopyUtils.copy(fis, out);
+			out.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch(Exception e) {}
+			}
+		}		
+	}	
+
+	// 4. 글쓰기등록요청
+	//에디터내용 쓰고 제목과 content내용 model 에 넣어서 
+	@PostMapping("/today_contents")
+	public String todayContents(@RequestParam("today_title") String today_title,
+			@RequestParam("today_contents")String today_contents,@RequestParam(value="today_file") MultipartFile file, Model model) {
+		String path = servletContext.getRealPath("/thumb/");
+		File destFile = new File(path+file.getOriginalFilename());
+		try {
+			//**
+			file.transferTo(destFile);
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
 
-		// 6.게시글보는페이지
-		@GetMapping("/today_select")
-		public ModelAndView today_select(@RequestParam(value="today_articleNo")int today_articleNo,
-				@RequestParam(value="page", required=false, defaultValue="1")int page) {
-			ModelAndView mav=new ModelAndView();
-			try {
-				Today tboard=todayService.getTBoard(today_articleNo);
-				mav.addObject("tboard", tboard);
-				mav.addObject("page", page);
-				mav.setViewName("/today_select");
+		
+		// 테스트를 위한 임시 유저 아이디
+		String user_id = "testUser";
+		
+		Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),today_contents);
+		System.out.println(today_title);  // DB저장
+		System.out.println(today_contents.trim());  // DB저장, 반드시 trim()
+		try {
+			todayService.setInputList(Tboard);
+			model.addAttribute("today_thumb", file.getOriginalFilename());
+			model.addAttribute("title", today_title);
+			model.addAttribute("content", today_contents.trim());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/today";
+	}
+
+	// 6.게시글보는페이지
+	//@PostMapping("/today_select")
+	//public ModelAndView today_select(@RequestParam(value="today_articleNo")int today_articleNo,
+	//		@RequestParam(value="page", required=false, defaultValue="1")int page) {
+	//	ModelAndView mav=new ModelAndView();
+	//	try {
+	//		Today tboard=todayService.getTBoard(today_articleNo);
+	//		mav.addObject("tboard", tboard);
+	//		mav.addObject("page", page);
+	//		mav.setViewName("/today_select");
+	//	} catch(Exception e) {
+	//		e.printStackTrace();
+	//		mav.addObject("err", e.getMessage());
+	//		mav.setViewName("/err");
+	//	}
+	//	return mav;
+	//}
+	
+	@GetMapping("/today_select/{today_articleNo}")
+	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) {
+		ModelAndView mav =new ModelAndView("today_select");						
+		PageInfo pageInfo = new PageInfo();
+		System.out.println(today_articleNo);
+		System.out.println(pageInfo);
+		
+		
+		// 로그인한 유저 아이디 가져오기 (세션)
+		String user_id = "testUser";
+		// 지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
+		//String writerid ="{today_user_id}"
+		String writerid="testUser";
+		Boolean modiAndDel = false;
+		
+		if (user_id.equals(writerid)) {
+			modiAndDel = true;
+		} 
+		mav.addObject("modiAndDel", modiAndDel);
+		
+		try {
+			System.out.println("try 들어옴");
+			
+			Today todayselect = todayService.getTBoard(today_articleNo);
+			mav.addObject("pageInfo", pageInfo);
+		    mav.addObject("todayselect", todayselect);
+			System.out.println(page);
+			
 			} catch(Exception e) {
 				e.printStackTrace();
 				mav.addObject("err", e.getMessage());
 				mav.setViewName("/err");
 			}
-			return mav;
-		}
-//		public ModelAndView todaySelect(@ModelAttribute Today tbaord) {
-//		ModelAndView mav = new ModelAndView();
-//		return mav;
-//		}
-		
-		
+		return mav;
+	}
+	
 
-		// 5.취소요청
-		@PostMapping("/today_postcancle")
-		public String todayPostcancle() {
-			return "today";
-		}
+	// 5.취소요청
+	@PostMapping("/today_postcancle")
+	public String todayPostcancle() {
+		return "today";
+	}
 
 
-		// 7.좋아요요청 ajax
-		@PostMapping("/today_likes")
-		public boolean todayLikes() {
-			return false;
-		}
+	// 7.좋아요요청 ajax
+	@PostMapping("/today_likes")
+	public boolean todayLikes() {
+		return false;
+	}
 
-		// 9.수정요청
-		@PostMapping("/today_modify")
-		public ModelAndView todayModify() {
-			ModelAndView mav = new ModelAndView();
-			return mav;
-		}
+	// 9.수정요청
+	@PostMapping("/today_modify")
+	public ModelAndView todayModify() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
 
-		// 10.삭제요청
-		@PostMapping("/today_delete")
-		public ModelAndView todayDelete() {
-			ModelAndView mav = new ModelAndView();
-			return mav;
-		}
+	// 10.삭제요청
+	@PostMapping("/today_delete")
+	public ModelAndView todayDelete() {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
 
-		// 6.신고 (insert alert)
-		@PostMapping("/report")
-		public String report() {
-			return "report";
-		}
+	// 6.신고 (insert alert)
+	@PostMapping("/report")
+	public String report() {
+		return "report";
+	}
 
-		// 7. 목록누르면 today로 돌아가기
-		@GetMapping("/today_list")
-		public String today_list() {
-			return "today";
-		}
+	// 7. 목록누르면 today로 돌아가기
+	@GetMapping("/today_list")
+	public String today_list() {
+		return "today";
+	}
 }
 
 
