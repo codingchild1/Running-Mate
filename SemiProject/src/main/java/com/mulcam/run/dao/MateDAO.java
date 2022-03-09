@@ -48,4 +48,6 @@ public interface MateDAO {
 	public Ptp ptpInfo2(Map map)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	
 	//게시물 검색
+	public List<GroupAndMate> searchList(Map map) throws Exception; 
+	public List<GroupAndMate> searchListAll(Map map) throws Exception; 
 }

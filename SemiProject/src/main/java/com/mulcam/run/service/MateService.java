@@ -43,4 +43,7 @@ public interface MateService{
 
 	Boolean likequery(int mate_articleNO, String user_id)throws Exception;
 //	Ptp ptpInfo(int mate_articleNO, String user_id)throws Exception;
+	
+	List<GroupAndMate> searchInfo(String type, String option, String input)throws Exception;
+	List<GroupAndMate> searchInfoAll(String option, String input)throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.mulcam.run.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,11 +42,8 @@ public class MateController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			List<GroupAndMate> mates = mateService.allpostInfo();
-			
 			mv.addObject("mates",mates);
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return mv;
@@ -75,6 +74,7 @@ public class MateController {
 			 List<Ptp> ptp = mateService.ptpInfo(mate_articleNO);
 //			Ptp ptp = mateService.ptpInfo(mate_articleNO);
 			result = new ResponseEntity<List<Ptp>>(ptp, HttpStatus.OK);
+			System.out.println(result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -117,7 +117,52 @@ public class MateController {
 	}
 	
 	@GetMapping("/mate_search")
-	public String mate_search() {
+	public ModelAndView mate_search() {
+		ModelAndView mv = new ModelAndView();
+		try {
+			List<GroupAndMate> mates = mateService.allpostInfo();
+			mv.addObject("mates",mates);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+//	@GetMapping("/mate_searchinfo")
+//	public String searchinfo(@RequestParam(value="type") String type,
+//							@RequestParam(value="option") String option,
+//							@RequestParam(value="input") String input,Model model) {
+//		try {
+//			List<GroupAndMate> mates = mateService.searchInfo(type, option, input);
+//			model.addAttribute("mates",mates);
+//			model.addAttribute("input",input);
+//			System.out.println(mates);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "mate_search";
+//	}
+	
+	@GetMapping("/mate_searchinfo")
+	public String searchinfo(@RequestParam(value="type") String type,
+							@RequestParam(value="option") String option,
+							@RequestParam(value="input") String input,Model model) {
+		try {
+			System.out.println(type);
+			if(type.equals("all")) {
+				List<GroupAndMate> mates = mateService.searchInfoAll(option, input);
+				model.addAttribute("mates",mates);
+				model.addAttribute("input",input);
+				System.out.println("전체");
+			}else {
+				List<GroupAndMate> mates = mateService.searchInfo(type, option, input);
+				model.addAttribute("mates",mates);
+				model.addAttribute("input",input);
+				System.out.println("부분");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "mate_search";
 	}
 
@@ -226,5 +271,23 @@ public class MateController {
 			e.printStackTrace();
 		}
 	}
+//	if(type==번개) {
+//		if(type2==제목) {
+//			matesr.1
+//		}else if(type2==내용) {
+//			matese.2
+//		}else {
+//			mateser.3
+//		}
+//	}else {
+//		if(type2==제목) {
+//			matesr.1
+//		}else if(type2==내용) {
+//			matese.2
+//		}else {
+//			mateser.3
+//		}
+//	}
+	
 	
 }

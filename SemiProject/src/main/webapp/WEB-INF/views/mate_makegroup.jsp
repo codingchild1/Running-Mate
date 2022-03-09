@@ -85,7 +85,7 @@ input:focus {
 						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
 					<button 
 						style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">
-						<a href="main" style="text-decoration-line: none;">취소</a>
+						<a href="mate_main" style="text-decoration-line: none;">취소</a>
 					</button>
 				</div>
 			</div>

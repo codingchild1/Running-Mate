@@ -291,11 +291,9 @@ body {
 				value=''>
 			<div style="font-size: 13px; float: right;display: flex;">
 				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
-				<%-- <c:if > --%>
 				<span
 					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span> 
 					<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
-			<%-- 	</c:if> --%>
 			</div>
 			<input name='mate_date' type="text"
 				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba(123, 173, 213, 0.70);"
