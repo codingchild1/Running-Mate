@@ -182,5 +182,27 @@
 			order by regdate desc;
 		]]>
 	</select>  
+	
+		<!-- mate and group전체게시물의 맵정보만 조회 -->
+	<select id="searchmapInfo" resultType="String" >
+		<![CDATA[
+			select mapinfo from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			order by regdate desc;
+		]]>
+	</select>
+	
+			<!-- mate and group전체게시물의 제목만 조회 -->
+	<select id="searchtitleInfo" resultType="String" >
+		<![CDATA[
+			select title from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			order by regdate desc;
+		]]>
+	</select>
 
 </mapper>

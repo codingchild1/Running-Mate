@@ -224,12 +224,13 @@
     </div>
     <div style="margin: 40px;">
         <div style="float: left;">
-        <div style="display: inline-block; border: 1px solid;padding: 2px;width: 190px;margin-left: 10px;">
+        <div style="display: inline-block; border: 1px solid;padding: 2px;width: 180px;margin-left: 10px;">
             <span><img class="search" src="images/search.png" style="width: 20px; height: 20px; float: left; margin-left: 5px;margin-top: 5px;"></span>
-        <input type="text" style="width: 150px;height: 30px; margin-left: 5px; border: none;">
+        <input id="search" type="text" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
     </div>
-    <span><img class="gps" src="images/gps.jpg" style="width: 30px; height: 30px; float: right; margin-top: 3px;"></span>
-        
+    <span><button id="search2" style="width:50px; height:37px;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;">검색</button></span>
+    <span onclick="getCurrentPosBtn()" style="cursor:pointer;"><img class="gps" src="images/gps.jpg" style="width: 30px; height: 30px; float: right; margin-top: 3px;"></span>
+     
         <div class="post2" style="height: 50px;">
         <ul style="cursor: pointer;">
             <li><b>전체</b></li>
@@ -269,7 +270,9 @@
         </div>
         
         <div id="map" style="width: 640px;height: 500px; border: 1px solid; float: left;margin-left: 70px;">
-
+	<input id="boundinfo" name="boundinfo" type="hidden" value=''>
+	<input id="mapinfo" name="mapinfo" type="hidden" value='${mapinfo }'>
+	<input id="titleinfo" name="titleinfo" type="hidden" value='${titleinfo }'>
         </div>
         </div>
    	<!-- mateform -->
@@ -368,14 +371,34 @@
 		</div>
 	</div>     
 <script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
     
     let m_editor;
 	let g_editor;
+	/* console.log($('#mapinfo').val()); */
+	/* console.log($('#titleinfo').val());  */
+	var map = JSON.parse($('#mapinfo').val());
+	var title ='${titleinfo}';
+	var titlelist = [];
+	<c:forEach items="${titleinfo }" var="item">
+		titlelist.push('${item}');
+		</c:forEach>
+	/* ${titleinfo} */
+	console.log(map);
 	
+	console.log(titlelist);
+	
+	var options = [];
+	map.forEach(function(item,index,array){
+		options.push({
+			content: '<div>'+titlelist[index]+'</div>',
+			latlng: new kakao.maps.LatLng(array[index].Ma, array[index].La)
+		})
+	});
+	console.log(options);
 	//ckeditor
 	ClassicEditor.create(document.querySelector("#editor"))
     .then(editor=>{
@@ -663,19 +686,72 @@
 	        		}
     		});
 		});
-    
+		 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 10 // 지도의 확대 레벨 
+	        level: 6 // 지도의 확대 레벨 
 	    }; 
 
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+ $(document).ready(function(){
+		$('#search2').bind("click", function(){
+			var search = $('#search').val();
+	        geocoder.addressSearch(search, function(result, status) {
+	        	
+	            // 정상적으로 검색이 완료됐으면 
+	             if (status === kakao.maps.services.Status.OK) {
 
+	                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	                // 결과값으로 받은 위치를 마커로 표시합니다
+	               /*  var marker = new kakao.maps.Marker({
+	                    map: map,
+	                    position: coords
+	                }); */
+	                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	                map.setCenter(coords);
+	                /* marker.setDraggable(true); */
+	                bounds = map.getBounds();
+	 	           console.log(bounds);
+	 	          $('input[name=boundinfo]').attr('value',bounds);
+	 	          console.log("검색좌표"+$('#boundinfo').val());
+	            }
+/* 	         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+	        	    
+	        	    // 클릭한 위도, 경도 정보를 가져옵니다 
+	        	    var latlng = mouseEvent.latLng;
+	        	    JSON.stringify(latlng);
+	        	    console.log("좌표: " + JSON.stringify(latlng));
+	        	    $('input[name=mate_mapinfo]').attr('value',JSON.stringify(latlng));
+	        	    // 마커 위치를 클릭한 위치로 옮깁니다
+	        	    marker.setPosition(latlng);
+	        	    
+	        	    var resultDiv = document.getElementById('clickLatlng'); 
+	        	    
+	        	    $('#submit').bind("click", function(){
+	        	      console.log(latlng.getLat(),latlng.getLng());  
+	        	    	console.log("맵정보는"+$('#mate_mapinfo').val()); 
+	        	    	console.log($('#user_img').val());
+		        	    console.log($('#user_id').val());
+		        	    console.log($('#mate_title').val());
+		        	    console.log($('#mate_cont').val());
+		        	    console.log(src);  
+		        	     resultDiv.innerHTML = message; 
+	        	    });
+	        	    
+	        	 }); */
+		 return false; 
+	        });  
+		return false;
+		});
+	}); 
 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-	if (navigator.geolocation) {
+	 if (navigator.geolocation) {
 	    
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	   	function getCurrentPosBtn(){
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	        
 	        var lat = position.coords.latitude, // 위도
@@ -685,26 +761,32 @@
 	            message = '<div style="padding:5px;">현재위치입니다.</div>'; // 인포윈도우에 표시될 내용입니다
 	        
 	        // 마커와 인포윈도우를 표시합니다
-	        displayMarker(locPosition, message);
-	            
+	          displayMarker(locPosition, message);  
+	           bounds = map.getBounds();
+	           var jbounds = JSON.stringify(bounds);
+	           console.log(jbounds);
+	           /* console.log(bounds); */
+	           $('input[name=boundinfo]').attr('value',jbounds);
+	 	       console.log("현재위치좌표"+$('#boundinfo').val());
 	      });
+	    }
 	    
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 	    
 	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
 	        message = 'geolocation을 사용할수 없어요..'
 	        
-	    displayMarker(locPosition, message);
+	     displayMarker(locPosition, message); 
 	}
 
 	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-	function displayMarker(locPosition, message) {
+ 	function displayMarker(locPosition, message) {
 
 	    // 마커를 생성합니다
-	    var marker = new kakao.maps.Marker({  
+ 	   /*  var marker = new kakao.maps.Marker({  
 	        map: map, 
-	        position: locPosition
-	    }); 
+	        position: locPosition 
+	    });   */
 	    
 	    var iwContent = message, // 인포윈도우에 표시할 내용
 	        iwRemoveable = true;
@@ -716,75 +798,11 @@
 	    });
 	    
 	    // 인포윈도우를 마커위에 표시합니다 
-	    infowindow.open(map, marker);
+	    /* infowindow.open(map, marker); */
 	    
 	    // 지도 중심좌표를 접속위치로 변경합니다
-	    map.setCenter(locPosition);      
-	}    
-    
-    
-    
-    
-    
-        /* const modal = document.getElementById("modal")
-        function modalOn() {
-            modal.style.display = "flex"
-        }
-        function isModalOn() {
-            return modal.style.display === "flex"
-        }
-        function modalOff() {
-            modal.style.display = "none"
-        }
-        const btnModal = document.getElementById("btn-modal")
-        btnModal.addEventListener("click", e => {
-            modalOn()
-        });
-        const closeBtn = modal.querySelector(".close-area")
-        closeBtn.addEventListener("click", e => {
-            modalOff()
-        });
-        modal.addEventListener("click", e => {
-            const evTarget = e.target
-            if (evTarget.classList.contains("modal-overlay")) {
-                modalOff()
-            }
-        });
-        window.addEventListener("keyup", e => {
-            if (isModalOn() && e.key === "Escape") {
-                modalOff()
-            }
-        });
-
-        const modal2 = document.getElementById("modal2")
-        function modalOn1() {
-            modal2.style.display = "flex"
-        }
-        function isModalOn1() {
-            return modal2.style.display === "flex"
-        }
-        function modalOff1() {
-            modal2.style.display = "none"
-        }
-        const btnModal2 = document.getElementById("btn-modal2")
-        btnModal2.addEventListener("click", e => {
-            modalOn1()
-        })
-        const closeBtn2 = modal2.querySelector(".close-area")
-        closeBtn2.addEventListener("click", e => {
-            modalOff1()
-        })
-        modal2.addEventListener("click", e => {
-            const evTarget2 = e.target
-            if (evTarget2.classList.contains("modal-overlay")) {
-                modalOff1()
-            }
-        })
-        window.addEventListener("keyup", e => {
-            if (isModalOn1() && e.key === "Escape") {
-                modalOff1()
-            }
-        }); */
+	    map.setCenter(locPosition);    
+	}      
     </script>
      <%@include file ="fotter.jsp" %>
 </body>

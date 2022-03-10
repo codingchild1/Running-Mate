@@ -164,6 +164,16 @@ public class MateServiceImipl implements MateService {
 		return mateDAO.searchListAll(map);
 	}
 
+	@Override
+	public List<String> allMapInfo() throws Exception {
+		return mateDAO.searchmapInfo();
+	}
+
+	@Override
+	public List<String> allTitleInfo() throws Exception {
+		return mateDAO.searchtitleInfo();
+	}
+
 
 //	@Override
 //	public Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {

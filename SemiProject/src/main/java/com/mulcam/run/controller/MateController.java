@@ -1,7 +1,9 @@
 package com.mulcam.run.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -155,7 +157,12 @@ public class MateController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			List<GroupAndMate> mates = mateService.allpostInfo();
+			List<String> mapinfo = mateService.allMapInfo();
+			List<String> titleinfo = mateService.allTitleInfo();
+//			Map<String,Object> map = new HashMap<>();
 			mv.addObject("mates",mates);
+			mv.addObject("mapinfo",mapinfo);
+			mv.addObject("titleinfo",titleinfo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

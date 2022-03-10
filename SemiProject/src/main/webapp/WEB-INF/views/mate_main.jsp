@@ -349,8 +349,8 @@ body {
 			<div class="content">
 				<div id="staticMap2"
 					style="width: 210px; height: 200px; border: 1px solid black;"></div>
-				<input id="mapinfo" name="mapinfo" type="hidden" value=''> <input
-					id="mapinfo2" name="mapinfo2" type="hidden" value=''>
+				<input id="mapinfo" name="mapinfo" type="hidden" value=''> 
+				<input id="mapinfo2" name="mapinfo2" type="hidden" value=''>
 					<input id="mapinfo3" name="mapinfo3" type="hidden" value=''>
 				 <textarea id="editor2" 
 					style="width: 352px; height: 190px;"></textarea> 

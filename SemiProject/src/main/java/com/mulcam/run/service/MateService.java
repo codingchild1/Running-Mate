@@ -1,6 +1,7 @@
 package com.mulcam.run.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
@@ -46,4 +47,7 @@ public interface MateService{
 	
 	List<GroupAndMate> searchInfo(String type, String option, String input)throws Exception;
 	List<GroupAndMate> searchInfoAll(String option, String input)throws Exception;
+	
+	List<String> allMapInfo() throws Exception; //전체 게시물 조회
+	List<String> allTitleInfo() throws Exception; //전체 게시물 조회
 }
