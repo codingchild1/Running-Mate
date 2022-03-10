@@ -14,6 +14,20 @@
 
 		]]>
 	</insert>
+	<select id="memberList" parameterType="Member" resultType="com.mulcam.run.dto.Member">
+		<![CDATA[
+			select id, name, password, email, phone, joindate from member order by name
+		]]>
+	</select>
+	<delete id="delete" parameterType="String">
+		<![CDATA[
+			delete from member where id=#{id}
+		]]>
+	</delete>
+	<update id="updatemypage" parameterType="Member">
+		update member set password=#{password}, email=#{email}, phone=#{phone}
+		where id = #{id} and name=#{name}
+	</update>
 </mapper>
 
 <!-- create table member(
@@ -29,6 +43,7 @@
     primary key(articleNO)
 );
 
-insert into member values(1, 'admin', 'admin', 'admin', 'admin', 'admin', sysdate(), 1);
+워크벤치에 먼저 등록
+insert into member values(1, 'admin', '관리자', 'admin04', 'admin@naver.com', '01085288525', sysdate(), 1, 'ad.jpg');
 
- -->
+-->

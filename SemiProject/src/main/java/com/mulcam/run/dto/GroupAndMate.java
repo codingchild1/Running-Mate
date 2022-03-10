@@ -8,10 +8,11 @@ public class GroupAndMate {
 	String regdate;
 	int likeno;
 	String type;
+	String cont;
 	
 	public GroupAndMate()	{}
 	public GroupAndMate(String no,String id,String img,String title,String regdate,int likeno,
-			String type) {
+			String type,String cont) {
 		this.no=no;
 		this.id=id;
 		this.img=img;
@@ -19,8 +20,15 @@ public class GroupAndMate {
 		this.regdate=regdate;
 		this.likeno=likeno;
 		this.type=type;
+		this.cont=cont;
 	}
 	
+	public String getCont() {
+		return cont;
+	}
+	public void setCont(String cont) {
+		this.cont = cont;
+	}
 	public String getNo() {
 		return no;
 	}
@@ -65,3 +73,4 @@ public class GroupAndMate {
 	}
 	
 }
+

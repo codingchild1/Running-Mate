@@ -160,5 +160,27 @@
 		]]>
 	</select>
 	
+	<!-- mate and group전체게시물 검색기반 조회 -->
+ 	 <select id="searchList" resultType="GroupAndMate" parameterType="map">
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where type=#{type} and ${option} like concat('%',#{input},'%')
+			order by regdate desc;
+		]]>
+	</select> 
+	<!-- mate and group전체게시물 검색기반 조회(전체) -->
+	 	 <select id="searchListAll" resultType="GroupAndMate" parameterType="map">
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where ${option} like concat('%',#{input},'%')
+			order by regdate desc;
+		]]>
+	</select>  
 
 </mapper>

@@ -145,6 +145,25 @@ public class MateServiceImipl implements MateService {
 		return true;
 	}
 
+	@Override
+	public List<GroupAndMate> searchInfo(String type, String option, String input) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("type", type);
+		map.put("option", option);
+		map.put("input", input);
+//		mateDAO.searchList(map);
+		System.out.println(type+" "+option+" "+input);
+		return mateDAO.searchList(map);
+	}
+
+	@Override
+	public List<GroupAndMate> searchInfoAll(String option, String input) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		map.put("option", option);
+		map.put("input", input);
+		return mateDAO.searchListAll(map);
+	}
+
 
 //	@Override
 //	public Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {
