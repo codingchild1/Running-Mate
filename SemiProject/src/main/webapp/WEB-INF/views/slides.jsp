@@ -56,7 +56,7 @@
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <a href="#"><img class="img-fluid" src="/images/오늘의 러너.jpg" alt="오늘의 러너"></a>
+                            <a href="today"><img class="img-fluid" src="/images/오늘의 러너.jpg" alt="오늘의 러너"></a>
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
@@ -75,7 +75,7 @@
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <a href="route_main"><img class="img-fluid" src="/images/코스공유.jpg" alt="코스공유"></a>
+                            <a href="route"><img class="img-fluid" src="/images/코스공유.jpg" alt="코스공유"></a>
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">

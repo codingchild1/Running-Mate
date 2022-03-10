@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.run.dao.BoardDAO;
 import com.mulcam.run.dto.Board;
+import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 
@@ -70,16 +71,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board insertContent(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public void insertContent(Board board) throws Exception {
+		boardDAO.insertBoard(board);
 	}
 
 	/* 최고의 러너 */
 	@Override
 	public List<Today> best3() throws Exception {
-		// TODO Auto-generated method stub
+
 		return boardDAO.bestrun();
 	}
 	
+	/* 메인페이지 번개 모임 */
+	@Override
+	public List<Mate> mate3() throws Exception {
+
+		return boardDAO.materun();
+	}
 }

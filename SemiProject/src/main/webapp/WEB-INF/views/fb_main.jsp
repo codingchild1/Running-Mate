@@ -129,7 +129,7 @@ a { text-decoration-line: none;}
 	</c:choose>
 	
         <div class="writebtn">
-        <button class="btn btn-success" onclick="location.href='fb_writing'">글 쓰기</button>
+        <button class="btn btn-success" onclick="location.href='fb_writing';">글 쓰기</button>
         </div>
     </div>
     

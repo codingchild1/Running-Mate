@@ -52,10 +52,12 @@
 		]]>
 	</select>
 
-
-
-	
-
+	<!-- 메인 페이지 번개 모임 -->
+	<select id="materun" resultType="Mate">
+		<![CDATA[
+			select * from mate order by mate_date desc limit 3;
+		]]>
+	</select>
 
 
 
@@ -64,18 +66,15 @@
 
 
 	<!-- 자유게시판 게시글 생성 -->
-	<insert id="insertBoard" parameterType="Board">
+	<insert id="insertBoard" parameterType="Board" >
 		<![CDATA[
-			insert into fb (fb_articleNO,writer,fb_title,fb_content,fb_img_url,fb_date,fb_views,warning) 
-				values(#{fb_articleNO},#{writer},#{fb_title},#{fb_content},#{fb_img_url},#{fb_date},#{fb_views},#{warning})
+			insert into freeboard (fb_articleNo,writer,fb_title,fb_content,fb_date,fb_views,warning) 
+				values(null,#{writer},#{fb_title},#{fb_content},now(),0,false)
 		]]>
 	</insert>
 
-	<update id="updateFbViews" parameterType="int">
-		<![CDATA[
-		update fb set fb_views=#{fb_views} where fb_articleNO=#{fb_articleNO}
-		]]>
-	</update>
+
+
 
 
 	<!-- 게시물 수정 -->
@@ -85,3 +84,25 @@
 		]]>
 	</update>
 </mapper>
+
+
+
+
+
+
+
+
+<!-- 
+create table freeboard(
+fb_articleNo int(11) not null auto_increment,
+fb_title varchar(255) not null,
+writer varchar(100) not null,
+fb_content longtext,
+warning tinyint(1) not null default '0',
+fb_date DATETIME default CURRENT_TIMESTAMP,
+fb_views int(255) default '0',
+fb_img_url varchar(500),
+keyword varchar(100),
+PRIMARY KEY(fb_articleNo)
+);
+ -->
