@@ -37,11 +37,7 @@ a:hover {
 </style>
 
 <script type="text/javascript">
-	function insertPopup() {
-		window.name = "fb_main";
-		
-		window.open("fb_delete","delete","width=300, height=200, resizable=no, scrollbars=no, status=no");
-	}
+
 </script>
 
 <%@include file="header.jsp"%>
@@ -59,8 +55,7 @@ a:hover {
 				</div>
 				<div class="modify">
 					<a href="fb_modify?fb_articleNo=${article.fb_articleNo}"> 수정 </a> 
-					<a href="javascript:insertPopup();">삭제</a>
-					<%-- <a href="fb_delete?fb_articleNo=${article.fb_articleNo}&page=${page}">삭제 </a> --%>
+					<a href="fb_delete?fb_articleNo=${article.fb_articleNo}&page=${page}"onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" style="float:right;">삭제</span></a>
 				</div>
 				<div>
 					<span id="detail_time" style="color: #A9A9A9; font-size: 12px;">${article.fb_date }</span>

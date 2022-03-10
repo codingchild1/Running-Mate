@@ -1,16 +1,32 @@
 package com.mulcam.run.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Board;
@@ -64,39 +80,41 @@ public class FBController {
 		return mv;
 	}
 	
-	@GetMapping(value="/fb_writing")
-	public String Fb_writing() {
-		return "fb_writing";
-	}
+
 	
 	
-	/* 삭제 */
+	//삭제폼
 	@GetMapping(value="/fb_delete")
 	public ModelAndView deleteform(@RequestParam(value="fb_articleNo", required=false, defaultValue = "1") int fb_articleNo,
 			@RequestParam(value="page", required=false, defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView();
+		try {
+		boardService.removeBoard(fb_articleNo);
 		mv.addObject("fb_articleNo", fb_articleNo);
 		mv.addObject("page", page);
 		mv.setViewName("fb_delete");
-		return mv;
+		mv.setViewName("redirect:/fb_main");
+	} catch(Exception e) {
+		e.printStackTrace();
+		mv.addObject("err", e.getMessage());
+		mv.setViewName("/err");	
 	}
+	return mv;
+}
 	
-
-	@PostMapping(value="/fb_delete")
-	public ModelAndView boarddelete(@RequestParam(value="fb_articleNo") int fb_articleNo,
-			@RequestParam(value="page") int page) {
-		ModelAndView mv = new ModelAndView();
-		try {
-			boardService.removeBoard(fb_articleNo);
-			mv.addObject("page", page);
-			mv.setViewName("redirect:/fb_main");
-		} catch(Exception e) {
-			e.printStackTrace();
-			mv.addObject("err", e.getMessage());
-			mv.setViewName("/err");	
-		}
-		return mv;
-	}
+/*
+ * //삭제하기
+ * 
+ * @PostMapping(value="/fb_delete") public ModelAndView
+ * boarddelete(@RequestParam(value="fb_articleNo") int fb_articleNo,
+ * 
+ * @RequestParam(value="page", required=false, defaultValue = "1") int page) {
+ * ModelAndView mv = new ModelAndView(); try {
+ * boardService.removeBoard(fb_articleNo); mv.addObject("page", page);
+ * mv.setViewName("redirect:/fb_main"); } catch(Exception e) {
+ * e.printStackTrace(); mv.addObject("err", e.getMessage());
+ * mv.setViewName("/err"); } return mv; }
+ */
 	
 	@PostMapping(value="fb_modify")
 	public String Fb_modify(int fb_no) {
@@ -109,4 +127,79 @@ public class FBController {
 //		Board board = new Board();
 //		return boardService.getSearchList(board);
 //		}
+	
+	/* 게시글 등록 하기 */
+	@GetMapping("fb_writing")
+	public String home() {
+		return "fb_writing";
+	}
+	
+	@ResponseBody
+	@PostMapping("/fb_upload")
+	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
+		String path = servletContext.getRealPath("/upload/");
+		String filename = file.getOriginalFilename();
+		File destFile = new File(path+filename);
+		Map<String, Object> json = new HashMap<>();
+		try {
+			file.transferTo(destFile);
+			json.put("uploaded", 1);
+			json.put("fileName", filename);
+			json.put("url", "/fileview/"+filename);
+		} catch(IOException e) {
+			e.printStackTrace();
+		} 
+		return json;
+	}	
+	
+	@GetMapping(value="/file/{filename}")
+	public void fileview(@PathVariable String filename, 
+			HttpServletRequest request, HttpServletResponse response)
+	{
+		String path = servletContext.getRealPath("/upload/");
+		File file = new File(path+filename);
+		String sfilename = null;
+		FileInputStream fis = null;
+		
+		try {
+			if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+				sfilename = URLEncoder.encode(file.getName(), "utf-8");
+			} else {
+				sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+			}
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/octet-stream;charset=utf-8");
+			//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
+			response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+			OutputStream out = response.getOutputStream();
+			fis= new FileInputStream(file);
+			FileCopyUtils.copy(fis, out);
+			out.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch(Exception e) {}
+			}
+		}		
+	}	
+	
+	@PostMapping("fb_write")
+	public String write(@ModelAttribute Board board, @RequestParam("fb_title") String title,
+			@RequestParam("fb_content") String content) {
+		System.out.println(title);  // DB저장
+		System.out.println(content.trim());  // DB저장, 반드시 trim()
+		board.setFb_title(title);
+		board.setFb_content(content);
+		try {
+			boardService.insertContent(board);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "err";
+		}
+		return "redirect:/fb_main";
+	}
+	
 }

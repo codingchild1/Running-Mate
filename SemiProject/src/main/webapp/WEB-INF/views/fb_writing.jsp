@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="js/main.js"></script>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 
 <title>글 쓰기</title>
 
@@ -41,51 +41,59 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 .btn2:hover {background: #6b9ab8; }
 a { text-decoration-line: none;}
     
+.ck.ck-reset.ck-editor.ck-rounded-corners {
+    		width: 70%;
+    		margin-left: 10%;
+		}
 
-.ck.ck-editor {
-	width: 100%;
-}
 
-.ck-editor__editable {
-	height: 500px;
-}
+
+
+
 </style>
 </head>
 <body>
 
 	<%@include file="header.jsp"%>
-	<Section>
-	<div class="container">
+	<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
+	<main style="width: 50%; margin: 0 auto;">
+	<div class="container" style="padding-top: 1em;">
 		<h2>게시판 등록</h2>
+		<form action="/fb_write" method="post" >
 		<div>
 			<div class="writing_title">
-				<input type="text" id="title" name="title"
+				<input type="text" id="title" name="fb_title"
 					placeholder="제목을 입력해 주세요." onfocus="this.placeholder=''"
 					onblur="this.placeholder='제목을 입력해 주세요.'"
 					style="width: 99%; height: 30px; margin: 15px 0 15px 0;" />
 			</div>
 		</div>
-		<!-- <form id="frm" name="frm" method="post" action="/board/insertBoard.do"> -->
+		
 			<div class="board_detail">
-
-				<div>
-					<div id="classic"></div>
-				</div>
+					<textarea id="editor" name="fb_content"></textarea>
 			</div>
 			<div class="writebtn">
-				<button type="button" value="취소" class="btn btn-success"
-					onclick="location.href='fb_main';">취소</button>
-				<button type="submit" value="저장" class="btn btn-success">저장</button>
+				<input type="submit" value="저장" class="btn btn-success"/>
+				<input type="button" value="취소" class="btn btn-success"
+					onclick="location.href='fb_main';"/>				
 			</div>
-		<!-- </form> -->
+		</form>
 	</div>
-</Section>
+</main>
 	<script>
+	$(function(){
         ClassicEditor
-            .create(document.querySelector('#classic'))
-            .catch(error => {
-                console.error(error);
-            });
+        	.create(document.querySelector("#editor"), {
+        		ckfinder : {
+        			uploadUrl : "/upload"
+        		}
+        	}).then(editor=> {
+        		window.editor=editor;
+        	})
+        	.catch((error) => {
+        		console.error(error);
+        	});
+	});
     </script>
     
 	<%@include file="fotter.jsp"%>

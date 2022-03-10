@@ -3,6 +3,7 @@ package com.mulcam.run.service;
 import java.util.List;
 
 import com.mulcam.run.dto.Board;
+import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 
@@ -12,10 +13,12 @@ public interface BoardService {
 	void removeBoard(int fb_articleNo) throws Exception;					// 삭제
 	
 
-	Board insertContent(Board board) throws Exception;
+	void insertContent(Board board) throws Exception;
+	
 	Board getContBoard(Board board) throws Exception;
 	void modifyBoard(Board board) throws Exception;
 	//검색
 	
 	List<Today> best3() throws Exception; // 최고의 러너
+	List<Mate> mate3() throws Exception; // 최고의 러너
 }

@@ -48,8 +48,8 @@
                 <div class="flex-fill">
             <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                 <li class="nav-item"><a class="nav-link" href="mate_main">메이트구하기</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">오늘의러닝</a></li>
-                <li class="nav-item"><a class="nav-link" href="route_main">코스공유</a></li>
+                <li class="nav-item"><a class="nav-link" href="today">오늘의러닝</a></li>
+                <li class="nav-item"><a class="nav-link" href="route">코스공유</a></li>
                 <li class="nav-item"><a class="nav-link" href="fb_main">자유게시판</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">이벤트</a></li>
                 
@@ -72,13 +72,13 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="login">
                         <i class="">로그인</i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="join">
                         <i class="">회원가입</i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="mypage">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
                     </a>
