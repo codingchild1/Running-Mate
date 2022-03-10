@@ -13,11 +13,14 @@ public interface BoardService {
 	void removeBoard(int fb_articleNo) throws Exception;					// 삭제
 	
 
-	void insertContent(Board board) throws Exception;
+	void insertContent(Board board) throws Exception;	//글 작성
 	
-	Board getContBoard(Board board) throws Exception;
-	void modifyBoard(Board board) throws Exception;
-	//검색
+	Board getContBoard(Board board) throws Exception;	//카운트
+	
+	
+	void modifyBoard(Board board) throws Exception; // 수정
+	
+												//검색
 	
 	List<Today> best3() throws Exception; // 최고의 러너
 	List<Mate> mate3() throws Exception; // 최고의 러너

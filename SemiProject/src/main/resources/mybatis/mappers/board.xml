@@ -7,7 +7,7 @@
 	<select resultType="int" id="selectBoardCount">
 
 		<![CDATA[
-			select count(*) from freeboard
+			select count(*) from freeboard;
 		]]>
 	</select>
 
@@ -17,11 +17,18 @@
 		<![CDATA[
 			select fb_articleNO,writer,fb_title,fb_content,fb_img_url, fb_date, fb_views,warning 
 				from (select @rownum:=@rownum+1 rnum, tot.* 
-					from (select * from freeboard order by fb_articleNO asc) tot, 
+					from (select * from freeboard order by fb_articleNO desc) tot, 
 					(select @rownum:=0) temp) sub
-			where rnum between #{startrow} and #{startrow}+9	
+			where rnum between #{startrow} and #{startrow}+9
 		]]>
 	</select>
+	
+<!-- 	select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
+				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
+			from route left join member 
+			on route.user_id=member.id 
+			order by route_date desc limit #{startrow}, 9
+	예선님 목록 불러오기 xml -->
 
 	<!-- 자유게시판 상세 보기 -->
 	<select id="selectBoard" resultType="board" parameterType="int">
@@ -78,9 +85,10 @@
 
 
 	<!-- 게시물 수정 -->
-	<update id="updateBoard" parameterType="int">
+	<update id="updateBoard" parameterType="board">
 		<![CDATA[
-		update fb set fb_title=#{fb_title},fb_content=#{fb_content}, fb_date=#{fb_date} where fb_articleNO=#{fb_articleNO}
+		update freeboard set fb_title=#{fb_title}, fb_content=#{fb_content}
+			where fb_articleNo=#{fb_articleNo}
 		]]>
 	</update>
 </mapper>

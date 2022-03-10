@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-
+	
 </head>
 <body>
  <!-- Start Top Nav -->
@@ -72,12 +73,23 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
+                              <c:choose>
+	          	<c:when test="${empty id }">
                     <a class="nav-icon position-relative text-decoration-none" href="login">
                         <i class="">로그인</i>
                     </a>
+                    </c:when>
+	          	<c:otherwise>
+                    <a class="nav-icon position-relative text-decoration-none" href="login">
+                        <i class="">로그아웃</i>
+                    </a>
+                    </c:otherwise>
+	          </c:choose>
+	          <c:if test="${empty id }">
                     <a class="nav-icon position-relative text-decoration-none" href="join">
                         <i class="">회원가입</i>
                     </a>
+                    </c:if>
                     <a class="nav-icon position-relative text-decoration-none" href="mypage">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>

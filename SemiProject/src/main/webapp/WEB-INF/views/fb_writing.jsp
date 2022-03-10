@@ -61,7 +61,8 @@ a { text-decoration-line: none;}
 	<div class="container" style="padding-top: 1em;">
 		<h2>게시판 등록</h2>
 		<form action="/fb_write" method="post" >
-		<input type="hidden" id="form_writer" name="writer">
+		<!-- 이거 없으면 에러남 -->
+		
 		<div>
 			<div class="writing_title">
 				<input type="text" id="title" name="fb_title"

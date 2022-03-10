@@ -55,8 +55,14 @@ public class BoardServiceImpl implements BoardService {
 
 
 	
+	@Override
+	public void modifyBoard(Board board) throws Exception {
+		boardDAO.updateBoard(board);
+		
+	}
 	
 	
+
 	@Override
 	public Board getContBoard(Board board) throws Exception {
 		// TODO Auto-generated method stub
@@ -64,11 +70,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	@Override
-	public void modifyBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void insertContent(Board board) throws Exception {
