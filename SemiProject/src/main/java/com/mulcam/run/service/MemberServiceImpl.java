@@ -46,5 +46,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.queryMember(id);
 	}
 
+	@Override
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		memberDAO.delete(id);
+	}
+	
+	
 
 }

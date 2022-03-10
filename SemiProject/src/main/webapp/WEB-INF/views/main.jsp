@@ -61,55 +61,34 @@
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">메이트 구하기</h1>
+                    <h1 class="h1">번개 모임</h1>
                     <p>
 
                     </p>
                 </div>
             </div>
             <div class="row">
+            
+            <c:forEach items="${MateList }" var="mate">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/.jpg" class="card-img-top" alt="...">
+                        <a href="#">
+                            <img src="${mate.user_img }"  class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
 
                             
                             <p class="card-text">
-                                서울에서 같이 달리실분~
+                                ${mate.mate_cont }
                             </p>
+                            <p class="text-muted">
+					(${mate.mate_like })
+				</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-
-                            
-                            <p class="card-text">
-                                인천에서 같이 달리실분~
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="./assets/img/.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-
-                           
-                            <p class="card-text">
-                                경기에서 같이 달리실분~
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
+                
             </div>
         </div>
     </section>

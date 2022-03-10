@@ -10,5 +10,7 @@ import com.mulcam.run.dto.Likes;
 @Repository("likesDAO")
 public interface LikesDAO {
 	public void insertLikes(Likes like) throws Exception;
-	public boolean selectLikes(Likes like) throws Exception;
+	public void deleteLikes(int likes_no) throws Exception;
+	public boolean checkLikes(Likes like) throws Exception;
+	public int selectlikesNo(Likes like) throws Exception;
 }

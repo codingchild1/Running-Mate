@@ -54,7 +54,7 @@
             	<p>나만의 러닝 코스를 공유해주세요!</p>
         	</div>
 		</div>
-		<div><form id="route_write" action="/route_reg" method="post">
+		<div><form id="route_write" action="/route_reg" method="post" enctype="multipart/form-data">
 			<div id="user_info" style="height:80px; display: flex; align-items: center;">
 				<div style="height:40px; width:40px; overflow:hidden;">
 					<!-- 썸네일 이미지 -->
@@ -67,6 +67,10 @@
 			</div>
 			<!-- 글 제목 -->
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
+			
+			<img class="col" src="" id="route_thumb" name="route_thumb" height="100px" width="100px">
+			<input type="file" id="route_file" name="route_file" />
+			
 			<!-- ckeditor -->
 			<textarea id="editor" name="content"></textarea><br>
 			
@@ -104,6 +108,15 @@
 	
 	<script>
 	$(function(){
+		$("#route_file").change(function (event) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#route_thumb").attr("src", e.target.result);	
+				console.log($("#route_thumb").src);
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		});
+	
 		/*var geocoder = new kakao.maps.services.Geocoder();
 		
 		var callback = function(result, status){
@@ -163,8 +176,6 @@
 			     	}
 			    }
 			};
-
-			
 			alert("2");
 			alert(callback[0].address_name);
 			alert(JSON.stringify(callback[0].address_name));
@@ -187,13 +198,17 @@
 				data: {"longitude" : center_lo, "latitude" : center_la},
 				dataType:"text",
 				success:function(data){
+					
 					$("#form_user_id").attr("value", $("#user_id").html());
 					$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
 					$("#route_area").attr("value", data);
 					$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
 					$("#route_distance").attr("value", mapinfo.matchings[0].distance);
+					//alert($('#route_thumb').src());
 					
 					$("#route_write").submit();
+				}, error: function (e) { 
+					console.log("ERROR : ", e); 
 				}
 			});
 			
