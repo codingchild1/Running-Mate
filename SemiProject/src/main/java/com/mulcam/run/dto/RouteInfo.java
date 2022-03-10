@@ -2,7 +2,7 @@ package com.mulcam.run.dto;
 
 import java.sql.Date;
 
-public class Route {
+public class RouteInfo {
 	int route_articleNo;
 	String user_id;
 	String route_title;
@@ -16,11 +16,12 @@ public class Route {
 	String route_mapinfo;
 	double route_distance;
 	boolean warning;
+	String memberthumb;
 	
-	public Route() {}
-	public Route(int route_articleNo, String user_id, String route_title, Date route_date, 
+	public RouteInfo() {}
+	public RouteInfo(int route_articleNo, String user_id, String route_title, Date route_date, 
 			int route_views, int route_likes, String route_thumb, String route_content, 
-			String route_center, String route_area, String route_mapinfo, double route_distance, boolean warning) {
+			String route_center, String route_area, String route_mapinfo, double route_distance, boolean warning, String memberthumb) {
 		this.route_articleNo = route_articleNo;
 		this.user_id = user_id;
 		this.route_title = route_title;
@@ -34,6 +35,7 @@ public class Route {
 		this.route_mapinfo = route_mapinfo;
 		this.route_distance = route_distance;
 		this.warning = warning;
+		this.memberthumb = memberthumb;
 	}
 	public int getRoute_articleNo() {
 		return route_articleNo;
@@ -112,5 +114,11 @@ public class Route {
 	}
 	public void setWarning(boolean warning) {
 		this.warning = warning;
+	}
+	public String getMemberthumb() {
+		return memberthumb;
+	}
+	public void setMemberthumb(String memberthumb) {
+		this.memberthumb = memberthumb;
 	}	
 }

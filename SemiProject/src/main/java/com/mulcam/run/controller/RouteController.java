@@ -23,8 +23,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
+import com.mulcam.run.dto.RouteInfo;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.RouteService;
 
@@ -55,15 +56,18 @@ public class RouteController {
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+	private ServletContext servletContext;
+	
 	@RequestMapping(value="/route", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routeMain(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView("route_main");
 		PageInfo pageInfo = new PageInfo();
 		try {
-			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
+			List<RouteInfo> routeslist = routeService.getRoutesList(page, pageInfo);
 			
 			mv.addObject("pageInfo", pageInfo);
-			mv.addObject("routeslist", routeslist);
+			mv.addObject("routesinfolist", routeslist);
 			mv.addObject("count", routeslist.size());
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -137,18 +141,63 @@ public class RouteController {
 	}
 	
 	@PostMapping(value="/route_reg")
-	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content) {
+	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
 		ModelAndView mv = new ModelAndView("route_post");
+		String path = servletContext.getRealPath("/thumb/route/");
+		File destFile = new File(path+file.getOriginalFilename());
 		try {			
-			route.setRoute_content(content.trim());
-			System.out.println(route.getRoute_area());
-			routeService.regRoute(route);
-			mv.addObject("route", route);
+			file.transferTo(destFile);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		route.setRoute_thumb(file.getOriginalFilename());
+		route.setRoute_content(content.trim());
+		System.out.println(route.getRoute_area());
+		System.out.println(route.getRoute_articleNo());
+		System.out.println(route.getRoute_distance());
+		try {			
+			routeService.regRoute(route);
+			//model.addAttribute("route", route);
+			mv.addObject("route", route);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
+	//이미지가 바라보는 url 
+		@GetMapping(value="/routethumbfileview/{filename}")
+		public void thumbfileview(@PathVariable String filename, 
+				HttpServletRequest request, HttpServletResponse response)
+		{			
+			String path = servletContext.getRealPath("/thumb/route/");
+			File file = new File(path+filename);
+			String sfilename = null;
+			FileInputStream fis = null;
+			
+			try {
+				if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+					sfilename = URLEncoder.encode(file.getName(), "utf-8");
+				} else {
+					sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+				}
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("application/octet-stream;charset=utf-8");
+				//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
+				response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+				OutputStream out = response.getOutputStream();
+				fis= new FileInputStream(file);
+				FileCopyUtils.copy(fis, out);
+				out.flush();
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(fis!=null) {
+					try {
+						fis.close();
+					} catch(Exception e) {}
+				}
+			}		
+		}	
 	
 	@PostMapping("/route_sort")
 	public String route_sort() {

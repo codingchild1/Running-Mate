@@ -6,12 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.mulcam.run.dto.Route;
+import com.mulcam.run.dto.RouteInfo;
 
 @Mapper
 @Repository("routeDAO")
 public interface RouteDAO {
 	public int selectRouteCount() throws Exception;
-	public List<Route> selectRouteList(int startrow) throws Exception; 	//select 전체 코스 게시물
+	public List<RouteInfo> selectRouteList(int startrow) throws Exception; 	//select 전체 코스 게시물
 	public Route queryRoute(int articleNo);								//select  코스 게시물
 	public List<Route> queryByDistance(int distance[]) throws Exception;
 	

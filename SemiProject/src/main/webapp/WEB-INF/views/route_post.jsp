@@ -60,12 +60,13 @@
 					<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a><br>
 				</c:if>
 				<span id="board_time">${route.route_date }</span>
-				<span style="float:right;">${route.route_views }</span>&nbsp;<span style="float:right;">조회</span>&nbsp;<span id="alert" style="float:right;">신고</span>
+				<span style="float:right;">${route.route_views }</span>&nbsp;<span style="float:right; padding-left:10px;">조회</span>
+				<span id="alert" style="float:right; padding-left:10px;">신고</span>
 			</div>
-			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
+			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목" style="disabled{background: #F0F0F0;}"/><br>
 			
-			<textarea id="content" name="content" style="width:45%; display:inline-block"></textarea><br>
-			<div id="map" style="width: 45%; height:500px; margin-bottom:50px; display:inline-block"></div>
+			<div style="display:inline-block; float:left; "><textarea id="content" name="content" ></textarea></div>
+			<div id="map" style="width: 45%; height:500px; margin-bottom:50px; display:inline-block; float:right; "></div>
 		</div>
 		<div id="likes" style="text-align:center;"><br>
 		<c:choose>
@@ -122,8 +123,12 @@
 	<script>
 		//editor script
 		$(function(){
-	        ClassicEditor.create(document.querySelector("#content"))
+			ClassicEditor.create(document.querySelector("#content"))
     	    .then(editor=>{
+    	    	window.editor = editor;
+    	    	editor.isReadOnly = true;
+    	    	const toolbarElement = editor.ui.view.toolbar.element;
+    	    	toolbarElement.style.display = 'none';
         		editor.setData('${route.route_content }');
         	})
 	        .catch((error) => {

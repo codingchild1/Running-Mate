@@ -51,14 +51,14 @@
 		</div>
 		
 		<c:choose>
-		<c:when test="${routeslist!=null && pageInfo.listCount>0 }">
+		<c:when test="${routesinfolist!=null && pageInfo.listCount>0 }">
 		<div id="routes_list" style="width: 100%;">
-		<c:forEach items="${routeslist }" var="route">
+		<c:forEach items="${routesinfolist }" var="route">
 		<a href="routepost?articleNo=${route.route_articleNo}">
         <div id="route_mini" style="width: 32%; height:500px; display: inline-block; border: 1px solid gray; margin: auto 0.5%" >
             <div id="route_miniHeader">
                 <span id="route_userThumb">
-                	<img id="userImage" style="width:25px; height:25px;">
+                	<img src="/profileview/${route.memberthumb }" id="userImage" style="width:25px; height:25px;">
                 </span>
                 <span id="route_userName">${route.user_id }</span>
                 <span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
@@ -66,7 +66,8 @@
             <div id="route_miniInfo">
                 <div id="route_miniTitle" style="text"></div>
                 <div id="route_miniThumbInfo">
-                    <div id="map" style="width:100%;height:300px; display:block; margin: auto;"></div>
+              
+                    <img src="/routethumbfileview/${route.route_thumb }" id="userImage" style="width:100%;height:300px; display:block; margin: auto;">
                     <div id="route_miniContent"></div>
                 </div>
             </div>
