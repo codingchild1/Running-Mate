@@ -27,16 +27,13 @@ public interface TodayDAO {
 	//4.todayrun 게시글 수정 (update) 
 	public void updateTBoard(Today tboard) throws Exception;
 	
-	//5. 조회 udate 조회수 변경
-	void updateReadCount(int today_articleNo) throws Exception;
+	//5. 조회수 변경
+	void updateReadCount(int articleNo) throws Exception;
 
 	//6.삭제 (delete)
-	public void deleteTBoard(int today_articleNo) throws Exception;
+	public void deleteTBoard(int articleNo) throws Exception;
 
-
-	
 	//7.신고 (insert alert) 
 	//public Boolean insertTWarn() throws Exception;
 	
-	//8.게시판 최대 page 수 ???
 }

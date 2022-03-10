@@ -91,9 +91,9 @@ body {
 </style>
 </head>
 <body>
-
+<%-- 
 	<%@include file="slides.jsp"%> 
-
+ --%>
 
 		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
 		<!-- <div class="col-lg-11 center border"> -->
@@ -193,6 +193,7 @@ body {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 	console.log(${pageInfo.page});
+	console.log(${user_id});
 /* 		$(function(){
 			$("#todayMake").click(function(){
 				let id = $('#user_id').val();

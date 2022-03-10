@@ -31,6 +31,17 @@ public class Today {
 		this.today_contents = today_contents; 
 		
 	}
+	
+	public Today(String today_title, String today_thumb,int today_likes,String
+	 today_contents) {
+		this.today_title = today_title; 
+		this.today_thumb = today_thumb;
+		this.today_likes = today_likes;
+		this.today_contents = today_contents; 
+	}
+	
+	
+	
 	public String getToday_articleNo() {
 		return today_articleNo;
 	}

@@ -36,7 +36,8 @@ public class MateController {
 	
 	@Autowired
 	HttpSession session;
-
+	
+	//메인페이지 이동
 	@GetMapping("/mate_main")
 	public ModelAndView mate_main() {
 		ModelAndView mv = new ModelAndView();
@@ -49,15 +50,12 @@ public class MateController {
 		return mv;
 	}
 	
+	//번개 모달창 띄우는기능
 	@ResponseBody
 	@PostMapping("/Mmodal")
 	public ResponseEntity<Mate> Mmodal(@RequestParam(value="no",required = false) int mate_articleNO) {
 		ResponseEntity<Mate> result = null;
-//		ModelAndView mv = new ModelAndView();
 		try {
-//			List<Ptp> ptps = mateService.ptpInfo(mate_articleNO);
-//			mv.addObject("ptps",ptps);
-//			System.out.println(ptps);
 			Mate mate = mateService.mateInfo(mate_articleNO);
 			result = new ResponseEntity<Mate>(mate, HttpStatus.OK);
 		}catch(Exception e) {
@@ -66,21 +64,21 @@ public class MateController {
 		return result;
 	}
 	
+	//번개 참여자리스트 기능
 	@ResponseBody
 	@PostMapping("/ptplist")
 	public ResponseEntity<List<Ptp>> ptplist(@RequestParam(value="no",required = false) int mate_articleNO) {
 		ResponseEntity<List<Ptp>> result = null; 
 		try {
 			 List<Ptp> ptp = mateService.ptpInfo(mate_articleNO);
-//			Ptp ptp = mateService.ptpInfo(mate_articleNO);
 			result = new ResponseEntity<List<Ptp>>(ptp, HttpStatus.OK);
-			System.out.println(result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 	
+	//소모임 모달창 띄우는기능
 	@ResponseBody
 	@PostMapping("/Gmodal")
 	public ResponseEntity<Group> Gmodal(@RequestParam(value="no",required = false) int group_articleNO) {
@@ -116,6 +114,7 @@ public class MateController {
 		return islike;
 	}
 	
+	//검색창 이동
 	@GetMapping("/mate_search")
 	public ModelAndView mate_search() {
 		ModelAndView mv = new ModelAndView();
@@ -128,6 +127,7 @@ public class MateController {
 		return mv;
 	}
 	
+	//검색기능
 	@GetMapping("/mate_searchinfo")
 	public String searchinfo(@RequestParam(value="type") String type,
 							@RequestParam(value="option") String option,
@@ -138,12 +138,10 @@ public class MateController {
 				List<GroupAndMate> mates = mateService.searchInfoAll(option, input);
 				model.addAttribute("mates",mates);
 				model.addAttribute("input",input);
-				System.out.println("전체");
 			}else {
 				List<GroupAndMate> mates = mateService.searchInfo(type, option, input);
 				model.addAttribute("mates",mates);
 				model.addAttribute("input",input);
-				System.out.println("부분");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -151,17 +149,26 @@ public class MateController {
 		return "mate_search";
 	}
 
+	
 	@GetMapping("/mate_map")
-	public String mate_map() {
-		return "mate_map";
+	public ModelAndView mate_map() {
+		ModelAndView mv = new ModelAndView();
+		try {
+			List<GroupAndMate> mates = mateService.allpostInfo();
+			mv.addObject("mates",mates);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
 	}
-
+	
+	//번개 게시물 작성페이지로 이동
 	@GetMapping("/mate_makemate")
 	public String mate_makemate() {
 		return "mate_makemate";
 	}
 
-
+	//번개 게시물 작성기능
 	@PostMapping("/mate_makemate")
 	public ModelAndView mate_makemate2(Mate mate,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
@@ -175,11 +182,14 @@ public class MateController {
 		}
 		return mv;
 	}
+	
+	//소모임 게시물 작성페이지로 이동
 	@GetMapping("/mate_makegroup")
 	public String mate_makegroup() {
 		return "mate_makegroup";
 	}
 	 
+	//소모임 게시물 작성기능
 	@PostMapping("/mate_makegroup")
 	public ModelAndView mate_makegroup2(Group group) {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
@@ -192,6 +202,7 @@ public class MateController {
 		return mv;
 	}
 	
+	//번개 게시물 수정페이지로 이동
 	@GetMapping("/mate_updatemate")
 	public String mate_updatemate(@RequestParam("ptp")int mate_articleNO, Model model) {
 		try {
@@ -202,6 +213,8 @@ public class MateController {
 		}
 		return "mate_updatemate";
 	}
+	
+	//번개 게시물 수정기능
 	@PostMapping("/mate_updatemate")
 	public ModelAndView mate_updatemate2(Mate mate) {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
@@ -213,7 +226,7 @@ public class MateController {
 		return mv;
 	}
 	
-	
+	//소모임 게시물 수정페이지로 이동
 	@GetMapping("/mate_updategroup")
 	public String mate_updategroup(@RequestParam("ptp")int group_articleNO, Model model) {
 		try {
@@ -225,6 +238,7 @@ public class MateController {
 		return "mate_updategroup";
 	}
 	
+	//소모임 게시물 수정기능
 	@PostMapping("/mate_updategroup")
 	public ModelAndView mate_updategroup2(Group group) {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
@@ -235,22 +249,23 @@ public class MateController {
 		}
 		return mv;
 	}
+	
+	//번개 게시물 삭제기능
 	@ResponseBody
 	@PostMapping("/deletemate")
 	public void deletemate(@RequestParam(value="no")int mate_articleNO) {
 		try {
-			System.out.println(mate_articleNO);
 			mateService.removeMate(mate_articleNO);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	//소모임 게시물 삭제기능
 	@ResponseBody
 	@PostMapping("/deletegroup")
 	public void deletegroup(@RequestParam(value="no")int group_articleNO) {
 		try {
-			System.out.println(group_articleNO);
 			mateService.removeGroup(group_articleNO);
 		}catch (Exception e) {
 			e.printStackTrace();

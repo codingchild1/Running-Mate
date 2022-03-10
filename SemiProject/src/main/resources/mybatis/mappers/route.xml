@@ -16,18 +16,20 @@
 	</select>
 			
 	<insert id="insertRoute" parameterType="route">
-		insert into route (user_id, route_title, route_content, route_center, route_area, route_mapinfo, route_distance)
-		values (#{user_id}, #{route_title}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
+		insert into route (user_id, route_title, route_thumb, route_content, route_center, route_area, route_mapinfo, route_distance)
+		values (#{user_id}, #{route_title}, #{route_thumb}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
 	</insert>
 	
-	<select id="selectRouteList" resultType="route" parameterType="int">
+	<select id="selectRouteList" resultType="routeinfo" parameterType="int">
 		<![CDATA[
-			select * from (select @rownum:=@rownum+1 rnum, tot.* 
-				from (select *from route order by route_date DESC) tot, (select @rownum:=0) temp) sub
-			where rnum between #{startrow} and #{startrow}+8
+			select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
+				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
+			from route left join member 
+			on route.user_id=member.id 
+			order by route_date desc limit #{startrow}, 9
 		]]>
 	</select>
-	
+	<!-- select * from route order by route_date desc limit #{startrow}, 9 -->
 	<select id="queryByDistance" parameterType="int" resultType="route">
 		<![CDATA[
 			select * from route where route_distance between #{distance[0]} and #{distance[1]}

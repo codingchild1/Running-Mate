@@ -1,12 +1,20 @@
 package com.mulcam.run.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -14,16 +22,24 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
+import com.mulcam.run.dto.RouteInfo;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.RouteService;
 
@@ -40,15 +56,18 @@ public class RouteController {
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+	private ServletContext servletContext;
+	
 	@RequestMapping(value="/route", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routeMain(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView("route_main");
 		PageInfo pageInfo = new PageInfo();
 		try {
-			List<Route> routeslist = routeService.getRoutesList(page, pageInfo);
+			List<RouteInfo> routeslist = routeService.getRoutesList(page, pageInfo);
 			
 			mv.addObject("pageInfo", pageInfo);
-			mv.addObject("routeslist", routeslist);
+			mv.addObject("routesinfolist", routeslist);
 			mv.addObject("count", routeslist.size());
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -67,6 +86,7 @@ public class RouteController {
 			String user_id = (String) session.getAttribute("id");
 			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
 			mv.addObject("route", posted);
+			mv.addObject("likes", likes);
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -121,18 +141,63 @@ public class RouteController {
 	}
 	
 	@PostMapping(value="/route_reg")
-	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content) {
+	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
 		ModelAndView mv = new ModelAndView("route_post");
+		String path = servletContext.getRealPath("/thumb/route/");
+		File destFile = new File(path+file.getOriginalFilename());
 		try {			
-			route.setRoute_content(content.trim());
-			System.out.println(route.getRoute_area());
-			routeService.regRoute(route);
-			mv.addObject("route", route);
+			file.transferTo(destFile);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		route.setRoute_thumb(file.getOriginalFilename());
+		route.setRoute_content(content.trim());
+		System.out.println(route.getRoute_area());
+		System.out.println(route.getRoute_articleNo());
+		System.out.println(route.getRoute_distance());
+		try {			
+			routeService.regRoute(route);
+			//model.addAttribute("route", route);
+			mv.addObject("route", route);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
+	//이미지가 바라보는 url 
+		@GetMapping(value="/routethumbfileview/{filename}")
+		public void thumbfileview(@PathVariable String filename, 
+				HttpServletRequest request, HttpServletResponse response)
+		{			
+			String path = servletContext.getRealPath("/thumb/route/");
+			File file = new File(path+filename);
+			String sfilename = null;
+			FileInputStream fis = null;
+			
+			try {
+				if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+					sfilename = URLEncoder.encode(file.getName(), "utf-8");
+				} else {
+					sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+				}
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("application/octet-stream;charset=utf-8");
+				//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
+				response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+				OutputStream out = response.getOutputStream();
+				fis= new FileInputStream(file);
+				FileCopyUtils.copy(fis, out);
+				out.flush();
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(fis!=null) {
+					try {
+						fis.close();
+					} catch(Exception e) {}
+				}
+			}		
+		}	
 	
 	@PostMapping("/route_sort")
 	public String route_sort() {
@@ -153,6 +218,27 @@ public class RouteController {
 			e.printStackTrace();
 		}
 		return routeslist;
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/likes")
+	public boolean likes(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
+		boolean likes = false;
+		try {
+			// 현재 게시물에 like에 대한 정보 확인
+			likes = likesService.getLikesTF(user_id, board_type, board_no);
+			if(likes == false) {
+				likesService.insertLikes(user_id, board_type, board_no);
+				likes = true;
+			} else {
+				likesService.deleteLikes(user_id, board_type, board_no);
+				likes = false;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(likes);
+		return likes;
 	}
 	
 	@ResponseBody

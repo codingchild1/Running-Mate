@@ -75,7 +75,7 @@ main, header, section {
 </script>
 </head>
 <body>
-	<%@include file="header.jsp"%>
+	<%-- <%@include file="header.jsp"%> --%>
 
 
 
@@ -141,7 +141,7 @@ main, header, section {
 						<!--컨트롤러 목록 today_list 로 이동  -->
 
 						<button class="btn btn-outline-secondary" type="button"
-							style="width: 100px; height: 30px; padding: 5px" id="today_list"
+							style="width: 100px; height: 30px; padding: 5px" id="today_list"  onClick="history.back(); return false;"
 							name="today_list">목록</button>
 					</div>
 					<br>
@@ -164,6 +164,16 @@ main, header, section {
 		});
 	});
 
+	
+/* 	$(function('#today') {
+		$('#today_postcancle').change(function (event) {
+			
+	});
+		
+	$(function() {
+		$('#today_list').change(function (event) {
+				
+	}); */
 	
 </script>
 </body>

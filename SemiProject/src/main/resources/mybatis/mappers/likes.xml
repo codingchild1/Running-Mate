@@ -4,15 +4,21 @@
    
 <mapper namespace="com.mulcam.run.dao.LikesDAO">
 
-	<insert  id="insertRoute" parameterType="likes">
-		insert into likes(likes_no, user_id, board_type, board_no)
-			values (#{likes_no}, #{user_id}, #{board_type}, #{board_no})
+	<insert  id="insertLikes" parameterType="likes">
+		insert into likes(user_id, board_type, board_no) values (#{user_id}, #{board_type}, #{board_no})
 	</insert>
 	
-	<select  id="selectLikes" parameterType="likes" resultType="boolean">
-		select EXISTS (select * from likes 
-			where user_id= #{user_id} and board_type=#{board_type} and board_no=#{board_no} limit 1) as success;
+	<delete  id="deleteLikes" parameterType="int">
+		delete from likes where likes_no=#{likes_no };
+	</delete>
 
+	<select  id="checkLikes" parameterType="likes" resultType="boolean">
+		select EXISTS (select * from likes 
+			where user_id= #{user_id} and board_type=#{board_type} and board_no=#{board_no} limit 1) as success
+	</select>
+	
+	<select  id="selectlikesNo" parameterType="likes" resultType="int">
+		select likes_no from likes where user_id= #{user_id} and board_type=#{board_type} and board_no=#{board_no} limit 1
 	</select>
 
 </mapper>
