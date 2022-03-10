@@ -43,6 +43,9 @@ public class FBController {
 	@Autowired
 	private ServletContext servletContext;
 	
+	@Autowired
+	HttpSession session;
+	
 	/* 게시글 불러오기 */
 	@RequestMapping(value="/fb_main", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView boardList(@RequestParam(value="page",required=false, defaultValue = "1") int page) {
@@ -69,6 +72,7 @@ public class FBController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			Board board = boardService.getBoard(fb_articleNo);
+			String writer = (String) session.getAttribute("id");
 			mv.addObject("article", board);
 			mv.addObject("page", page);
 			mv.setViewName("/fb_detail");

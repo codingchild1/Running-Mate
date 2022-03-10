@@ -54,8 +54,10 @@ a:hover {
 						height="20px" alt="" />${article.writer }</a>
 				</div>
 				<div class="modify">
+				<c:if test= "${id eq article.writer }">
 					<a href="fb_modify?fb_articleNo=${article.fb_articleNo}"> 수정 </a> 
 					<a href="fb_delete?fb_articleNo=${article.fb_articleNo}&page=${page}"onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" style="float:right;">삭제</span></a>
+				</c:if>
 				</div>
 				<div>
 					<span id="detail_time" style="color: #A9A9A9; font-size: 12px;">${article.fb_date }</span>
