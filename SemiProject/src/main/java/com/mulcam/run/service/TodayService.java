@@ -14,11 +14,11 @@ public interface TodayService {
 	//6.신고 (insert warn) 
 		
 
-	Today getTBoard(int today_articleNo) throws Exception; 
+	Today getTBoard(int articleNo) throws Exception; 
 	List<Today> getTBoardList(int page, PageInfo pageInfo) throws Exception;
 	void setInputList(Today tboard) throws Exception; 
 	void modifyBoard(Today tboard) throws Exception; 
-	void removeBoard(Today tboard) throws Exception;
+	void removeTBoard(int articleNo) throws Exception;
 	void inputWarn(boolean a) throws Exception;
 	List<Today> getSerchBoardList() throws Exception; 
 
