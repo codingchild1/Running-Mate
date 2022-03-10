@@ -70,6 +70,7 @@
             outline:none;
         }
         #modal.modal-overlay {
+        	z-index: 8;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -133,10 +134,11 @@
         #modal .content {
             /* margin-top: 20px; */
             padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
+           /*  text-shadow: 1px 1px 2px gray;
+            color: white; */
         }
         #modal2.modal-overlay {
+       		 z-index: 8;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -194,8 +196,8 @@
         #modal2 .content {
             /* margin-top: 20px; */
             padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
+            /* text-shadow: 1px 1px 2px gray;
+            color: white; */
         }
         .more{
         cursor: pointer;
@@ -263,56 +265,6 @@
             </div>
         </div>
          </c:forEach> 
-<!--         <div class="register">
-            <div
-                style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <div style=" width: 150px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                            disabled> </span>
-                </div>
-                <div>
-                    번개
-                </div>
-            </div>
-            <div style=" vertical-align: middle;margin-top: 15px;">
-                <span><img class="heart" src="images/하트.png" style="width: 20px; height: 20px; margin-top: 10px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 13px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button id="btn-modal2" class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div>
-        <div class="register">
-            <div
-                style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">
-                <div style=" width: 150px;">
-                    <span><input type="text" id="title" value="제목"
-                            style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value="닉네임"
-                            style="height: 20px;vertical-align: middle; border:none; background-color: white;"
-                            disabled> </span>
-                </div>
-                <div>
-                    번개
-                </div>
-            </div>
-            <div style=" vertical-align: middle;margin-top: 15px;">
-                <span><img class="heart" src="images/하트.png" style="width: 20px; height: 20px; margin-top: 10px;"></span>
-                <span><input type="text" id="like" value="13"
-                        style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 13px; font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button class="more"
-                    style="float: right; margin-top: 10px;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1); ">더
-                    보기</button>
-            </div>
-        </div> -->
     </div>
         </div>
         
@@ -415,89 +367,41 @@
 			</div>
 		</div>
 	</div>     
-        
-        
-        
-        
-        
-     <!-- mateform -->
-<!--      <div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="title">
-                <input
-                    style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                    value="제목">
-                <div class="close-area">X</div>
-            </div>
-            <input
-                style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-                value="아이디">
-            <div style="font-size: 13px; float: right;">
-                <span style="margin: 5px; cursor: pointer;">수정
-                    <span style="margin: 5px; cursor: pointer;">삭제
-                        <span style="margin: 5px; cursor: pointer;">신고
-            </div>
-             <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
-            <div class="content">
-                <div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
-                <textarea style="width: 352px; height: 190px;"></textarea>
-                <div 
-                    style="display:flex; flex-direction: row-reverse; margin: 7px; margin-right: 0px;  float: right;position: relative;height: 32px;">
-                    <div class="info" style="margin: 5px; width: 43px;">조회
-                        <div class="ptplist"
-                        style="position: relative; border: 1px solid; width: 200px; top: -150px; margin: 10px; background-color: #2b2e4a;">
-                        <p style="font-size: 13px; margin:2px; padding: 5px;">참여자 목록</p>
-                        <div style="margin: 5px;">
-                            <input>
-                            <input>
-                            <input>
-                        </div>
-                    </div>
-                    </div>
-                    <button style="margin: 5px; width: 43px;">참여</button>
-                </div>
-            </div>
-        </div>
-    </div>
-groupform
-<div id="modal2" class="modal-overlay">
-    <div class="modal-window">
-        <div class="title">
-            <input
-                style="border: none; font-size: 20px; font-weight: bold; background-color: rgba( 123, 173, 213, 0.70 ); margin-top: 20px;"
-                value="제목">
-            <div class="close-area">X</div>
-        </div>
-        <input
-            style="border: none; font-size: 15px; background-color: rgba( 123, 173, 213, 0.70 ); padding-left: 10px; margin-top: 10px; "
-            value="아이디">
-           
-        <div style="font-size: 13px; float: right;">
-            <span style="margin: 5px; cursor: pointer;">수정
-                <span style="margin: 5px; cursor: pointer;">삭제
-                    <span style="margin: 5px; cursor: pointer;">신고
-        </div>
-        <input type="text" style="height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba( 123, 173, 213, 0.70 );" value="2021.02.27 14:22:35">
-        <div class="content">
-<div style="font:normal normal 400 12px/normal dotum, sans-serif; width:210px; height:200px; color:#333; position:relative"><div style="height: 200px;"><a href="https://map.kakao.com/?urlX=482233.0&amp;urlY=1132230.0&amp;name=%EC%84%9C%EC%9A%B8%20%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC%20%EB%82%A8%EA%B0%80%EC%A2%8C%EB%8F%99&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/64f8487a44c9c0785f3976c0e62d8d652a5b1890c8b57752d7e5f5d35ca02020" width="208px" height="198px" style="border:1px solid #ccc;"></a></div></div>
-            
-            <textarea style="width: 352px; height: 190px;"></textarea>
-            <div>
-            </div>
-            <div
-            style="display:flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px;  float: right;position: relative;">
-            <a href="#"><img class="kakao" src="images/kakao.png" style="width: 25px; height: 25px; margin-left: 13px;"></a>
-            <a href="#"><img class="insta" src="images/insta.png" style="width: 25px; height: 25px;"></a>
-           
-            </div>
-        </div>
-    </div>
-</div> -->
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
+    
+    let m_editor;
+	let g_editor;
+	
+	//ckeditor
+	ClassicEditor.create(document.querySelector("#editor"))
+    .then(editor=>{
+    	window.editor = editor;
+    	editor.isReadOnly = true;
+    	const toolbarElement = editor.ui.view.toolbar.element;
+    	toolbarElement.style.display = 'none';
+    	 m_editor=editor;
+		/* editor.setData('${route.route_content }'); */
+	})
+    .catch((error) => {
+    	console.error(error);
+	});
+ 	ClassicEditor.create(document.querySelector("#editor2"))
+    .then(editor=>{
+    	window.editor = editor;
+    	editor.isReadOnly = true;
+    	const toolbarElement = editor.ui.view.toolbar.element;
+    	toolbarElement.style.display = 'none';
+    	 g_editor=editor;
+		/* editor.setData('${route.route_content }'); */
+	})
+    .catch((error) => {
+    	console.error(error);
+	});
+ 	
 	//더보기 클릭시 모달창 띄어주는 코드
     function detailModal(no,type){
 		//번개 모달창 ajax
@@ -536,15 +440,8 @@ groupform
      				 $('#update').hide();
      			  } 
      			  
-     	          //ckeditor
-     	          
-				ClassicEditor.create(document.querySelector("#editor"))
-     	                .then(editor=>{
-     	                	editor.setData($('#mate_cont').val());
-     	                })
-     	                .catch((error) => {
-     	                	console.error(error);
-     	                });
+     			//메이트에디터에 값넣어주는 함수	  
+       	     	m_editor.setData($('#mate_cont').val());
      	   
      			var La = $('#mapinfo').val();
      			var Ma = $('#mapinfo2').val();
@@ -625,14 +522,8 @@ groupform
   				 $('#update2').hide();
   			  }
 	           
- 	                ClassicEditor.create(document.querySelector("#editor2"))
- 	                .then(editor=>{
- 	                	editor.setData($('#group_cont').val());
- 	                })
- 	                .catch((error) => {
- 	                	console.error(error);
- 	                });
- 	        	
+			//그룹게시물에디터 값 넣는 함수
+			g_editor.setData($('#group_cont').val());
 			 
  			var La = $('#mapinfo').val();
  			var Ma = $('#mapinfo2').val(); 

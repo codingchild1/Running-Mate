@@ -132,8 +132,8 @@
         #modal .content {
             /* margin-top: 20px; */
             padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
+            /* text-shadow: 1px 1px 2px gray;
+            color: white; */
         }
         #modal2.modal-overlay {
             width: 100%;
@@ -193,8 +193,8 @@
         #modal2 .content {
             /* margin-top: 20px; */
             padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
+            /* text-shadow: 1px 1px 2px gray;
+            color: white; */
         }
 
 
@@ -376,6 +376,34 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
+    let m_editor;
+	let g_editor;
+	
+	ClassicEditor.create(document.querySelector("#editor"))
+    .then(editor=>{
+    	window.editor = editor;
+    	editor.isReadOnly = true;
+    	const toolbarElement = editor.ui.view.toolbar.element;
+    	toolbarElement.style.display = 'none';
+    	 m_editor=editor;
+		/* editor.setData('${route.route_content }'); */
+	})
+    .catch((error) => {
+    	console.error(error);
+	});
+ 	ClassicEditor.create(document.querySelector("#editor2"))
+    .then(editor=>{
+    	window.editor = editor;
+    	editor.isReadOnly = true;
+    	const toolbarElement = editor.ui.view.toolbar.element;
+    	toolbarElement.style.display = 'none';
+    	 g_editor=editor;
+		/* editor.setData('${route.route_content }'); */
+	})
+    .catch((error) => {
+    	console.error(error);
+	});
+    
     function detailModal(no,type){
 		//번개 모달창 ajax
     	if(type=='m'){
@@ -412,17 +440,8 @@
      				 $('#delete').hide();
      				 $('#update').hide();
      			  } 
-     			  
-     	          
-     	                ClassicEditor.create(document.querySelector("#editor"))
-     	                .then(editor=>{
-     	                	editor.setData($('#mate_cont').val());
-     	                })
-     	                .catch((error) => {
-     	                	console.error(error);
-     	                });
-     	        	
-     	      	     
+     			//메이트에디터에 값넣어주는 함수	  
+     	     	m_editor.setData($('#mate_cont').val());
      	   
      			var La = $('#mapinfo').val();
      			var Ma = $('#mapinfo2').val();
@@ -504,15 +523,9 @@
   				 $('#delete2').hide();
   				 $('#update2').hide();
   			  }
-	           
- 	                ClassicEditor.create(document.querySelector("#editor2"))
- 	                .then(editor=>{
- 	                	editor.setData($('#group_cont').val());
- 	                })
- 	                .catch((error) => {
- 	                	console.error(error);
- 	                });
- 	        	
+			  
+			//그룹게시물에디터 값 넣는 함수
+			g_editor.setData($('#group_cont').val());
 			 
  			var La = $('#mapinfo').val();
  			var Ma = $('#mapinfo2').val(); 
