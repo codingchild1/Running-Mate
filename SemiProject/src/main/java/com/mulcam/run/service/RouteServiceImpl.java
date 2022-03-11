@@ -9,6 +9,7 @@ import com.mulcam.run.dao.RouteDAO;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.RouteInfo;
+import com.mulcam.run.dto.SearchRoute;
 
 @Service 
 public class RouteServiceImpl implements RouteService {
@@ -17,9 +18,8 @@ public class RouteServiceImpl implements RouteService {
 	RouteDAO routeDAO;
 	
 	@Override
-	public Route regRoute(Route route) throws Exception {
+	public void regRoute(Route route) throws Exception {
 		routeDAO.insertRoute(route);
-		return null;
 	}
 
 	@Override
@@ -40,17 +40,20 @@ public class RouteServiceImpl implements RouteService {
 	}	
 	
 	@Override
-	public Route getRouteInfo(int articleNo) throws Exception{
+	public RouteInfo getRouteInfo(int articleNo) throws Exception{
 		return routeDAO.queryRoute(articleNo);
 	}
 
 	@Override
-	public List<Route> getSortedRoutes(String area, int[] distance) throws Exception {
+	public List<Route> getSortedRoutes(String area, int distance_left, int distance_right) throws Exception {
 		List<Route> sortedRouteLists = null;
-		if(area!="" && distance[1]!=0) {
-			//sortedRouteLists = 
-		} else if(distance[1]!=0) {
-			sortedRouteLists = routeDAO.queryByDistance(distance);
+		SearchRoute search = new SearchRoute(area, distance_left, distance_right);
+		if(area=="" && distance_right!=0) {
+			sortedRouteLists = routeDAO.queryByDistance(search);
+		} else if(area!=null && distance_left==0 && distance_right==0) {
+			sortedRouteLists = routeDAO.queryByArea(search);
+		} else {
+			sortedRouteLists = routeDAO.queryByAreaNDistance(search);
 		}
 		return sortedRouteLists;
 	}
@@ -69,6 +72,16 @@ public class RouteServiceImpl implements RouteService {
 	@Override
 	public void removeRouteBoard(int articleNo) throws Exception {
 		routeDAO.deleteRoute(articleNo);
+	}
+
+	@Override
+	public void LikesPlus(int articleNo) throws Exception {
+		routeDAO.updateLikePlus(articleNo);
+	}
+
+	@Override
+	public void LikesMinus(int articleNo) throws Exception {
+		routeDAO.updateLikeMinus(articleNo);
 	}
 	
 }

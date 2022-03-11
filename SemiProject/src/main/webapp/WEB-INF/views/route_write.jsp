@@ -117,79 +117,7 @@
 			reader.readAsDataURL(event.target.files[0]);
 		});
 	
-		/*var geocoder = new kakao.maps.services.Geocoder();
-		
-		var callback = function(result, status){
-			if (status === kakao.maps.services.Status.OK) {
-				//console.log('지역 명칭 : ' + result[0].address_name);
-			   	//console.log('행정구역 코드 : ' + result[0].code);
-			   	for(var i = 0; i < result.length; i++) {
-		            // 행정동의 region_type 값은 'H' 이므로
-		            if (result[i].region_type === 'H') {
-		              	//areaName = result[i].address_name;
-		            	//return JSON.stringify(result[i].address_name);
-		            	break;
-		     	}
-			}
-		};
-		
-		function searchAddrFromCoords(longitude, latitude, callback) {
-		    // 좌표로 행정동 주소 정보를 요청합니다
-		    geocoder.coord2RegionCode(longitude, latitude, callback);
-		    return callback;
-		}
-		var areaName = "";
-		function displayCenterInfo(result, status) {
-		    if (status === kakao.maps.services.Status.OK) {
-		        for(var i = 0; i < result.length; i++) {
-		            // 행정동의 region_type 값은 'H' 이므로
-		            if (result[i].region_type === 'H') {
-		              	//areaName = result[i].address_name;
-		            	return JSON.stringify(result[i].address_name);
-		            	break;
-		            }
-		        }
-		    }    
-		}
-		*/
-		$("#submit").click(function(){	
-			/*console.log(geocoder.coord2RegionCode(center_lo, center_la, callback));
-			alert("2");
-			alert(areaName);
-			console.log(center_lo +", "+ center_la);
-			*/
-			/*
-			geocoder.coord2RegionCode(center_lo, center_la, callback);
-			
-			var geocoder = new kakao.maps.services.Geocoder();
-			var callback = function(result, status) {
-			    if (status === kakao.maps.services.Status.OK) {
-			        for(var i = 0; i < result.length; i++) {
-			            // 행정동의 region_type 값은 'H' 이므로
-			            if (result[i].region_type === 'H') {
-			              	//areaName = result[i].address_name;
-			            	//return JSON.stringify(result[i].address_name);
-			            	alert("1");
-			            	alert(result[i].address_name);
-			            	//break;
-			            }
-			     	}
-			    }
-			};
-			alert("2");
-			alert(callback[0].address_name);
-			alert(JSON.stringify(callback[0].address_name));
-			
-			$("#form_user_id").attr("value", $("#user_id").html());
-			$("#route_center").attr("value", JSON.stringify({"latitude" : center_la, "longitude" : center_lo}));
-			//$("#route_area").attr("value", areaName);
-			
-		    $("#route_area").attr("value", areaName);		               
-			
-			$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
-			$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-			*/
-			
+		$("#submit").click(function(){
 			$.ajax({
 				async:false,
 				type:"post",
@@ -204,8 +132,6 @@
 					$("#route_area").attr("value", data);
 					$("#route_mapinfo").attr("value", JSON.stringify(mapinfo.matchings[0].geometry));
 					$("#route_distance").attr("value", mapinfo.matchings[0].distance);
-					//alert($('#route_thumb').src());
-					
 					$("#route_write").submit();
 				}, error: function (e) { 
 					console.log("ERROR : ", e); 

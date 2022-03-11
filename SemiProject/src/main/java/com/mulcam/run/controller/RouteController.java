@@ -37,10 +37,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.run.dto.Member;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.RouteInfo;
+import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
+import com.mulcam.run.service.MemberService;
 import com.mulcam.run.service.RouteService;
 
 
@@ -52,9 +55,15 @@ public class RouteController {
 	
 	@Autowired
 	LikesService likesService;
+	
+	@Autowired
+	AlertService alertService;
 
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -81,12 +90,19 @@ public class RouteController {
 	public ModelAndView routePost(@RequestParam(value="articleNo",required=true) int articleNo) {
 		ModelAndView mv = new ModelAndView("route_post");
 		try {
-			routeService.updateRoutePostView(articleNo);
-			Route posted = routeService.getRouteInfo(articleNo);
 			String user_id = (String) session.getAttribute("id");
+			String user_profile = memberService.profileImg(user_id);
 			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
-			mv.addObject("route", posted);
-			mv.addObject("likes", likes);
+			if(likes==false) {
+				mv.addObject("likes", "false");
+			} else {
+				mv.addObject("likes", "true");
+			}
+			
+			routeService.updateRoutePostView(articleNo);
+			RouteInfo posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);	
+			mv.addObject("profileImg", user_profile);	
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -99,9 +115,8 @@ public class RouteController {
 	public ModelAndView routeModify(@RequestParam(value="articleNo",required=true) int articleNo) {
 		ModelAndView mv = new ModelAndView("route_modify");
 		try {
-			Route posted = routeService.getRouteInfo(articleNo);
+			RouteInfo posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);
-			//mv.addObject("update", "update");
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -131,7 +146,7 @@ public class RouteController {
 			route.setRoute_content(content.trim());
 			routeService.updateRoutePost(route);
 			routeService.updateRoutePostView(articleNo);
-			Route posted = routeService.getRouteInfo(articleNo);
+			RouteInfo posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -152,18 +167,18 @@ public class RouteController {
 		}
 		route.setRoute_thumb(file.getOriginalFilename());
 		route.setRoute_content(content.trim());
-		System.out.println(route.getRoute_area());
-		System.out.println(route.getRoute_articleNo());
-		System.out.println(route.getRoute_distance());
+		
 		try {			
 			routeService.regRoute(route);
-			//model.addAttribute("route", route);
+			Member mem = memberService.queryById(route.getUser_id());
 			mv.addObject("route", route);
+			mv.addObject("profileImg", mem.getMemberthumb());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
+	
 	//이미지가 바라보는 url 
 		@GetMapping(value="/routethumbfileview/{filename}")
 		public void thumbfileview(@PathVariable String filename, 
@@ -210,35 +225,37 @@ public class RouteController {
 	
 	@ResponseBody
 	@PostMapping(value="/sortRoutes")
-	public List<Route> sortRoutes(@RequestParam("area") String area, @RequestParam("distance") int distance[]) {
+	public List<Route> sortRoutes(@RequestParam("area") String area,
+				@RequestParam("distance_left") int distance_left, @RequestParam("distance_right") int distance_right, Model model) {
 		List<Route> routeslist = null;
+		System.out.println(area +","+distance_left+","+distance_right);
 		try {
-			routeslist = routeService.getSortedRoutes(area, distance);
+			routeslist = routeService.getSortedRoutes(area, distance_left, distance_right);
+			model.addAttribute("sorted", true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return routeslist;
 	}
 	
-	@ResponseBody
-	@PostMapping(value="/likes")
-	public boolean likes(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
-		boolean likes = false;
+	@GetMapping(value="alert")
+	public String alert(@RequestParam("id") String id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no, Model model)  {
+		boolean alert = false;
 		try {
-			// 현재 게시물에 like에 대한 정보 확인
-			likes = likesService.getLikesTF(user_id, board_type, board_no);
-			if(likes == false) {
-				likesService.insertLikes(user_id, board_type, board_no);
-				likes = true;
+			alert = alertService.getAlertTF(id, board_type, board_no);
+			if(alert==false) {
+				alertService.insertAlert(id, board_type, board_no);
+				alert = true;
+				model.addAttribute("alert", true);
+				
 			} else {
-				likesService.deleteLikes(user_id, board_type, board_no);
-				likes = false;
+				alertService.deleteAlert(id, board_type, board_no);
+				alert = false;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(likes);
-		return likes;
+		return "redirect:/route_post";
 	}
 	
 	@ResponseBody
@@ -300,6 +317,7 @@ public class RouteController {
 	private static String getRegionAddress(String jsonString) {
         String value = "";
         JSONObject jObj = (JSONObject) JSONValue.parse(jsonString);
+        System.out.println(jObj);
         JSONObject meta = (JSONObject) jObj.get("meta");
         long size = (long) meta.get("total_count");
         

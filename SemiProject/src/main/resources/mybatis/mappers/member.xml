@@ -28,6 +28,12 @@
 		update member set password=#{password}, email=#{email}, phone=#{phone}
 		where id = #{id} and name=#{name}
 	</update>
+	
+	<select id="queryProfile" parameterType="String" resultType="String">
+		<![CDATA[
+			select memberthumb from member where id=#{user_id}
+		]]>
+	</select>
 </mapper>
 
 <!-- create table member(

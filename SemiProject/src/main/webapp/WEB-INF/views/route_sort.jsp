@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,74 +15,23 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
-
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-	<style>
-   		ul.area_ul {
-        	list-style-type: none; 
-	        /* list 앞에 나타나는 총알을 없애줌 */
-    	    margin: 0px;
-        	padding :0px;
-	        overflow: auto;
-    	    background-color: #f3f3f3;
-        	border: 1px solid #e7e7e7;  
-	    }
-    	li.area_li {
-    		height:40px;
-	        float: left;
-    	    font-size:8px; 
-        	text-align: center;
-	        display: block;
-    	    color: #666;
-        	padding: 4px 12px;
-        	text-decoration: none;
-	    }
-    	li.area_li a:hover:not(.active){
-        	text-decoration: underline;
-	    }
-    
-    	/* 구 */
-    	ul.part_ul {
-        	list-style-type: none; 
-        	margin: 0px;
-        	padding :0px;
-        	overflow: auto;
-    	}    
-    	ul.part_ul li {
-       		float: left;
-	        font-size:8px; 
-    	    display: block;
-        	width: 117px;
-	        color: #666;
-    	    padding: 8px 12px;
-        	text-decoration: none; 
-	    }  
-    	ul.part_ul li a:hover:not(.active){
-      		text-decoration: underline;
-    	}
-    
-    	/* 동 */
-    	ul.specific_ul {
-        	list-style-type: none; 
-        	margin: 0px;
-        	padding :0px;
-        	overflow: auto;
-        	background-color: #e9e9e9;
-    	}    
-	    ul.specific_ul li {
-    	    float: left;
-        	font-size: 1em; 
-	        display: block;
-    	    width: 120px;
-        	color: #666;
-	        padding: 4px 4px;
-    	    text-decoration: none; 
-	    }  
-    	ul.specific_ul li a:hover:not(.active){
-      		text-decoration: underline;
-	    }
+    <style>
+   		.main { width: 70%; margin: 0 auto; }
+		.container2 { max-width:1024px; margin:30px auto;}
+		.writebtn { text-align: right;  display:inline-block; float:right; margin-right:10%; }
+		.routebtns { width: 100%; height:60px; display:inline-block; align-items: center; margin-top:50px; margin-bottom:50px; }
+		.routebtn { width:150px; height:50px; display:inline-block; }
+		.route_mini { width: 32%; height:500px; display: inline-block; border: 1px solid gray; border-radius: 13px; margin: 30px 0.5% 15px 0.5%; }
+		.userProfile { width:25px;; height:25px; }
+		.routeThumbImg { width:100%;height:300px; display:block; margin: auto; }
+		
+		.route_miniHeader { margin: 10px 5% 10px 2%; }
+		.route_miniInfo { padding-left:10px; padding-right:10px; } 
+		.route_miniFooter { display: inline-block;  margin: 10px 5% 10px 4%; }
+		
     
     	.active{
         	color: white;
@@ -92,29 +42,36 @@
 	  		padding: 10px;
   			vertical-align: top;
 		}
+		
 	</style>
 </head>
 <body>
-	<header><%@include file ="header.jsp" %></header>
-	<main style="width: 70%; margin: 0 auto;">
-		<div class="row align-items-center py-3">
-			<div class="col-md-8 text-black">
-        		<h2>나처럼 달려</h2><br><br>
-	            <div id="route_buttons" style="width: 100%; height:60px; display:inline-block; align-items: center;">
-    			<div style="width:150px; height:50px; display:inline-block;">
-    				<form action ="/route" method="post" style=" display:inline-block">
-    					<button id="routes_all" class="btn btn-success" style="width:150px;">전체보기</button>
-    				</form></div>
-    			<div style="width:200px; height:50px; display:inline-block;">
-    				<form action ="/route_sort" method="post">
+	<header>
+		<%@include file ="header.jsp" %>
+		<%@include file ="slides.jsp" %>
+    </header>
+    
+	<main class="main">
+	<div class="container2">
+		<h2>나처럼 달려</h2>
+		<div id="route_buttons" class="routebtns">
+			<div class="routebtn">
+    			<form action ="/route" method="post" >
+    				<button id="routes_all" class="btn btn-success" style="width:150px;">전체보기</button>
+    			</form>
+    		</div>
+    		<div class="routebtn">
+    			<form action ="/route_sort" method="post">
     					<button id="routes_sort" class="btn btn-success" style="width:200px;">지역별/거리별 보기</button>
-    				</form></div>
-    			<div style="width:150px; height:50px; display:inline-block; float:right;">
-    				<form action ="/route_write" method="post">
-    					<button id="route_reg" class="btn btn-success" style="width:150px;">코스등록하기</button>
-    				</form></div>
-    			</div>
-        	</div>
+    			</form>
+    		</div>
+    		<div class="writebtn">
+    			<form action ="/route_write" method="post">
+    				<c:if test="${!empty id }">
+    					<button id="route_reg" class="btn btn-success" style="width:150px; ">코스등록하기</button>
+    				</c:if>
+    			</form>
+    		</div>
 		</div>
 		
 		<fieldset style="padding-bottom: 30px; border: 1px solid gray;">
@@ -123,35 +80,6 @@
 					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">지역</div>
 					<input type="text" id="area_text" class="form-control mt-1" style="display:inline-block; width:70%;"/>
 				</div>
-				<div id="select_area" style="width:852px; margin: 0 auto; display: none; border: 1px solid gray;">
-					<div id="select_range" style="width:852px;">
-						<ul class="area_ul">
-            				<li class="area_li active" value="11"><a>서울</a></li>
-		        	    	<li class="area_li" value="26"><a>부산</a></li>
-    		       			<li class="area_li" value="27"><a>대구</a></li>
-        		   			<li class="area_li" value="28"><a>인천</a></li>
-	           				<li class="area_li" value="29"><a>광주</a></li>
-		           			<li class="area_li" value="30"><a>대전</a></li>
-	    	        		<li class="area_li" value="31"><a>울산</a></li>
-	    		   	    	<li class="area_li" value="36"><a>세종</a></li>
-    	    	   			<li class="area_li" value="41"><a>경기</a></li>
-	        	   			<li class="area_li" value="42"><a>강원</a></li>
-    	        			<li class="area_li" value="43"><a>충북</a></li>
-	    	        		<li class="area_li" value="44"><a>충남</a></li>
-		           			<li class="area_li" value="45"><a>전북</a></li>
-	        	   			<li class="area_li" value="46"><a>전남</a></li>
-	    		    	   	<li class="area_li" value="47"><a>경북</a></li>
-    	   		    		<li class="area_li" value="48"><a>경남</a></li>
-	    	    	   		<li class="area_li" value="50"><a>제주</a></li>
-    	    			</ul>
-					</div>
-    	    		<div id="select_part" style="width:852px; margin-top:3px;">
-    	    			<ul id="part_ul" class="part_ul"></ul>
-    	    		</div>
-    	    		<div id="select_specific" style="width:852px; margin-top:3px;">
-	    	    		<ul id="specific_ul" class="specific_ul"></ul>
-    		    	</div>
-       			</div>
 			</div>
 			<div id="distance_div" style="margin: 0 auto; padding-top: 20px;">
 				<div style="height:50px; margin: 0 auto;" >
@@ -163,11 +91,95 @@
 			</div><br><br>
 
 			<div style="margin: 0 auto; text-align:center;">
-				<input id="submit" value="검색" style="width:15%; height:40px; text-align : center; line-height: 20px;" value="검색"/>
+				<button id="submit" style="width:15%; height:40px; text-align : center; line-height: 20px;" >검색</button>
 			</div>
 		</fieldset>
 		
-		<script>
+		
+		<c:if test="${empty sorted }">
+			<section id="emptyArea">등록된 글이 없습니다.</section>
+		</c:if>
+		<c:otherwise>
+			<div id="routes"></div>
+		</c:otherwise>
+		
+		<!-- <div id="routes">
+			<c:if test="${sorted }">
+			</c:if>
+		<c:choose>
+			<c:when test="${routesinfolist!=null && pageInfo.listCount>0 }">
+			<div id="routes_list">
+				<c:forEach items="${routesinfolist }" var="route">
+					<a href="routepost?articleNo=${route.route_articleNo}">
+					<div id="route_mini" class="route_mini">
+            			<div id="route_miniHeader" class="route_miniHeader">
+                			<img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile">
+                			<span id="route_userName">${route.user_id }</span>
+                			<span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
+           				 </div>
+            			<div id="route_miniInfo" class="route_miniInfo">
+                			<div id="route_miniTitle" style="text"></div>
+                			<div id="route_miniThumbInfo">
+              					<img src="/routethumbfileview/${route.route_thumb }" id="routeThumbImg" class="routeThumbImg">
+                    			<div id="route_miniContent"></div>
+                			</div>
+            			</div>
+           				<div id="route_miniFooter" >
+                			<div id="route_miniFooterLeft" class="route_miniFooter" >
+                    			<img src="${pageContext.request.contextPath }/images/like.PNG" class="userProfile" />
+                    			<span id="route_likes">${route.route_likes }</span>
+                    			<img src="${pageContext.request.contextPath }/images/nolike.PNG" class="userProfile" />
+                   				<span id="route_Replies">4</span>
+                			</div>
+               	 			<div id="route_miniFooterRight" class="route_miniFooter" style="float:right;" >
+                    			<span>조회</span>
+                    			<span id="route_myViews">${route.route_views }</span>
+                			</div>
+           			 	</div>
+        			</div>
+        			</a>
+				</c:forEach>
+			</div>
+			
+			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
+			<c:choose>
+				<c:when test="${pageInfo.page<=1}">
+					[이전]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="route?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<c:choose>
+					<c:when test="${pageInfo.page==i }">
+						[${i }]
+					</c:when>
+					<c:otherwise>
+						<a href="route?page=${i}">[${i }]</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+					[다음]
+				</c:when>
+				<c:otherwise>
+					<a href="route?page=${pageInfo.page+1}">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+			</c:when>	
+			<c:otherwise>
+				<section id="emptyArea">등록된 글이 없습니다.</section>
+			</c:otherwise>
+		</c:choose>
+		</div>-->
+	</div>
+		
+		
+		
+	<script>
 		$("#btn_length1").click(function(){
 			$("#btn_length1").removeClass("btn btn-success");
 			$("#btn_length2").removeClass("btn btn-success");
@@ -187,31 +199,77 @@
 			$("#btn_length3").attr('class','btn btn-success');
 		});
 		$("#submit").click(function(){
-			var distance;
+			var distance_left, distance_right;
 			if($("#btn_length1").hasClass("btn btn-success")===true){
-				distance = [0, 5000];
+				distance_left=0;
+				distance_right=5000;
 			}else if($("#btn_length2").hasClass("btn btn-success")===true){
-				distance = [5000, 20000];
+				distance_left=5000;
+				distance_right=20000;
 			}else if($("#btn_length3").hasClass("btn btn-success")===true){
-				distance = [20000, 100000];
+				distance_left=20000;
+				distance_right=100000000;
 			} else{
-				distance = [0, 0];
+				distance_left=0;
+				distance_right=0;
 			}
 			
-			
+			var area = $("#area_text").val();
 			$.ajax({
 				async:false,
 				type:"post",
 				url:"http://localhost:8090/sortRoutes",
 				traditional:true,
-				data: {"area": "", "distance" : distance},
+				data: {"area": area, "distance_left" : distance_left, "distance_right" : distance_right },
 				dataType:"text",
 				success:function(data){
-					console.log(data);
+					var routeElem = "";
+					var jsonInfo = JSON.parse(data);
+					console.log(jsonInfo);
+					
+					for(let route of jsonInfo){
+						
+						//routeElem += '<div id="routes_list">';
+						routeElem += '<a href="routepost?articleNo=' + jsonInfo.route_articleNo +'>';
+						routeElem += '<div id="route_mini" class="route_mini">';
+						routeElem += '<div id="route_miniHeader" class="route_miniHeader">';
+						//routeElem += '<img src="/profileview/'+route.memberthumb+'" id="userImage" class="userProfile">';	
+						routeElem += '<span id="route_userName">'+jsonInfo.user_id+'</span>';	
+						routeElem += '<span id="route_uploadTime" style="float:right;">'+jsonInfo.route_date+'</span>';
+						routeElem += '</div>'; 	
+						routeElem += '<div id="route_miniInfo" class="route_miniInfo">'; 	
+						routeElem += '<div id="route_miniTitle" style="text"></div>'; 	
+						routeElem += '<div id="route_miniThumbInfo">'; 	
+						routeElem += '<img src="/routethumbfileview/'+jsonInfo.route_thumb+'"id="routeThumbImg" class="routeThumbImg">'; 	
+						routeElem += '<div id="route_miniContent"></div>'; 	
+						routeElem += '</div>'; 	
+						routeElem += '</div>'; 	
+						routeElem += '<div id="route_miniFooter" >'; 	
+						routeElem += '<div id="route_miniFooterLeft" class="route_miniFooter" >'; 	
+						routeElem += '<img src="${pageContext.request.contextPath }/images/like.PNG" class="userProfile" />'; 	
+						routeElem += '<span id="route_likes">'+jsonInfo.route_likes+'</span>';		
+						routeElem += '<img src="${pageContext.request.contextPath }/images/nolike.PNG" class="userProfile" />'; 	
+						routeElem += '<span id="route_Replies">4</span>'; 		
+						routeElem += '</div>'; 	
+						routeElem += '<div id="route_miniFooterRight" class="route_miniFooter" style="float:right;" >'; 		
+						routeElem += '<span>조회</span>'; 	
+						routeElem += '<span id="route_myViews">'+jsonInfo.route_views+'</span>';	 		
+						routeElem += '</div>'; 				
+						routeElem += '</div>'; 	
+						routeElem += '</div>'; 	
+						routeElem += '</a>'; 
+						//routeElem += '</div>'; 
+						
+					}
+					//$("#routes").detach();
+					$("#routes").append(routeElem);
+					
 				}
 			});
 		});
-		</script>
+	</script>
+		
+		<br><br><br><br><br>
 		
 		<h2 style="display:inline-block">추천코스</h2>  <h4 style="display:inline-block">동작구</h4>
 		<div id="routes_list" style="width: 90%; height:400px; margin-left: 5%; margin-right: 5%;">
@@ -308,7 +366,8 @@
 	                </div>
     	        </div>
         	</div>
-    	</div>
+    	</div> 
+    	
 	</main>
 	
 	<script>
@@ -322,7 +381,7 @@
 			var parts = [];
 			
 			/* 지역 검색창 열기 */
-			$('#area_text').click(function(){
+			/*$('#area_text').click(function(){
 				$('#select_area').show();
 				area_values[0] = '11';					//도시 번호
 				areaName = hangjungdong.sido[area_values[0]].codeNm;
@@ -338,7 +397,7 @@
 				for(var i in parts){
 					part_ul.append("<li><a>"+Object.values(parts[i])[2]+"</a></li>");
 				}
-			});
+			});*/
 			
 			
 			$(document).on("click",".area_ul li", function(){

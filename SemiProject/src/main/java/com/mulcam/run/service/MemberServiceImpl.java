@@ -52,6 +52,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.delete(id);
 	}
 	
-	
+	@Override
+	public String profileImg(String user_id) throws Exception {
+		return memberDAO.queryProfile(user_id);
+	}
 
 }

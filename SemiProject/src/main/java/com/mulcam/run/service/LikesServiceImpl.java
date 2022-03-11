@@ -18,13 +18,13 @@ public class LikesServiceImpl implements LikesService {
 		likesDAO.insertLikes(like);
 	}
 	@Override
-	public boolean getLikesTF(String user_id, String board_type, int articleNo) throws Exception {
-		Likes like = new Likes(user_id, board_type, articleNo);
+	public boolean getLikesTF(String user_id, String board_type, int board_no) throws Exception {
+		Likes like = new Likes(user_id, board_type, board_no);
 		return likesDAO.checkLikes(like);
 	}
 	@Override
-	public void deleteLikes(String user_id, String board_type, int articleNo) throws Exception {
-		Likes like = new Likes(user_id, board_type, articleNo);
+	public void deleteLikes(String user_id, String board_type, int board_no) throws Exception {
+		Likes like = new Likes(user_id, board_type, board_no);
 		int like_no = likesDAO.selectlikesNo(like);
 		likesDAO.deleteLikes(like_no);		
 	}	

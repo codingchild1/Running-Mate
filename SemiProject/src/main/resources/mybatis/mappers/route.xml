@@ -9,9 +9,13 @@
 		]]>
 	</select>
 	
-	<select id="queryRoute" parameterType="int" resultType="route">
+	<select id="queryRoute" parameterType="int" resultType="routeinfo">
 		<![CDATA[
-			select * from route where route_articleNo=#{articleNo} limit 1
+			select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
+				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
+			from route left join member 
+			on route.user_id=member.id 
+			where route_articleNo=#{articleNo} limit 1
 		]]>
 	</select>
 			
@@ -30,15 +34,37 @@
 		]]>
 	</select>
 	<!-- select * from route order by route_date desc limit #{startrow}, 9 -->
-	<select id="queryByDistance" parameterType="int" resultType="route">
+	
+	<select id="queryByAreaNDistance" parameterType="SearchRoute" resultType="route">
 		<![CDATA[
-			select * from route where route_distance between #{distance[0]} and #{distance[1]}
+			select * from route where route_distance between #{distance_left} and #{distance_right} and route_area like CONCAT('%',#{area},'%')
+		]]>
+	</select>
+	<select id="queryByDistance" parameterType="SearchRoute" resultType="route">
+		<![CDATA[
+			select * from route where route_distance between #{distance_left} and #{distance_right}
+		]]>
+	</select>
+	<select id="queryByArea" parameterType="SearchRoute" resultType="route">
+		<![CDATA[
+			select * from route where route_area like CONCAT('%',#{area},'%')
 		]]>
 	</select>
 	
 	<update id="updateViews" parameterType="int">
 		<![CDATA[
 			update route set route_views=route_views+1 where route_articleNo=#{articleNo }
+		]]>
+	</update>
+	
+	<update id="updateLikePlus"  parameterType="int">
+		<![CDATA[
+			update route set route_likes=route_likes+1 where route_articleNo=#{articleNo }
+		]]>
+	</update>
+	<update id="updateLikeMinus"  parameterType="int">
+		<![CDATA[
+			update route set route_likes=route_likes-1 where route_articleNo=#{articleNo }
 		]]>
 	</update>
 	
