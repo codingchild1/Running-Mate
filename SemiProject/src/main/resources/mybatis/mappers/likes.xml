@@ -22,3 +22,13 @@
 	</select>
 
 </mapper>
+
+<!-- 
+create table likes(
+	likes_no int(11) auto_increment,
+    user_id varchar(100) not null,
+	board_type varchar(100) not null,
+    board_no int(11) not null,
+    primary key (likes_no)
+);
+ -->
