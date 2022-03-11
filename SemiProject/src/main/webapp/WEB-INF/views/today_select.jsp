@@ -113,9 +113,12 @@ header {
 									
 										<td>
 									<c:choose>
-										<c:when test= "${id  eq todayselect.user_id || id eq 'admin' }">
+										<c:when test= "${id eq todayselect.user_id || id eq 'admin' }">
 											<button type="button" class="col gap-1 rounded btn btn-white"
-												id="today_delete" name="today_delete">삭제</button>
+												id="today_delete" name="today_delete">
+												
+												
+												삭제</button>
 											<input type="submit" class="col gap-1 rounded btn btn-white"
 												id="today_modify" name="today_modify" value="수정"/>
 										</c:when>

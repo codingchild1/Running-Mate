@@ -1,6 +1,8 @@
 package com.mulcam.run.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,6 @@ public class TodayServiceImpl implements TodayService {
 	
 	@Autowired 
 	TodayDAO todayDAO; 
-	
-	@Override
-	public List<Today> getSerchBoardList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 	//전체 게시글 
 	@Override
@@ -74,6 +69,33 @@ public class TodayServiceImpl implements TodayService {
 	public void removeTBoard(int articleNo) throws Exception {
 		todayDAO.deleteTBoard(articleNo);
 		
+	}
+	
+	@Override
+	public List<Today> getSearchBoardList(String search, int page, PageInfo pageInfo) throws Exception {
+		int listCount=todayDAO.searchTBoardCount(search);
+		System.out.println("List카운트:"+listCount);
+		int maxPage=(int)Math.ceil((double)listCount/6);
+		int startPage=(((int) ((double)page/6+0.9))-1)*6+1;
+		int endPage=startPage+10-1;
+		System.out.println(maxPage +","+startPage+","+endPage);
+		if(endPage>maxPage) {
+			endPage=maxPage;
+		}
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		pageInfo.setListCount(listCount);
+		
+		int startrow=(page-1)*6;
+		
+		Map<String, Object> searchParam = new HashMap<String, Object>();
+		searchParam.put("search", search);
+		searchParam.put("startrow", startrow);
+		
+		
+		return todayDAO.selectSerchTBoardList(searchParam);
 	}
 
 	@Override

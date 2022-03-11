@@ -1,6 +1,7 @@
 package com.mulcam.run.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,10 @@ public interface TodayDAO {
 	 
 	 
 	//1.전체페이지 검색후 여러게시물 반환
+	int searchTBoardCount(String search) throws Exception;
+	List<Today> selectSerchTBoardList(Map<String, Object> searchParam) throws Exception;
+	
+	
 	//2.하나의 글 정보를 select하는 쿼리문
 	Today selectTBoard(int today_articleNo) throws Exception;
 
