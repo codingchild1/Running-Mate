@@ -50,4 +50,8 @@ public interface MateService{
 	
 	List<String> allMapInfo() throws Exception; //전체 게시물 조회
 	List<String> allTitleInfo() throws Exception; //전체 게시물 조회
+	
+	List<GroupAndMate> addressinfo(String input) throws Exception; //map페이지 주소검색
+	List<GroupAndMate> addressinfo2(String type,String input) throws Exception; //map페이지 주소검색
+	List<GroupAndMate> addressinfo3(String type) throws Exception; //map페이지 주소검색
 }

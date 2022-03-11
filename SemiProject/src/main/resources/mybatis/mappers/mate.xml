@@ -45,7 +45,7 @@
 	<update id="updateMate" parameterType="mate" >
 		<![CDATA[
 		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_date=now(), 
-		mate_mapinfo=#{mate_mapinfo} where mate_articleNO=#{mate_articleNO}
+		mate_mapinfo=#{mate_mapinfo},mate_address=#{mate_address} where mate_articleNO=#{mate_articleNO}
 		]]>
 	</update>
 	
@@ -53,7 +53,7 @@
 	<update id="updateGroup" parameterType="group" >
 		<![CDATA[
 		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
-						group_il=#{group_ki}, group_date=now(), group_area=#{group_area} 
+						group_il=#{group_ki}, group_date=now(), group_area=#{group_area} , group_address=#{group_address}
 						where group_articleNO=#{group_articleNO}
 		]]>
 	</update>
@@ -89,16 +89,16 @@
 	<!-- mate게시물 생성 -->
 	<insert id="insertMate" parameterType="mate">
 		<![CDATA[
-			insert into mate (mate_articleNO,user_id,mate_title,mate_cont,user_img,mate_like,mate_date,mate_views,mate_mapinfo,warning) 
-				values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},false)
+			insert into mate (mate_articleNO,user_id,mate_title,mate_cont,user_img,mate_like,mate_date,mate_views,mate_mapinfo,warning,mate_address) 
+				values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},false,#{mate_address})
 		]]>
 	</insert>
 	
 		<!-- group게시물 생성 -->
 	<insert id="insertGroup" parameterType="group">
 		<![CDATA[
-			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_kl,group_il,group_date,group_area,group_views,warning) 
-				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,false)
+			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_kl,group_il,group_date,group_area,group_views,warning,group_address) 
+				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,false,#{group_address})
 		]]>
 	</insert>
 	
@@ -204,5 +204,40 @@
 			order by regdate desc;
 		]]>
 	</select>
+	
+		<!-- 전체게시물 지도검색결과조회 -->
+	<select id="searchMap" resultType="GroupAndMate" >
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_address as address,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_address as address,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where address like concat('%',#{input},'%')
+			order by regdate desc
+		]]>
+	</select>
+	
+			<!--  전체게시물 지도검색결과조회 타입까지 -->
+  	<select id="searchMap2" resultType="GroupAndMate"  parameterType="map">
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_address as address,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_address as address,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where address like concat('%',#{input},'%') and type=#{type}
+			order by regdate desc
+		]]>
+	</select>
+	
+	  	<select id="searchMap3" resultType="GroupAndMate">
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_cont as cont,group_area as mapinfo,group_address as address,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_cont as cont,mate_mapinfo as mapinfo,mate_address as address,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where type=#{type}
+			order by regdate desc
+		]]>
+	</select> 
 
 </mapper>

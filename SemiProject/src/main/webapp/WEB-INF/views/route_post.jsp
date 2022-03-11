@@ -111,10 +111,10 @@
 			success:function(data){
 				if(data=="true"){
 					console.log("true: " +data);
-					$("#alert").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+					$("#like").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
 				} else {
 					console.log("false: " + data);
-					$("#alert").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+					$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
 				}
 			}
 		});			 

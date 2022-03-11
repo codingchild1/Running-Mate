@@ -201,7 +201,34 @@
         }
         .more{
         cursor: pointer;
-        } 
+        }
+      /*   .register2{
+                padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;
+               }
+               .profile{
+                width: 40px; height: 40px;margin-top: 10px; margin-right: 10px
+               }
+               .register3{
+                width: 150px;
+               }
+               #title{
+                width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;
+               }
+               #id{
+                width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;
+               }
+               .register4{
+                vertical-align: middle;margin-top: 15px;
+               }
+               .heart{
+                width: 23px; height: 23px;
+               }
+               #like{
+                width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;
+               }
+               .more{
+                float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);
+               }  */
 
     </style>
 </head>
@@ -226,18 +253,21 @@
         <div style="float: left;">
         <div style="display: inline-block; border: 1px solid;padding: 2px;width: 180px;margin-left: 10px;">
             <span><img class="search" src="images/search.png" style="width: 20px; height: 20px; float: left; margin-left: 5px;margin-top: 5px;"></span>
-        <input id="search" type="text" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
+        <input id="search" name="search" type="text" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
+        <input id="mysearch" name="mysearch" type="text" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
     </div>
     <span><button id="search2" style="width:50px; height:37px;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;">검색</button></span>
     <span onclick="getCurrentPosBtn()" style="cursor:pointer;"><img class="gps" src="images/gps.jpg" style="width: 30px; height: 30px; float: right; margin-top: 3px;"></span>
      
         <div class="post2" style="height: 50px;">
         <ul style="cursor: pointer;">
-            <li><b>전체</b></li>
-            <li>번개</li>
-            <li>소모임</li>
+            <li class="all"><b>전체</b></li>
+            <li class="matel">번개</li>
+            <li class="groupl">소모임</li>
         </ul>
+            <input id="type" name="type" type="hidden" value=''>
         </div>
+        <div class="aa">
          <c:forEach items="${mates }" var="groupandmate">
         <div class="register">
             <div
@@ -266,6 +296,7 @@
             </div>
         </div>
          </c:forEach> 
+         </div>
     </div>
         </div>
         
@@ -380,25 +411,7 @@
 	let g_editor;
 	/* console.log($('#mapinfo').val()); */
 	/* console.log($('#titleinfo').val());  */
-	var map = JSON.parse($('#mapinfo').val());
-	var title ='${titleinfo}';
-	var titlelist = [];
-	<c:forEach items="${titleinfo }" var="item">
-		titlelist.push('${item}');
-		</c:forEach>
-	/* ${titleinfo} */
-	console.log(map);
 	
-	console.log(titlelist);
-	
-	var options = [];
-	map.forEach(function(item,index,array){
-		options.push({
-			content: '<div>'+titlelist[index]+'</div>',
-			latlng: new kakao.maps.LatLng(array[index].Ma, array[index].La)
-		})
-	});
-	console.log(options);
 	//ckeditor
 	ClassicEditor.create(document.querySelector("#editor"))
     .then(editor=>{
@@ -686,18 +699,46 @@
 	        		}
     		});
 		});
-		 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+		
+		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 6 // 지도의 확대 레벨 
+	        level: 4 // 지도의 확대 레벨 
 	    }; 
-
+		
+		var map = JSON.parse('${mapinfo}');
+		var title ='${titleinfo}';
+		var titlelist = [];
+		<c:forEach items="${titleinfo }" var="item">
+			titlelist.push('${item}');
+			</c:forEach>
+		/* ${titleinfo} */
+		console.log(map);
+		console.log(titlelist);
+		
+		var positions = [];
+		map.forEach(function(item,index,array){
+			positions.push({
+				content: '<div>'+titlelist[index]+'</div>',
+				latlng: new kakao.maps.LatLng(array[index].Ma, array[index].La)
+			})
+		});
+		
+		console.log(positions);
+		
+		
+		
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+    
+    
  $(document).ready(function(){
 		$('#search2').bind("click", function(){
 			var search = $('#search').val();
+			
 	        geocoder.addressSearch(search, function(result, status) {
 	        	
 	            // 정상적으로 검색이 완료됐으면 
@@ -705,11 +746,39 @@
 
 	                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-	                // 결과값으로 받은 위치를 마커로 표시합니다
-	               /*  var marker = new kakao.maps.Marker({
-	                    map: map,
-	                    position: coords
-	                }); */
+	        		for (var i = 0; i < positions.length; i ++) {
+	        		    // 마커를 생성합니다
+	        		    var marker = new kakao.maps.Marker({
+	        		        map: map, // 마커를 표시할 지도
+	        		        position: positions[i].latlng // 마커의 위치
+	        		    });
+
+	        		    // 마커에 표시할 인포윈도우를 생성합니다 
+	        		    var infowindow = new kakao.maps.InfoWindow({
+	        		        content: positions[i].content // 인포윈도우에 표시할 내용
+	        		    });
+
+	        		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+	        		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+	        		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+	        		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+	        		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	        		}
+
+	        		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	        		function makeOverListener(map, marker, infowindow) {
+	        		    return function() {
+	        		        infowindow.open(map, marker);
+	        		    };
+	        		}
+
+	        		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	        		function makeOutListener(infowindow) {
+	        		    return function() {
+	        		        infowindow.close();
+	        		    };
+	        		}
+	                
 	                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	                map.setCenter(coords);
 	                /* marker.setDraggable(true); */
@@ -717,6 +786,54 @@
 	 	           console.log(bounds);
 	 	          $('input[name=boundinfo]').attr('value',bounds);
 	 	          console.log("검색좌표"+$('#boundinfo').val());
+	 	         $('input[name=type]').attr('value','all');
+	 	          console.log($('#search').val());
+	 	  			 $.ajax({
+	 	    			async:false,
+	 	    			type:"GET",
+	 	    			url:"http://localhost:8090/mate_mapsearch",
+	 	    			dataType:"text",
+	 	    			 contentType : 'application/json; charset=UTF-8', 
+	 	    			data:{"input":$('#search').val(),
+	 	    				  "type":$('#type').val()},
+	 	    			success: function(data, textStatus) {
+	 	    				/* console.log(data); */
+	 	    				var jdata = JSON.parse(data);
+	 	    				/* console.log(jdata);
+	 	    				console.log(jdata.length); */
+	 	    				//var jsonInfo = JSON.parse(data);
+	 	    				var count = 0;
+	 	    				 for(var i of jdata) {
+	 	    					var accEle = "";
+	 	    					 console.log(i);
+	 	    					 /* var jdata =JSON.parse(i); */
+	 	    					/*  console.log(jdata[i].title); */ 
+	 	    					console.log(i.type);
+	 	    					accEle += '<div class="register">'
+	 	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+	 	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+	 	    					accEle +=' <div style=" width: 150px;">'
+	 	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	 	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+	 	    					accEle +='</div>'
+	 	    					accEle +=' <div>'+"번개"+'</div>'
+	 	    					accEle +='</div>'
+	 	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+	 	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
+	 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+	 	    					 accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+	 	    					accEle +='</div>'
+	 	    					accEle +=' </div>'
+	 	    					count++;
+	 	    				}  
+	 	    				console.log(accEle);
+	 	    				
+	 	    				$('.register').detach();
+	 	    				 $('.aa').append(accEle);  
+	 	    				
+	 	    			}
+	 	    		});   
+	 	          
 	            }
 /* 	         	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 	        	    
@@ -761,15 +878,51 @@
 	            message = '<div style="padding:5px;">현재위치입니다.</div>'; // 인포윈도우에 표시될 내용입니다
 	        
 	        // 마커와 인포윈도우를 표시합니다
-	          displayMarker(locPosition, message);  
-	           bounds = map.getBounds();
-	           var jbounds = JSON.stringify(bounds);
-	           console.log(jbounds);
-	           /* console.log(bounds); */
-	           $('input[name=boundinfo]').attr('value',jbounds);
-	 	       console.log("현재위치좌표"+$('#boundinfo').val());
+	          displayMarker(locPosition, message);
+	            
+	         function searchAddrFromCoords(coords, callback) {
+	  		    // 좌표로 행정동 주소 정보를 요청합니다
+	  		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+	  		}
+
+	  		function searchDetailAddrFromCoords(coords, callback) {
+	  		    // 좌표로 법정동 상세 주소 정보를 요청합니다
+	  		    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	  		} 
+	            //삭제해도됨
+      	    searchDetailAddrFromCoords(locPosition, function(result, status) {
+    	        if (status === kakao.maps.services.Status.OK) {
+    	            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+    	            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+    	            
+    	            var content = '<div class="bAddr">' +
+    	                            detailAddr + 
+    	                        '</div>';
+    	                        var latlng = locPosition
+    	                        JSON.stringify(latlng);
+    	    	        	    console.log("좌표: " + JSON.stringify(latlng));
+    	            // 마커를 클릭한 위치에 표시합니다 
+    	           /*  marker.setPosition(locPosition); */
+    	           /*  marker.setMap(map); */
+
+    	            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+    	            /* infowindow.setContent(content);
+    	            infowindow.open(map, marker); */
+    	           
+    	         console.log(result[0].address.address_name);
+    	            $('input[name=mysearch]').attr('value',result[0].address.address_name);
+    	            //여기서 받은 value를 ajax넘겨주는 데이터를 input으로 똑같이 보내주면됨. 단 데이터 전부넣지말고 잘라서 넣어야됨 근데 어떻게?
+    	            // 현재위치 list받고나서 전체,번개,소모임 카테고리를 눌렀을 때 데이터는?
+    	       /*  $('input[name=mate_address]').attr('value',result[0].address.address_name); */
+    	        }
+    	        /* console.log($('#mate_address').val()); */
+    	    });
+	            //여기까지
+	            
 	      });
+	    
 	    }
+	    
 	    
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 	    
@@ -781,13 +934,40 @@
 
 	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
  	function displayMarker(locPosition, message) {
+		
+ 		for (var i = 0; i < positions.length; i ++) {
+		    // 마커를 생성합니다
+		    var marker = new kakao.maps.Marker({
+		        map: map, // 마커를 표시할 지도
+		        position: positions[i].latlng // 마커의 위치
+		    });
 
-	    // 마커를 생성합니다
- 	   /*  var marker = new kakao.maps.Marker({  
-	        map: map, 
-	        position: locPosition 
-	    });   */
-	    
+		    // 마커에 표시할 인포윈도우를 생성합니다 
+		    var infowindow = new kakao.maps.InfoWindow({
+		        content: positions[i].content // 인포윈도우에 표시할 내용
+		    });
+
+		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+		}
+
+		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		}
+		
 	    var iwContent = message, // 인포윈도우에 표시할 내용
 	        iwRemoveable = true;
 
@@ -802,7 +982,143 @@
 	    
 	    // 지도 중심좌표를 접속위치로 변경합니다
 	    map.setCenter(locPosition);    
-	}      
+	}
+	
+ 	$('.matel').click(function(){
+ 		 $('input[name=type]').attr('value','m');
+ 		 $.ajax({
+  			async:false,
+  			type:"GET",
+  			url:"http://localhost:8090/mate_mapsearch",
+  			dataType:"text",
+  			 contentType : 'application/json; charset=UTF-8', 
+  			data:{"input":$('#search').val(),
+  				  "type":$('#type').val()},
+  			success: function(data, textStatus) {
+  				console.log(data);
+  				var jdata = JSON.parse(data);
+  				console.log(jdata);
+  				//var jsonInfo = JSON.parse(data);
+  				
+  				var count = 0;
+  				 for(var i of jdata) {
+  					var accEle = "";
+  					 /* var jdata =JSON.parse(i); */
+  					/*  console.log(jdata[i].title); */ 
+  					accEle += '<div class="register">'
+  					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+  					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+  					accEle +=' <div style=" width: 150px;">'
+  					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+  					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+  					accEle +='</div>'
+  					accEle +=' <div>'+"번개"+'</div>'
+  					accEle +='</div>'
+  					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+  					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
+  					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+  					 accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+  					accEle +='</div>'
+  					accEle +=' </div>'
+  					count++;
+  				}  
+  				console.log(count);
+  				$('.register').detach();
+  				 $('.aa').append(accEle);  
+  				
+  			}
+  		});   
+ 	});
+ 	$('.groupl').click(function(){
+		 $('input[name=type]').attr('value','g');
+		 $.ajax({
+  			async:false,
+  			type:"GET",
+  			url:"http://localhost:8090/mate_mapsearch",
+  			dataType:"text",
+  			 contentType : 'application/json; charset=UTF-8', 
+  			data:{"input":$('#search').val(),
+  				  "type":$('#type').val()},
+  			success: function(data, textStatus) {
+  				console.log(data);
+  				var jdata = JSON.parse(data);
+  				console.log(jdata);
+  				//var jsonInfo = JSON.parse(data);
+  				
+  				var count = 0;
+  				 for(var i of jdata) {
+  					var accEle = "";
+  					 /* var jdata =JSON.parse(i); */
+  					/*  console.log(jdata[i].title); */ 
+  					accEle += '<div class="register">'
+  					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+  					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+  					accEle +=' <div style=" width: 150px;">'
+  					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+  					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+  					accEle +='</div>'
+  					accEle +=' <div>'+"번개"+'</div>'
+  					accEle +='</div>'
+  					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+  					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
+  					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+  					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+  					accEle +='</div>'
+  					accEle +=' </div>'
+  					count++;
+  				}  
+  				console.log(count);
+  				$('.register').detach();
+  				 $('.aa').append(accEle);  
+  				
+  			}
+  		});   
+	});
+ 	$('.all').click(function(){
+		 $('input[name=type]').attr('value','all');
+		 $.ajax({
+  			async:false,
+  			type:"GET",
+  			url:"http://localhost:8090/mate_mapsearch",
+  			dataType:"text",
+  			 contentType : 'application/json; charset=UTF-8', 
+  			data:{"input":$('#search').val(),
+  				  "type":$('#type').val()},
+  			success: function(data, textStatus) {
+  				console.log(data);
+  				var jdata = JSON.parse(data);
+  				console.log(jdata);
+  				//var jsonInfo = JSON.parse(data);
+  				
+  				var count = 0;
+  				 for(var i of jdata) {
+  					var accEle = "";
+  					 /* var jdata =JSON.parse(i); */
+  					/*  console.log(jdata[i].title); */ 
+  					accEle += '<div class="register">'
+  					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+  					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+  					accEle +=' <div style=" width: 150px;">'
+  					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+  					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+  					accEle +='</div>'
+  					accEle +=' <div>'+"번개"+'</div>'
+  					accEle +='</div>'
+  					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+  					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
+  					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+  					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+  					accEle +='</div>'
+  					accEle +='</div>'
+  					count++;
+  				}  
+  				console.log(accEle);
+  				$('.register').detach();
+  				$('.aa').append(accEle);  
+  				
+  			}
+  		});   
+	});
     </script>
      <%@include file ="fotter.jsp" %>
 </body>

@@ -12,11 +12,12 @@ public class Group {
 	String group_area;
 	int group_views;
 	boolean warning;
+	String group_address;
 	
 	public Group() {}
 	public Group(String group_articleNO,String user_id, String group_title, String group_cont,
 			String user_img, String group_kl, String group_il,String group_date,
-			String group_area, int group_views, boolean warning) {
+			String group_area, int group_views, boolean warning,String group_address) {
 		this.group_articleNO=group_articleNO;
 		this.user_id=user_id;
 		this.group_title=group_title;
@@ -28,8 +29,15 @@ public class Group {
 		this.group_area=group_area;
 		this.group_views=group_views;
 		this.warning = warning;
+		this.group_address=group_address;
 	}
 	
+	public String getGroup_address() {
+		return group_address;
+	}
+	public void setGroup_address(String group_address) {
+		this.group_address = group_address;
+	}
 	public String getGroup_articleNO() {
 		return group_articleNO;
 	}

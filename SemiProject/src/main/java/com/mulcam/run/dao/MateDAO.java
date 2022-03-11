@@ -53,4 +53,8 @@ public interface MateDAO {
 	
 	public List<String> searchmapInfo() throws Exception; //전체게시물의 맵정보만 조회
 	public List<String> searchtitleInfo() throws Exception; //전체게시물의 맵정보만 조회
+	
+	public List<GroupAndMate> searchMap(String input)throws Exception; //map페이지 주소검색
+	public List<GroupAndMate> searchMap2(Map map)throws Exception; //map페이지 주소검색
+	public List<GroupAndMate> searchMap3(String type)throws Exception; //map페이지 주소검색
 }
