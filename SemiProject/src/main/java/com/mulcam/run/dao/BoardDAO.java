@@ -21,7 +21,7 @@ public interface BoardDAO {
 	List<Mate> materun() throws Exception;			// 메인페이지 번개 모임
 	
 
-	public void updateBoard(int fb_no) throws Exception; // 게시글 수정
+	void updateBoard(Board board) throws Exception; // 게시글 수정
 	
 	
 	void insertBoard(Board board) throws Exception; // 작성

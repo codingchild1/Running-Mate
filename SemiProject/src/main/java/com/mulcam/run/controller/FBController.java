@@ -1,5 +1,7 @@
 package com.mulcam.run.controller;
 
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,6 +43,13 @@ public class FBController {
 	
 	@Autowired
 	private ServletContext servletContext;
+	
+	@Autowired
+	HttpSession session;
+	
+	@Autowired() 
+	private HttpServletRequest request;
+
 	
 	/* 게시글 불러오기 */
 	@RequestMapping(value="/fb_main", method= {RequestMethod.GET, RequestMethod.POST})
@@ -69,6 +77,7 @@ public class FBController {
 		ModelAndView mv = new ModelAndView();
 		try {
 			Board board = boardService.getBoard(fb_articleNo);
+			String writer = (String) session.getAttribute("id");
 			mv.addObject("article", board);
 			mv.addObject("page", page);
 			mv.setViewName("/fb_detail");
@@ -116,10 +125,40 @@ public class FBController {
  * mv.setViewName("/err"); } return mv; }
  */
 	
-	@PostMapping(value="fb_modify")
-	public String Fb_modify(int fb_no) {
-	return "redirect:/detail?fb_no="+Integer.toString(fb_no);
+	@GetMapping(value="/fb_modify")
+	public ModelAndView modifyform(@RequestParam(value="fb_articleNo") int fb_articleNo
+			) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			Board board = boardService.getBoard(fb_articleNo);
+			mv.addObject("article", board);
+			mv.setViewName("/fb_modify");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		
+		return mv;
 	}
+	
+	@PostMapping(value="/boardmodify")
+	public ModelAndView boardmodify(@ModelAttribute Board board, @RequestParam(value="page", required=false, defaultValue = "1") int page) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			boardService.modifyBoard(board);
+			mv.addObject("fb_articleNo", board.getFb_articleNo());
+			mv.addObject("page", page);
+			mv.setViewName("redirect:/fb_detail");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+			mv.setViewName("/board/err");	
+		}
+		
+		return mv;
+	}
+	
+	
 	
 //	@GetMapping(value = "search")
 //	@ResponseBody
@@ -189,12 +228,18 @@ public class FBController {
 	@PostMapping("fb_write")
 	public String write(@ModelAttribute Board board, @RequestParam("fb_title") String title,
 			@RequestParam("fb_content") String content) {
+		HttpSession session = request.getSession(); //세션 요청
+		String writer = (String)session.getAttribute("id"); // 세션의 id = writer
+
 		System.out.println(title);  // DB저장
 		System.out.println(content.trim());  // DB저장, 반드시 trim()
+		System.out.println(writer);  // DB저장
 		board.setFb_title(title);
 		board.setFb_content(content);
+		board.setWriter(writer);	// dto에 writer 입력?
 		try {
 			boardService.insertContent(board);
+			/* String writer = (String) session.getAttribute("id"); */
 		} catch(Exception e) {
 			e.printStackTrace();
 			return "err";

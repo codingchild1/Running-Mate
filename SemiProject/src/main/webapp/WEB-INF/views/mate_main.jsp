@@ -134,8 +134,8 @@ button a {
 #modal .content {
 	/* margin-top: 20px; */
 	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
+	/* text-shadow: 1px 1px 2px gray;
+	color: white; */
 }
 
 #modal2.modal-overlay {
@@ -195,8 +195,8 @@ button a {
 #modal2 .content {
 	/* margin-top: 20px; */
 	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
+/* 	text-shadow: 1px 1px 2px gray;
+	color: white; */
 }
 
 /* .info:hover{
@@ -211,6 +211,8 @@ body {
 .more {
 	cursor: pointer;
 }
+
+
 </style>
 </head>
 
@@ -272,11 +274,6 @@ body {
 		</div>
 
 	</div>
-	<!-- <div id="container2">
-        <h2>Lorem Ipsum</h2>
-        <div id="lorem-ipsum"></div>
-        <button class="click">모달</button>
-    </div> -->
 	<!-- mateform -->
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">
@@ -378,27 +375,51 @@ body {
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 	<script>
+		let m_editor;
+		let g_editor;
+        	
+        	//ClassicEditor.create(document.querySelector("#editor"))
+            // .then(editor=>{
+            	// g_editor=editor;
+             	/* editor.setData($('#mate_cont').val()); */
+             /* })
+             .catch((error) => {
+             	console.error(error);
+             });
+        	
+             	ClassicEditor.create(document.querySelector("#editor2"))
+            .then(editor=>{
+           	 m_editor=editor;
+            })
+            .catch((error) => {
+            	console.error(error);
+            });   */
 	
-	// ckeditor
-/*            	$(function(){
-                ClassicEditor.create(document.querySelector("#editor"))
-                .then(editor=>{
-                	editor.setData("$('#mate_cont').val()");
-                })
-                .catch((error) => {
-                	console.error(error);
-                });
-        	}) ; */
+             	ClassicEditor.create(document.querySelector("#editor"))
+        	    .then(editor=>{
+        	    	window.editor = editor;
+        	    	editor.isReadOnly = true;
+        	    	const toolbarElement = editor.ui.view.toolbar.element;
+        	    	toolbarElement.style.display = 'none';
+        	    	 m_editor=editor;
+            		/* editor.setData('${route.route_content }'); */
+            	})
+    	        .catch((error) => {
+        	    	console.error(error);
+            	});
+             	ClassicEditor.create(document.querySelector("#editor2"))
+        	    .then(editor=>{
+        	    	window.editor = editor;
+        	    	editor.isReadOnly = true;
+        	    	const toolbarElement = editor.ui.view.toolbar.element;
+        	    	toolbarElement.style.display = 'none';
+        	    	 g_editor=editor;
+            		/* editor.setData('${route.route_content }'); */
+            	})
+    	        .catch((error) => {
+        	    	console.error(error);
+            	});
 
-        	/*  ClassicEditor.create(document.querySelector("#editor"), {
-      	    	  initialData : jdata.mate_cont
-      	      }).then(editor=> {
-            		window.editor=editor;
-            		})
-      		   .catch((error) => {
-      		   	console.error(error);
-      		    }); */
-	
 	//더보기 클릭시 모달창 띄어주는 코드
     function detailModal(no,type){
 		//번개 모달창 ajax
@@ -436,18 +457,9 @@ body {
      				 $('#delete').hide();
      				 $('#update').hide();
      			  } 
-     			  
-     	          
-     	                ClassicEditor.create(document.querySelector("#editor"))
-     	                .then(editor=>{
-     	                	editor.setData($('#mate_cont').val());
-     	                })
-     	                .catch((error) => {
-     	                	console.error(error);
-     	                });
-     	        	
-     	      	     
-     	   
+     		//메이트에디터에 값넣어주는 함수	  
+     	   	m_editor.setData($('#mate_cont').val());
+     	   	
      			var La = $('#mapinfo').val();
      			var Ma = $('#mapinfo2').val();
      			
@@ -470,12 +482,10 @@ body {
 
      		// 마커가 지도 위에 표시되도록 설정합니다
      		marker.setMap(map);
-     		
     		},
     		error:function(data, textStatus){
     			alert("실패");
     		}
-    		
     		});
             //참여자 리스트 ajax
               $.ajax({     
@@ -485,11 +495,12 @@ body {
         		url:"http://localhost:8090/ptplist",
         		data:{"no":no},
         		success: function(data, textStatus){ 
-        			 var jdata = JSON.parse(data);
+        			$('.list').html('');
+        			var jdata = JSON.parse(data);
+        			console.log(jdata);
         			 for(let i of jdata) {
-        					$('.list').replaceWith('<input type="text" name="ptplist" value=""><br>');
-        					var idx = $('input[name="ptplist"]').index(this);
-        					$('input[name=ptplist]').eq(idx).val(i.user_id);
+        				 var clist = $('.list').html()+'<span>'+i.user_id+"</span><br>";
+        				 $('.list').html(clist);
         				}
         		
         		},
@@ -528,15 +539,9 @@ body {
   				 $('#delete2').hide();
   				 $('#update2').hide();
   			  }
-	           
- 	                ClassicEditor.create(document.querySelector("#editor2"))
- 	                .then(editor=>{
- 	                	editor.setData($('#group_cont').val());
- 	                })
- 	                .catch((error) => {
- 	                	console.error(error);
- 	                });
- 	        	
+			  
+			//그룹게시물에디터 값 넣는 함수
+			g_editor.setData($('#group_cont').val());
 			 
  			var La = $('#mapinfo').val();
  			var Ma = $('#mapinfo2').val(); 
@@ -567,6 +572,7 @@ body {
  		});
     	 
     	}
+		
     }
 	//mate 모달창 함수
         const modal = document.getElementById("modal")

@@ -12,8 +12,11 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -34,9 +37,11 @@ import com.mulcam.run.service.TodayService;
 @Controller
 public class TodayController {
 
-
 	@Autowired
 	TodayService todayService;
+	
+	@Autowired
+	HttpSession session;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -48,6 +53,7 @@ public class TodayController {
 		PageInfo pageInfo=new PageInfo();
 		try {
 			List<Today> todayList=todayService.getTBoardList(page, pageInfo);
+			System.out.println(todayList.size());
 			mav.addObject("pageInfo", pageInfo);
 			mav.addObject("todayList", todayList);
 			mav.setViewName("today");
@@ -171,17 +177,13 @@ public class TodayController {
 			@RequestParam("today_contents")String today_contents,@RequestParam(value="today_file") MultipartFile file, Model model) {
 		String path = servletContext.getRealPath("/thumb/");
 		File destFile = new File(path+file.getOriginalFilename());
+		String user_id = (String) session.getAttribute("id");
+		System.out.println(user_id);
 		try {
-			//**
 			file.transferTo(destFile);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-
-		
-		// 테스트를 위한 임시 유저 아이디
-		String user_id = "testUser";
-		
 		Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),today_contents);
 		System.out.println(today_title);  // DB저장
 		System.out.println(today_contents.trim());  // DB저장, 반드시 trim()
@@ -196,38 +198,24 @@ public class TodayController {
 		}
 		return "redirect:/today";
 	}
-
-	// 6.게시글보는페이지
-	//@PostMapping("/today_select")
-	//public ModelAndView today_select(@RequestParam(value="today_articleNo")int today_articleNo,
-	//		@RequestParam(value="page", required=false, defaultValue="1")int page) {
-	//	ModelAndView mav=new ModelAndView();
-	//	try {
-	//		Today tboard=todayService.getTBoard(today_articleNo);
-	//		mav.addObject("tboard", tboard);
-	//		mav.addObject("page", page);
-	//		mav.setViewName("/today_select");
-	//	} catch(Exception e) {
-	//		e.printStackTrace();
-	//		mav.addObject("err", e.getMessage());
-	//		mav.setViewName("/err");
-	//	}
-	//	return mav;
-	//}
 	
+
 	@GetMapping("/today_select/{today_articleNo}")
 	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
 		System.out.println(today_articleNo);
 		System.out.println(pageInfo);
-		
+		//User userInfo = (User)session.getAttribute("user");
 		
 		// 로그인한 유저 아이디 가져오기 (세션)
 		String user_id = "testUser";
 		// 지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
-		//String writerid ="{today_user_id}"
 		String writerid="testUser";
+		/*
+		 * String user_id = (String)session.getAttribute("id"); String
+		 * writerid="user_id";
+		 */
 		Boolean modiAndDel = false;
 		
 		if (user_id.equals(writerid)) {
@@ -267,16 +255,38 @@ public class TodayController {
 
 	// 9.수정요청
 	@PostMapping("/today_modify")
-	public ModelAndView todayModify() {
-		ModelAndView mav = new ModelAndView();
-		return mav;
+	public String todayModify(@RequestParam(value="articleNo",required=true) int articleNo,
+			@RequestParam("today_title") String today_title,
+			@RequestParam("today_contents")String today_contents,
+			@RequestParam(value="today_file") MultipartFile file, 
+			Model model) {
+		try {
+			Today tboard = todayService.getTBoard(articleNo);
+			if(!file.isEmpty()) {
+				String path = servletContext.getRealPath("/thumb/");
+				File destFile = new File(path+file.getOriginalFilename());
+				file.transferTo(destFile);
+				tboard.setToday_thumb(file.getOriginalFilename());
+			}
+			tboard.setToday_title(today_title);
+			tboard.setToday_contents(today_contents);
+			todayService.modifyBoard(tboard);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/today";
 	}
 
 	// 10.삭제요청
 	@PostMapping("/today_delete")
-	public ModelAndView todayDelete() {
-		ModelAndView mav = new ModelAndView();
-		return mav;
+	public ResponseEntity<String> todayDelete(@RequestParam(value="articleNo",required=true) int articleNo) {
+		try {
+			todayService.removeTBoard(articleNo);
+			return new ResponseEntity<String>("삭제되었습니다.", HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("삭제에 실패했습니다..", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	// 6.신고 (insert alert)
