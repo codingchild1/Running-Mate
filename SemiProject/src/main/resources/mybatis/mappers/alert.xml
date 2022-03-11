@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.run.dao.AlertDAO">
+
+	<insert id="insertAlert" parameterType="alert">
+		insert into alert(user_id, board_type, board_no) values (#{user_id}, #{board_type}, #{board_no})
+	</insert>
+	
+	<delete id="deleteAlert" parameterType="int">
+		delete from alert where alert_no=#{alert_no };
+	</delete>
+
+	<select id="checkAlert" parameterType="alert" resultType="boolean">
+		select EXISTS (select * from alert 
+			where user_id= #{user_id} and board_type=#{board_type} and board_no=#{board_no} limit 1) as success
+	</select>
+	
+	<select  id="selectAlertNo" parameterType="alert" resultType="int">
+		select alert_no from alert where user_id= #{user_id} and board_type=#{board_type} and board_no=#{board_no} limit 1
+	</select>
+
+</mapper>
+
+<!-- 
+create table alert(
+	alert_no int(11) auto_increment,
+    user_id varchar(100) not null,
+	board_type varchar(100) not null,
+    board_no int(11) not null,
+    primary key (alert_no)
+);
+ -->

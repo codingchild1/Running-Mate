@@ -1,6 +1,7 @@
 package com.mulcam.run.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,10 @@ public interface TodayDAO {
 	 
 	 
 	//1.전체페이지 검색후 여러게시물 반환
+	int searchTBoardCount(String search) throws Exception;
+	List<Today> selectSerchTBoardList(Map<String, Object> searchParam) throws Exception;
+	
+	
 	//2.하나의 글 정보를 select하는 쿼리문
 	Today selectTBoard(int today_articleNo) throws Exception;
 
@@ -27,16 +32,13 @@ public interface TodayDAO {
 	//4.todayrun 게시글 수정 (update) 
 	public void updateTBoard(Today tboard) throws Exception;
 	
-	//5. 조회 udate 조회수 변경
-	void updateReadCount(int today_articleNo) throws Exception;
+	//5. 조회수 변경
+	void updateReadCount(int articleNo) throws Exception;
 
 	//6.삭제 (delete)
-	public void deleteTBoard(int today_articleNo) throws Exception;
+	public void deleteTBoard(int articleNo) throws Exception;
 
-
-	
 	//7.신고 (insert alert) 
 	//public Boolean insertTWarn() throws Exception;
 	
-	//8.게시판 최대 page 수 ???
 }

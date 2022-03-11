@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@ User user = new User(1, 'admin', '관리자', 'admin04', 'admin@naver.com', '01085288525', sysdate(), 1, 'ad.jpg'); %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,7 @@ header {
 <!-- 자바스크립트 -->
 </head>
 <body>
-	<%@include file="header.jsp"%>
+<%-- 	<%@include file="header.jsp"%> --%>
 
 
 	<div class="container py-5">
@@ -73,10 +74,13 @@ header {
 
 			<div class="col-lg-1 "></div>
 			<!---------------헤더 : 타이틀, 아이디, date, 삭제, 수정, 신고, 조회 -->
+			<form action="/today_modify" method="post" enctype="multipart/form-data">
 			<div class="col-lg-11 border">
 				<header>
+			
 					<div class="row">
 						<div class="container fluid border">
+ 							<input name="articleNo" id="today_articleNo" type="hidden" value='${todayselect.today_articleNo}'>
 							<ul class="list-inline shop-top-menu pb-3 pt-1">
 								<li><input name="today_title" id="today_title" size="150"
 									value='${todayselect.today_title}'></li>
@@ -87,7 +91,7 @@ header {
 										<td><img
 											src=""
 											class="col" /></td>
-										<td id="user_id" class="col d-flex justify-content-start">${todayselect.user_id}아이디</td>
+										<td id="user_id" name="user_id" class="col d-flex justify-content-start">${todayselect.user_id}아이디</td>
 
 									</tr>
 								</tbody>
@@ -96,94 +100,99 @@ header {
 
 						<div class="row mt-1">
 							<table class="container d-flex">
-								<td class="col">${todayselect.today_date}날짜/시간</td>
+								<tr>
+								<td class="col">${todayselect.today_date}</td>
 								<td class="col pl-5">&nbsp&nbsp
-									<button type="text" class="col gap-1 rounded btn btn-white"
+									<button class="col gap-1 rounded btn btn-white"
 										id="today_views" name="today_views" disabled> ${todayselect.today_views}</button>
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-
-									<button type="button" class="col gap-1 rounded btn btn-white"
-										id="today_delete" name="today_delete">삭제</button>
-									<button type="button" class="col gap-1 rounded btn btn-white"
-										id="today_modify" name="today_modify">수정</button>
-									<button type="button" class="col gap-1 rounded btn btn-white"
-										id="warning" name="warning">신고</button>
+									
+										<td>
+									<c:choose>
+										<c:when test= "${id eq todayselect.user_id || id eq 'admin' }">
+											<button type="button" class="col gap-1 rounded btn btn-white"
+												id="today_delete" name="today_delete">
+												
+												
+												삭제</button>
+											<input type="submit" class="col gap-1 rounded btn btn-white"
+												id="today_modify" name="today_modify" value="수정"/>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="col gap-1 rounded btn btn-white"
+												id="warning" name="warning">신고</button>
+										</c:otherwise>
+									</c:choose>										
 								</td>
+								</tr>
 							</table>
 						</div> 
 						
 						
-						
-<%-- 			글쓴이와 관리자만 삭제수정/ 사용자는 신고기능만 보이게.....그런데 작동이.....		
 
-				<div class="row mt-1">
-							<table class="container d-flex">
-								<td>${todayselect.today_date}날짜/시간</td>
-									<button class="col gap-1 rounded btn btn-white"	id="today_views" name="today_views" disabled> ${todayselect.today_views}조회 </button>
-										<tr>
-										<td>
-									<c:choose>
-											<c:when test= ${loginUserid =="testUser" || loginUserid =="admin") }>
-												<button type="button" class="col gap-1 rounded btn btn-white" id="today_delete" name="today_delete">삭제</button>
-												<button type="button" class="col gap-1 rounded btn btn-white" id="today_modify" name="today_modify">수정</button>	
-											</c:when>
-											<c:otherwise>
-												<button type="button" class="col gap-1 rounded btn btn-white" id="warning" name="warning">신고</button>		
-											</c:otherwise>
-									</c:choose>
-									</td>
-								</tr>
-							</table>
-						</div> --%>
 						
-					</div>
+					</div> 
+					
 				</header>
 
 				<!--------------------------------------------------게시글 ---------------------------- -->
 				<main>
-					<img class="col" src="/thumbfileview/${todayselect.today_thumb}" id="today_thumb" name="today_thumb"
-						height="100px" width="100px"> ${todayselect.today_thumb}<input type="file"
-						name="today_file" id="today_file" />
-				
 					<table class="container-fluid">
-						<div id="editor"></div>
-						<br>
+						<tr><td>
+							<img class="col" src="/thumbfileview/${todayselect.today_thumb}" id="today_thumb" name="today_thumb"
+							height="100px" width="100px">
+						    <label for="today_file" style="border: solid 1px black;">업로드</label>
+    						<input type="file" name="today_file" id="today_file" accept="image/*" style="position:absolute; clip:rect(0, 0, 0, 0);">
+							
+						</td></tr>		
+								
+						<tr><td>
+						<textarea id="editor" name="today_contents" height="200px" width="200px"></textarea>
+						</td></tr>
+						<tr>
+							<td class="d-flex mt-2">
+							<i class="bi bi-heart d-flex justify-content-center mt-2">${todayselect.today_likes}</i>
+							</td>
+						</tr>
 					</table>
 				</main>
 
-
-				<table>
-					<tr>
-						<td class="d-flex mt-2"></td>
-						<i class="bi bi-heart d-flex justify-content-center mt-2">${todayselect.today_likes}</i>
-					</tr>
-				</table>
-
 			</div>
-
+			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
 
 			<!--------------------------------------------------목록---------------------------- -->
 			<div style="text-align: right">
-				<button class="btn btn-outline-secondary" type="submit"
+				<button class="btn btn-outline-secondary"
 					style="width: 100px; height: 30px; padding: 5px" id="today_list"
 					name="today_list">목록</button>
 			</div>
 
 		</div>
 	</div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
+	$(function() {
+		$('#today_file').change(function (event) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#today_thumb').attr("src", e.target.result);	
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		});
+	});
+	
 		 //목록 버튼
 	      $(function(){
 	    	  $("#today_list").click(function(){
-	    	      location.href="today";
+	    	      location.href="/today";
 	    	      });
-	    	  });
+	    	  }); 
 		 
 	      //ckeditor 작성내용 보여주는부분
   		$(function(){
@@ -197,34 +206,59 @@ header {
 		    });
 		});
     
-	    
-	    	   
-	  /*     //수정 버튼
-	    	  $(function(){$("#today_modify").click(function(){
-	    	      //첨부파일 이름들을 폼에 추가
-	    	      var str="";
-	    	      $("#uploadedList.file").each(function(i){
-	    	          str+=
-	    	              "<input type='hidden' name='files["+i+"]' value='"
-	    	              +$(this).val()+"'>";
-	    	      });
-	    	      $("#form1").append(str);
-	    	      document.form1.action="${path}/board/update.do";
-	    	      document.form1.submit();
-	    	      });
-	    	  });
 	      
 	      
-
-	    	   
-	    	  //삭제 버튼
-	    	  $(function(){$("#today_delete").click(function(){
-	    	      if(confirm("삭제하시겠습니까?")){
-	    	          document.form1.action="${path}/board/delete.do";
-	    	          document.form1.submit();
-	    	          }
-	    	      });
-	    	  }); */
+  		$(function() {
+  			$('#today_delete').click(function (event) {
+  			
+  				let message = confirm('삭제하시겠습니까?');
+  				if(message == false){ 
+  					return 
+  				}
+  			
+  				$.ajax({     
+  	        		type:"post",
+  	        		dataType:"text",
+  	        		async:false,
+  	        		url:"http://localhost:8090/today_delete",
+  	        		data:{"articleNo":${todayselect.today_articleNo}},
+  	        		success: function(data, textStatus){ 
+  	        			 alert(data);
+  	        			 location.href="/today";
+  	        		},
+  	        		error:function(data, textStatus){
+ 	        			 alert(data);
+  	        		}
+  	        	}); 
+  			});
+  		});
+  			
+  	   
+  			
+ 		/* $(function() {
+  			$('#today_modify').click(function (event) {
+  				let message = confirm('수정하시겠습니까?');
+  				if(message == false){ 
+  					return 
+  				}
+  			
+  				$.ajax({     
+  	        		type:"post",
+  	        		dataType:"text",
+  	        		async:false,
+  	        		url:"http://localhost:8090/today_modify",
+  	        		data:{"articleNo":${todayselect.today_articleNo}},
+  	        		success: function(data, textStatus){ 
+  	        			 alert(data);
+  	        			 location.href="/today";
+  	        		},
+  	        		error:function(data, textStatus){
+ 	        			 alert(data);
+  	        		}
+  	        	}); 
+  			});  
+ 		}); */
+	
 		</script>
 	<%@include file="fotter.jsp"%>
 

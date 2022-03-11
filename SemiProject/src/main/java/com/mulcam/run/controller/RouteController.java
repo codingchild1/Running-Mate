@@ -37,10 +37,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mulcam.run.dto.GroupAndMate;
+import com.mulcam.run.dto.Member;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.RouteInfo;
+import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
+import com.mulcam.run.service.MemberService;
 import com.mulcam.run.service.RouteService;
 
 
@@ -52,7 +56,11 @@ public class RouteController {
 	
 	@Autowired
 	LikesService likesService;
+	@Autowired
+	AlertService alertService;
 
+	@Autowired
+	MemberService memberService;
 	@Autowired
 	HttpSession session;
 	
@@ -76,17 +84,73 @@ public class RouteController {
 		return mv;
 	}
 	
+	@PostMapping("/route_sort")
+	public String route_sort() {
+		return "route_sort";
+	}
 	
+	@PostMapping("/route_write")
+	public ModelAndView  route_write(){
+		ModelAndView mv = new ModelAndView("route_write");
+		try {
+			String user_id = (String) session.getAttribute("id");
+			String user_profile = memberService.profileImg(user_id);
+			mv.addObject("profileImg", user_profile);
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/sortRoutes", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView sortRoutes(@RequestParam("area") String area,
+				@RequestParam("distance_left") int distance_left, @RequestParam("distance_right") int distance_right, 
+				@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
+		ModelAndView mv = new ModelAndView("route_sort");
+		PageInfo pageInfo = new PageInfo();
+		System.out.println(area + ", " + distance_left + ", ");
+	
+		try {
+			List<RouteInfo> routeslist = routeService.getSortedRoutes(area, distance_left, distance_right, page, pageInfo);
+			System.out.println(pageInfo.getEndPage());
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("routesinfolist", routeslist);
+			mv.addObject("count", routeslist.size());
+			mv.addObject("area", area);
+			mv.addObject("distance_left", distance_left);
+			mv.addObject("distance_right", distance_right);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+	//게시물 보기
 	@RequestMapping(value="/routepost", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routePost(@RequestParam(value="articleNo",required=true) int articleNo) {
 		ModelAndView mv = new ModelAndView("route_post");
 		try {
-			routeService.updateRoutePostView(articleNo);
-			Route posted = routeService.getRouteInfo(articleNo);
 			String user_id = (String) session.getAttribute("id");
+			String user_profile = memberService.profileImg(user_id);
 			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
-			mv.addObject("route", posted);
-			mv.addObject("likes", likes);
+			boolean alert = alertService.getAlertTF(user_id, "route", articleNo);
+			if(likes==false) {
+				mv.addObject("likes", "false");
+			} else {
+				mv.addObject("likes", "true");
+			}
+			if(alert==false) {
+				mv.addObject("alert", "false");
+			} else {
+				mv.addObject("alert", "true");
+			}
+			
+			routeService.updateRoutePostView(articleNo);
+			RouteInfo posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("route", posted);	
+			mv.addObject("profileImg", user_profile);	
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -94,14 +158,13 @@ public class RouteController {
 		return mv;
 	}
 	
-	
+	//게시물 수정
 	@RequestMapping(value="/routeModify", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routeModify(@RequestParam(value="articleNo",required=true) int articleNo) {
 		ModelAndView mv = new ModelAndView("route_modify");
 		try {
-			Route posted = routeService.getRouteInfo(articleNo);
+			RouteInfo posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);
-			//mv.addObject("update", "update");
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -109,6 +172,7 @@ public class RouteController {
 		return mv;
 	}
 	
+	//게시물 삭제
 	@RequestMapping(value="/routeDelete", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView routeDelete(@RequestParam(value="articleNo",required=true) int articleNo) {
 		ModelAndView mv = new ModelAndView("route_err");
@@ -127,12 +191,14 @@ public class RouteController {
 		ModelAndView mv = new ModelAndView("route_post");
 		try {
 			int articleNo = route.getRoute_articleNo();
-			System.out.println(route.getRoute_articleNo());
 			route.setRoute_content(content.trim());
 			routeService.updateRoutePost(route);
 			routeService.updateRoutePostView(articleNo);
-			Route posted = routeService.getRouteInfo(articleNo);
+			RouteInfo posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);
+			
+			Member mem = memberService.queryById(route.getUser_id());
+			mv.addObject("profileImg", mem.getMemberthumb());
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -140,9 +206,10 @@ public class RouteController {
 		return mv;
 	}
 	
+	// 게시물 등록
 	@PostMapping(value="/route_reg")
 	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
-		ModelAndView mv = new ModelAndView("route_post");
+		ModelAndView mv = new ModelAndView("route_reg");
 		String path = servletContext.getRealPath("/thumb/route/");
 		File destFile = new File(path+file.getOriginalFilename());
 		try {			
@@ -152,95 +219,19 @@ public class RouteController {
 		}
 		route.setRoute_thumb(file.getOriginalFilename());
 		route.setRoute_content(content.trim());
-		System.out.println(route.getRoute_area());
-		System.out.println(route.getRoute_articleNo());
-		System.out.println(route.getRoute_distance());
+		
 		try {			
 			routeService.regRoute(route);
-			//model.addAttribute("route", route);
+			Member mem = memberService.queryById(route.getUser_id());
 			mv.addObject("route", route);
+			mv.addObject("profileImg", mem.getMemberthumb());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return mv;
 	}
-	//이미지가 바라보는 url 
-		@GetMapping(value="/routethumbfileview/{filename}")
-		public void thumbfileview(@PathVariable String filename, 
-				HttpServletRequest request, HttpServletResponse response)
-		{			
-			String path = servletContext.getRealPath("/thumb/route/");
-			File file = new File(path+filename);
-			String sfilename = null;
-			FileInputStream fis = null;
-			
-			try {
-				if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
-					sfilename = URLEncoder.encode(file.getName(), "utf-8");
-				} else {
-					sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
-				}
-				response.setCharacterEncoding("utf-8");
-				response.setContentType("application/octet-stream;charset=utf-8");
-				//response.setHeader("Content-Disposition", "attachment; filename=\""+sfilename+"\";");
-				response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
-				OutputStream out = response.getOutputStream();
-				fis= new FileInputStream(file);
-				FileCopyUtils.copy(fis, out);
-				out.flush();
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(fis!=null) {
-					try {
-						fis.close();
-					} catch(Exception e) {}
-				}
-			}		
-		}	
 	
-	@PostMapping("/route_sort")
-	public String route_sort() {
-		return "route_sort";
-	}
-	@PostMapping("/route_write")
-	public String route_write() {
-		return "route_write";
-	}
-	
-	@ResponseBody
-	@PostMapping(value="/sortRoutes")
-	public List<Route> sortRoutes(@RequestParam("area") String area, @RequestParam("distance") int distance[]) {
-		List<Route> routeslist = null;
-		try {
-			routeslist = routeService.getSortedRoutes(area, distance);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return routeslist;
-	}
-	
-	@ResponseBody
-	@PostMapping(value="/likes")
-	public boolean likes(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
-		boolean likes = false;
-		try {
-			// 현재 게시물에 like에 대한 정보 확인
-			likes = likesService.getLikesTF(user_id, board_type, board_no);
-			if(likes == false) {
-				likesService.insertLikes(user_id, board_type, board_no);
-				likes = true;
-			} else {
-				likesService.deleteLikes(user_id, board_type, board_no);
-				likes = false;
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(likes);
-		return likes;
-	}
-	
+	//코스의 중심 좌표를 통해 주소명 받아오기
 	@ResponseBody
 	@PostMapping(value="/route/routeCoords")
 	public static String coordToAddr(@RequestParam("longitude") double longitude, @RequestParam("latitude") double latitude){
@@ -248,7 +239,6 @@ public class RouteController {
 		String addr = "";
 		try{
 			addr = getRegionAddress(getJSONData(url));
-			System.out.println("addr : " + addr);
 	    }catch(Exception e){
 	    	System.out.println("주소 api 요청 에러");
 	        e.printStackTrace();
@@ -256,6 +246,42 @@ public class RouteController {
 	    return addr;
 	}
 	
+	//코스 대표 이미지 url 
+	@GetMapping(value="/routethumbfileview/{filename}")
+	public void thumbfileview(@PathVariable String filename, 
+			HttpServletRequest request, HttpServletResponse response)
+	{			
+		String path = servletContext.getRealPath("/thumb/route/");
+		File file = new File(path+filename);
+		String sfilename = null;
+		FileInputStream fis = null;
+		
+		try {
+			if(request.getHeader("User-Agent").indexOf("MSIE")>-1) {
+				sfilename = URLEncoder.encode(file.getName(), "utf-8");
+			} else {
+				sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+			}
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/octet-stream;charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment; filename="+sfilename);
+			OutputStream out = response.getOutputStream();
+			fis= new FileInputStream(file);
+			FileCopyUtils.copy(fis, out);
+			out.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch(Exception e) {}
+			}
+		}		
+	}	
+	
+	
+	// 카카오 지도 정보
 	private static String getJSONData(String apiUrl) throws Exception {
 		HttpURLConnection conn = null;
     	StringBuffer response = new StringBuffer();
@@ -272,7 +298,7 @@ public class RouteController {
 
         //request에 JSON data 준비
         conn.setDoOutput(true);
-        System.out.println(apiUrl);
+        
         //보내고 결과값 받기
         int responseCode = conn.getResponseCode();
         if (responseCode == 400) {
@@ -289,8 +315,6 @@ public class RouteController {
              	response.append(inputLine); 
              } 
          }
-         
-        System.out.println(response);
          return response.toString();
     }
     
@@ -300,6 +324,7 @@ public class RouteController {
 	private static String getRegionAddress(String jsonString) {
         String value = "";
         JSONObject jObj = (JSONObject) JSONValue.parse(jsonString);
+        System.out.println(jObj);
         JSONObject meta = (JSONObject) jObj.get("meta");
         long size = (long) meta.get("total_count");
         

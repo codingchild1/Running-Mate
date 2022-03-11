@@ -11,4 +11,7 @@ public interface MemberService {
 	public List<Member> memberList();
 	Member queryById(String id) throws Exception;
 	public void delete(String id);
+	
+	//사용자 profile 이미지 정보
+	String profileImg(String user_id) throws Exception;
 }

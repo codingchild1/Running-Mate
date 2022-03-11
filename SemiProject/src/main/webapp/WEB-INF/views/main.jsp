@@ -32,7 +32,7 @@
 	<div class="col-12 col-md-4 mb-4">
 		<div class="card h-100">
 			<a href="#">
-				<img src="${best.today_thumb }" class="card-img-top" alt="...">
+				<img src="${pageContext.request.contextPath }/upload/${best.today_thumb }" class="card-img-top" alt="...">
 			</a>
 			<div class="card-body">
 				<p class="card-text">
@@ -72,14 +72,14 @@
             <c:forEach items="${MateList }" var="mate">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="#">
-                            <img src="${mate.user_img }"  class="card-img-top" alt="...">
-                        </a>
+                        <div>
+                            <"${mate.mate_mapinfo }"  >
+                        </div>
                         <div class="card-body">
 
                             
                             <p class="card-text">
-                                ${mate.mate_cont }
+                                ${mate.mate_title }
                             </p>
                             <p class="text-muted">
 					(${mate.mate_like })

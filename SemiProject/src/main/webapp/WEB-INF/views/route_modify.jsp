@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +44,7 @@
 		max-width:100%;
 	    min-height: 500px;
 	}
+	.userProfile { width:25px;; height:25px; }
 	</style>
 </head>
 <body>
@@ -58,9 +60,7 @@
 			<div id="user_info" style="height:80px; display: flex; align-items: center;">
 				<div style="height:40px; width:40px; overflow:hidden;">
 					<!-- 썸네일 이미지 -->
-					<img id="thumb_img"
-						src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-user-icon-png-image_1796659.jpg"
-						style="width:100%; object-fit:cover;">
+					<img src="/profileview/${profileImg }" id="userImage" class="userProfile">
 				</div>
 				<!-- 사용자 ID -->
 				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >${id}</div>

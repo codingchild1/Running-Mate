@@ -7,16 +7,25 @@ import org.springframework.stereotype.Repository;
 
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.RouteInfo;
+import com.mulcam.run.dto.SearchRoute;
 
 @Mapper
 @Repository("routeDAO")
 public interface RouteDAO {
 	public int selectRouteCount() throws Exception;
 	public List<RouteInfo> selectRouteList(int startrow) throws Exception; 	//select 전체 코스 게시물
-	public Route queryRoute(int articleNo);								//select  코스 게시물
-	public List<Route> queryByDistance(int distance[]) throws Exception;
+	public RouteInfo queryRoute(int articleNo);								//select  코스 게시물
+	
+	public List<RouteInfo> queryByAreaNDistance(SearchRoute sr) throws Exception;
+	public List<RouteInfo> queryByDistance(SearchRoute sr) throws Exception;
+	public List<RouteInfo> queryByArea(SearchRoute sr) throws Exception;
+	public int countByAreaNDistance(SearchRoute sr) throws Exception;
+	public int countByDistance(SearchRoute sr) throws Exception;
+	public int countByArea(SearchRoute sr) throws Exception;
 	
 	public void updateViews(int articleNo);				//update 조회수
+	public void updateLikePlus(int articleNo);
+	public void updateLikeMinus(int articleNo);
 	
 	//public List<Route> selectRoute();			//select 코스 게시물 list 기준 by 지역 & 거리
 	//public void updateViews();				//update 조회수

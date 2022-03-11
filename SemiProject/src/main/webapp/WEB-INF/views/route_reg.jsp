@@ -56,96 +56,35 @@
         <p>나만의 러닝 코스를 공유해주세요!</p>
         
         <div id="routeboardHeader" class="routeboardHeader">
-        	<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="${route.route_title} " 
-        		style="disabled{background-color: white;}; height:80px; width:80%; border: 0px;" disabled/>
-        	<c:if test= "${id eq route.user_id }">
-				<a onclick="return confirm('정말 게시글을 삭제하시겠습니까?')">&nbsp&nbsp<span id="delete" style="float:right; padding-left:10px;">삭제</span></a>
-				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a><br>
-			</c:if><br>
-        	
+        	<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목" 
+        		style="disabled{background-color: #F0F0F0;}; height:80px; width:80%; border: 0px;"/>
+              	
 			<img src="/profileview/${profileImg }" class="userProfile">
 			<span id="user_id">${route.user_id }</span>
 			<span id="board_time">${route.route_date }</span>
-			
-			<span id="alerts" onclick=alert()>
-			<c:choose>
-			<c:when test="${alert eq true }">
-				<span id="alert" style="float:right; padding-left:10px;">신고취소</span>
-			</c:when>
-			<c:when test="${alert eq false }">
-				<span id="alert" style="float:right; padding-left:10px;">신고</span>
-			</c:when>
-			</c:choose>
-			</span>
-			<span style="float:right;">${route.route_views }</span><span style="float:right;">조회</span>
+			<c:if test= "${id eq route.user_id }">
+				<a href="routeDelete?articleNo=${route.route_articleNo}" onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" style="float:right; padding-left:10px;">삭제</span></a>
+				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a>
+			</c:if><br>
 			
 		</div><br><br>
 		
 		<div id="routeboardMain" style="diplay:block; height:550px;">
-			<div style="display:inline-block; float:left; width:48%; height:500px;"><textarea id="content" name="content" style="width: 100%; " ></textarea></div>
+			<div style="display:inline-block; float:left; width:48%; height:500px;"><textarea id="content" name="content" style="width: 100%;" ></textarea></div>
 			<div id="map" style="width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; "></div>
     	</div><br><br>
-    	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
-       		<div id="likes" onclick=changeImg() style="text-align:center;">				
-       			<c:choose>
-				<c:when test="${likes eq true }">
-					<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
-				</c:when>
-				<c:when test="${likes eq false }">
-					<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
-				</c:when>
-				</c:choose>
-			</div>
-			<br><hr>
+    	
+    	
+    	<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+    	<form action ="/route" method="post" >
+			<button style="width:15%; display:inline-block;" class="btn btn-dark">목록</button>
+		</form>
 		</div>
+    	
     </div>
 	</main>
-	
+
 	<script>
-	function changeImg(){
-		$.ajax({
-			type:"post",
-			url:"http://localhost:8090/likes",
-			data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
-			dataType:"text",
-			success:function(data){
-				if(data=="true"){
-					console.log("true: " +data);
-					$("#alert").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
-				} else {
-					console.log("false: " + data);
-					$("#alert").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
-				}
-			}
-		});			 
-	}
-	function alert(){
-		var alert;
-		if($("#alerts span").html() == "신고"){
-			 alert = confirm('정말 게시글을 신고하시겠습니까?');
-		}
-		else if($("#alerts span").html() == "신고취소"){
-			 alert = confirm('게시글을 신고를 취소하시겠습니까?');
-		}
-		
-		if(alert==true){
-			$.ajax({
-				type:"post",
-				url:"http://localhost:8090/alert",
-				data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
-				dataType:"text",
-				success:function(data){
-					if(data=="true"){
-						$("#alerts span").html("신고취소");
-					} else {
-						$("#alerts span").html("신고");
-					}
-				}
-			});
-		}
-	}
-	</script>
-	<script>	
 	$(function(){
 		ClassicEditor.create(document.querySelector("#content"))
     	.then(editor=>{

@@ -42,11 +42,12 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 a { text-decoration-line: none;}
     
 .ck.ck-reset.ck-editor.ck-rounded-corners {
-    		width: 70%;
-    		margin-left: 10%;
+    		width: 100%;
 		}
 
-
+.ck-editor__editable {
+    min-height: 700px;
+}
 
 
 
@@ -60,17 +61,19 @@ a { text-decoration-line: none;}
 	<div class="container" style="padding-top: 1em;">
 		<h2>게시판 등록</h2>
 		<form action="/fb_write" method="post" >
+		<!-- 이거 없으면 에러남 -->
+		
 		<div>
 			<div class="writing_title">
 				<input type="text" id="title" name="fb_title"
 					placeholder="제목을 입력해 주세요." onfocus="this.placeholder=''"
 					onblur="this.placeholder='제목을 입력해 주세요.'"
-					style="width: 99%; height: 30px; margin: 15px 0 15px 0;" />
+					style="width: 100%; height: 30px; margin: 15px 0 15px 0;" />
 			</div>
 		</div>
 		
 			<div class="board_detail">
-					<textarea id="editor" name="fb_content"></textarea>
+					<textarea  id="editor" name="fb_content"></textarea>
 			</div>
 			<div class="writebtn">
 				<input type="submit" value="저장" class="btn btn-success"/>
@@ -81,6 +84,8 @@ a { text-decoration-line: none;}
 	</div>
 </main>
 	<script>
+	
+	
 	$(function(){
         ClassicEditor
         	.create(document.querySelector("#editor"), {
@@ -94,6 +99,7 @@ a { text-decoration-line: none;}
         		console.error(error);
         	});
 	});
+	
     </script>
     
 	<%@include file="fotter.jsp"%>

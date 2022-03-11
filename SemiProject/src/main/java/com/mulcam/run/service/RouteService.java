@@ -8,12 +8,14 @@ import com.mulcam.run.dto.RouteInfo;
 
 public interface RouteService {
 	
-	public Route regRoute(Route route) throws Exception;
+	public void regRoute(Route route) throws Exception;
 	public List<RouteInfo> getRoutesList(int page, PageInfo pageInfo) throws Exception;
-	public Route getRouteInfo(int articleNo) throws Exception;
-	public List<Route> getSortedRoutes(String area, int distance[]) throws Exception;
+	public RouteInfo getRouteInfo(int articleNo) throws Exception;
+	public List<RouteInfo> getSortedRoutes(String area, int distance_left, int distance_right, int page, PageInfo pageInfo) throws Exception;
+	
 	public void updateRoutePostView(int articleNO) throws Exception;
 	public void updateRoutePost(Route route) throws Exception;
-	
+	public void LikesPlus(int articleNo) throws Exception;
+	public void LikesMinus(int articleNo) throws Exception;
 	public void removeRouteBoard(int articleNo) throws Exception;
 }

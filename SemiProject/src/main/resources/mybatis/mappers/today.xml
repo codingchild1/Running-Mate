@@ -31,11 +31,17 @@
  	</update>
 	
 	<!-- today 검색게시물 조회 -->
-	<select id="selectSerchTBoardList" resultType="Today" parameterType="int"  >
+	<select id="searchTBoardCount" resultType="int" parameterType="String">
+ 		<![CDATA[
+ 			select count(*) from today where today_title like CONCAT('%',#{search},'%') or today_contents like CONCAT('%',#{search},'%')	
+ 		]]>
+ 	</select>
+	<select id="selectSerchTBoardList" resultType="Today" parameterType="Map">
     	<![CDATA[
-			select * from today order by today_articleNo
+    		select * from today where today_title like CONCAT('%',#{search},'%') or today_contents like CONCAT('%',#{search},'%')  order by today_date desc limit #{startrow},6 ;
     	]]>
 	</select>
+
 	 	
 	<!-- Today게시물 생성  -->
 	<insert id="insertTBoard" parameterType="Today">
@@ -46,10 +52,10 @@
 	</insert>
 	
 	<!-- today게시물 수정 -->
-	<update id="updateTBoard" parameterType="int">
+	<update id="updateTBoard" parameterType="Today">
 		<![CDATA[
-		update today set today_title = #{today_title},today_date = #{today_date},today_contents=#{today_contents},
-		today_views=#{today_views},today_likes=#{today_likes},today_thumb=#{today_thumb},warning={warning} where today_articlNo = #{today_articlNo}; 
+		update today set today_title = #{today_title},today_contents=#{today_contents},
+		today_likes=#{today_likes},today_thumb=#{today_thumb} where today_articleNo = #{today_articleNo}; 
 		 ]]>
 	</update>
 	
@@ -57,8 +63,7 @@
 	
 	<!-- today 삭제 -->
 	<delete id="deleteTBoard" parameterType="int">
-		<![CDATA[
-		
+		<![CDATA[		
 		delete from today where today_articleNO=#{today_articleNO}
 		 ]]>
 	</delete>
