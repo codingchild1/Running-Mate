@@ -93,10 +93,16 @@ public class RouteController {
 			String user_id = (String) session.getAttribute("id");
 			String user_profile = memberService.profileImg(user_id);
 			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
+			boolean alert = alertService.getAlertTF(user_id, "route", articleNo);
 			if(likes==false) {
 				mv.addObject("likes", "false");
 			} else {
 				mv.addObject("likes", "true");
+			}
+			if(alert==false) {
+				mv.addObject("alert", "false");
+			} else {
+				mv.addObject("alert", "true");
 			}
 			
 			routeService.updateRoutePostView(articleNo);
@@ -265,7 +271,6 @@ public class RouteController {
 		String addr = "";
 		try{
 			addr = getRegionAddress(getJSONData(url));
-			System.out.println("addr : " + addr);
 	    }catch(Exception e){
 	    	System.out.println("주소 api 요청 에러");
 	        e.printStackTrace();
@@ -289,7 +294,7 @@ public class RouteController {
 
         //request에 JSON data 준비
         conn.setDoOutput(true);
-        System.out.println(apiUrl);
+        
         //보내고 결과값 받기
         int responseCode = conn.getResponseCode();
         if (responseCode == 400) {
@@ -306,8 +311,6 @@ public class RouteController {
              	response.append(inputLine); 
              } 
          }
-         
-        System.out.println(response);
          return response.toString();
     }
     

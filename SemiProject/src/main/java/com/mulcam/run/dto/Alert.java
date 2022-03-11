@@ -12,6 +12,12 @@ public class Alert {
 		this.board_type = board_type;
 		this.board_no = board_no;
 	}
+	public Alert(int alert_no, String user_id, String board_type, int board_no){
+		this.alert_no = alert_no;
+		this.user_id = user_id;
+		this.board_type = board_type;
+		this.board_no = board_no;
+	}
 	public int getAlert_no() {
 		return alert_no;
 	}

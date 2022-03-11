@@ -66,8 +66,17 @@
 			<img src="/profileview/${profileImg }" class="userProfile">
 			<span id="user_id">${route.user_id }</span>
 			<span id="board_time">${route.route_date }</span>
-			<a href="alert?id=${route.user_id}&board_type=route&board_no=${route.route_articleNo}" onclick="return confirm('정말 게시글을 신고하시겠습니까?')">
-				<span id="alert" style="float:right;">&nbsp&nbsp신고</span></a>
+			
+			<span id="alerts" onclick=alert()>
+			<c:choose>
+			<c:when test="${alert eq true }">
+				<span id="alert" style="float:right;">신고취소</span>
+			</c:when>
+			<c:when test="${alert eq false }">
+				<span id="alert" style="float:right;">신고</span>
+			</c:when>
+			</c:choose>
+			</span>
 			<span style="float:right;">${route.route_views }</span><span style="float:right;">조회</span>
 			
 		</div><br><br>
@@ -77,7 +86,8 @@
 			<div id="map" style="width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; "></div>
     	</div><br><br>
     	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
-       		<div id="likes" onclick=changeImg() style="text-align:center;">				<c:choose>
+       		<div id="likes" onclick=changeImg() style="text-align:center;">				
+       			<c:choose>
 				<c:when test="${likes eq true }">
 					<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
 				</c:when>
@@ -101,13 +111,38 @@
 			success:function(data){
 				if(data=="true"){
 					console.log("true: " +data);
-					$("#likes img").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+					$("#alert").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
 				} else {
 					console.log("false: " + data);
-					$("#likes img").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+					$("#alert").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
 				}
 			}
-		});			
+		});			 
+	}
+	function alert(){
+		var alert;
+		if($("#alerts span").html() == "신고"){
+			 alert = confirm('정말 게시글을 신고하시겠습니까?');
+		}
+		else if($("#alerts span").html() == "신고취소"){
+			 alert = confirm('게시글을 신고를 취소하시겠습니까?');
+		}
+		
+		if(alert==true){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/alert",
+				data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
+				dataType:"text",
+				success:function(data){
+					if(data=="true"){
+						$("#alerts span").html("신고취소");
+					} else {
+						$("#alerts span").html("신고");
+					}
+				}
+			});
+		}
 	}
 	</script>
 	<script>	

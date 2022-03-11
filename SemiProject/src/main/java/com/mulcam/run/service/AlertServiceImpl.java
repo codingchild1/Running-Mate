@@ -21,7 +21,8 @@ public class AlertServiceImpl implements AlertService {
 	@Override
 	public boolean getAlertTF(String user_id, String board_type, int board_no) throws Exception {
 		Alert alert = new Alert(user_id, board_type, board_no);
-		return alertDAO.checkAlert(alert);
+		boolean check = alertDAO.checkAlert(alert);
+		return check;
 	}
 
 	@Override
