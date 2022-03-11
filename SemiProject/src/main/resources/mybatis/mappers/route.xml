@@ -24,7 +24,7 @@
 		values (#{user_id}, #{route_title}, #{route_thumb}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
 	</insert>
 	
-	<select id="selectRouteList" resultType="routeinfo" parameterType="int">
+	<select id="selectRouteList" parameterType="int" resultType="routeinfo">
 		<![CDATA[
 			select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
 				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
@@ -35,19 +35,53 @@
 	</select>
 	<!-- select * from route order by route_date desc limit #{startrow}, 9 -->
 	
-	<select id="queryByAreaNDistance" parameterType="SearchRoute" resultType="route">
+	<select id="queryByAreaNDistance" parameterType="SearchRoute" resultType="routeinfo">
 		<![CDATA[
-			select * from route where route_distance between #{distance_left} and #{distance_right} and route_area like CONCAT('%',#{area},'%')
+			select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
+				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
+			from route left join member on route.user_id=member.id 
+			where route_distance between #{distance_left} and #{distance_right} and route_area like CONCAT('%',#{area},'%')
+			order by route_date desc limit #{startrow}, 6
 		]]>
 	</select>
-	<select id="queryByDistance" parameterType="SearchRoute" resultType="route">
+	
+	<select id="countByAreaNDistance" parameterType="SearchRoute" resultType="int">
 		<![CDATA[
-			select * from route where route_distance between #{distance_left} and #{distance_right}
+			select count(*) from route left join member on route.user_id=member.id 
+			where route_distance between #{distance_left} and #{distance_right} and route_area like CONCAT('%',#{area},'%')	
 		]]>
 	</select>
-	<select id="queryByArea" parameterType="SearchRoute" resultType="route">
+	
+	<select id="queryByDistance" parameterType="SearchRoute" resultType="routeinfo">
 		<![CDATA[
-			select * from route where route_area like CONCAT('%',#{area},'%')
+			select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
+				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
+			from route left join member on route.user_id=member.id
+			where route_distance between #{distance_left} and #{distance_right}
+			order by route_date desc limit #{startrow}, 6
+		]]>
+	</select>
+	<select id="countByDistance" parameterType="SearchRoute" resultType="int">
+		<![CDATA[
+			select count(*) from route left join member on route.user_id=member.id
+			where route_distance between #{distance_left} and #{distance_right}
+		]]>
+	</select>
+	
+	
+	<select id="queryByArea" parameterType="SearchRoute" resultType="routeinfo">
+		<![CDATA[
+			select route.route_articleNo, route.user_id, route.route_title, route.route_date, route.route_views, route.route_likes, 
+				route.route_thumb, route.route_content,	route.route_center, route.route_area, route.route_mapinfo, route.route_distance, route.warning, member.memberthumb
+			from route left join member on route.user_id=member.id
+			where route_area like CONCAT('%',#{area},'%')
+			order by route_date desc limit #{startrow}, 6
+		]]>
+	</select>
+	<select id="countByArea" parameterType="SearchRoute" resultType="int">
+		<![CDATA[
+			select count(*) from route left join member on route.user_id=member.id
+			where route_area like CONCAT('%',#{area},'%')
 		]]>
 	</select>
 	

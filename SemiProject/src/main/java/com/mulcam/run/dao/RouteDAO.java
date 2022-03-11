@@ -16,9 +16,12 @@ public interface RouteDAO {
 	public List<RouteInfo> selectRouteList(int startrow) throws Exception; 	//select 전체 코스 게시물
 	public RouteInfo queryRoute(int articleNo);								//select  코스 게시물
 	
-	public List<Route> queryByAreaNDistance(SearchRoute search) throws Exception;
-	public List<Route> queryByDistance(SearchRoute search) throws Exception;
-	public List<Route> queryByArea(SearchRoute search) throws Exception;
+	public List<RouteInfo> queryByAreaNDistance(SearchRoute sr) throws Exception;
+	public List<RouteInfo> queryByDistance(SearchRoute sr) throws Exception;
+	public List<RouteInfo> queryByArea(SearchRoute sr) throws Exception;
+	public int countByAreaNDistance(SearchRoute sr) throws Exception;
+	public int countByDistance(SearchRoute sr) throws Exception;
+	public int countByArea(SearchRoute sr) throws Exception;
 	
 	public void updateViews(int articleNo);				//update 조회수
 	public void updateLikePlus(int articleNo);

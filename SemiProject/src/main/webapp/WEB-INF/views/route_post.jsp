@@ -56,10 +56,10 @@
         <p>나만의 러닝 코스를 공유해주세요!</p>
         
         <div id="routeboardHeader" class="routeboardHeader">
-        	<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목" 
-        		style="disabled{background-color: #F0F0F0;}; height:80px; width:80%; border: 0px;"/>
+        	<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="${route.route_title} " 
+        		style="disabled{background-color: white;}; height:80px; width:80%; border: 0px;" disabled/>
         	<c:if test= "${id eq route.user_id }">
-				<a onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" style="float:right;">&nbsp&nbsp삭제</span></a>
+				<a onclick="return confirm('정말 게시글을 삭제하시겠습니까?')">&nbsp&nbsp<span id="delete" style="float:right; padding-left:10px;">삭제</span></a>
 				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a><br>
 			</c:if><br>
         	
@@ -70,10 +70,10 @@
 			<span id="alerts" onclick=alert()>
 			<c:choose>
 			<c:when test="${alert eq true }">
-				<span id="alert" style="float:right;">신고취소</span>
+				<span id="alert" style="float:right; padding-left:10px;">신고취소</span>
 			</c:when>
 			<c:when test="${alert eq false }">
-				<span id="alert" style="float:right;">신고</span>
+				<span id="alert" style="float:right; padding-left:10px;">신고</span>
 			</c:when>
 			</c:choose>
 			</span>

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     
     <style>
+    	/* margin : 아래 오른쪽 위 왼쪽 */
     	.main { width: 70%; margin: 0 auto; }
 		.container2 { max-width:1024px; margin:30px auto;}
 		.writebtn { text-align: right;  display:inline-block; float:right; margin-right:10%; }
@@ -32,8 +33,6 @@
 		a:link { color:black; text-decoration: none;}
      	a:visited { color: black; text-decoration: none;}
 	 	a:hover { color: black; text-decoration: none;}
-		
-		/* margin : 아래 오른쪽 위 왼쪽 */
 	</style>
 </head>
 
@@ -54,7 +53,7 @@
     		</div>
     		<div class="routebtn">
     			<form action ="/route_sort" method="post">
-    					<button id="routes_sort" class="btn btn-success" style="width:200px;">지역별/거리별 보기</button>
+    				<button id="routes_sort" class="btn btn-success" style="width:200px;">지역별/거리별 보기</button>
     			</form>
     		</div>
     		<div class="writebtn">

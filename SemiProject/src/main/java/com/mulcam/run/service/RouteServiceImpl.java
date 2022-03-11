@@ -45,19 +45,59 @@ public class RouteServiceImpl implements RouteService {
 	}
 
 	@Override
-	public List<Route> getSortedRoutes(String area, int distance_left, int distance_right) throws Exception {
-		List<Route> sortedRouteLists = null;
-		SearchRoute search = new SearchRoute(area, distance_left, distance_right);
+	public List<RouteInfo> getSortedRoutes(String area, int distance_left, int distance_right, int page, PageInfo pageInfo) throws Exception {
+		List<RouteInfo> sortedRouteLists = null;
+		int startPage=(((int) ((double)page/6+0.9))-1)*6+1;
+		int endPage=startPage+10-1;
+		//distance
 		if(area=="" && distance_right!=0) {
-			sortedRouteLists = routeDAO.queryByDistance(search);
-		} else if(area!=null && distance_left==0 && distance_right==0) {
-			sortedRouteLists = routeDAO.queryByArea(search);
-		} else {
-			sortedRouteLists = routeDAO.queryByAreaNDistance(search);
+			SearchRoute sr = new SearchRoute(area, distance_left, distance_right);
+			int listCount =  routeDAO.countByDistance(sr);
+			int maxPage = (int)Math.ceil((double)listCount/6);
+			if(endPage>maxPage) endPage=maxPage;
+			
+			pageInfo.setStartPage(startPage);
+			pageInfo.setEndPage(endPage);
+			pageInfo.setMaxPage(maxPage);
+			pageInfo.setPage(page);
+			pageInfo.setListCount(listCount);
+			sr.setStartrow((page-1)*6);
+			
+			sortedRouteLists = routeDAO.queryByDistance(sr);
+		}
+		//area
+		else if(area!=null && distance_left==0 && distance_right==0) {
+			SearchRoute sr = new SearchRoute(area, distance_left, distance_right);
+			int listCount =  routeDAO.countByArea(sr);
+			int maxPage = (int)Math.ceil((double)listCount/6);
+			if(endPage>maxPage) endPage=maxPage;
+			pageInfo.setStartPage(startPage);
+			pageInfo.setEndPage(endPage);
+			pageInfo.setMaxPage(maxPage);
+			pageInfo.setPage(page);
+			pageInfo.setListCount(listCount);
+			sr.setStartrow((page-1)*6);
+			
+			sortedRouteLists = routeDAO.queryByArea(sr);
+		}
+		//distance and area
+		else {
+			SearchRoute sr = new SearchRoute(area, distance_left, distance_right);
+			int listCount =  routeDAO.countByAreaNDistance(sr);
+			int maxPage = (int)Math.ceil((double)listCount/6);
+			if(endPage>maxPage) endPage=maxPage;
+			pageInfo.setStartPage(startPage);
+			pageInfo.setEndPage(endPage);
+			pageInfo.setMaxPage(maxPage);
+			pageInfo.setPage(page);
+			pageInfo.setListCount(listCount);
+			sr.setStartrow((page-1)*6);
+			
+			sortedRouteLists = routeDAO.queryByAreaNDistance(sr);
 		}
 		return sortedRouteLists;
 	}
-
+	
 	@Override
 	public void updateRoutePostView(int articleNO) throws Exception {
 		routeDAO.updateViews(articleNO);

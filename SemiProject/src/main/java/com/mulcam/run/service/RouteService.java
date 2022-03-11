@@ -11,7 +11,7 @@ public interface RouteService {
 	public void regRoute(Route route) throws Exception;
 	public List<RouteInfo> getRoutesList(int page, PageInfo pageInfo) throws Exception;
 	public RouteInfo getRouteInfo(int articleNo) throws Exception;
-	public List<Route> getSortedRoutes(String area, int distance_left, int distance_right ) throws Exception;
+	public List<RouteInfo> getSortedRoutes(String area, int distance_left, int distance_right, int page, PageInfo pageInfo) throws Exception;
 	
 	public void updateRoutePostView(int articleNO) throws Exception;
 	public void updateRoutePost(Route route) throws Exception;

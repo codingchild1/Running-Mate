@@ -4,6 +4,7 @@ public class SearchRoute {
 	String area;
 	int distance_left;
 	int distance_right;
+	int startrow;
 	
 	SearchRoute(){}
 	public SearchRoute(String area, int distance_left, int distance_right){
@@ -33,6 +34,12 @@ public class SearchRoute {
 	}
 	public void setDistance_right(int distance_right) {
 		this.distance_right = distance_right;
+	}
+	public int getStartrow() {
+		return startrow;
+	}
+	public void setStartrow(int startrow) {
+		this.startrow = startrow;
 	}
 	
 }
