@@ -66,11 +66,26 @@ public class TodayController {
 	}
 
 	// 2.전체페이지 검색정보(search) ajax 로 구현
-	@ResponseBody
-	@PostMapping("/today_serch")
-	public ModelAndView searchInfo(@ModelAttribute Today tbaord) {
-		ModelAndView mav = new ModelAndView("today");
-		// ajax 로 구현
+	
+	@GetMapping("/today_search")
+	public ModelAndView searchInfo(@RequestParam(value="page", required=false, defaultValue="1") int page, @RequestParam(value="todaySearchText") String search) {
+		ModelAndView mav=new ModelAndView();
+		PageInfo pageInfo=new PageInfo();
+		try {
+			List<Today> todayList=todayService.getSearchBoardList(search, page, pageInfo);
+			System.out.println(todayList.size());
+			for(Today t : todayList ) {
+				System.out.println("제목:"+t.getToday_title()+"// 내용:"+t.getToday_contents());
+			}
+			mav.addObject("pageInfo", pageInfo);
+			mav.addObject("todayList", todayList);
+			mav.addObject("todaySearchText", search);
+			mav.setViewName("todayResult");
+		} catch(Exception e) {
+			e.printStackTrace();
+			mav.addObject("err", e.getMessage());
+			mav.setViewName("err");
+		}
 		return mav;
 	}
 
@@ -243,7 +258,7 @@ public class TodayController {
 	// 5.취소요청
 	@PostMapping("/today_postcancle")
 	public String todayPostcancle() {
-		return "today";
+		return "redirect:/today";
 	}
 
 

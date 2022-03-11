@@ -31,11 +31,17 @@
  	</update>
 	
 	<!-- today 검색게시물 조회 -->
-	<select id="selectSerchTBoardList" resultType="Today" parameterType="int"  >
+	<select id="searchTBoardCount" resultType="int" parameterType="String">
+ 		<![CDATA[
+ 			select count(*) from today where today_title like CONCAT('%',#{search},'%') or today_contents like CONCAT('%',#{search},'%')	
+ 		]]>
+ 	</select>
+	<select id="selectSerchTBoardList" resultType="Today" parameterType="Map">
     	<![CDATA[
-			select * from today order by today_articleNo
+    		select * from today where today_title like CONCAT('%',#{search},'%') or today_contents like CONCAT('%',#{search},'%')  order by today_date desc limit #{startrow},6 ;
     	]]>
 	</select>
+
 	 	
 	<!-- Today게시물 생성  -->
 	<insert id="insertTBoard" parameterType="Today">

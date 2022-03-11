@@ -19,10 +19,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>Insert title here</title>
 
-<!DOCTYPE html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 .profile {
 	width: 50px;
@@ -31,19 +27,21 @@
 }
 body {
 	margin: 0 auto;
+
 }
 .outer {
 	width:1100px;
 	margin: 0 auto;
 }
 .content {
-	width:1100px;
+	width:1000px;
 	height: 700px;
 	margin: 0 auto;
 }
 .title {
 	width:1100px;
 	margin: 0 auto;
+	text-align: center;
 }
 #to-title {
 	text-align: center;
@@ -87,30 +85,39 @@ body {
 
 .search {
 	text-align: center;
+	flex:center;
+}
+#search{
+	text-align: center;
 }
 </style>
 </head>
 <body>
-<%-- 
-	<%@include file="slides.jsp"%> 
- --%>
-
+	<%@include file="header.jsp"%>
+	<%-- <%@include file="slides.jsp"%>  --%>
 		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
 		<!-- <div class="col-lg-11 center border"> -->
 		<div class="outer">
 
-			<div class="title">
+			<div class="title" >
 				<div>
 					<h1 class="display-5 fw-bold" id="to-title">오늘의 런닝</h1>
 				</div>
 
-				<div class="search">
-						<input class="" type="text"	style="width: 250px; height: 40px;" placeholder="Search" aria-label="Search" />
-						<button class="btn btn-outline-secondary" id="todaySearch" name="todayMake" type="button" style="width: 80px; height: 40px;">검색</button>
+				<table class="search">
+				<tr><td>
+					<form action="/today_search" method="get">
+						<input class="" type="text" id="todaySearchText" name="todaySearchText"  style="width: 250px; height: 40px;" placeholder="Search" aria-label="Search" />
+						<input class="btn btn-outline-secondary" type="submit" style="width: 80px; height: 40px;" value="검색"/>
 						&nbsp&nbsp
+					</form></td>
+					<td>
 						<button class="btn btn-outline-secondary" id="todayMake" name="todayMake" type="button" style="width: 80px; height: 40px;">글쓰기</button>
-				</div>
+					</td></tr>
+				</table>
 			</div>
+			
+			
 			<div class="content">
 				<!---------------페이지 내용------------------------------------------------ -->
 				<c:choose>
@@ -118,10 +125,9 @@ body {
 						<div class="" id="container1"> 
 									<!--1행 1열-->
 									<c:forEach var="tboard" items="${todayList}">
-										<div class="border mycard" >
-
+										<div class=" mycard" >
 										<!-- 회원이미지, 아이디, 날짜/시간 -->
-										<header	class="border">
+										<header	class="">
 											<div class="">
 												<span class="col-lg">
 													<span><img class="profile" src='images/user_icon_1.png' width=10px height=10px>i</span> <span id="user_id">${tboard.user_id}</span>
@@ -132,7 +138,7 @@ body {
 										</header>
 
 										<!--타이틀-->
-										<div class="border" id="today_title">${tboard.today_title }</div>
+										<div class="" id="today_title" >${tboard.today_title }</div>
 										<!--썸네일-->
 										<section class="bg-white">
 													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
@@ -157,6 +163,7 @@ body {
 						</div>
 					</c:when>
 				</c:choose>
+				
 				<div id="paging">
 					<c:choose>
 						<c:when test="${pageInfo.page<=1}">
@@ -192,8 +199,8 @@ body {
 		
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
-	console.log(${pageInfo.page});
-	console.log(${user_id});
+	//console.log(${pageInfo.page});
+	//console.log(${user_id});
 /* 		$(function(){
 			$("#todayMake").click(function(){
 				let id = $('#user_id').val();
@@ -206,16 +213,36 @@ body {
 			});
 		}); */
 		
+		
+		/* $(document).on('click', '#todaySearch', function(e) {
+ 				$.ajax({     
+  	        		type:"post",
+  	        		dataType:"text",
+  	        		async:false,
+  	        		url:"http://localhost:8090/today_search",
+  	        		//data:{"todaySearchText":??},
+  	        		success: function(data, textStatus){ 
+  	        			
+  	        			var todaySearchText = $('form input[name=todaySearch]').val();
+						console.log(todaySearchText);	
+  	        		},
+  	        		error:function(data, textStatus){
+ 	        			
+  	        		}
+  	        	}); 
+  			});
+  		}); */
+		
 		$(document).ready(function(){
+			//console.log("${todayList[0].today_title}");
 			$('#todayMake').on('click',function(){
 				location.href="today_make";
 			});
-			
+
 
 		});
 		
-
 	</script>
-		<%@include file="fotter.jsp"%>
+		<%-- <%@include file="fotter.jsp"%> --%>
 </body>
 </html>

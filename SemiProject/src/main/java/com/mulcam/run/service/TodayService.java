@@ -20,6 +20,6 @@ public interface TodayService {
 	void modifyBoard(Today tboard) throws Exception; 
 	void removeTBoard(int articleNo) throws Exception;
 	void inputWarn(boolean a) throws Exception;
-	List<Today> getSerchBoardList() throws Exception; 
+	List<Today> getSearchBoardList(String search, int page, PageInfo pageInfo) throws Exception; 
 
 }

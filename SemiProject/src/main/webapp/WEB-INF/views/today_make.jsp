@@ -130,12 +130,12 @@ main, header, section {
 						&nbsp&nbsp&nbsp&nbsp&nbsp
 
 
-						<!--컨트롤러 취소  today_postcancle 로 이동  -->
+<!-- 						컨트롤러 취소  today_postcancle 로 이동 
 
 						<button class="btn btn-outline-secondary" type="reset"
 							style="width: 100px; height: 30px; padding: 5px"
 							id="today_postcancle" name="today_postcancle">취소</button>
-						&nbsp&nbsp&nbsp&nbsp&nbsp
+						&nbsp&nbsp&nbsp&nbsp&nbsp -->
 
 
 						<!--컨트롤러 목록 today_list 로 이동  -->
