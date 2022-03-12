@@ -274,12 +274,8 @@
                 style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">
                <span><img class="profile" src='${groupandmate.img }' style="width: 40px; height: 40px;margin-top: 10px; margin-right: 10px"></span>
                 <div style=" width: 150px;">
-                    <span><input type="text" id="title" value='${groupandmate.title }'
-                            style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;"
-                            disabled> </span>
-                    <span><input type="text" id="id" value='${groupandmate.id }'
-                            style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"
-                            disabled> </span>
+                    <span><input type="text" id="title" value='${groupandmate.title }' style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled> </span>
+                    <span><input type="text" id="id" value='${groupandmate.id }' style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;" disabled> </span>
                 </div>
                 <div>
                     번개
@@ -772,7 +768,6 @@
 		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 	        level: 4 // 지도의 확대 레벨 
@@ -807,7 +802,10 @@
  $(document).ready(function(){
 		$('#search2').bind("click", function(){
 			var search = $('#search').val();
-			
+			if(search==''){
+				alert("주소를 입력하세요");
+				return false;
+			}
 	        geocoder.addressSearch(search, function(result, status) {
 	        	
 	            // 정상적으로 검색이 완료됐으면 

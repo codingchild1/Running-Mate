@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,6 +61,18 @@ public class MateController {
 		}
 		return mv;
 	}
+	
+//	@RequestMapping(value = "/accmenu", method = RequestMethod.GET)
+//	public String accmenu(HttpServletRequest request, Model model) {
+//		String cpage = request.getParameter("cpage");
+//		HttpSession session = request.getSession();
+//		String id = (String)session.getAttribute("id");
+//		if(id==null || id.equals("")) {
+//			return "login";
+//		}
+//		model.addAttribute("cpage", cpage);
+//		return "mate_main";
+//	}
 	
 	//번개 모달창 띄우는기능
 	@ResponseBody
@@ -228,8 +242,6 @@ public class MateController {
 			String user_img2 = memberService.profileImg(id);
 			mv.addObject("id",id);
 			mv.addObject("user_img2",user_img2);
-			System.out.println(id);
-			System.out.println(user_img2);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

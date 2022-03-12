@@ -246,28 +246,32 @@
 				<div class="register">
 					<div
 						style="margin: 5px; padding: 5px; display: flex; align-items: flex-start; justify-content: space-between;">
-						<span><img class="profile" src='${groupandmate.img }'></span>
-						<div style="margin-left: 10px;">
-							<span><input type="text" id="title"
-								value='${groupandmate.title }'
-								style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border: none; background-color: white;"
-								disabled> </span> <span><input type="text" id="id"
-								value='${groupandmate.id }'
-								style="height: 20px; vertical-align: middle; border: none; background-color: white;"
-								disabled> </span>
+						<span style="margin-top: 9px;"><img class="profile" src='${groupandmate.img }'></span>
+						<div style="margin-left: 10px;width: 150px">
+							<span><input type="text" id="title"value='${groupandmate.title }'style="height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border: none; background-color: white;"disabled> </span> 
+							<span><input type="text" id="id"value='${groupandmate.id }'style="height: 20px; vertical-align: middle; border: none; background-color: white;"disabled> </span>
 						</div>
+						<c:choose>
+						<c:when test="${groupandmate.type eq 'g'}">
+						<div style="display: inline-block;line-height: 35px;">소모임</div>
+						</c:when>
+						<c:otherwise>
+						<div style="display: inline-block;line-height: 35px;">번개</div>
+						</c:otherwise>
+						</c:choose>
 					</div>
-					<div
-						style="margin: 5px; margin-top: 25px; padding: 5px; vertical-align: middle;">
-						<span><img class="heart" src="images/ptp2.png"
-							style="width: 30px; height: 30px;"></span> <span><input
-							type="text" id="like" value='${groupandmate.likeno }'
-							style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
-							disabled></span>
-						<button id="btn-modal" class="more"
-							style="border: none; float: right; margin-top: 10px; background-color: white; color: rgba(var(- -f52, 142, 142, 142), 1); cursor: pointer;"
-							onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더
-							보기</button>
+					<div style="margin: 5px; margin-top: 25px; padding: 5px; vertical-align: middle;">
+						<c:choose>
+						<c:when test="${groupandmate.type eq 'g'}">
+						 <span><img class="heart" src="images/white.png"style="width: 30px; height: 30px;"></span> 
+						<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px;  vertical-align: middle; font-size: 15px; font-weight: bold; border: none; background-color: white;color:white;"disabled></span>
+						</c:when>
+						<c:otherwise>
+						<span><img class="heart" src="images/ptp2.png"style="width: 30px; height: 30px;"></span> 
+						<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle; font-size: 15px; font-weight: bold; border: none; background-color: white;"disabled></span>
+						</c:otherwise>
+						</c:choose>
+						<button id="btn-modal" class="more"style="border: none; float: right; background-color: white; color: rgba(var(- -f52, 142, 142, 142), 1); cursor: pointer;"onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더보기</button>
 					</div>
 				</div>
 			</c:forEach>
