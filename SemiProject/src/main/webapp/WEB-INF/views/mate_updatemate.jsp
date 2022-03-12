@@ -67,6 +67,20 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
     
+    $('#form').submit(function() {
+		 let title = $('#mate_title').val();
+		 if(title==''){
+			 alert("제목을 입력하세요");
+			 $('#mate_title').focus();
+	         return false;
+		 }
+		 let search = $('#search').val();
+		 if(search==''){
+			 alert("주소를 입력하세요");
+			 $('#search').focus();
+	         return false;
+		 }
+	 });
     //ckeditor
 	$(function(){
         ClassicEditor

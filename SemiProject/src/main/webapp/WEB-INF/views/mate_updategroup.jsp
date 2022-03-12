@@ -96,6 +96,29 @@ input:focus {
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
+	
+	$('#form').submit(function() {
+		 let title = $('#group_title').val();
+		 if(title==''){
+			 alert("제목을 입력하세요");
+			 $('#group_title').focus();
+	         return false;
+		 }
+		 let search = $('#search').val();
+		 if(search==''){
+			 alert("주소를 입력하세요");
+			 $('#search').focus();
+	         return false;
+		 }
+		 let group_kl = $('#group_kl').val();
+		 let group_il = $('#group_il').val();
+		 if(group_kl==''||group_id==''){
+			 alert("연락 주소 둘 중 하는 필수입니다.");
+			 $('#group_kl').focus();
+	         return false;
+		 }
+	 });
+	
     //ckeditor
 	$(function(){
         ClassicEditor

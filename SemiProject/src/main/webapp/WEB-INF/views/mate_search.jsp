@@ -639,6 +639,11 @@
 	   
         //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
 		$('.ptp').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+    			alert("로그인이 필요한 서비스입니다.");
+    			return false;
+			}
 	            $.ajax({
 	        		type:"post",
 	        		dataType:"text",

@@ -261,7 +261,7 @@
      
         <div class="post2" style="height: 50px;">
         <ul style="cursor: pointer;">
-            <li class="all"><b>전체</b></li>
+            <li class="all" style="color:#59ab6e;font-weight: bold !important">전체</li>
             <li class="matel">번개</li>
             <li class="groupl">소모임</li>
         </ul>
@@ -273,22 +273,31 @@
             <div
                 style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">
                <span><img class="profile" src='${groupandmate.img }' style="width: 40px; height: 40px;margin-top: 10px; margin-right: 10px"></span>
-                <div style=" width: 150px;">
+                <div style=" width: 130px;">
                     <span><input type="text" id="title" value='${groupandmate.title }' style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled> </span>
-                    <span><input type="text" id="id" value='${groupandmate.id }' style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;" disabled> </span>
+                    <span><input type="text" id="id" value='${groupandmate.id }' style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;" disabled> </span>
                 </div>
-                <div>
-                    번개
-                </div>
+               <c:choose>
+						<c:when test="${groupandmate.type eq 'g'}">
+						<div style="display: inline-block;line-height: 35px;">소모임</div>
+						</c:when>
+						<c:otherwise>
+						<div style="display: inline-block;line-height: 35px;">번개</div>
+						</c:otherwise>
+						</c:choose>
             </div>
             <div style=" vertical-align: middle;margin-top: 15px;">
-                <span><img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;"></span>
-                <span><input type="text" id="like" value='${groupandmate.likeno }'
-                        style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"
-                        disabled></span>
-                <button id="btn-modal" class="more"
-                    style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더
-                    보기</button>
+            <c:choose>
+			<c:when test="${groupandmate.type eq 'g'}">
+                <span><img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 5px"></span>
+                <span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled></span>
+          	</c:when>
+			<c:otherwise>
+				<span><img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 5px"></span>
+                <span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 3px;"disabled></span>
+			</c:otherwise>
+			</c:choose>     
+                <button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더보기</button>
             </div>
         </div>
          </c:forEach> 
@@ -667,6 +676,11 @@
         //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
 	    var bt;
 		$('.ptp').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+    			alert("로그인이 필요한 서비스입니다.");
+    			return false;
+			}
 	            $.ajax({
 	        		type:"post",
 	        		dataType:"text",
@@ -849,10 +863,10 @@
 	                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	                map.setCenter(coords);
 	                /* marker.setDraggable(true); */
-	                bounds = map.getBounds();
+	               /*  bounds = map.getBounds();
 	 	           console.log(bounds);
 	 	          $('input[name=boundinfo]').attr('value',bounds);
-	 	          console.log("검색좌표"+$('#boundinfo').val());
+	 	          console.log("검색좌표"+$('#boundinfo').val()); */
 	 	         $('input[name=type]').attr('value','all');
 	 	          console.log($('#search').val());
 	 	  			 $.ajax({
@@ -869,7 +883,6 @@
 	 	    				/* console.log(jdata);
 	 	    				console.log(jdata.length); */
 	 	    				//var jsonInfo = JSON.parse(data);
-	 	    				var count = 0;
 	 	    					var accEle = "";
 	 	    				 for(var i of jdata) {
 	 	    					 console.log(i);
@@ -877,21 +890,20 @@
 	 	    					/*  console.log(jdata[i].title); */ 
 	 	    					console.log(i.type);
 	 	    					accEle += '<div class="register">'
-	 	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
-	 	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
-	 	    					accEle +=' <div style=" width: 150px;">'
-	 	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
-	 	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
-	 	    					accEle +='</div>'
-	 	    					accEle +=' <div>'+"번개"+'</div>'
-	 	    					accEle +='</div>'
-	 	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
-	 	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
-	 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
-	 	    					 accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
-	 	    					accEle +='</div>'
-	 	    					accEle +=' </div>'
-	 	    					count++;
+		 	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+		 	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+		 	    					accEle +=' <div style=" width: 150px;">'
+		 	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+		 	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+		 	    					accEle +='</div>'
+		 	    					accEle +=' <div>'+"번개"+'</div>'
+		 	    					accEle +='</div>'
+		 	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+		 	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
+		 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+		 	    					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+		 	    					accEle +='</div>'
+		 	    					accEle +=' </div>'
 	 	    				}  
 	 	    				console.log(accEle);
 	 	    				
@@ -1053,6 +1065,10 @@
 	
  	$('.matel').click(function(){
  		 $('input[name=type]').attr('value','m');
+ 		 $('.matel').attr('style','color:#59ab6e;font-weight:bold !important');
+ 		 $('.groupl').attr('style','');
+ 		 $('.all').attr('style','');
+ 		 
  		 $.ajax({
   			async:false,
   			type:"GET",
@@ -1084,7 +1100,7 @@
   					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
   					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
   					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
-  					 accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+  					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
   					accEle +='</div>'
   					accEle +=' </div>'
   					count++;
@@ -1098,6 +1114,9 @@
  	});
  	$('.groupl').click(function(){
 		 $('input[name=type]').attr('value','g');
+ 		 $('.groupl').attr('style','color:#59ab6e;font-weight:bold !important');
+ 		 $('.matel').attr('style','');
+ 		 $('.all').attr('style','');
 		 $.ajax({
   			async:false,
   			type:"GET",
@@ -1143,6 +1162,9 @@
 	});
  	$('.all').click(function(){
 		 $('input[name=type]').attr('value','all');
+ 		 $('.all').attr('style','color:#59ab6e;font-weight:bold !important');
+ 		 $('.matel').attr('style','');
+ 		 $('.groupl').attr('style','');
 		 $.ajax({
   			async:false,
   			type:"GET",

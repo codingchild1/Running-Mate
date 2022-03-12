@@ -228,16 +228,9 @@ body {
 					<li><a href="mate_search">검색</a></li>
 					<li><a href="mate_map">지도로 보기</a></li>
 				</ul>
-				<div
-					style="display: flex; float: right; align-items: center; margin-right: 55px;">
-					<button
-						style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem;">
-						<a href="mate_makemate">번개 글작성</a>
-					</button>
-					<button
-						style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem;">
-						<a href="mate_makegroup">소모임 글작성</a>
-					</button>
+				<div style="display: flex; float: right; align-items: center; margin-right: 55px;">
+					<button style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem;"><a href="mate_makemate">번개 글작성</a></button>
+					<button style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem;"><a href="mate_makegroup">소모임 글작성</a></button>
 				</div>
 			</div>
 		</div>
@@ -671,6 +664,11 @@ body {
         //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
 	    var bt;
 		$('.ptp').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+    			alert("로그인이 필요한 서비스입니다.");
+    			return false;
+			}
 	            $.ajax({
 	        		type:"post",
 	        		dataType:"text",
@@ -684,7 +682,7 @@ body {
 	        			} else{
 	        				alert("참여가 취소되었습니다.");
 	        				$('.ptp').attr('value','참여');
-	        			}
+	        			}	
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
