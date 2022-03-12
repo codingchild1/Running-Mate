@@ -56,6 +56,7 @@ public class MateServiceImipl implements MateService {
 	@Override
 	public void updateGroup(Group group) throws Exception {
 		mateDAO.updateGroup(group);
+		System.out.println("service");
 	}
 
 	@Override
@@ -91,11 +92,11 @@ public class MateServiceImipl implements MateService {
 		
 	}
 
-	@Override
-	public Warning makeWarning(Warning warning) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Warning makeWarning(Warning warning) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {
@@ -190,6 +191,30 @@ public class MateServiceImipl implements MateService {
 	@Override
 	public List<GroupAndMate> addressinfo3(String type) throws Exception {
 		return mateDAO.searchMap3(type);
+	}
+
+	@Override
+	public void mateWarning(int mate_articleNO) throws Exception {
+		mateDAO.mateWarning(mate_articleNO);
+		
+	}
+
+	@Override
+	public void groupWarning(int group_articleNO) throws Exception {
+		mateDAO.groupWarning(group_articleNO);
+		
+	}
+
+	@Override
+	public void mateWarningCanc(int mate_articleNO) throws Exception {
+		mateDAO.mateWarningCanc(mate_articleNO);
+		
+	}
+
+	@Override
+	public void groupWarningCanc(int group_articleNO) throws Exception {
+		mateDAO.groupWarningCanc(group_articleNO);
+		
 	}
 
 

@@ -35,7 +35,13 @@ public interface MateDAO {
 	public void insertMate(Mate mate)throws Exception; //번개 생성
 	public void insertGroup(Group group)throws Exception;  //소모임 생성
 	
-	public void insertWarning(Warning warning)throws Exception; //신고 접수
+//	public void insertWarning(Warning warning)throws Exception; //신고 접수
+	
+	public void mateWarning(int mate_articleNO)throws Exception; //번개신고 접수
+	public void groupWarning(int group_articleNO)throws Exception; //소모임신고 접수
+	
+	void mateWarningCanc(int mate_articleNO)throws Exception; //번개신고 접수
+	void groupWarningCanc(int group_articleNO)throws Exception; //소모임신고 접수
 	
 	public void like(int mate_articleNO)throws Exception; //번개참여(참여자수 +1)
 	public void likeCancel(int mate_articleNO)throws Exception; //번개참여취소(참여자수 -1)

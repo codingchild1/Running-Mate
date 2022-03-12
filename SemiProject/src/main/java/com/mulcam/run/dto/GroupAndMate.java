@@ -9,10 +9,11 @@ public class GroupAndMate {
 	int likeno;
 	String type;
 	String cont;
+	String warning;
 	
 	public GroupAndMate()	{}
 	public GroupAndMate(String no,String id,String img,String title,String regdate,int likeno,
-			String type,String cont) {
+			String type,String cont,String warning) {
 		this.no=no;
 		this.id=id;
 		this.img=img;
@@ -21,8 +22,15 @@ public class GroupAndMate {
 		this.likeno=likeno;
 		this.type=type;
 		this.cont=cont;
+		this.warning=warning;
 	}
 	
+	public String getWarning() {
+		return warning;
+	}
+	public void setWarning(String warning) {
+		this.warning = warning;
+	}
 	public String getCont() {
 		return cont;
 	}

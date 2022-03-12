@@ -322,7 +322,12 @@
 				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
 				<span
 					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span> 
-					<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
+					<span id="alerts" style="margin: 5px;">
+					<!-- <input type="text" class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;" value="신고"> -->
+					<span class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">신고</span>
+					<input type="hidden" id="mwarning" name="mwarning" value=''>
+					<!-- <span class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">취소</span> -->
+					</span>
 			</div>
 			<input name='mate_date' type="text"
 				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba(123, 173, 213, 0.70);"
@@ -350,8 +355,8 @@
 							</div>
 						</div>
 					</div>
-					<button class="ptp" style="margin: 5px; width: 43px;">참여</button>
-					
+					<!-- <button class="ptp" style="margin: 5px; width: 43px;">참여</button> -->
+					<input class="ptp" type="text" style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'>
 				</div>
 			</div>
 		</div>
@@ -372,7 +377,12 @@
 			<div style="font-size: 13px; float: right;display: flex;">
 				<form action="mate_updategroup" method="get"><span id="update2"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
 				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span>
-				<span style="margin: 5px;"><button class="repoprt" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">신고</button></span>
+				<span id="alerts" style="margin: 5px;">
+					<!-- <input type="text" class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;" value="신고"> -->
+					<span class="alert2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">신고</span>
+					<input type="hidden" id="gwarning" name="gwarning" value=''>
+					<!-- <span class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">취소</span> -->
+					</span>
 
 			</div>
 			<input name="group_date" type="text"
@@ -463,7 +473,8 @@
      			 $('input[name=mapinfo]').attr('value',map.La); 
      			 $('input[name=mapinfo2]').attr('value',map.Ma); 
      			 $('input[name=mapinfo3]').attr('value',jdata.mate_mapinfo); 
-     			 $('input[name=mate_cont]').val(jdata.mate_cont); 
+     			 $('input[name=mate_cont]').val(jdata.mate_cont);
+     			$('input[name=mwarning]').val(jdata.warning); 
      			 /*  console.log(jdata.mate_mapinfo);
      			  console.log(jdata.mate_cont); */
      			  /* console.log($('#mate_cont').val());  */
@@ -475,6 +486,11 @@
      				 $('#delete').hide();
      				 $('#update').hide();
      			  } 
+     			 if($('#mwarning').val()=='1'){
+     				 $('#alerts span').html('신고취소');
+     			  }else{
+     				 $('#alerts span').html('신고');
+     			  }
      			  
      			//메이트에디터에 값넣어주는 함수	  
        	     	m_editor.setData($('#mate_cont').val());
@@ -548,6 +564,7 @@
  			 $('input[name=mapinfo]').attr('value',map.La); 
 			 $('input[name=mapinfo2]').attr('value',map.Ma);  
 			 $("#group_cont").val(jdata.group_cont); 
+			 $('input[name=gwarning]').val(jdata.warning); 
 			 
 			 var uid = '<%=(String)session.getAttribute("id")%>';
 			  if($('#user_id').val()==uid){
@@ -557,6 +574,11 @@
   				 $('#delete2').hide();
   				 $('#update2').hide();
   			  }
+			  if($('#gwarning').val()=='1'){
+	  				 $('#alerts span').html('신고취소');
+	  			  }else{
+	  				 $('#alerts span').html('신고');
+	  			  }
 	           
 			//그룹게시물에디터 값 넣는 함수
 			g_editor.setData($('#group_cont').val());
@@ -658,8 +680,10 @@
 	        		success: function(data, textStatus){
 	        			if(data=='false') {
 	        				alert("참여가 완료되었습니다.");
+	        				$('.ptp').attr('value','참여취소');
 	        			} else{
 	        				alert("참여가 취소되었습니다.");
+	        				$('.ptp').attr('value','참여');
 	        			}
 	        		},
 	        		error:function(data, textStatus){
@@ -699,7 +723,52 @@
 	        		}
     		});
 		});
-		
+		$('.alert').click(function(){
+			 $.ajax({
+	       		type:"post",
+	       		dataType:"text",
+	       		async:false,
+	       		url:"http://localhost:8090/alert",
+	       		data:{"board_no":$('#ptp').val(),
+	       			  "user_id":$("#user_id").val(),
+	       			  "board_type":"mate"},
+	       		success: function(data, textStatus){
+	       			if(data=="true"){
+	       				alert("성공적으로 신고되었습니다.");
+	       				$('#alerts span').html('신고취소');
+	       			}else{
+	       				alert("신고가 취소되었습니다.")
+	       				$('#alerts span').html('신고');
+	       			}
+	       		},
+	       		error:function(data, textStatus){
+	       			alert("실패");
+	       		}
+			});
+		});
+		$('.alert2').click(function(){
+			 $.ajax({
+	       		type:"post",
+	       		dataType:"text",
+	       		async:false,
+	       		url:"http://localhost:8090/alert",
+	       		data:{"board_no":$('#ptp').val(),
+	       			  "user_id":$("#user_id").val(),
+	       			  "board_type":"group"},
+	       		success: function(data, textStatus){
+	       			if(data=="true"){
+	       				alert("성공적으로 신고되었습니다.");
+	       				$('#alerts span').html('신고취소');
+	       			}else{
+	       				alert("신고가 취소되었습니다.")
+	       				$('#alerts span').html('신고');
+	       			}
+	       		},
+	       		error:function(data, textStatus){
+	       			alert("실패");
+	       		}
+			});
+		});
 		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -1119,6 +1188,7 @@
   			}
   		});   
 	});
+
     </script>
      <%@include file ="fotter.jsp" %>
 </body>

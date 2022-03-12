@@ -7,9 +7,9 @@
 	<select id="postList" resultType="GroupAndMate" >
 		<![CDATA[
 			select * from 
-			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,group_date as regdate,0 as likeno, 'g' as type from group1)
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,warning as warning,group_date as regdate,0 as likeno, 'g' as type from group1)
 			union
-			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,warning as warning,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
 			order by regdate desc;
 		]]>
 	</select>
@@ -53,8 +53,8 @@
 	<update id="updateGroup" parameterType="group" >
 		<![CDATA[
 		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
-						group_il=#{group_ki}, group_date=now(), group_area=#{group_area} , group_address=#{group_address}
-						where group_articleNO=#{group_articleNO}
+		group_il=#{group_il}, group_date=now(), group_area=#{group_area} , group_address=#{group_address}
+		where group_articleNO=#{group_articleNO}
 		]]>
 	</update>
 	
@@ -90,7 +90,7 @@
 	<insert id="insertMate" parameterType="mate">
 		<![CDATA[
 			insert into mate (mate_articleNO,user_id,mate_title,mate_cont,user_img,mate_like,mate_date,mate_views,mate_mapinfo,warning,mate_address) 
-				values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},false,#{mate_address})
+				values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},'0',#{mate_address})
 		]]>
 	</insert>
 	
@@ -98,15 +98,34 @@
 	<insert id="insertGroup" parameterType="group">
 		<![CDATA[
 			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_kl,group_il,group_date,group_area,group_views,warning,group_address) 
-				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,false,#{group_address})
+				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,'0',#{group_address})
 		]]>
 	</insert>
 	
-		<!-- 신고접수 -->
-	<insert id="insertWarning" parameterType="warning">
+		<!-- 번개신고접수 -->
+	<insert id="mateWarning" parameterType="int">
 		<![CDATA[
-			insert into report (alert_no,board_type,board_no,comment_ref,comment_seq,alert_cnt,alert_id) 
-				values(#{alert_no},#{board_type},#{board_no},#{comment_ref},#{comment_seq},#{alert_cnt},#{alert_id})
+			update mate set warning='1' where mate_articleNO=#{mate_articleNO}
+		]]>
+	</insert>
+	
+			<!-- 소모임신고접수 -->
+	<insert id="groupWarning" parameterType="int">
+		<![CDATA[
+			update group1 set warning='1' where group_articleNO=#{group_articleNO}
+		]]>
+	</insert>
+			<!-- 번개신고접수취소 -->
+	<insert id="mateWarningCanc" parameterType="int">
+		<![CDATA[
+			update mate set warning='0' where mate_articleNO=#{mate_articleNO}
+		]]>
+	</insert>
+	
+			<!-- 소모임신고접수취소 -->
+	<insert id="groupWarningCanc" parameterType="int">
+		<![CDATA[
+			update group1 set warning='0' where group_articleNO=#{group_articleNO}
 		]]>
 	</insert>
 	
@@ -241,3 +260,34 @@
 	</select> 
 
 </mapper>
+
+<!-- create table group1(
+	group_articleNO int(11) auto_increment,
+	user_id varchar(100) not null,
+	group_title varchar(255) not null,
+	group_cont longtext,
+	user_img varchar(500) not null,
+	group_kl varchar(500),
+	group_il varchar(500),
+	group_date Datetime not null,
+	group_area varchar(500) not null,
+	group_views int(255),
+	warning boolean not null,
+    group_address varchar(500) not null,
+    primary key(group_articleNO)
+); -->
+
+<!-- create table mate(
+	mate_articleNO int(11) auto_increment,
+	user_id varchar(100) not null,
+	mate_title varchar(255) not null,
+	mate_cont longtext,
+	user_img varchar(500) not null,
+	mate_like int(255),
+	mate_date Datetime not null,
+	mate_views int(255),
+	mate_mapinfo varchar(500),
+	warning boolean not null,
+    mate_address varchar(500) not null,
+    primary key(mate_articleNO)
+); -->

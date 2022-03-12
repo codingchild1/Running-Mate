@@ -27,6 +27,7 @@ import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Ptp;
+import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.MemberService;
 import com.mysql.cj.Session;
@@ -39,6 +40,9 @@ public class MateController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	AlertService alertService;
 	
 	@Autowired
 	HttpSession session;
@@ -59,7 +63,8 @@ public class MateController {
 	//번개 모달창 띄우는기능
 	@ResponseBody
 	@PostMapping("/Mmodal")
-	public ResponseEntity<Mate> Mmodal(@RequestParam(value="no",required = false) int mate_articleNO) {
+	public ResponseEntity<Mate> Mmodal(@RequestParam(value="no",required = false) int mate_articleNO,
+			Model model) {
 		ResponseEntity<Mate> result = null;
 		try {
 			Mate mate = mateService.mateInfo(mate_articleNO);
@@ -302,7 +307,7 @@ public class MateController {
 	public String mate_updategroup(@RequestParam("ptp")int group_articleNO, Model model) {
 		try {
 		 Group group = mateService.groupInfo(group_articleNO);
-			model.addAttribute(group);
+		 model.addAttribute("group",group);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -315,6 +320,7 @@ public class MateController {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
 		try{
 			mateService.updateGroup(group);
+			System.out.println("controller");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

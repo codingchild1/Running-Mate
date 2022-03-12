@@ -30,7 +30,13 @@ public interface MateService{
 	void makeMate(Mate mate)throws Exception; //번개 게시물 생성
 	void makeGroup(Group group)throws Exception; //소모임 게시물 생성
 	
-	Warning makeWarning(Warning warning)throws Exception; //신고 접수
+	//Warning makeWarning(Warning warning)throws Exception; //신고 접수
+	void mateWarning(int mate_articleNO)throws Exception; //번개신고 접수
+	void groupWarning(int group_articleNO)throws Exception; //소모임신고 접수
+	
+	void mateWarningCanc(int mate_articleNO)throws Exception; //번개신고 접수
+	void groupWarningCanc(int group_articleNO)throws Exception; //소모임신고 접수
+	
 	void like(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
 	void likeCancel(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
 	

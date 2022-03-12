@@ -17,8 +17,8 @@ body {
 }
 
 .profile {
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	border-radius: 70%;
 }
 

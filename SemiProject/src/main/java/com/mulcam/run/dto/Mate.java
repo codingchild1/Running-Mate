@@ -12,13 +12,13 @@ public class Mate {
 	String mate_date;
 	int mate_views;
 	String mate_mapinfo;
-	boolean warning;
+	String warning;
 	String mate_address;
 	
 	public Mate() {}
 	public Mate(int mate_articleNO,String user_id, String mate_title,
 			String mate_cont, String user_img,int mate_like,
-			String mate_date, int mate_views, String mate_mapinfo, boolean warning,String mate_address) {
+			String mate_date, int mate_views, String mate_mapinfo, String warning,String mate_address) {
 		this.mate_articleNO=mate_articleNO;
 		this.user_id=user_id;
 		this.mate_title=mate_title;
@@ -92,10 +92,10 @@ public class Mate {
 	public void setMate_mapinfo(String mate_mapinfo) {
 		this.mate_mapinfo = mate_mapinfo;
 	}
-	public boolean isWarning() {
+	public String getWarning() {
 		return warning;
 	}
-	public void setWarning(boolean warning) {
+	public void setWarning(String warning) {
 		this.warning = warning;
 	}
 }

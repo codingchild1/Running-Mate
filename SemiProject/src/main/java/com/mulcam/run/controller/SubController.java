@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
+import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.RouteService;
 
 @Controller
@@ -20,6 +21,9 @@ public class SubController {
 	
 	@Autowired
 	RouteService routeService;
+	
+	@Autowired
+	MateService mateService;
 	
 	@ResponseBody
 	@PostMapping(value="/likes")
@@ -81,6 +85,10 @@ public class SubController {
 				alertService.insertAlert(user_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
+					mateService.mateWarning(board_no);
+					break;
+				case "group":
+					mateService.groupWarning(board_no);
 					break;
 				case "today":
 					break;
@@ -96,6 +104,10 @@ public class SubController {
 				alertService.deleteAlert(user_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
+					mateService.mateWarningCanc(board_no);
+					break;
+				case "group":
+					mateService.groupWarningCanc(board_no);
 					break;
 				case "today":
 					break;
