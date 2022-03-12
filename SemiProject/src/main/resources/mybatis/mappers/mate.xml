@@ -272,7 +272,7 @@
 	group_date Datetime not null,
 	group_area varchar(500) not null,
 	group_views int(255),
-	warning boolean not null,
+	warning varchar(100) not null,
     group_address varchar(500) not null,
     primary key(group_articleNO)
 ); -->
@@ -287,7 +287,7 @@
 	mate_date Datetime not null,
 	mate_views int(255),
 	mate_mapinfo varchar(500),
-	warning boolean not null,
+	warning varchar(100) not null,
     mate_address varchar(500) not null,
     primary key(mate_articleNO)
 ); -->
