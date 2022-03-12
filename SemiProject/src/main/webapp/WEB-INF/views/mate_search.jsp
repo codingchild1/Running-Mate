@@ -360,10 +360,10 @@
 				<!-- <div></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px; float: right; position: relative;">
-					<a id=group_kl href=''><img class="kakao"
+					<a id=group_kl href=''  target='_blank'><img class="kakao"
 						src="images/kakao.png"
 						style="width: 25px; height: 25px; margin-left: 13px;"></a> <a
-						id=group_il href=''><img class="insta" src="images/insta.png"
+						id=group_il href=''  target='_blank'><img class="insta" src="images/insta.png"
 						style="width: 25px; height: 25px;"></a>
 
 				</div>

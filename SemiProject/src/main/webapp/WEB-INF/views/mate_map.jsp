@@ -254,7 +254,7 @@
         <div style="display: inline-block; border: 1px solid;padding: 2px;width: 180px;margin-left: 10px;">
             <span><img class="search" src="images/search.png" style="width: 20px; height: 20px; float: left; margin-left: 5px;margin-top: 5px;"></span>
         <input id="search" name="search" type="text" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
-        <input id="mysearch" name="mysearch" type="text" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
+        <input id="mysearch" name="mysearch" type="hidden" style="width: 140px;height: 30px; margin-left: 5px; border: none;">
     </div>
     <span><button id="search2" style="width:50px; height:37px;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;">검색</button></span>
     <span onclick="getCurrentPosBtn()" style="cursor:pointer;"><img class="gps" src="images/gps.jpg" style="width: 30px; height: 30px; float: right; margin-top: 3px;"></span>
@@ -391,10 +391,10 @@
 				<!-- <div></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin-top: 13px; margin-right: 0px; float: right; position: relative;">
-					<a id=group_kl href=''><img class="kakao"
+					<a id=group_kl href=''  target='_blank'><img class="kakao"
 						src="images/kakao.png"
 						style="width: 25px; height: 25px; margin-left: 13px;"></a> <a
-						id=group_il href=''><img class="insta" src="images/insta.png"
+						id=group_il href=''  target='_blank'><img class="insta" src="images/insta.png"
 						style="width: 25px; height: 25px;"></a>
 
 				</div>
@@ -803,8 +803,8 @@
 	 	    				console.log(jdata.length); */
 	 	    				//var jsonInfo = JSON.parse(data);
 	 	    				var count = 0;
-	 	    				 for(var i of jdata) {
 	 	    					var accEle = "";
+	 	    				 for(var i of jdata) {
 	 	    					 console.log(i);
 	 	    					 /* var jdata =JSON.parse(i); */
 	 	    					/*  console.log(jdata[i].title); */ 
@@ -1001,8 +1001,8 @@
   				//var jsonInfo = JSON.parse(data);
   				
   				var count = 0;
-  				 for(var i of jdata) {
   					var accEle = "";
+  				 for(var i of jdata) {
   					 /* var jdata =JSON.parse(i); */
   					/*  console.log(jdata[i].title); */ 
   					accEle += '<div class="register">'
@@ -1046,8 +1046,8 @@
   				//var jsonInfo = JSON.parse(data);
   				
   				var count = 0;
-  				 for(var i of jdata) {
   					var accEle = "";
+  				 for(var i of jdata) {
   					 /* var jdata =JSON.parse(i); */
   					/*  console.log(jdata[i].title); */ 
   					accEle += '<div class="register">'
@@ -1091,8 +1091,8 @@
   				//var jsonInfo = JSON.parse(data);
   				
   				var count = 0;
-  				 for(var i of jdata) {
   					var accEle = "";
+  				 for(var i of jdata) {
   					 /* var jdata =JSON.parse(i); */
   					/*  console.log(jdata[i].title); */ 
   					accEle += '<div class="register">'
