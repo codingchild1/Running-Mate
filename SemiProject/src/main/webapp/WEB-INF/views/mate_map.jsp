@@ -244,8 +244,8 @@
                 <li><a href="mate_map"><b>지도로 보기</b></a></li>
             </ul>
             <div style=" display: flex; float: right;align-items: center;margin-right: 55px;">
-                 <button style="width: 30; height: 40px; padding: 6px 6px; margin: 7px;border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;"><a href="mate_makemate">번개 글작성</a></button>
-                <button style="width: 30; height: 40px; padding: 6px 6px; margin: 7px;border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;"><a href="mate_makegroup">소모임 글작성</a></button>
+                 <button id="make" style="width: 30; height: 40px; padding: 6px 6px; margin: 7px;border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;"><a href="mate_makemate">번개 글작성</a></button>
+                <button id="make2" style="width: 30; height: 40px; padding: 6px 6px; margin: 7px;border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;"><a href="mate_makegroup">소모임 글작성</a></button>
             </div>
         </div>
     </div>
@@ -421,6 +421,21 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
+    
+    $('#make').click(function(){
+		var uid = '<%=(String)session.getAttribute("id")%>';
+		 if(uid=='null'){
+			alert("로그인이 필요한 서비스입니다.");
+			return false;
+			}
+	});
+	$('#make2').click(function(){
+		var uid = '<%=(String)session.getAttribute("id")%>';
+		 if(uid=='null'){
+			alert("로그인이 필요한 서비스입니다.");
+			return false;
+			}
+	});
     
     let m_editor;
 	let g_editor;
