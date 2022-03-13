@@ -144,11 +144,17 @@ header {
 												id="today_modify" name="today_modify" value="수정"/>
 										</c:when>
 										<c:otherwise>
-										<button type="button" class="col gap-1 rounded btn btn-white"
-												id="alerts" name="warning" onclick=alert()>신고</button>
-
-											<button type="button" class="col gap-1 rounded btn btn-white"
-												 id="today_list" name="today_list">목록</button>
+												<span id="alerts" onclick=alert()> 
+											    	<c:choose>
+														<c:when test="${alert eq true }">
+															<span id="alert" style="float:right; padding-left:10px;">신고취소</span>
+														</c:when>
+														<c:when test="${alert eq false }">
+															<span id="alert" style="float:right; padding-left:10px;">신고</span>
+														</c:when>
+													</c:choose>
+												 </span>
+											<span id="today_list" onclick=today_list()>목록</span>
 										</c:otherwise>
 									</c:choose>										
 								</td>
@@ -200,6 +206,10 @@ header {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
+		  function today_list(){
+			  location.href="/today";	  
+		  }
+  	 
 	//좋아요 user_id , board_type, board_no 
 		function changeImg(){
   			$.ajax({
@@ -221,10 +231,10 @@ header {
 	//신고 user_id , board_type, board_no 
 	function alert(){
 		var alert;
-		if($("#alerts").html() == "신고"){
+		if($("#alert").html() == "신고"){
 			 alert = confirm('정말 게시글을 신고하시겠습니까?');
 		}
-		else if($("#alerts").html() == "신고취소"){
+		else if($("#alert").html() == "신고취소"){
 			 alert = confirm('게시글을 신고를 취소하시겠습니까?');
 		}
 		
