@@ -33,8 +33,7 @@ public class MateServiceImipl implements MateService {
 
 	@Override
 	public List<Group> allGroupInfo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mateDAO.groupList();
 	}
 
 	@Override

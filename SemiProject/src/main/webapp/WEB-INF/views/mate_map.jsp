@@ -784,7 +784,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 4 // 지도의 확대 레벨 
+	        level: 5 // 지도의 확대 레벨 
 	    }; 
 		
 		var map = JSON.parse('${mapinfo}');
@@ -820,6 +820,9 @@
 				alert("주소를 입력하세요");
 				return false;
 			}
+			$('input[name=mysearch]').attr('value',search); 
+			console.log($('#mysearch').val());
+			
 	        geocoder.addressSearch(search, function(result, status) {
 	        	
 	            // 정상적으로 검색이 완료됐으면 
@@ -875,7 +878,7 @@
 	 	    			url:"http://localhost:8090/mate_mapsearch",
 	 	    			dataType:"text",
 	 	    			 contentType : 'application/json; charset=UTF-8', 
-	 	    			data:{"input":$('#search').val(),
+	 	    			data:{"input":$('#mysearch').val(),
 	 	    				  "type":$('#type').val()},
 	 	    			success: function(data, textStatus) {
 	 	    				/* console.log(data); */
@@ -988,16 +991,66 @@
     	            /* infowindow.setContent(content);
     	            infowindow.open(map, marker); */
     	           
-    	         console.log(result[0].address.address_name);
-    	            $('input[name=mysearch]').attr('value',result[0].address.address_name);
+    	         var address = result[0].address.address_name;
+    	            var address1 = address.split(' ');
+    	            var address2 = address1[0];
+    	            console.log(address2);
+    	            
+    	            
+    	           /*  $('input[name=mysearch]').attr('value',result[0].address.address_name); */
+    	            $('input[name=mysearch]').attr('value',address2);
+    	          /*  console.log($('#mysearch').val()); */
     	            //여기서 받은 value를 ajax넘겨주는 데이터를 input으로 똑같이 보내주면됨. 단 데이터 전부넣지말고 잘라서 넣어야됨 근데 어떻게?
     	            // 현재위치 list받고나서 전체,번개,소모임 카테고리를 눌렀을 때 데이터는?
     	       /*  $('input[name=mate_address]').attr('value',result[0].address.address_name); */
     	        }
-    	        /* console.log($('#mate_address').val()); */
+    	         console.log($('#mysearch').val()); 
+    		     $('input[name=type]').attr('value','all');    
+    	   		 $.ajax({
+    	   			async:false,
+    	   			type:"GET",
+    	   			url:"http://localhost:8090/mate_mapsearch",
+    	   			dataType:"text",
+    	   			 contentType : 'application/json; charset=UTF-8', 
+    	   			data:{"input":$('#mysearch').val(),
+    	   				  "type":$('#type').val()},
+    	   			success: function(data, textStatus) {
+    	   				console.log(data);
+    	   				var jdata = JSON.parse(data);
+    	   				console.log(jdata);
+    	   				//var jsonInfo = JSON.parse(data);
+    	   				
+    	   				var count = 0;
+    	   					var accEle = "";
+    	   				 for(var i of jdata) {
+    	   					 /* var jdata =JSON.parse(i); */
+    	   					/*  console.log(jdata[i].title); */ 
+    	   					accEle += '<div class="register">'
+    	   					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+    	   					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+    	   					accEle +=' <div style=" width: 150px;">'
+    	   					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+    	   					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+    	   					accEle +='</div>'
+    	   					accEle +=' <div>'+"번개"+'</div>'
+    	   					accEle +='</div>'
+    	   					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+    	   					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
+    	   					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+    	   					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+    	   					accEle +='</div>'
+    	   					accEle +='</div>'
+    	   					count++;
+    	   				}  
+    	   				console.log(accEle);
+    	   				$('.register').detach();
+    	   				$('.aa').append(accEle);  
+    	   				
+    	   			}
+    	   		});
     	    });
 	            //여기까지
-	            
+
 	      });
 	    
 	    }
@@ -1075,7 +1128,7 @@
   			url:"http://localhost:8090/mate_mapsearch",
   			dataType:"text",
   			 contentType : 'application/json; charset=UTF-8', 
-  			data:{"input":$('#search').val(),
+  			data:{"input":$('#mysearch').val(),
   				  "type":$('#type').val()},
   			success: function(data, textStatus) {
   				console.log(data);
@@ -1123,7 +1176,7 @@
   			url:"http://localhost:8090/mate_mapsearch",
   			dataType:"text",
   			 contentType : 'application/json; charset=UTF-8', 
-  			data:{"input":$('#search').val(),
+  			data:{"input":$('#mysearch').val(),
   				  "type":$('#type').val()},
   			success: function(data, textStatus) {
   				console.log(data);
@@ -1171,7 +1224,7 @@
   			url:"http://localhost:8090/mate_mapsearch",
   			dataType:"text",
   			 contentType : 'application/json; charset=UTF-8', 
-  			data:{"input":$('#search').val(),
+  			data:{"input":$('#mysearch').val(),
   				  "type":$('#type').val()},
   			success: function(data, textStatus) {
   				console.log(data);

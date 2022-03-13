@@ -53,7 +53,7 @@
 	<update id="updateGroup" parameterType="group" >
 		<![CDATA[
 		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
-		group_il=#{group_il}, group_date=now(), group_area=#{group_area} , group_address=#{group_address}
+		group_il=#{group_il}, group_date=now(), group_area=#{group_area},group_address=#{group_address}
 		where group_articleNO=#{group_articleNO}
 		]]>
 	</update>

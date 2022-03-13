@@ -15,6 +15,7 @@ import com.mulcam.run.dto.Warning;
 @Mapper
 @Repository
 public interface MateDAO {
+	
 	public List<GroupAndMate> postList() throws Exception;  //전체 게시물
 	
 	public List<Mate> mateList() throws Exception;  //번개 전체조회

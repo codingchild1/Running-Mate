@@ -34,12 +34,10 @@
     <div style="margin-top: 100px;">
     <div style="display: flex; align-items: center;">
         <span><img class="profile" src='${mate.user_img }' id="user_img2"></span>
-         <input type="hidden" name="user_img" id="user_img" value="">   
-        <span><input type="text" id="user_id" name="user_id" value='${mate.user_id }'
-            style="height: 20px;border:none; background-color: white;"
-            disabled> </span>
-            <input type="hidden" id="user_id" name="user_id" value=''>
-             <input type="hidden" id="mate_articleNO" name="mate_articleNO" value='${mate.mate_articleNO }'>
+        <input type="hidden" name="user_img" id="user_img" value="">   
+        <span><input type="text" id="user_id" name="user_id" value='${mate.user_id }'style="height: 20px;border:none; background-color: white;"disabled> </span>
+        <input type="hidden" id="user_id" name="user_id" value=''>
+        <input type="hidden" id="mate_articleNO" name="mate_articleNO" value='${mate.mate_articleNO }'>
     </div>
     <div style="border-bottom: 1px solid; margin-top: 20px;">
         <input type="text" id="mate_title" name="mate_title" style="border:none; border-bottom: 2px; height: 30px; font-size: 20px;width: 100%;" placeholder="제목" value='${mate.mate_title }'>

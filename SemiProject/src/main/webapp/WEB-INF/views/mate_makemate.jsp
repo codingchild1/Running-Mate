@@ -122,6 +122,7 @@ var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입
 	 
 	  $(document).ready(function(){
 		$('#search2').bind("click", function(){
+			
 			var search = $('#search').val();
 	        geocoder.addressSearch(search, function(result, status) {
 	        	
