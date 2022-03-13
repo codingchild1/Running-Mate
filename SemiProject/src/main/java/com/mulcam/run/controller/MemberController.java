@@ -191,7 +191,6 @@ public class MemberController {
 		return "redirect:/mypage";
 	}
 	
-
 	
 	@GetMapping(value="/delete")
 	public String deleteForm() {
@@ -202,21 +201,22 @@ public class MemberController {
 	public String deleteMem(@RequestParam("password") String password) {
 		String id = (String) session.getAttribute("id");
 		String pw = memberService.checkPw(id);
-		if(password.equals(pw)) {
-			memberService.delete(id);
-		} else {
+		if(!password.equals(pw)) {
 			return "delete";
 		}
+		memberService.delete(id);
+		session.invalidate();
 		return "login";
 	}
 	
 	//비밀번호 변경에서 modify가 안 먹힘
 	@PostMapping(value="/changepw")
-	public String pwChange(@RequestParam("password") String password, @RequestParam("newPw") String newPw) {
+	public String pwChange(@RequestParam("password") String password, @RequestParam("newPw") String newPw, Member mem) {
 		String id = (String) session.getAttribute("id");
 		String pw = memberService.checkPw(id);
 		if(password.equals(pw)) {
-			memberService.modifyPw(newPw);
+			mem.setPassword(newPw);
+			memberService.modifyPw(mem);
 			session.invalidate();
 			return "login";
 		}
@@ -229,6 +229,8 @@ public class MemberController {
 	public String changePw() {
 		return "changepw";
 	}
+	
+	
 	
 	
 }

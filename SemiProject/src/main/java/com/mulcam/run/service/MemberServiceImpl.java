@@ -67,11 +67,12 @@ public class MemberServiceImpl implements MemberService {
 	
 
 	@Override
-	public void modifyPw(String newPw) {
+	public void modifyPw(Member mem) {
 		// TODO Auto-generated method stub
-		memberDAO.changePw(newPw);
+		memberDAO.changePw(mem);
 		
 	}
+	
 	
 	@Override
 	public String profileImg(String user_id) throws Exception {

@@ -29,7 +29,7 @@
    <div class="container mt-3">
         <h5 class='title'>회원가입</h5>
         <form id='form' action="join" method="post" enctype="multipart/form-data">
-        		<img id="memberthumb" name="memberthumb" src="" width=100px height=100px /><br>
+        		<img id="memberthumb" name="memberthumb" src="" width=100px height=100px onerror="this.src='/profile/Untitled.png'" /><br>
         		<input type="file" name="profile" id="profile"/><br>
             <div class="input-group mb-2">
                 <span class="input-group-text title">이름</span>
