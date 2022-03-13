@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +30,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
+import com.mulcam.run.service.AlertService;
+import com.mulcam.run.service.LikesService;
+import com.mulcam.run.service.MemberService;
 import com.mulcam.run.service.TodayService;
 
 
@@ -42,6 +44,16 @@ public class TodayController {
 	
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	MemberService memberService;
+	
+	@Autowired
+	LikesService likesService;
+	
+	@Autowired
+	AlertService alertService;
+
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -215,32 +227,46 @@ public class TodayController {
 	}
 	
 
+	//게시글보기
 	@GetMapping("/today_select/{today_articleNo}")
-	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) {
+	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) throws Exception {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
 		System.out.println(today_articleNo);
-		System.out.println(pageInfo);
-		//User userInfo = (User)session.getAttribute("user");
+		System.out.println("page:"+ pageInfo);
 		
 		// 로그인한 유저 아이디 가져오기 (세션)
-		String user_id = "testUser";
-		// 지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
+		 String user_id = (String) session.getAttribute("id");
+		//지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
 		String writerid="testUser";
-		/*
-		 * String user_id = (String)session.getAttribute("id"); String
-		 * writerid="user_id";
-		 */
-		Boolean modiAndDel = false;
+		//user_profile = memberService.profileImg(user_id); 
 		
+		
+		/*
+		 * String user_id = (String) session.getAttribute("id");
+		 * String writer_id = memberService.member(articleNo);
+		 * user_profile = memberService.profileImg(user_id); 
+		 */
+		Boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
+		Boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
+		if(likes==false) {
+			mav.addObject("likes", "false");
+		} else {
+			mav.addObject("likes", "true");
+		}
+		if(alert==false) {
+			mav.addObject("alert", "false");
+		} else {
+			mav.addObject("alert", "true");
+		}
+		
+		
+		Boolean modiAndDel = false;		
 		if (user_id.equals(writerid)) {
 			modiAndDel = true;
 		} 
 		mav.addObject("modiAndDel", modiAndDel);
-		
 		try {
-			System.out.println("try 들어옴");
-			
 			Today todayselect = todayService.getTBoard(today_articleNo);
 			mav.addObject("pageInfo", pageInfo);
 		    mav.addObject("todayselect", todayselect);
@@ -253,20 +279,11 @@ public class TodayController {
 			}
 		return mav;
 	}
-	
-
-	// 5.취소요청
-	@PostMapping("/today_postcancle")
-	public String todayPostcancle() {
-		return "redirect:/today";
-	}
-
 
 	// 7.좋아요요청 ajax
-	@PostMapping("/today_likes")
-	public boolean todayLikes() {
-		return false;
-	}
+	/*
+	 * @PostMapping("/today_likes") public boolean todayLikes() { return false; }
+	 */
 
 	// 9.수정요청
 	@PostMapping("/today_modify")

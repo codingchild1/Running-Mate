@@ -75,7 +75,8 @@ main, header, section {
 </script>
 </head>
 <body>
-	<%-- <%@include file="header.jsp"%> --%>
+	<%@include file="header.jsp"%>
+	<%-- <%@include file="slides.jsp"%>  --%>
 
 
 

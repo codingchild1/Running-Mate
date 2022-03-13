@@ -130,7 +130,7 @@ body {
 										<header	class="">
 											<div class="">
 												<span class="col-lg">
-													<span><img class="profile" src='images/user_icon_1.png' width=10px height=10px>i</span> <span id="user_id">${tboard.user_id}</span>
+													<span><img src="/profileview/${profileImg}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
 												</span>
 											</div>
 											<span class="" id="today_date">${tboard.today_date}</span>

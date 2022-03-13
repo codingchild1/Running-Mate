@@ -68,6 +68,20 @@
 		 ]]>
 	</delete>
 	
+	<!--좋아요 +1, -1  -->
+	<update id="updateLikePlus"  parameterType="int">
+		<![CDATA[
+			update route set route_likes=route_likes+1 where route_articleNo=#{articleNo }
+		]]>
+	</update>
+	<update id="updateLikeMinus"  parameterType="int">
+		<![CDATA[
+			update route set route_likes=route_likes-1 where route_articleNo=#{articleNo }
+		]]>
+	</update>
+	
+	
+	
 <!-- 	today 신고 
 	<insert id="insertTWarn" parameterType="today">
 		<![CDATA[

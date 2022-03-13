@@ -47,25 +47,29 @@ main {
 }
 
 .ck-editor__editable {
-	min-height: 550px;
-	min-width: 1200px;
+	min-height: 450px;
+	/* min-width: 300px; */
 	max-width:100%;
-}
+} 
 
 #today_delete, #today_modify, #warning {
 	text-decoration: none;
 }
-
+#todayboardFooter{
+	height : 30px;
+	width : 30px;
+}
 header {
 	display: center;
 	padding-top: 50px;
 	width: 1170px;
 }
 </style>
-<!-- 자바스크립트 -->
+
 </head>
 <body>
-<%-- 	<%@include file="header.jsp"%> --%>
+	<%@include file="header.jsp"%>
+	<%-- <%@include file="slides.jsp"%>  --%>
 
 
 	<div class="container py-5">
@@ -88,11 +92,17 @@ header {
 							<table>
 								<tbody class="container mt-1">
 									<tr>
-										<td><img
-											src=""
-											class="col" /></td>
-										<td id="user_id" name="user_id" class="col d-flex justify-content-start">${todayselect.user_id}아이디</td>
-
+										<td><img src="/profileview/${profileImg }" class="userProfile border"></td>
+										<td id="user_id" class="col d-flex justify-content-start">${todayselect.user_id}</td>
+									
+										<td class="col pl-5">	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+								
+										<button class="col gap-1 rounded btn btn-white"
+											id="today_views" name="today_views"disabled> ${todayselect.today_views}</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -102,41 +112,50 @@ header {
 							<table class="container d-flex">
 								<tr>
 								<td class="col">${todayselect.today_date}</td>
-								<td class="col pl-5">&nbsp&nbsp
-									<button class="col gap-1 rounded btn btn-white"
-										id="today_views" name="today_views" disabled> ${todayselect.today_views}</button>
+								<td class="d-flex mt-2" style="display:block;">&nbsp&nbsp&nbsp
+										<div id="todayboardFooter" class="todayboardFooter border  d-flex justify-content-center mt-2">
+							       			<div id="likes" onclick=changeImg() style="float:left;">				
+							       				<c:choose>
+													<c:when test="${likes eq true }">
+														<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
+													</c:when>
+												<c:when test="${likes eq false }">
+													<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
+												</c:when>
+												</c:choose>
+											</div>
+											<br><hr>
+										</div>	
+									</td>
+
+									<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									
-										<td>
+									&nbsp&nbsp&nbsp&nbsp
 									<c:choose>
 										<c:when test= "${id eq todayselect.user_id || id eq 'admin' }">
 											<button type="button" class="col gap-1 rounded btn btn-white"
 												id="today_delete" name="today_delete">
-												
-												
+
 												삭제</button>
 											<input type="submit" class="col gap-1 rounded btn btn-white"
 												id="today_modify" name="today_modify" value="수정"/>
 										</c:when>
 										<c:otherwise>
+										<button type="button" class="col gap-1 rounded btn btn-white"
+												id="alerts" name="warning" onclick=alert()>신고</button>
+
 											<button type="button" class="col gap-1 rounded btn btn-white"
-												id="warning" name="warning">신고</button>
+												 id="today_list" name="today_list">목록</button>
 										</c:otherwise>
 									</c:choose>										
 								</td>
 								</tr>
 							</table>
-						</div> 
-						
-						
-
-						
-					</div> 
-					
+						</div> 	
+					</div> 				
 				</header>
 
 				<!--------------------------------------------------게시글 ---------------------------- -->
@@ -151,42 +170,93 @@ header {
 						</td></tr>		
 								
 						<tr><td>
-						<textarea id="editor" name="today_contents" height="200px" width="200px"></textarea>
+						<textarea id="editor" class="ck-editor__editable"name="today_contents" ></textarea>
 						</td></tr>
 						<tr>
-							<td class="d-flex mt-2">
-							<i class="bi bi-heart d-flex justify-content-center mt-2">${todayselect.today_likes}</i>
-							</td>
+							<td class="d-flex mt-2" style="display:block;">
+								<div id="todayboardFooter" class="todayboardFooter   d-flex justify-content-center mt-2">
+				       				<div id="likes" onclick=changeImg() style="text-align:center;">				
+				       					<c:choose>
+											<c:when test="${likes eq true }">
+												<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
+											</c:when>
+										<c:when test="${likes eq false }">
+											<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
+										</c:when>
+										</c:choose>
+									</div>
+									<br><hr>
+								</div>
+								</td>
 						</tr>
 					</table>
 				</main>
-
 			</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
-
-			<!--------------------------------------------------목록---------------------------- -->
-			<div style="text-align: right">
-				<button class="btn btn-outline-secondary"
-					style="width: 100px; height: 30px; padding: 5px" id="today_list"
-					name="today_list">목록</button>
-			</div>
 
 		</div>
 	</div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
-	$(function() {
-		$('#today_file').change(function (event) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#today_thumb').attr("src", e.target.result);	
-			};
-			reader.readAsDataURL(event.target.files[0]);
+	//좋아요 user_id , board_type, board_no 
+		function changeImg(){
+  			$.ajax({
+  				type:"post",
+  				url:"http://localhost:8090/likes",
+  				data: {"user_id": $("#user_id").text(), "board_type" : "today", "board_no": ${todayselect.today_articleNo}},
+  				dataType:"text",
+  				success:function(data){
+  					if(data=="true"){
+  						console.log("true: " +data);
+  						$("#like").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+  					} else {
+  						console.log("false: " + data);
+  						$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+  					}
+  				}
+  			});			 
+  		}
+	//신고 user_id , board_type, board_no 
+	function alert(){
+		var alert;
+		if($("#alerts").html() == "신고"){
+			 alert = confirm('정말 게시글을 신고하시겠습니까?');
+		}
+		else if($("#alerts").html() == "신고취소"){
+			 alert = confirm('게시글을 신고를 취소하시겠습니까?');
+		}
+		
+		if(alert==true){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/alert",
+				data: {"user_id": $("#user_id").text(), "board_type" : "today", "board_no": ${todayselect.today_articleNo}},
+				dataType:"text",
+				success:function(data){
+					if(data=="true"){
+						$("#alerts span").html("신고취소");
+					} else {
+						$("#alerts span").html("신고");
+					}
+				}
+			});
+		}
+	}
+  	  </script>
+	<script>
+	//썸네일 오직 리드만 수행
+		$(function() {
+			$('#today_file').change(function (event) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#today_thumb').attr("src", e.target.result);	
+				};
+				reader.readAsDataURL(event.target.files[0]);
+			});
 		});
-	});
-	
+		
 		 //목록 버튼
 	      $(function(){
 	    	  $("#today_list").click(function(){
@@ -197,7 +267,10 @@ header {
 	      //ckeditor 작성내용 보여주는부분
   		$(function(){
 	      ClassicEditor.create(document.querySelector("#editor"), {
-	    	  initialData : '${todayselect.today_contents}'
+	    	  initialData : '${todayselect.today_contents}',
+	    	  ckfinder : {
+          			uploadUrl : "/upload"
+          		}
 	      }).then(editor=> {
       		window.editor=editor;
       		})
@@ -233,7 +306,8 @@ header {
   			});
   		});
   			
-  	   
+  		
+
   			
  		/* $(function() {
   			$('#today_modify').click(function (event) {
@@ -260,7 +334,7 @@ header {
  		}); */
 	
 		</script>
-	<%@include file="fotter.jsp"%>
+<%-- 	<%@include file="fotter.jsp"%> --%>
 
 </body>
 </html>
