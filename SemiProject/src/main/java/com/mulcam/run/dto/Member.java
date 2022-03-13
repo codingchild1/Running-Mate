@@ -20,7 +20,10 @@ public class Member {
 		this.phone=phone;
 		this.memberthumb=memberthumb;
 	}
-
+	
+	public Member(String password) {
+		this.password=password;
+	}
 	public String getId() {
 		return id;
 	}
