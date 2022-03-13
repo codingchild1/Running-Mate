@@ -184,6 +184,7 @@ public class MemberController {
 			}
 		}
 	}
+
 	//바뀌긴 하는데 경로가 하나도 안 맞음
 	@RequestMapping(value="update", method= {RequestMethod.POST})
 	public String memberUpdate(@ModelAttribute Member mem) {
