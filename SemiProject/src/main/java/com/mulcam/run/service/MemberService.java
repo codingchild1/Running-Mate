@@ -9,8 +9,11 @@ public interface MemberService {
 	void makeMember(Member mem) throws Exception;
 	boolean accessMember(String id, String password) throws Exception;
 	public List<Member> memberList();
-	Member queryById(String id) throws Exception;
+	public Member queryById(String id) throws Exception;
 	public void delete(String id);
+	public String checkPw(String id);
+	public void updateMember(Member mem);
+	public void modifyPw(String newPw);
 	
 	//사용자 profile 이미지 정보
 	String profileImg(String user_id) throws Exception;
