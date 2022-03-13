@@ -44,17 +44,17 @@
 	<!-- mate게시물 수정 -->
 	<update id="updateMate" parameterType="mate" >
 		<![CDATA[
-		update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_date=now(), 
-		mate_mapinfo=#{mate_mapinfo},mate_address=#{mate_address} where mate_articleNO=#{mate_articleNO}
+			update mate set mate_title=#{mate_title},mate_cont=#{mate_cont},mate_date=now(), 
+			mate_mapinfo=#{mate_mapinfo},mate_address=#{mate_address} where mate_articleNO=#{mate_articleNO}
 		]]>
 	</update>
 	
 	<!-- group게시물 수정 -->
 	<update id="updateGroup" parameterType="group" >
 		<![CDATA[
-		update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
-		group_il=#{group_il}, group_date=now(), group_area=#{group_area},group_address=#{group_address}
-		where group_articleNO=#{group_articleNO}
+			update group1 set group_title=#{group_title}, group_cont=#{group_cont}, group_kl=#{group_kl},
+			group_il=#{group_il}, group_date=now(), group_area=#{group_area},group_address=#{group_address}
+			where group_articleNO=#{group_articleNO}
 		]]>
 	</update>
 	
@@ -82,7 +82,7 @@
 		<!-- group게시물 삭제시 조회수 -1변경 -->
 	<update id="updateGroupviews" parameterType="int" >
 		<![CDATA[
-		update group1 set group_views=#{group_views} where group_articleNO=#{group_articleNO}
+			update group1 set group_views=#{group_views} where group_articleNO=#{group_articleNO}
 		]]>
 	</update>
 	
@@ -90,7 +90,7 @@
 	<insert id="insertMate" parameterType="mate">
 		<![CDATA[
 			insert into mate (mate_articleNO,user_id,mate_title,mate_cont,user_img,mate_like,mate_date,mate_views,mate_mapinfo,warning,mate_address) 
-				values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},'0',#{mate_address})
+			values(null,#{user_id},#{mate_title},#{mate_cont},#{user_img},0,now(),0,#{mate_mapinfo},'0',#{mate_address})
 		]]>
 	</insert>
 	
@@ -98,7 +98,7 @@
 	<insert id="insertGroup" parameterType="group">
 		<![CDATA[
 			insert into group1 (group_articleNO,user_id,group_title,group_cont,user_img,group_kl,group_il,group_date,group_area,group_views,warning,group_address) 
-				values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,'0',#{group_address})
+			values(null,#{user_id},#{group_title},#{group_cont},#{user_img},#{group_kl},#{group_il},now(),#{group_area},0,'0',#{group_address})
 		]]>
 	</insert>
 	
@@ -134,7 +134,7 @@
  	<!-- 참여버튼 (like +1) -->
   	<update id="like" parameterType="int">
 		<![CDATA[
-		update mate set mate_like=mate_like+1 where mate_articleNO=#{mate_articleNO}
+			update mate set mate_like=mate_like+1 where mate_articleNO=#{mate_articleNO}
 		]]> 
 	</update> 
 	
@@ -148,7 +148,7 @@
 	<!-- 참여버튼취소 (like -1) -->
 	<update id="likeCancel" parameterType="int">
 		<![CDATA[
-		update mate set mate_like=mate_like-1 where mate_articleNO=#{mate_articleNO}
+			update mate set mate_like=mate_like-1 where mate_articleNO=#{mate_articleNO}
 		]]> 
 	</update>
 	

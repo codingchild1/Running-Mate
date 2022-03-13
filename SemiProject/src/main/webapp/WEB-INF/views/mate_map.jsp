@@ -4,26 +4,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
  * {
-            padding: 0;
-            /* margin: 0 auto; */
-            box-sizing: border-box;
-        }
-        body{
-            display: flex;
-    flex-direction: column;
-    justify-content: center;
-        } 
-
-        .post li {
-            float: left;
-            margin: 10px;
-            list-style: none;
-        }
-              .post2 li {
+padding: 0;
+/* margin: 0 auto; */
+box-sizing: border-box;
+}
+body{
+display: flex;
+flex-direction: column;
+justify-content: center;
+} 
+.post li {
+float: left;
+margin: 10px;
+list-style: none;
+}
+.post2 li {
             float: left;
             margin: 10px;
             list-style: none;

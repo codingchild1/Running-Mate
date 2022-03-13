@@ -10,6 +10,7 @@ import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.RouteService;
+import com.mulcam.run.service.TodayService;
 
 @Controller
 public class SubController {
@@ -25,6 +26,10 @@ public class SubController {
 	@Autowired
 	MateService mateService;
 	
+	@Autowired
+	TodayService todayService;
+
+	
 	@ResponseBody
 	@PostMapping(value="/likes")
 	public boolean likes(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
@@ -32,13 +37,15 @@ public class SubController {
 		
 		// 현재 게시물에 like에 대한 정보 확인
 		try {
+			System.out.println("좋아요");
 			likes = likesService.getLikesTF(user_id, board_type, board_no);
 			if(likes == false) {
 				likesService.insertLikes(user_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
 					break;
-				case "today":
+				case "today": 
+					todayService.LikesPlus(board_no);
 					break;
 				case "route":
 					routeService.LikesPlus(board_no);
@@ -49,11 +56,13 @@ public class SubController {
 				
 				likes = true;
 			} else {
+				System.out.println("좋아요 취소");
 				likesService.deleteLikes(user_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
 					break;
 				case "today":
+					todayService.LikesMinus(board_no);
 					break;
 				case "route":
 					routeService.LikesMinus(board_no);
@@ -61,9 +70,6 @@ public class SubController {
 				default:
 					break;
 				}
-				
-				
-				
 				likes = false;
 			}
 		} catch(Exception e) {
@@ -82,6 +88,7 @@ public class SubController {
 		try {
 			alert = alertService.getAlertTF(user_id, board_type, board_no);
 			if(alert == false) {
+				System.out.println("신고");
 				alertService.insertAlert(user_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
@@ -98,9 +105,9 @@ public class SubController {
 				default:
 					break;
 				}
-				
 				alert = true;
 			} else {
+				System.out.println("신고취소");
 				alertService.deleteAlert(user_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
@@ -117,9 +124,6 @@ public class SubController {
 				default:
 					break;
 				}
-				
-				
-				
 				alert = false;
 			}
 		} catch(Exception e) {

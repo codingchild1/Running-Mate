@@ -174,7 +174,7 @@ public class MateController {
 		return "mate_search";
 	}
 
-	
+	//지도로보기 이동
 	@GetMapping("/mate_map")
 	public ModelAndView mate_map() {
 		ModelAndView mv = new ModelAndView();
@@ -192,6 +192,7 @@ public class MateController {
 		return mv;
 	}
 	
+	//지도로보기 지도검색기능
 	@GetMapping("/mate_mapsearch")
 	public ResponseEntity<List<GroupAndMate>> mate_mapSearch(@RequestParam(value="input")String input,
 			@RequestParam(value="type")String type) {
