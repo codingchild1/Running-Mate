@@ -14,6 +14,10 @@ public interface MemberDAO {
 	public void insertMember(Member mem) throws Exception;
 	public List<Member> memberList();
 	public void delete(String id);
-
+	public String pwCheck(String id)throws Exception;
+	public void updateMember(Member mem);
+	public String queryPassword(String id);
+	public void changePw(String newPw);
+	
 	public String queryProfile(String user_id) throws Exception;
 }

@@ -16,7 +16,7 @@
 			// 취소
 			$(".cencle").on("click", function(){
 				
-				location.href = "main";
+				location.href = "join";
 						    
 			})
 		
@@ -43,20 +43,17 @@
 		})
 	</script>
 	<body>
-	<header><%@include file ="mypageheader.jsp" %></header>
+	<header>
+	<%@include file ="mypageheader.jsp" %></header>
 		<section id="container">
-			<form action="updatemypage" method="post">
+			<form name="form1" method="post">
 				<div>
 					<label class="control-label" for="memberthumb">프로필</label>
-					<img src="/profileview/${member.memberthumb }" width="100px" height="100px"  />
+					<img src="/profileview/${member.memberthumb }" onerror="this.src='/profile/다운로드.jpg'" width="100px" height="100px"  />
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="id">아이디</label>
 					<input class="form-control" type="text" id="id" name="id" value="${member.id }" readonly="readonly"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="password">패스워드</label>
-					<input class="form-control" type="password" id="password" name="password" />
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="name">성명</label>
@@ -67,7 +64,7 @@
 					<input class="form-control" type="text" id="email" name="email" value="${member.email}"/>
 				</div>
 				<div class="form-group has-feedback">
-					<label class="control-label" for="phone">성명</label>
+					<label class="control-label" for="phone">전화번호</label>
 					<input class="form-control" type="text" id="phone" name="phone" value="${member.phone}"/>
 				</div>
 				<div class="form-group has-feedback">
@@ -76,7 +73,14 @@
 				</div>
 			</form>
 		</section>
-		
+		<script>
+			$(document).ready(function(){
+				$('#submit').click(function(){
+					document.form1.action = "update";
+					document.form1.submit();
+				});
+			});
+		</script>
 	</body>
 	
 </html>

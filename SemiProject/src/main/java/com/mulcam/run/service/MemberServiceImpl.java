@@ -51,6 +51,27 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		memberDAO.delete(id);
 	}
+
+
+	@Override
+	public void updateMember(Member mem) {
+		// TODO Auto-generated method stub
+		memberDAO.updateMember(mem);
+	}
+
+	@Override
+	public String checkPw(String id) {
+		// TODO Auto-generated method stub
+		return memberDAO.queryPassword(id);
+	}
+	
+
+	@Override
+	public void modifyPw(String newPw) {
+		// TODO Auto-generated method stub
+		memberDAO.changePw(newPw);
+		
+	}
 	
 	@Override
 	public String profileImg(String user_id) throws Exception {

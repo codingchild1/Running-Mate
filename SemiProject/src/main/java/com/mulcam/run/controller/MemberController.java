@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.run.dto.Member;
 import com.mulcam.run.service.MemberService;
@@ -58,7 +60,7 @@ public class MemberController {
 				//
 				modelAndView.addObject("member", member);
 
-			} else throw new Exception();
+			} 
 		} catch(EmptyResultDataAccessException e) {
 			modelAndView.addObject("err", "아이디가 존재하지 않습니다");
 			modelAndView.addObject("cpage", "err");
@@ -113,10 +115,11 @@ public class MemberController {
 	}
 		
 	
-	@RequestMapping(value="/mypage", method= {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping(value="/mypage")
 	public String mypage() {
-		return "mypage";
+		return "/mypage";
 	}
+	//마이페이지 post도 있어야 될 듯 요청 페이지 프로필도 추가하고...
 	
 	@ResponseBody
 	@PostMapping(value="/memberoverlap")
@@ -181,5 +184,52 @@ public class MemberController {
 			}
 		}
 	}
+	//바뀌긴 하는데 경로가 하나도 안 맞음
+	@RequestMapping(value="update", method= {RequestMethod.POST})
+	public String memberUpdate(@ModelAttribute Member mem) {
+		memberService.updateMember(mem);
+		return "redirect:/mypage";
+	}
+	
 
+	
+	@GetMapping(value="/delete")
+	public String deleteForm() {
+		return "delete";
+	}
+	
+	@PostMapping(value="/delete")
+	public String deleteMem(@RequestParam("password") String password) {
+		String id = (String) session.getAttribute("id");
+		String pw = memberService.checkPw(id);
+		if(password.equals(pw)) {
+			memberService.delete(id);
+		} else {
+			return "delete";
+		}
+		return "login";
+	}
+	
+	//비밀번호 변경에서 modify가 안 먹힘
+	@PostMapping(value="/changepw")
+	public String pwChange(@RequestParam("password") String password, @RequestParam("newPw") String newPw) {
+		String id = (String) session.getAttribute("id");
+		String pw = memberService.checkPw(id);
+		if(password.equals(pw)) {
+			memberService.modifyPw(newPw);
+			session.invalidate();
+			return "login";
+		}
+		
+		return "redirect:/changepw";
+		
+	}
+	
+	@GetMapping(value="/changepw")
+	public String changePw() {
+		return "changepw";
+	}
+	
+	
 }
+
