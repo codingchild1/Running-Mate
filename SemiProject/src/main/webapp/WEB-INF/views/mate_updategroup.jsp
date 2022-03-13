@@ -24,6 +24,13 @@ body {
 input:focus {
 	outline: none;
 }
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border-color: var(--ck-color-base-border);
+    height: 400px;
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
+height:400px;
+}
 </style>
 </head>
 <body>
@@ -37,7 +44,7 @@ input:focus {
 					<input type="hidden" name="user_img" id="user_img" value=""> <span>
 					<input type="text" id="user_id" name="user_id" value='${group.user_id }'style="height: 20px; border: none; background-color: white;"disabled></span> 
 					<input type="hidden" id="user_id" name="user_id" value="">
-					<input type="hidden" id="mate_articleNO" name="mate_articleNO" value='${group.group_articleNO }'>
+					<input type="hidden" id="group_articleNO" name="group_articleNO" value='${group.group_articleNO }'>
 				</div>
 				<div style="border-bottom: 1px solid; margin-top: 20px;">
 					<input type="text" id="group_title" name="group_title"style="border: none; border-bottom: 2px; height: 30px; font-size: 20px; width: 100%;"placeholder="제목" value="${group.group_title }">
@@ -70,6 +77,9 @@ input:focus {
 	<script type="text/javascript"src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
+	
+	
+	
 	
  	$('#form').submit(function() {
 		 let title = $('#group_title').val();
