@@ -5,43 +5,102 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
     <style>
-        .container {
-            width: 400px;
-        }
 
-        .input-group-text {
-            display: inline-block;
-            width: 130px;
-        }
-
-        .title {
-            text-align: center;
-            font-weight: bold;
-        }
-    </style> 
+	 * {
+	  margin: 0px;
+	  padding: 0px;
+	  text-decoration: none;
+	  font-family:sans-serif;
+	
+	}
+	
+	body {
+	  background-image:#34495e;
+	}
+	
+	.form3 {
+	  position:absolute;
+	  width:400px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  top:40%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	  border-radius: 15px;
+	}
+	
+	.form3 h2 {
+	  text-align: center;
+	  margin: 30px;
+	}
+	
+	.textForm {
+	  border-bottom: 2px solid #adadad;
+	  margin: 30px;
+	  padding: 10px 10px;
+	}
+	
+	
+	.id {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.password {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+		
+	.btn {
+	  position:relative;
+	  left:40%;
+	  transform: translateX(-50%);
+	  margin-bottom: 40px;
+	  width:80%;
+	  height:40px;
+	  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+	  background-position: left;
+	  background-size: 200%;
+	  color:white;
+	  font-weight: bold;
+	  border:none;
+	  cursor:pointer;
+	  transition: 0.4s;
+	  display:inline;
+	}
+	
+	.btn:hover {
+	  background-position: right;
+	}
+	</style>
 </head>
 <body>
-   <div class="container mt-3">
-        <h5 class='title'>로그인</h5>
-        <form id='form' action="login" method="post">
-            <div class="input-group mb-2">
-                <span class="input-group-text title">아이디</span>
-                <input type="text" class="form-control" id="id" name="id"><br>
+       		<form id='form3' action="login" method="post" class="form3">
+       		<h2>로그인</h2>
+            <div class="textForm">
+                <input type="text"  class="id"  id="id" name="id" placeholder="id" autofocus>
             </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">비밀번호</span>
-                <input type="password" class="form-control" id="password" name="password">
+            <div class="textForm">
+                <input type="password" class="password" id="password" name="password" placeholder="password">
             </div>
             <div class="d-grid">
-                <input type="submit" class="btn btn-primary btn-block" value='로그인'>
+                <input type="submit" class="btn" value='로그인'>
             </div>
         </form>
-    </div> 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         $(function () {

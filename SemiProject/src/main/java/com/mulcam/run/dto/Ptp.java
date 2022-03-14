@@ -7,6 +7,10 @@ public class Ptp {
 
 	public Ptp() {
 	}
+	public Ptp(int mate_articleNO, String user_id) {
+		this.user_id = user_id;
+		this.mate_articleNO = mate_articleNO;
+	}
 	public Ptp(int ptp_no, int mate_articleNO, String user_id) {
 		this.ptp_no = ptp_no;
 		this.mate_articleNO = mate_articleNO;

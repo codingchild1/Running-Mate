@@ -9,6 +9,41 @@
 <title>Insert title here</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/main.js"></script>
+    <style>
+    .container2 {
+	
+	width: 1060px;
+}
+.register {
+	width: 400px;
+	height: 250px;
+	padding: 8px 8px;
+	background: white;
+	color: #2b2e4a;
+	font-size: 14px;
+	margin: 14px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	display: inline-block;
+}
+.profile {
+	width: 80px;
+	height: 80px;
+	border-radius: 70%;
+}
+
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.ptpimg{
+	margin-top: 40px;
+	
+	display: inline-block;
+}
+    </style>
 </head>
 <body>
 <%@include file ="header.jsp" %>
@@ -32,7 +67,7 @@
 	<div class="col-12 col-md-4 mb-4">
 		<div class="card h-100">
 			<a href="#">
-				<img src="${pageContext.request.contextPath }/upload/${best.today_thumb }" class="card-img-top" alt="...">
+				<img src="${pageContext.request.contextPath }/thumb/${best.today_thumb }" class="card-img-top" alt="..." style="width: 100%; height: 400px"/>
 			</a>
 			<div class="card-body">
 				<p class="card-text">
@@ -69,7 +104,45 @@
             </div>
             <div class="row">
             
-            <c:forEach items="${MateList }" var="mate">
+            <div class="container2">
+			<c:forEach items="${mates }" var="groupandmate">
+				<div class="register">
+					<div style="margin: 5px; padding: 5px; display: flex; align-items: flex-start; justify-content: space-between;">
+						<span><img class="profile" src='${groupandmate.img }'></span>
+						<div style="width: 150px">
+							<span><input type="text" id="title"value='${groupandmate.title }'style="width:200px;height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border: none; background-color: white;"disabled> </span> 
+							<span><input type="text" id="id" value='${groupandmate.id }'style="height: 20px; vertical-align: middle; border: none; background-color: white;"disabled> </span>
+						</div>
+						<c:choose>
+							<c:when test="${groupandmate.type eq 'g'}">
+								<div style="display: inline-block;line-height: 30px;">소모임</div>
+							</c:when>
+							<c:otherwise>
+								<div style="display: inline-block;line-height: 30px;">번개</div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<div style="margin: 5px; margin-top: 25px; padding: 5px; vertical-align: middle;">
+						<c:choose>
+							<c:when test="${groupandmate.type eq 'g'}">
+						 		<span><img class="heart" src="images/white.png"style="width: 30px; height: 30px;margin-bottom:17px;"></span> 
+								<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px;  vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;color:white;"disabled></span>
+							</c:when>
+							<c:otherwise>
+							<div class="ptpimg">
+								<span><img class="heart" src="images/ptp2.png"style="width: 30px; height: 30px;margin-bottom:17px;"></span> 
+								<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"disabled></span>
+							</div>
+							</c:otherwise>
+						</c:choose>
+					<button id="btn-modal" class="more"style="border: none; float: right; margin-top: 40px; background-color: white; color: rgba(var(- -f52, 142, 142, 142), 1); cursor: pointer;"onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더보기</button>
+						<input type="hidden" id="warning" name="warning" value='${groupandmate.warning}'>
+						<input type="hidden" id="type" name="type" value='${groupandmate.type}'>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+            <%-- <c:forEach items="${MateList }" var="mate">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <div>
@@ -87,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-                </c:forEach>
+                </c:forEach> --%>
                 
             </div>
         </div>

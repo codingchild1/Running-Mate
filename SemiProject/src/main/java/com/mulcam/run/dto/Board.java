@@ -11,9 +11,16 @@ public class Board {
 	private boolean warning;
 	private Date fb_date;
 	private int fb_views;
-	private String fb_img_url;
+	private String user_img;
 	private String keyword;
+	private String fb_likes;
 	
+	public String getFb_likes() {
+		return fb_likes;
+	}
+	public void setFb_likes(String fb_likes) {
+		this.fb_likes = fb_likes;
+	}
 	public String getFb_title() {
 		return fb_title;
 	}
@@ -69,11 +76,12 @@ public class Board {
 	public void setFb_views(int fb_views) {
 		this.fb_views = fb_views;
 	}
-	public String getFb_img_url() {
-		return fb_img_url;
+	public String getUser_img() {
+		return user_img;
 	}
-	public void setFb_img_url(String fb_img_url) {
-		this.fb_img_url = fb_img_url;
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
 	}
+	
 	
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>메이트 구하기</title>
     <style>
                 * {
             padding: 0;
@@ -69,6 +69,7 @@
             border-radius: 70%;
         }
         #modal.modal-overlay {
+        z-index: 8;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -136,6 +137,7 @@
             color: white; */
         }
         #modal2.modal-overlay {
+        z-index: 8;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -314,7 +316,7 @@
 				<!-- <div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin: 7px; margin-right: 0px; float: right; position: relative; height: 32px;">
-					<div class="info" style="margin: 5px; width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;line-height: 30px;">
+					<div class="info" style="margin: 5px; width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;line-height: 30px;font-size:13px;">
 						조회
 						<div class="ptplist"style="position: relative; border: 1px solid; width: 150px; top: -150px; margin: 10px; background-color: #59ab6e;">
 							<p style="font-size: 13px; margin: 2px; padding: 5px;display:flex;">참여자 목록</p>
@@ -323,7 +325,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'>참여</button>
+					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;font-size:13px;">참여</button>
 					<!-- <input class="ptp" type="text" style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'> -->
 				</div>
 			</div>
@@ -466,11 +468,6 @@
      				 $('#delete').hide();
      				 $('#update').hide();
      			  } 
-     			 if($('#mwarning').val()=='1'){
-     				 $('#alerts span').html('신고취소');
-     			  }else{
-     				 $('#alerts span').html('신고');
-     			  }
      			//메이트에디터에 값넣어주는 함수	  
      	     	m_editor.setData($('#mate_cont').val());
      	   
@@ -522,7 +519,43 @@
         		error:function(data, textStatus){
         			alert("실패");
         		}
-        		}); 
+        		});
+            //번개 신고버튼 체크
+          	$.ajax({     
+      			type:"post",
+      			dataType:"text",
+      			async:false,
+      			url:"http://localhost:8090/alertcheck",
+      			data:{"no":no},
+      			success: function(data, textStatus){ 
+      				if(data=='true'){
+      					$("#alerts span").html("신고취소");
+      				}else{
+      					$("#alerts span").html("신고");
+      				}
+      			},
+      			error:function(data, textStatus){
+      				alert("실패");
+      			}
+      		});
+          //참여버튼 체크
+       	 $.ajax({     
+   			type:"post",
+   			dataType:"text",
+   			async:false,
+   			url:"http://localhost:8090/Likecheck",
+   			data:{"no":no},
+   			success: function(data, textStatus){ 
+   				if(data=='true'){
+   					$('.ptp').html('참여취소');
+   				}else{
+   					$('.ptp').html('참여');
+   				}
+   			},
+   			error:function(data, textStatus){
+   				alert("실패");
+   			}
+   		});
 
             //소모임 모달폼 ajax
     	}else{
@@ -555,11 +588,6 @@
   				 $('#delete2').hide();
   				 $('#update2').hide();
   			  }
-			  if($('#gwarning').val()=='1'){
-	  				 $('#alerts span').html('신고취소');
-	  			  }else{
-	  				 $('#alerts span').html('신고');
-	  			  }
 			  
 			//그룹게시물에디터 값 넣는 함수
 			g_editor.setData($('#group_cont').val());
@@ -590,6 +618,24 @@
  		error:function(data, textStatus){
  			alert("실패");
  		}
+ 		});
+   	//소모임 신고버튼 체크
+     	$.ajax({     
+ 			type:"post",
+ 			dataType:"text",
+ 			async:false,
+ 			url:"http://localhost:8090/alertcheck2",
+ 			data:{"no":no},
+ 			success: function(data, textStatus){ 
+ 				if(data=='true'){
+ 					$("#alerts span").html("신고취소");
+ 				}else{
+ 					$("#alerts span").html("신고");
+ 				}
+ 			},
+ 			error:function(data, textStatus){
+ 				alert("실패");
+ 			}
  		});
     	 
     	}
@@ -674,7 +720,28 @@
 	        			alert("실패");
 	        		}
         		});
+	          //참여자 리스트
+	    	    $.ajax({     
+	    			type:"post",
+	    			dataType:"text",
+	    			async:false,
+	    			url:"http://localhost:8090/ptplist",
+	    			data:{"no":$('#ptp').val()},
+	    			success: function(data, textStatus){ 
+	    				$('.list').html('');
+	    				var jdata = JSON.parse(data);
+	    				console.log(jdata);
+	    			 	for(let i of jdata) {
+	    				 	var clist = $('.list').html()+'<span style="float: left;">'+i.user_id+"</span><br>";
+	    				 	$('.list').html(clist);
+	    				}
+	    			},
+	    			error:function(data, textStatus){
+	    				alert("실패");
+	    			}
 		});
+		
+	});
 		
 		//게시물 삭제 기능ajax
  		$('.delete').click(function(){
@@ -686,6 +753,7 @@
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			alert("성공적으로 삭제되었습니다.");
+	        			location.reload();
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
@@ -701,6 +769,7 @@
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			alert("성공적으로 삭제되었습니다.");
+	        			location.reload();
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
@@ -708,6 +777,11 @@
     		});
 		});
 		$('.alert').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+	    		alert("로그인이 필요한 서비스입니다.");
+	    		return false;
+			}
 			 $.ajax({
 	        		type:"post",
 	        		dataType:"text",
@@ -731,6 +805,11 @@
   		});
 		});
 		$('.alert2').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+	    		alert("로그인이 필요한 서비스입니다.");
+	    		return false;
+			}
 			 $.ajax({
 	        		type:"post",
 	        		dataType:"text",

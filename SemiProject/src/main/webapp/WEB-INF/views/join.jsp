@@ -5,59 +5,153 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
     <style>
-        .container {
-            width: 400px;
-        }
-
-        .input-group-text {
-            display: inline-block;
-            width: 130px;
-        }
-
-        .title {
-            text-align: center;
-            font-weight: bold;
-        }
-    </style> 
+	 * {
+	  margin: 0px;
+	  padding: 0px;
+	  text-decoration: none;
+	  font-family:sans-serif;
+	
+	}
+	
+	body {
+	  background-image:#34495e;
+	}
+	
+	.joinForm {
+	  position:absolute;
+	  width:400px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  top:40%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	  border-radius: 15px;
+	}
+	
+	.joinForm h2 {
+	  text-align: center;
+	  margin: 30px;
+	}
+	
+	.textForm {
+	  border-bottom: 2px solid #adadad;
+	  margin: 30px;
+	  padding: 10px 10px;
+	}
+	
+	
+	.id {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.pw {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.name {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.email {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.nickname {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.cellphoneNo {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.btn {
+	  position:relative;
+	  left:40%;
+	  transform: translateX(-50%);
+	  margin-bottom: 40px;
+	  width:80%;
+	  height:40px;
+	  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+	  background-position: left;
+	  background-size: 200%;
+	  color:white;
+	  font-weight: bold;
+	  border:none;
+	  cursor:pointer;
+	  transition: 0.4s;
+	  display:inline;
+	}
+	
+	.btn:hover {
+	  background-position: right;
+	}
+	</style>
 </head>
 <body>
-   <div class="container mt-3">
-        <h5 class='title'>회원가입</h5>
-        <form id='form' action="join" method="post" enctype="multipart/form-data">
-        		<img id="memberthumb" name="memberthumb" src="" width=100px height=100px onerror="this.src='/profile/Untitled.png'" /><br>
+        <form id='form' action="join" method="post" enctype="multipart/form-data" class="joinForm" >
+                <h2>회원가입</h2>
+        		<img id="memberthumb" name="memberthumb"  onerror="this.src='/profile/다운로드.jpg'" src="" width=100px height=100px /><br>
         		<input type="file" name="profile" id="profile"/><br>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">이름</span>
-                <input type="text" class="form-control" id="name" name="name"><br>
+            <div class="textForm">
+                <input type="text" id="name" name="name" class="name" placeholder="이름"><br>
             </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">아이디</span>
-                <input type="text" class="form-control" id="id" name="id">
-                <button type="button" class="btn btn-info" id="memidoverlap">중복</button>
+            <div class="textForm">
+                <input type="text" id="id" name="id" class="id" placeholder="아이디">
             </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">비밀번호</span>
-                <input type="password" class="form-control" id="password" name="password">
+           	<button type="button" class="btn btn-info" id="memidoverlap">중복</button>
+            <div class="textForm">
+                <input type="password" class="pw" id="password" name="password" placeholder="비밀번호">
             </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">비밀번호 확인</span>
-                <input type="password" class="form-control" id="password2" name="password2">
+            <div class="textForm">
+                <input type="password" class="pw" id="password2" name="password2" placeholder="비밀번호 확인">
             </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">이메일</span>
-                <input type="text" class="form-control" id="email" name="email">
+            <div class="textForm">
+                <input type="text" class="email" id="email" name="email" placeholder="이메일">
             </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text title">전화번호</span>
-                <input type="text" class="form-control" id="phone" name="phone">
+            <div class="textForm">
+                <input type="text" class="cellphoneNo" id="phone" name="phone" placeholder="전화번호">
             </div>                 
             <div class="d-grid">
-                <input type="submit" id="submit" class="btn btn-primary btn-block" value='회원가입'>
+                <input type="submit" id="submit" class="btn" value='회원가입'>
             </div>
         </form>
     </div> 

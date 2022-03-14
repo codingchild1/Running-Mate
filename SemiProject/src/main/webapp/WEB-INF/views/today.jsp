@@ -79,7 +79,7 @@ body {
 }
 #paging {
 	width:820px;
-	margin: 0 auto;
+	margin: 0 auto; 
 	text-align: center;
 }
 
@@ -90,6 +90,7 @@ body {
 #search{
 	text-align: center;
 }
+.userProfile { width:25px; height:25px; }
 </style>
 </head>
 <body>
@@ -112,7 +113,12 @@ body {
 						&nbsp&nbsp
 					</form></td>
 					<td>
-						<button class="btn btn-outline-secondary" id="todayMake" name="todayMake" type="button" style="width: 80px; height: 40px;">글쓰기</button>
+					
+					<c:choose>
+						<c:when test="${id!=null}">
+							<button class="btn btn-outline-secondary" id="todayMake" name="todayMake" type="button" style="width: 80px; height: 40px;">글쓰기</button>
+						</c:when>
+					</c:choose>						
 					</td></tr>
 				</table>
 			</div>
@@ -130,7 +136,7 @@ body {
 										<header	class="">
 											<div class="">
 												<span class="col-lg">
-													<span><img src="/profileview/${profileImg}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
+													<span><img src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
 												</span>
 											</div>
 											<span class="" id="today_date">${tboard.today_date}</span>

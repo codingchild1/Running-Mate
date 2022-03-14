@@ -11,6 +11,106 @@
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>회원가입</title>
 	</head>
+	<style>
+	 * {
+	  margin: 0px;
+	  padding: 0px;
+	  text-decoration: none;
+	  font-family:sans-serif;
+	
+	}
+	
+	body {
+	  background-image:#34495e;
+	}
+	
+	.form1 {
+	  position:absolute;
+	  width:400px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  top:40%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	  border-radius: 15px;
+	}
+	
+	.form1 h2 {
+	  text-align: center;
+	  margin: 30px;
+	}
+	
+	.textForm {
+	  border-bottom: 2px solid #adadad;
+	  margin: 30px;
+	  padding: 10px 10px;
+	}
+	
+	
+	.id {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.name {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.phone {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}	
+	
+	.email {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}		
+	
+	.btn {
+	  position:relative;
+	  left:40%;
+	  transform: translateX(-50%);
+	  margin-bottom: 40px;
+	  width:80%;
+	  height:40px;
+	  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+	  background-position: left;
+	  background-size: 200%;
+	  color:white;
+	  font-weight: bold;
+	  border:none;
+	  cursor:pointer;
+	  transition: 0.4s;
+	  display:inline;
+	}
+	
+	.btn:hover {
+	  background-position: right;
+	}
+	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
@@ -45,34 +145,29 @@
 	<body>
 	<header>
 	<%@include file ="mypageheader.jsp" %></header>
-		<section id="container">
-			<form name="form1" method="post">
+			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
+				<h2>회원 정보 수정</h2>
+				<div style="margin: 30px;padding: 10px 10px;">
+					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/다운로드.jpg'" width="100px" height="100px"  />
+					<input type="file" id="profile" name="profile" />
+				</div>
+				<div class="textForm">
+					<input class="id" type="text" id="id" name="id" value="${member.id }" readonly="readonly" placeholder="아이디" />
+				</div>
+				<div class="textForm">
+					<input class="name" type="text" id="name" name="name" value="${member.name}" readonly="readonly" placeholder="이름" />
+				</div>
+				<div class="textForm">
+					<input class="email" type="text" id="email" name="email" value="${member.email}" placeholder="이메일"/>
+				</div>
+				<div class="textForm">
+					<input class="phone" type="text" id="phone" name="phone" value="${member.phone}" placeholder="전화번호"/>
+				</div>
 				<div>
-					<label class="control-label" for="memberthumb">프로필</label>
-					<img src="/profileview/${member.memberthumb }" onerror="this.src='/profile/Untitled.png'" width="100px" height="100px"  />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="id">아이디</label>
-					<input class="form-control" type="text" id="id" name="id" value="${member.id }" readonly="readonly"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="name">성명</label>
-					<input class="form-control" type="text" id="name" name="name" value="${member.name}" readonly="readonly"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="email">이메일</label>
-					<input class="form-control" type="text" id="email" name="email" value="${member.email}"/>
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="phone">전화번호</label>
-					<input class="form-control" type="text" id="phone" name="phone" value="${member.phone}"/>
-				</div>
-				<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">회원정보수정</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
+					<button class="btn" type="submit" id="submit">회원정보수정</button>
+					<button class="btn" type="button">취소</button>
 				</div>
 			</form>
-		</section>
 		<script>
 			$(document).ready(function(){
 				$('#submit').click(function(){

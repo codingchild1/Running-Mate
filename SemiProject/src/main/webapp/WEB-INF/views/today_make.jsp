@@ -94,8 +94,13 @@ main, header, section {
 					<table>
 						<tbody class="container-fluid mt-1">
 							<tr>
-								<td><img src="" class="col" /></td>
-								<td id="user_id" class="col d-flex justify-content-start">${tboard.user_id}아이디</td>
+								<td>
+									<img src='/profileview/${user_img2}' class="col" />
+									<input type="hidden"name="user_img" id="user_img" value=''>
+								</td>
+								<td id="wirte_id" class="col d-flex justify-content-start">
+									${wirte_id}
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -165,7 +170,9 @@ main, header, section {
 		});
 	});
 
-	
+	 var src = jQuery('#user_img2').attr("src");
+	   $('input[name=user_img]').attr('value',src); 
+
 /* 	$(function('#today') {
 		$('#today_postcancle').change(function (event) {
 			
