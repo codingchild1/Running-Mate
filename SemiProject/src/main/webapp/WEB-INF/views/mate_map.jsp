@@ -7,34 +7,34 @@
 <meta charset="UTF-8">
 <title>메이트 구하기</title>
 <style>
-
  * {
-	padding: 0;
-	box-sizing: border-box;
-	}
+padding: 0;
+/* margin: 0 auto; */
+box-sizing: border-box;
+}
 body{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
 } 
 .post li {
-	float: left;
-	margin: 10px;
-	list-style: none;
-}
-.post2 li {
-    float: left;
+float: left;
 margin: 10px;
 list-style: none;
 }
-ul li a {
-text-decoration-line: none;
-color: black;
-}
-button a{
-text-decoration-line: none;
-color: white;
-}
+.post2 li {
+            float: left;
+            margin: 10px;
+            list-style: none;
+        }
+        ul li a {
+            text-decoration-line: none;
+            color: black;
+        }
+        button a{
+            text-decoration-line: none;
+            color: white;
+        }
         .post {
             display: inline-flex;
             /* flex-direction: column; */

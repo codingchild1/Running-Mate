@@ -145,11 +145,11 @@
 	<body>
 	<header>
 	<%@include file ="mypageheader.jsp" %></header>
-			<form name="form1" method="post" class="form1">
+			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
 				<h2>회원 정보 수정</h2>
 				<div style="margin: 30px;padding: 10px 10px;">
-					<img src="/profileview/${member.memberthumb }" onerror="this.src='/profile/다운로드.jpg'" width="100px" height="100px"  />
-					<input type="file" id="file" name="file" />
+					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/다운로드.jpg'" width="100px" height="100px"  />
+					<input type="file" id="profile" name="profile" />
 				</div>
 				<div class="textForm">
 					<input class="id" type="text" id="id" name="id" value="${member.id }" readonly="readonly" placeholder="아이디" />

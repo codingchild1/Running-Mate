@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mulcam.run.dto.Warning;
 import com.mulcam.run.service.AlertService;
+import com.mulcam.run.service.BoardService;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.RouteService;
@@ -39,6 +39,9 @@ public class SubController {
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+	BoardService boardService;
+	
 	@ResponseBody
 	@PostMapping(value="/likes")
 	public boolean likes(@RequestParam("user_id") String user_id ,@RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
@@ -59,6 +62,9 @@ public class SubController {
 				case "route":
 					routeService.LikesPlus(board_no);
 					break;
+				case "article":
+					boardService.LikesPlus5(board_no);
+					break;
 				default:
 					break;
 				}
@@ -74,6 +80,9 @@ public class SubController {
 					break;
 				case "route":
 					routeService.LikesMinus(board_no);
+					break;
+				case "article":
+					boardService.LikesMinus5(board_no);
 					break;
 				default:
 					break;
@@ -109,6 +118,9 @@ public class SubController {
 				case "route":
 					routeService.routeWarning(board_no);
 					break;
+				case "article":
+					boardService.LikesPlus5(board_no);
+					break;
 				default:
 					break;
 				}
@@ -128,6 +140,9 @@ public class SubController {
 					break;
 				case "route":
 					routeService.routeWarningDelete(board_no);
+					break;
+				case "article":
+					boardService.LikesMinus5(board_no);
 					break;
 				default:
 					break;
