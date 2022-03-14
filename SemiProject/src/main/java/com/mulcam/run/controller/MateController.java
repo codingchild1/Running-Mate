@@ -210,31 +210,24 @@ public class MateController {
 	public ResponseEntity<List<GroupAndMate>> mate_mapSearch(@RequestParam(value="input")String input,
 			@RequestParam(value="type")String type) {
 		ResponseEntity<List<GroupAndMate>> result = null;
-		System.out.println(input+" "+type);
 		try {
 			if(type.equals("all")) {
 				if(input.equals("")) {
 					List<GroupAndMate> mates = mateService.allpostInfo();
 					result = new ResponseEntity<List<GroupAndMate>>(mates, HttpStatus.OK);
-					System.out.println("검색값 안넣고 all조회");
 				}else {
 					List<GroupAndMate> mates = mateService.addressinfo(input);
 					result = new ResponseEntity<List<GroupAndMate>>(mates, HttpStatus.OK);
-					System.out.println("검색값 넣고 all조회");
 				}
 			}else {
 				if(input.equals("")) {
 					List<GroupAndMate> mates = mateService.addressinfo3(type);
 					result = new ResponseEntity<List<GroupAndMate>>(mates, HttpStatus.OK);
-					System.out.println("검색값 안넣고 부분조회");
 				}else {
 					List<GroupAndMate> mates = mateService.addressinfo2(type, input);
 					result = new ResponseEntity<List<GroupAndMate>>(mates, HttpStatus.OK);
-					System.out.println("검색값 넣고 부분조회");
 				}
 			}
-			System.out.println(input);
-			System.out.println(result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
