@@ -52,7 +52,13 @@ main, header, section {
 	min-width: 550px;
 	max-width:100%;
 }
-
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border-color: var(--ck-color-base-border);
+    height: 400px;
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
+height:400px;
+}
 .locate {
 	position: absolute;
 	top: 870px;
@@ -91,13 +97,16 @@ main, header, section {
 
 			<header>
 				<ul class="list-inline shop-top-menu pb-3 pt-1">
-					<li class="list-inline-item">${today_title}
-						<h1 class="display-5 fw-bold" style="align-text: center;">오늘의런닝</h1>
+					<li class="list-inline-item">
+							<h1 style="float:left; margin-top:25px; margin-bottom:55px;">오늘의 런닝</h1>
 					</li>
 				</ul>
 
 				<ul>
-					<table>
+
+				</ul>
+			</header>
+<%-- 					<table>
 						<tbody class="container-fluid mt-1">
 							<br>
 							<tr>
@@ -110,10 +119,14 @@ main, header, section {
 								</td>
 							</tr>
 						</tbody>
-					</table>
-				</ul>
-			</header>
-
+					</table> --%>
+					
+					<div style="display: flex; margin-left:330px; align-items: center;">
+					<span><img class="userProfile" src='/profileview/${user_img2 }'id="user_img2" name="user_img2"></span>
+						<input type="hidden"name="user_img" id="user_img" value=''>
+					<span><input type="text" id="user_id" name="user_id" value='${wirte_id}'style="height: 20px; border: none; background-color: white;"disabled></span>
+						<input type="hidden" id="user_id"name="user_id" value='${wirte_id}'>
+				</div>
 			<!--------------------------------------------------게시글 ---------------------------- -->
 			<main role="main" class="container-fluid">
 				<script></script>
@@ -122,7 +135,7 @@ main, header, section {
 					<div class="pt-1">
 						<input type="text" name="today_title" id="today_title"
 							placeholder="제목을 입력하세요"
-							style="border-radius: 5px; width: 100%; padding: 5px" />
+							style="width: 100%; padding: 5px; border:none; border-bottom:1px solid black;" />
 					</div>
 					<div></div>
 
