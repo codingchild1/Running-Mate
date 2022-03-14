@@ -38,7 +38,7 @@
 	#map {
         top: 0;
         bottom: 0;
-        height: 500px;
+        height: 400px;
       }
 	.ck-editor__editable {
 		max-width:100%;
@@ -49,7 +49,7 @@
 </head>
 <body>
 	<header><%@include file ="header.jsp" %></header>
-	<main style="width: 70%; margin: 0 auto;">
+	<main style="width: 70%; margin: 0 auto; margin-bottom: 60px;">
 		<div class="row align-items-center py-3">
 			<div class="col-md-8 text-black">
         		<h2>나처럼 달려</h2>
@@ -59,36 +59,38 @@
 		<div><form id="route_write" action="/route_reg" method="post" enctype="multipart/form-data">
 			<div id="user_info" style="height:80px; display: flex; align-items: center;">
 				<div style="height:40px; width:40px; overflow:hidden;">
-					<!-- 썸네일 이미지 -->
 					<img src="/profileview/${profileImg }" id="userImage" class="userProfile">
 				</div>
-				<!-- 사용자 ID -->
 				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >${id}</div>
 			</div>
-			<!-- 글 제목 -->
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
-			
-			<img class="col" src="" id="route_thumb" name="route_thumb" height="100px" width="100px">
-			<input type="file" id="route_file" name="route_file" />
-			
-			<!-- ckeditor -->
 			<textarea id="editor" name="content"></textarea><br>
 			
-			<p id="test">코스를 그려주세요</p>
-			<div id="map""></div>
-			
+			<div style="height:530px; padding-top: 30px;">
+				<div id="routethumbbox" style="float:left; width: 30%; height:400px; text-align: center;">
+					<p id="test" style="text-align: center;">썸네일 이미지</p>
+					<img class="col" src='' id="route_thumb" name="route_thumb" style="height: 300px; width: 90%;">
+					<br><br><br>
+					<input type="file" id="route_file" name="route_file" style="text-align: center;" />
+				</div>
+				<div id="mapbox" style="float:right; width: 70%; height:500px;">
+					<p id="test" style="text-align: center;">코스를 그려주세요</p>
+					<div id="map"></div>
+				</div>
+			</div>
 			<input type="hidden" id="form_user_id" name="user_id">
 			<input type="hidden" id="route_center" name="route_center">
 			<input type="hidden" id="route_area" name="route_area">
 			<input type="hidden" id="route_mapinfo" name="route_mapinfo">
 			<input type="hidden" id="route_distance" name="route_distance">
 			
-			<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+			<div style="text-align:center;">
 				<button id="submit" style="width:15%; display:inline-block;" class="btn btn-dark">등록</button>
 				<button id="reset" type="reset" style="width:15%; display:inline-block;" class="btn btn-dark">취소</button>
 			</div>
 		</form></div>
 	</main>
+	<%@include file="fotter.jsp"%>
 
 	<script>
 		$(function(){
@@ -112,12 +114,24 @@
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$("#route_thumb").attr("src", e.target.result);	
-				console.log($("#route_thumb").src);
 			};
 			reader.readAsDataURL(event.target.files[0]);
 		});
+		
+		$("#reset").click(function(){
+			window.location.href = 'http://localhost:8090/route';
+		});
 	
 		$("#submit").click(function(){
+			if(center_lo == null || center_la ==null){
+				alert("코스를 그려주세요!");
+				return false;
+			}
+			if(!$("#route_file").val()){
+				alert("섬네일 이미지를 첨부해주세요!");
+				return false;
+			}
+			
 			$.ajax({
 				async:false,
 				type:"post",

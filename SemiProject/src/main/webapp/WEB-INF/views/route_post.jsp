@@ -43,7 +43,12 @@
 		.main { width: 70%; margin: 0 auto; }
 		.container2 { max-width:1024px; margin:30px auto;}
 		.routeboardHeader { border-bottom: 1px solid gray; padding-bottom:20px; }
-		.userProfile { width:25px; height:25px; }
+		.userProfile { width:30px; height:30px; }
+		.route_title { height:80px; width: 100%; border: 0px; font-size:23pt; font-weight: bold; margin-bottom: 5px;}
+		.user_id{font-size : 15pt;}
+		.board_time{font-size : 10pt;}
+		input:disabled { background: white; }
+		
 	</style>
 
 </head>
@@ -56,16 +61,13 @@
         <p>나만의 러닝 코스를 공유해주세요!</p>
         
         <div id="routeboardHeader" class="routeboardHeader">
-        	<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="${route.route_title} " 
-        		style="disabled{background-color: white;}; height:80px; width:80%; border: 0px;" disabled/>
-        	<c:if test= "${id eq route.user_id }">
-				<a onclick="return confirm('정말 게시글을 삭제하시겠습니까?')">&nbsp&nbsp<span id="delete" style="float:right; padding-left:10px;">삭제</span></a>
+        	<input type="text" id="route_title" name="route_title" class="route_title" value="${route.route_title}" disabled/>
+        	<img src="/profileview/${route.memberthumb }" class="userProfile">
+			<span id="user_id" class="user_id">${route.user_id }</span>
+			<c:if test= "${id eq route.user_id }">
+				<span id="delete" onclick=deleteArticle() style="float:right; padding-left:10px;">삭제</span>
 				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a><br>
-			</c:if><br>
-        	
-			<img src="/profileview/${route.memberthumb }" class="userProfile">
-			<span id="user_id">${route.user_id }</span>
-			<span id="board_time">${route.route_date }</span>
+			</c:if>
 			
 			<c:if test="${!empty id }">
     			<span id="alerts" onclick=alert()>
@@ -75,12 +77,11 @@
 				</c:choose>
 				</span>
     		</c:if>
-			
-			<span style="float:right;">${route.route_views }</span><span style="float:right;">조회</span>
-			
+    		<span style="float:right;">${route.route_views }</span><span style="float:right;">조회</span>
+			<span id="board_time" class="board_time">${route.route_date }</span>		
 		</div><br><br>
 		
-		<div id="routeboardMain" style="diplay:block; height:550px;">
+		<div id="routeboardMain" style="diplay:block; height:580px;">
 			<div style="display:inline-block; float:left; width:48%; height:500px;"><textarea id="content" name="content" style="width: 100%; " ></textarea></div>
 			<div id="map" style="width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; "></div>
     	</div><br><br>
@@ -99,6 +100,13 @@
 	</main>
 	
 	<script>
+	function deleteArticle(){
+		alert = confirm('게시글을 정말 삭제하시겠습니까?');
+		if(alert==true){
+			window.location.href = 'http://localhost:8090/routeDelete?articleNo='+${route.route_articleNo};
+		}
+		else return false;
+	}
 	function changeImg(){
 		$.ajax({
 			type:"post",
