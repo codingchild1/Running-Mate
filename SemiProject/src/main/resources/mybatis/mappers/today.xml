@@ -90,3 +90,23 @@
 		 ]]>
 	</insert> -->
 </mapper>
+
+
+<!-- 
+
+CREATE TABLE `today` (
+  `today_articleNo` int NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(100) NOT NULL,
+  `user_img` varchar(500) NOT NULL,
+  `today_title` varchar(255) NOT NULL,
+  `today_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `today_contents` longtext NOT NULL,
+  `today_thumb` varchar(500) DEFAULT NULL,
+  `today_views` int DEFAULT '0',
+  `today_likes` int DEFAULT '0',
+  `warning` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`today_articleNo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+ -->

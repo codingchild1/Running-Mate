@@ -5,21 +5,79 @@
 <head>
     <title>탈퇴 화면</title>
     
-    <style type="text/css">
-        table{
-            margin-left:auto; 
-            margin-right:auto;
-            border:3px solid skyblue;
-        }
-        
-        td{
-            border:1px solid skyblue
-        }
-        
-        #title{
-            background-color:skyblue
-        }
-    </style>
+<style>
+	 * {
+	  margin: 0px;
+	  padding: 0px;
+	  text-decoration: none;
+	  font-family:sans-serif;
+	
+	}
+	
+	body {
+	  background-image:#34495e;
+	}
+	
+	.form4 {
+	  position:absolute;
+	  width:400px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  top:40%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	  border-radius: 15px;
+	}
+	
+	.form4 h2 {
+	  text-align: center;
+	  margin: 30px;
+	}
+	
+	.textForm {
+	  border-bottom: 2px solid #adadad;
+	  margin: 30px;
+	  padding: 10px 10px;
+	}
+	
+	
+	.password {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+
+	
+	
+	
+	.btn {
+	  position:relative;
+	  left:40%;
+	  transform: translateX(-50%);
+	  margin-bottom: 40px;
+	  width:80%;
+	  height:40px;
+	  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+	  background-position: left;
+	  background-size: 200%;
+	  color:white;
+	  font-weight: bold;
+	  border:none;
+	  cursor:pointer;
+	  transition: 0.4s;
+	  display:inline;
+	}
+	
+	.btn:hover {
+	  background-position: right;
+	}
+	</style>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript">
     // 비밀번호 미입력시 경고창
@@ -34,20 +92,13 @@
     
 </head>
 <body>
-    <b><font size="6" color="gray">내 정보</font></b>
- 	<!-- 회원은 삭제되는데 유효성 검사가 안 됨 -->
-    <form name="deleteform" method="post" action="delete" onsubmit="return checkValue()">
- 
-        <table>
-            <tr>
-                <td bgcolor="skyblue">비밀번호</td>
-                <td><input type="text" id="password" name="password"></td>
-            </tr>
-        </table>
-        
-        <br> 
-        <input type="button" value="취소" onclick="history.go(-1)">
-        <input type="submit" value="탈퇴" /> 
+    <form name="deleteform" method="post" class="form4" action="delete" onsubmit="return checkValue()">
+                <h2>회원 탈퇴</h2>
+                <div class="textForm">
+               		 <input type="text" id="password" class="password" name="password">
+                </div>
+		        <input type="submit" class="btn" value="탈퇴" /> 
+		        <input type="button" class="btn" value="취소" onclick="history.go(-1)">
     </form>
 
 </body>
