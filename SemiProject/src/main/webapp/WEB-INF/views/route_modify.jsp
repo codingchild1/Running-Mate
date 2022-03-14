@@ -38,13 +38,20 @@
 	#map {
         top: 0;
         bottom: 0;
-        height: 500px;
+        height: 400px;
       }
 	.ck-editor__editable {
 		max-width:100%;
 	    min-height: 500px;
 	}
-	.userProfile { width:25px;; height:25px; }
+	
+		.user_info { height:80px; display: flex; align-items: center;} 
+		.userProfile { width:40px;; height:40px; }
+		.thumbBox { height:40px; width:40px; overflow:hidden;}
+		.user_id { font-size : 15pt; height:40px; display:inline-block; line-height: 40px; padding-left : 10px;}
+		.route_title { height:50px; font-size:15pt; }
+		.buttons { text-align:center; margin-top:20px; margin-bottom:20px;}
+		.eachbutton { width:15%; display:inline-block;"}
 	</style>
 </head>
 <body>
@@ -56,23 +63,26 @@
             	<p>나만의 러닝 코스를 공유해주세요!</p>
         	</div>
 		</div>
-		<div><form id="route_modify" action="/route_modify" method="post">
-			<div id="user_info" style="height:80px; display: flex; align-items: center;">
-				<div style="height:40px; width:40px; overflow:hidden;">
-					<!-- 썸네일 이미지 -->
-					<img src="/profileview/${profileImg }" id="userImage" class="userProfile">
-				</div>
-				<!-- 사용자 ID -->
-				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >${id}</div>
+		<div><form id="route_modify" action="/route_modify" method="post" enctype="multipart/form-data">
+			<div id="user_info" class="user_info">
+				<div class="thumbBox"><img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile"></div>
+				<div id="user_id" class="user_id">${route.user_id}</div>
 			</div>
-			<!-- 글 제목 -->
-			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="${route.route_title} "/><br>
-			<!-- ckeditor -->
+			<input type="text" id="route_title" name="route_title" class="form-control mt-1 route_title" value="${route.route_title} "/><br>
 			<textarea id="editor" name="content"></textarea><br>
 			
-			<p id="test">코스를 그려주세요</p>
-			<div id="map"></div>
-			
+			<div style="height:530px; padding-top: 30px;">
+				<div id="routethumbbox" style="float:left; width: 30%; height:400px; text-align: center;">
+					<p id="test" style="text-align: center;">썸네일 이미지</p>
+					<img class="col" src='' id="route_thumb" name="route_thumb" style="height: 300px; width: 90%;">
+					<br><br><br>
+					<input type="file" id="route_file" name="route_file" style="text-align: center;" />
+				</div>
+				<div id="mapbox" style="float:right; width: 70%; height:500px;">
+					<p id="test" style="text-align: center;">코스를 그려주세요</p>
+					<div id="map"></div>
+				</div>
+			</div>
 			<input type="hidden" id="form_articleNo" name="route_articleNo">
 			<input type="hidden" id="form_user_id" name="user_id">
 			<input type="hidden" id="route_center" name="route_center">
@@ -80,13 +90,14 @@
 			<input type="hidden" id="route_mapinfo" name="route_mapinfo">
 			<input type="hidden" id="route_distance" name="route_distance">
 			
-			<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
-				<button id="submit" style="width:15%; display:inline-block;" class="btn btn-dark">수정</button>
-				<button id="reset" type="reset" style="width:15%; display:inline-block;" class="btn btn-dark">취소</button>
+			<div class="buttons">
+				<button id="submit" class="btn btn-dark eachbutton" >수정</button>
+				<button id="reset" type="reset" class="btn btn-dark eachbutton" >취소</button>
 			</div>
 		</form></div>
 	</main>
-
+	<%@include file="fotter.jsp"%>
+	
 	<script>
 	$(function(){
 		ClassicEditor
@@ -100,23 +111,32 @@
 		.catch((error) => {
 			console.error(error);
     	});
-		
-		/*
-    	ClassicEditor.create(document.querySelector("#editor"))
-	    .then(editor=>{
-    		editor.setData('${route.route_content }');
-    	})
-        .catch((error) => {
-	    	console.error(error);
-    	});
-		*/
 	});
 	</script>
 	
 	<script>
-	$(function(){
-
+	$(function(){		
+		$("#route_file").change(function (event) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#route_thumb").attr("src", e.target.result);	
+			};
+			reader.readAsDataURL(event.target.files[0]);
+		});
+		
+		$("#reset").click(function(){
+			window.location.href = 'http://localhost:8090/routepost?articleNo='+${route.route_articleNo};
+		});
 		$("#submit").click(function(){	
+			if(center_lo ==null || center_la ==null){
+				alert("코스를 그려주세요!");
+				return false;
+			}
+			if(!$("#route_file").val()){
+				alert("섬네일 이미지를 첨부해주세요!");
+				return false;
+			}
+			
 			$.ajax({
 				async:false,
 				type:"post",

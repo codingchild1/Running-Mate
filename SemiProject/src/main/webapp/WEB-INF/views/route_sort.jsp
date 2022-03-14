@@ -21,10 +21,12 @@
     <style>
    		.main { width: 70%; margin: 0 auto; }
 		.container2 { max-width:1024px; margin:30px auto;}
+		.searchfield { padding-bottom: 30px; border: 1px solid gray; margin-bottom: 50px;}
 		.writebtn { text-align: right;  display:inline-block; float:right; margin-right:10%; }
 		.routebtns { width: 100%; height:60px; display:inline-block; align-items: center; margin-top:50px; margin-bottom:50px; }
 		.routebtn { width:150px; height:50px; display:inline-block; }
-		.route_mini { width: 32%; height:500px; display: inline-block; border: 1px solid gray; border-radius: 13px; margin: 30px 0.5% 15px 0.5%; }
+		.route_mini { width: 31%; height:500px; display: inline-block; border: 1px solid gray; border-radius: 13px; margin: 15px 0.5% 15px 0.5%; }
+		.route_miniTitle { margin-top: 5px; margin-bottom: 10px; font : 18px bold; }
 		.userProfile { width:25px;; height:25px; }
 		.routeThumbImg { width:100%;height:300px; display:block; margin: auto; }
 		
@@ -32,17 +34,8 @@
 		.route_miniInfo { padding-left:10px; padding-right:10px; } 
 		.route_miniFooter { display: inline-block;  margin: 10px 5% 10px 4%; }
 		
-    /*
-    	.active{
-        	color: white;
-        	background-color: #4caf50;
-    	}
-    	table th {
- 	 		width: 350px;
-	  		padding: 10px;
-  			vertical-align: top;
-		}
-		*/
+		.distanceButton { width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;}
+		.buttonTitle { width:10%; margin-left: 10%; display:inline-block;}
 	</style>
 </head>
 <body>
@@ -74,20 +67,20 @@
     		</div>
 		</div>
 		
-		<fieldset style="padding-bottom: 30px; border: 1px solid gray;">
+		<fieldset class="searchfield">
 		<form action="/sortRoutes" method="post">
 			<div id="area_div" style="margin: 0 auto; padding-top: 20px;">
 				<div style="height:50px; margin: 0 auto;" >
-					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">지역</div>
+					<div class="buttonTitle btn btn-success">지역</div>
 					<input type="text" id="area_text" name="area" value="${area }"class="form-control mt-1" style="display:inline-block; width:70%;"/>
 				</div>
 			</div>
 			<div id="distance_div" style="margin: 0 auto; padding-top: 20px;">
 				<div style="height:50px; margin: 0 auto;" >
-					<div class="btn btn-success" style="width:10%; margin-left: 10%; display:inline-block;">거리</div>
-					<div id="btn_length1" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">~5km</div>
-					<div id="btn_length2" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">5km~20km</div>
-					<div id="btn_length3" style="width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;" class="btn btn-light">20km~</div>
+					<div class="btn btn-success buttonTitle" >거리</div>
+					<div id="btn_length1" class="distanceButton btn btn-light">~5km</div>
+					<div id="btn_length2" class="distanceButton btn btn-light">5km~20km</div>
+					<div id="btn_length3" class="distanceButton btn btn-light">20km~</div>
 					<input type="hidden" id="distance_left" name="distance_left" value="${distance_left}" />
 					<input type="hidden" id="distance_right" name="distance_right" value="${distance_right}" />
 				</div>
@@ -101,7 +94,7 @@
 		
 		<c:choose>
 			<c:when test="${routesinfolist!=null && pageInfo.listCount>0 }">
-			<div id="routes_list">
+			<div id="routes_list" style="margin: 0 auto;">
 				<c:forEach items="${routesinfolist }" var="route">
 					<a href="routepost?articleNo=${route.route_articleNo}">
 					<div id="route_mini" class="route_mini">
@@ -111,7 +104,7 @@
                 			<span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
            				 </div>
             			<div id="route_miniInfo" class="route_miniInfo">
-                			<div id="route_miniTitle" style="text"></div>
+                			<div id="route_miniTitle" style="text">${route.route_title }</div>
                 			<div id="route_miniThumbInfo">
               					<img src="/routethumbfileview/${route.route_thumb }" id="routeThumbImg" class="routeThumbImg">
                     			<div id="route_miniContent"></div>
@@ -174,22 +167,44 @@
 	<script>
 	$(function(){
 		$("#btn_length1").click(function(){
-			$("#btn_length1").removeClass("btn btn-success");
-			$("#btn_length2").removeClass("btn btn-success");
-			$("#btn_length3").removeClass("btn btn-success");
-			$("#btn_length1").attr('class','btn btn-success');
+			if($("#btn_length1").hasClass("btn-success")===true){
+				$("#btn_length1").removeClass("btn-success");
+				$("#btn_length1").attr('class','btn btn-light distanceButton');
+			}
+			else{
+				$("#btn_length2").removeClass("btn-success");
+				$("#btn_length3").removeClass("btn-success");
+				$("#btn_length2").attr('class','btn btn-light distanceButton');
+				$("#btn_length3").attr('class','btn btn-light distanceButton');
+				$("#btn_length1").attr('class','btn btn-success distanceButton');
+			}
 		});
 		$("#btn_length2").click(function(){
-			$("#btn_length1").removeClass("btn btn-success");
-			$("#btn_length2").removeClass("btn btn-success");
-			$("#btn_length3").removeClass("btn btn-success");
-			$("#btn_length2").attr('class','btn btn-success');
+			if($("#btn_length2").hasClass("btn-success")===true){
+				$("#btn_length2").removeClass("btn-success");
+				$("#btn_length2").attr('class','btn btn-light distanceButton');
+			}
+			else{
+				$("#btn_length1").removeClass("btn-success");
+				$("#btn_length3").removeClass("btn-success");
+				$("#btn_length1").attr('class','btn btn-light distanceButton');
+				$("#btn_length3").attr('class','btn btn-light distanceButton');
+				$("#btn_length2").attr('class','btn btn-success distanceButton');
+			}
 		});
 		$("#btn_length3").click(function(){
-			$("#btn_length1").removeClass("btn btn-success");
-			$("#btn_length2").removeClass("btn btn-success");
-			$("#btn_length3").removeClass("btn btn-success");
-			$("#btn_length3").attr('class','btn btn-success');
+			if($("#btn_length3").hasClass("btn-success")===true){
+				$("#btn_length3").removeClass("btn-success");
+				$("#btn_length3").attr('class','btn btn-light distanceButton');
+			}
+			else{
+				$("#btn_length1").removeClass("btn-success");
+				$("#btn_length2").removeClass("btn-success");
+				$("#btn_length1").attr('class','btn btn-light distanceButton');
+				$("#btn_length2").attr('class','btn btn-light distanceButton');
+				$("#btn_length3").attr('class','btn btn-success distanceButton');
+			}
+
 		});
 		
 		$("#submit").click(function(){

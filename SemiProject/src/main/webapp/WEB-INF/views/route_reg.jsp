@@ -44,11 +44,21 @@
 		.container2 { max-width:1024px; margin:30px auto;}
 		.routeboardHeader { border-bottom: 1px solid gray; padding-bottom:20px; }
 		.userProfile { width:25px; height:25px; }
+		.route_title { height:80px; width: 100%; border: 0px; font-size:23pt; font-weight: bold; margin-bottom: 5px;}
+		.deletetag { float:right; padding-left:10px; } 
+		.boardbox { diplay:block; height:580px; }
+		.editorbox { display:inline-block; float:left; width:48%; height:500px;}
+		.mapresult { width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; }
+		.listbtn { width:15%; display:inline-block; }
+		input:disabled { background: white; }
 	</style>
 
 </head>
 <body>
-	<header><%@include file ="header.jsp" %></header>
+	<header>
+		<%@include file ="header.jsp" %>
+		<%@include file ="slides.jsp" %>
+	</header>
 	
 	<main class="main">
 	<div class="container2">
@@ -56,29 +66,24 @@
         <p>나만의 러닝 코스를 공유해주세요!</p>
         
         <div id="routeboardHeader" class="routeboardHeader">
-        	<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목" 
-        		style="disabled{background-color: #F0F0F0;}; height:80px; width:80%; border: 0px;"/>
-              	
-			<img src="/profileview/${profileImg }" class="userProfile">
+        	<input type="text" id="route_title" name="route_title" class="route_title" value="${route.route_title}" disabled/>
+        	<img src="/profileview/${profileImg }" class="userProfile">
 			<span id="user_id">${route.user_id }</span>
 			<span id="board_time">${route.route_date }</span>
 			<c:if test= "${id eq route.user_id }">
-				<a href="routeDelete?articleNo=${route.route_articleNo}" onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" style="float:right; padding-left:10px;">삭제</span></a>
+				<a href="routeDelete?articleNo=${route.route_articleNo}" onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" class="deletetag">삭제</span></a>
 				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a>
 			</c:if><br>
 			
 		</div><br><br>
 		
-		<div id="routeboardMain" style="diplay:block; height:550px;">
-			<div style="display:inline-block; float:left; width:48%; height:500px;"><textarea id="content" name="content" style="width: 100%;" ></textarea></div>
-			<div id="map" style="width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; "></div>
+		<div id="routeboardMain" class="boardbox">
+			<div class="editorbox"><textarea id="content" name="content" style="width: 100%; " ></textarea></div>
+			<div id="map" class="mapresult"></div>
     	</div><br><br>
     	
-    	
-    	<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
-    	<form action ="/route" method="post" >
-			<button style="width:15%; display:inline-block;" class="btn btn-dark">목록</button>
-		</form>
+       	<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+    		<form action ="/route" method="post" ><button class="listbtn btn btn-dark">목록</button></form>
 		</div>
     	
     </div>
