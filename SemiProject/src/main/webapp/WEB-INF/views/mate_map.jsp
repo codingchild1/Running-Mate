@@ -870,7 +870,7 @@ input:focus{
 		 	    				accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
 		 	    				accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
 		 	    				accEle +=' <div style=" width: 130px;">'
-		 	    				accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+		 	    				accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;width: 130px;text-overflow: ellipsis;" disabled>'+'</span>'
 		 	    				accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
 		 	    				accEle +='</div>'
 		 	    					
@@ -966,7 +966,7 @@ input:focus{
 	 	    				accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
 	 	    				accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
 	 	    				accEle +=' <div style=" width: 130px;">'
-	 	    				accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	 	    				accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;width: 130px;text-overflow: ellipsis;" disabled>'+'</span>'
 	 	    				accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
 	 	    				accEle +='</div>'
 	 	    					
@@ -1077,7 +1077,7 @@ input:focus{
 	    			accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
 	    			accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
 	    			accEle +=' <div style=" width: 130px;">'
-	    			accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	    			accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;width: 130px;text-overflow: ellipsis;" disabled>'+'</span>'
 	    			accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
 	    			accEle +='</div>'
 	    					
@@ -1127,7 +1127,7 @@ input:focus{
 	    			accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
 	    			accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
 	    			accEle +=' <div style=" width: 130px;">'
-	    			accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	    			accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;width: 130px;text-overflow: ellipsis;" disabled>'+'</span>'
 	    			accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
 	    			accEle +='</div>'
 	    					
@@ -1177,7 +1177,7 @@ input:focus{
 	    			accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
 	    			accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
 	    			accEle +=' <div style=" width: 130px;">'
-	    			accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	    			accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;width: 130px;text-overflow: ellipsis;" disabled>'+'</span>'
 	    			accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
 	    			accEle +='</div>'
 	    					
