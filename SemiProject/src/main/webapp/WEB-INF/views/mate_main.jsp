@@ -419,7 +419,7 @@ body {
     				alert("실패");
     			}
     		});
-            //참여자 리스트 ajax
+            	//참여자 리스트 ajax
             	$.ajax({     
         			type:"post",
         			dataType:"text",
@@ -439,7 +439,7 @@ body {
         				alert("실패");
         			}
         		});
-            //번개 신고버튼 체크
+           		//번개 신고버튼 체크
             	$.ajax({     
         			type:"post",
         			dataType:"text",
@@ -585,7 +585,7 @@ body {
             }
         });
 	//group 모달창 함수
-         const modal2 = document.getElementById("modal2")
+        const modal2 = document.getElementById("modal2")
         function modalOn1() {
             modal2.style.display = "flex"
         }
