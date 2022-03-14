@@ -8,6 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script>
 		$(function() {
@@ -66,16 +70,16 @@
 </head>
 <body>
 	<h2>회원목록 조회</h2>
-<table border=1 > 
+<table border=1 align="center" class="table table-hover"> 
 <tr>
 	<th>
-	<input id="allCheck" type="checkbox" name="allCheck" />
+	<input id="allCheck" class="form-check-input" type="checkbox" name="allCheck" />
 	</th>
-	<th>아이디</th>
-	<th>이름</th>
-	<th>가입날짜</th>
-	<th>전화번호</th>
-	<th>이메일</th>
+	<th scope="col">아이디</th>
+	<th scope="col">이름</th>
+	<th scope="col">가입날짜</th>
+	<th scope="col">전화번호</th>
+	<th scope="col">이메일</th>
 </tr>
 <c:choose>
 	<c:when test="${empty list}">
@@ -87,18 +91,18 @@
 	
 	<c:when test="${!empty list}">
 		<c:forEach var='member' items="${list}">
-			<tr>
-				<td><input type="checkbox" name="RowCheck" value="${member.id}"/></td>
-    			<td>${member.id}</td>
-	 			<td>${member.name}</td>
-	 			<td>${member.joindate}</td>
-	 			<td>${member.phone}</td>
-	 			<td>${member.email}</td>
+			<tr class="table-active">
+				<td scope="row"><input type="checkbox" class="form-check-input"  name="RowCheck" value="${member.id}"/></td>
+    			<td scope="row">${member.id}</td>
+	 			<td scope="row">${member.name}</td>
+	 			<td scope="row">${member.joindate}</td>
+	 			<td scope="row">${member.phone}</td>
+	 			<td scope="row">${member.email}</td>
 			</tr>
 		</c:forEach>
 	</c:when>
 </c:choose>
 </table>
-<input type="button" value="삭제" onclick="deleteValue();" />
+<input type="button" value="삭제" class="btn btn-success" onclick="deleteValue();" />
 </body>
 </html>
