@@ -21,5 +21,6 @@ public interface TodayService {
 	public void LikesMinus(int articleNo) throws Exception; 
 //	public void AlertPlus(int articleNo) throws Exception; 
 //	public void AlertMinus(int articleNo) throws Exception;
+	
 
 }

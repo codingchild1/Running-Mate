@@ -206,9 +206,9 @@ header {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
-		  function today_list(){
-			  location.href="/today";	  
-		  }
+	  function today_list(){
+		  location.href="/today";	  
+	  }
   	 
 	//좋아요 user_id , board_type, board_no 
 		function changeImg(){

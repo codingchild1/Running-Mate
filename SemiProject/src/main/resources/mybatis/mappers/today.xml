@@ -46,8 +46,8 @@
 	<!-- Today게시물 생성  -->
 	<insert id="insertTBoard" parameterType="Today">
 		<![CDATA[
-		insert into today (user_id,today_title,today_thumb,today_contents)
-		values(#{user_id},#{today_title},#{today_thumb},#{today_contents});
+		insert into today (user_id,user_img,today_title,today_thumb,today_contents)
+		values(#{user_id},#{user_img},#{today_title},#{today_thumb},#{today_contents});
 		 ]]>
 	</insert>
 	

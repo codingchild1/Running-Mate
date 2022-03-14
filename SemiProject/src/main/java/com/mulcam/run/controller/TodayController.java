@@ -68,16 +68,23 @@ public class TodayController {
 			System.out.println(todayList.size());
 			mav.addObject("pageInfo", pageInfo);
 			mav.addObject("todayList", todayList);
+			Map<String, String> profileImgMap= new HashMap<String, String>();
+			for(int i=0;i<todayList.size();i++) {
+				String writerId = todayList.get(i).getUser_id();
+				String profileImg = memberService.profileImg(writerId);
+				profileImgMap.put(writerId, profileImg);
+			}
+			mav.addObject("profileImgMap", profileImgMap);
 			mav.setViewName("today");
 		} catch(Exception e) {
 			e.printStackTrace();
-			mav.addObject("err", e.getMessage());
+			mav.addObject("err", "오늘의 러닝 메인페이지 에러");
 			mav.setViewName("err");
 		}
 		return mav;
 	}
 
-	// 2.전체페이지 검색정보(search) ajax 로 구현
+	// 2.전체페이지 검색정보(search)
 	
 	@GetMapping("/today_search")
 	public ModelAndView searchInfo(@RequestParam(value="page", required=false, defaultValue="1") int page, @RequestParam(value="todaySearchText") String search) {
@@ -102,8 +109,19 @@ public class TodayController {
 	}
 
 	
-	@GetMapping("/today_make")
-	public String todayMake() {
+	@GetMapping("/today_make") 
+	public String todayMake(Model model) {
+		String wirte_id = (String) session.getAttribute("id");
+		String user_img2;
+		try {
+			user_img2 = memberService.profileImg(wirte_id);
+			model.addAttribute("wirte_id", wirte_id);
+			model.addAttribute("user_img2", user_img2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		
 		return "today_make";
 	}
 	
@@ -201,17 +219,24 @@ public class TodayController {
 	//에디터내용 쓰고 제목과 content내용 model 에 넣어서 
 	@PostMapping("/today_contents")
 	public String todayContents(@RequestParam("today_title") String today_title,
-			@RequestParam("today_contents")String today_contents,@RequestParam(value="today_file") MultipartFile file, Model model) {
+			@RequestParam("today_contents")String today_contents,
+			@RequestParam(value="today_file") MultipartFile file,
+			Model model) throws Exception {
 		String path = servletContext.getRealPath("/thumb/");
 		File destFile = new File(path+file.getOriginalFilename());
-		String user_id = (String) session.getAttribute("id");
-		System.out.println(user_id);
+		
+		String wirte_id = (String) session.getAttribute("id");
+		String user_img2 = memberService.profileImg(wirte_id);  
+		model.addAttribute("wirte_id", wirte_id);
+		model.addAttribute("user_img2", user_img2);
+		System.out.println("유저이미지"+user_img2);
 		try {
-			file.transferTo(destFile);
+			file.transferTo(destFile);			
 		} catch(IOException e) {
+			System.out.println("전달오류");
 			e.printStackTrace();
 		}
-		Today Tboard = new Today(user_id, today_title,file.getOriginalFilename(),today_contents);
+		Today Tboard = new Today(wirte_id, user_img2, today_title,file.getOriginalFilename(),today_contents);
 		System.out.println(today_title);  // DB저장
 		System.out.println(today_contents.trim());  // DB저장, 반드시 trim()
 		try {
@@ -227,26 +252,40 @@ public class TodayController {
 	}
 	
 
+	
+	/*
+	 * @PostMapping("/today_write") public ModelAndView route_write(){ ModelAndView
+	 * mv = new ModelAndView("today_make"); try { String user_id = (String)
+	 * session.getAttribute("id"); String user_profile =
+	 * memberService.profileImg(user_id); mv.addObject("profileImg", user_profile);
+	 * } catch(Exception e) { e.printStackTrace(); mv.addObject("err",
+	 * e.getMessage()); }
+	 * 
+	 * return mv; }
+	 */
+	
 	//게시글보기
 	@GetMapping("/today_select/{today_articleNo}")
 	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) throws Exception {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
-		System.out.println(today_articleNo);
-		System.out.println("page:"+ pageInfo);
+	//	System.out.println(today_articleNo);
+	//	System.out.println("page:"+ pageInfo);
+	// 로그인한 유저 아이디 가져오기 (세션)
+	// 지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
+	//	 String user_id = (String) session.getAttribute("id");
+	//	 String writerid="testUser";
+//		String user_id = (String) session.getAttribute("id");
+//		String user_img2 = memberService.profileImg(user_id);  
+//		mav.addObject("user_id", user_id);
+//		mav.addObject("user_img2",user_img2);
 		
-		// 로그인한 유저 아이디 가져오기 (세션)
-		 String user_id = (String) session.getAttribute("id");
-		//지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
-		String writerid="testUser";
-		//user_profile = memberService.profileImg(user_id); 
 		
 		
-		/*
-		 * String user_id = (String) session.getAttribute("id");
-		 * String writer_id = memberService.member(articleNo);
-		 * user_profile = memberService.profileImg(user_id); 
-		 */
+		String user_id = (String) session.getAttribute("id");
+		
+	// String writer_id = memberService.member(articleNo);
+
 		Boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
 		Boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
 		if(likes==false) {
@@ -260,17 +299,18 @@ public class TodayController {
 			mav.addObject("alert", "true");
 		}
 		
-		
-		Boolean modiAndDel = false;		
-		if (user_id.equals(writerid)) {
-			modiAndDel = true;
-		} 
-		mav.addObject("modiAndDel", modiAndDel);
 		try {
 			Today todayselect = todayService.getTBoard(today_articleNo);
+			String writerId = todayselect.getUser_id();
+
 			mav.addObject("pageInfo", pageInfo);
 		    mav.addObject("todayselect", todayselect);
+		    
+		    String writer_profile = memberService.profileImg(writerId);
+		    mav.addObject("profileImg", writer_profile);
 			System.out.println(page);
+					
+			
 			
 			} catch(Exception e) {
 				e.printStackTrace();

@@ -6,6 +6,7 @@ import java.sql.Date;
 public class Today {
 	String today_articleNo; 
 	String user_id;
+	String user_img;
 	String today_title; 
 	Date today_date; 
 	int today_views; 
@@ -24,8 +25,9 @@ public class Today {
 	 * this.today_thumb = today_thumb; this.today_contents = today_contents;
 	 * //this.warning = warning; }
 	 */
-	public Today(String user_id, String today_title,String today_thumb, String today_contents) {
+	public Today(String user_id,String user_img, String today_title,String today_thumb, String today_contents) {
 		this.user_id = user_id;
+		this.user_img = user_img;
 		this.today_title = today_title; 
 		this.today_thumb = today_thumb; 
 		this.today_contents = today_contents; 
