@@ -613,7 +613,6 @@ body {
         }); 
 	   
         //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
-	var bt;
 	$('.ptp').click(function(){
 		var uid = '<%=(String)session.getAttribute("id")%>';
 		if(uid=='null'){
@@ -630,7 +629,6 @@ body {
 	        	if(data=='false') {
 	        		alert("참여가 완료되었습니다.");
 	        		$('.ptp').html('참여취소');
-	        		
 	        	} else{
 	        		alert("참여가 취소되었습니다.");
 	        		$('.ptp').html('참여');
