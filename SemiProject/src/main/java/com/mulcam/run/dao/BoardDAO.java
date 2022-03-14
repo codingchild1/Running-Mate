@@ -29,4 +29,7 @@ public interface BoardDAO {
 	
 	public void updateLikePlus5(int fb_articleNo);
 	public void updateLikeMinus5(int fb_articleNo);
+	
+	//내가 쓴 글 가지고 오기
+	public List<Board> fbList(String id);
 }

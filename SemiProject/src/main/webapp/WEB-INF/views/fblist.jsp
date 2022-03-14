@@ -10,33 +10,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="mypageheader.jsp" %>
-<%@include file="contentlisthead.jsp" %>
 </head>
 <body>
 	<h2>내가 쓴 글</h2>
-	<table border="1"> 
+	<table border="1" align="center"> 
 	<tr>
-		<th>번호</th>
+		<th>no</th>
 		<th>제목</th>
+		<th>날짜</th>
 	</tr>
 	<c:choose>
-		<c:when test="${empty memberInfo.contentlist}">
+		<c:when test='${empty fblist}'>
 		<tr>
-			<td colspan="2">
+			<td colspan="3">
 				<b>작성한 글이 없습니다.</b>
 			</td>
 		</tr>
 		</c:when>
 		
-		<c:when test="${!empty memberInfo.contentlist}">
-			<c:forEach var='contentlist' items="${memberInfo.contentlist}">
+		<c:otherwise>
+			<c:forEach var="board" items="${fblist}">
 				<tr>
-	    			<td>${contentlist.fb_articleNo}</td>
-		 			<td>${contentlist.fb_title}</td>
+					<td>${board.writer}</td>
+	    			<td>${board.fb_title}</td>
+		 			<td>${board.fb_date}</td>
 				</tr>
 			</c:forEach>
-		</c:when>
+		</c:otherwise>
 	</c:choose>
 	</table>
 </body>

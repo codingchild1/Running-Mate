@@ -102,4 +102,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateLikeMinus5(fb_articleNo);
 		
 	}
+	
+	//내가 쓴 글
+	@Override
+	public List<Board> fbList(String id){
+		// TODO Auto-generated method stub
+		return boardDAO.fbList(id);
+	}
 }

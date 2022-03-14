@@ -28,4 +28,7 @@ public interface BoardService {
 	
 	public void LikesPlus5(int fb_articleNo) throws Exception;
 	public void LikesMinus5(int fb_articleNo) throws Exception;
+	
+	//내가 쓴 글
+	public List<Board> fbList(String id);
 }

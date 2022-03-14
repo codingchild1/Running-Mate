@@ -30,17 +30,18 @@ body {
 
 }
 .outer {
-	width:1100px;
+	width:1200px;
 	margin: 0 auto;
 }
 .content {
-	width:1000px;
+	width:1100px;
 	height: 700px;
 	margin: 0 auto;
 }
 .title {
 	width:1100px;
 	margin: 0 auto;
+	text-align: center;
 }
 #to-title {
 	text-align: center;
@@ -78,40 +79,92 @@ body {
 }
 #paging {
 	width:820px;
-	margin: 0 auto;
+	margin: 0 auto; 
 	text-align: center;
 }
 
 .search {
+	display : inblock;
 	text-align: center;
 	flex:center;
 }
 #search{
 	text-align: center;
 }
+.userProfile { width:35px; height:35px; }
+
+ #wrap {
+  padding-top: 10em;
+  position: relative;
+  width: 100%; 
+  background-color: #f2f2f2;
+}
+
+section {
+  padding-bottom: 105px;
+}
+
+footer {
+  width: 100%;
+  height: 90px;
+  bottom: 50px;
+  position: absolute;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 15px;
+  text-align: center;
+}
+
+footer a {
+  display: inline-block;
+  margin: 0 20px 10px 20px;
+  color: #808080; 
+  font-size: 20px;  
+}
+
+footer p span {
+  display: inline-block;
+  margin-left: 20px;
+} 
 </style>
 </head>
 <body>
 	<%@include file="header.jsp"%>
 	<%-- <%@include file="slides.jsp"%>  --%>
 		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
-		<!-- <div class="col-lg-11 center border"> -->
+
 		<div class="outer">
-
-			<div class="title">
+			<div class="title" >
 				<div>
-					<h1 class="display-5 fw-bold" id="to-title">오늘의 런닝</h1>
+					<h1 style="float:left; margin-top:25px; margin-bottom:55px;">오늘의 런닝</h1>
 				</div>
 
-				<div class="search">
+				<table class="search" style="float:right; padding: 10px; margin: 20px auto;">
+				<tr><td>
 					<form action="/today_search" method="get">
-						<input class="" type="text" id="todaySearchText" name="todaySearchText"  style="width: 250px; height: 40px;" placeholder="Search" aria-label="Search" />
-						<input class="btn btn-outline-secondary" type="submit" style="width: 80px; height: 40px;" value="검색"/>
+<!-- 						<input class="" type="text" id="todaySearchText" name="todaySearchText"  style="width: 250px; height: 38px; font-color:white;" placeholder="Search" aria-label="Search" />
+						<input class="btn btn-outline-secondary" type="submit" style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem;"value="검색"/>
 						&nbsp&nbsp
-					</form>
-						<button class="btn btn-outline-secondary" id="todayMake" name="todayMake" type="button" style="width: 80px; height: 40px;">글쓰기</button>
-					
-				</div>
+						 -->
+						<div style="display: flex; align-items: flex-end;">
+							<div style="border: 1px solid; padding: 2px; width: 210px; margin-top: 20px;">
+								<span><img class="search" src="images/search.png" style="width: 20px; height: 20px; float: left; margin-left: 5px; margin-top: 5px;"></span>
+								<input class="search" id="todaySearchText" name="todaySearchText"  type="text"style="width: 170px; height: 30px; margin-left: 5px; border: none;"placeholder="키워드를 입력해보세요">
+							</div>
+								<input id="search2" type="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; height: 38px; margin-left: 5px;" value="검색"; >
+									
+						</div>
+				
+				
+					</form></td>
+					<td>
+					<c:choose>
+						<c:when test="${id!=null}">
+							<button id="todayMake" name="todayMake" type="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; height: 38px; margin-left: 5px; margin-top: 19px;">글쓰기</button>
+						</c:when>
+					</c:choose>						
+					</td></tr>
+				</table>
 			</div>
 			
 			
@@ -127,7 +180,7 @@ body {
 										<header	class="">
 											<div class="">
 												<span class="col-lg">
-													<span><img class="profile" src='images/user_icon_1.png' width=10px height=10px>i</span> <span id="user_id">${tboard.user_id}</span>
+													<span><img  style="border-radius: 70%;" src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
 												</span>
 											</div>
 											<span class="" id="today_date">${tboard.today_date}</span>
@@ -137,29 +190,30 @@ body {
 										<!--타이틀-->
 										<div class="" id="today_title" >${tboard.today_title }</div>
 										<!--썸네일-->
-										<section class="bg-white">
+										<div class="bg-white">
 													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
 															id="today_thumb" name="today_thumb"  width="120px" height="120px" /></a>
-										</section>
+										</div>
 
 										<!-- 조회, 좋아요, 숫자 -->
-										<footer class="d-flex">
+										<div class="d-flex">
 											<span class="d-flex justify-content-start">
 												<img class="heart" src="images/하트.png" style="width: 30px; height: 30px;">
 											</span>
 											<span>
 												<input type="text" id="today_likes" value='${tboard.today_likes}'
-													style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
-													disabled>
+													style="width: 30px; display: inline-block; vertical-align: right; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
+													disabled>&nbsp&nbsp&nbsp&nbsp&nbsp
 											</span>
 											<span class="d-flex justify-content-end" id="today_views">${tboard.today_views}
 											</span>
-										</footer>
+										</div>
 										</div>
 									</c:forEach>
 						</div>
 					</c:when>
 				</c:choose>
+				
 				
 				<div id="paging">
 					<c:choose>
@@ -193,6 +247,19 @@ body {
 		</div>
 	<br>	<br>	<br>
 	
+	 <div id='wrap'>
+        <footer>
+            <nav>
+                <a href='#'>광고문의</a>
+                <a href='#'>이용약관</a>
+            </nav>
+            <p>
+                <span>고객센터 :1544-9001</span><br />
+                <span>이메일 : 1stone4birds@mulcam.com</span><br />
+                <span>주소: 서울특별시 강남구 언주로 508 14층 (역삼동, 서울상록빌딩) </span>
+            </p>
+        </footer>
+    </div>
 		
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
@@ -240,6 +307,6 @@ body {
 		});
 		
 	</script>
-		<%-- <%@include file="fotter.jsp"%> --%>
+
 </body>
 </html>

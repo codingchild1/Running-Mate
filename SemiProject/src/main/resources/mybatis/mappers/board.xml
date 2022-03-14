@@ -111,6 +111,13 @@
 			where fb_articleNo=#{fb_articleNo}
 		]]>
 	</update>
+	
+	<!-- 내가 쓴 글 목록 -->
+	<select id="fbList" parameterType="String" resultType="Board">
+		<![CDATA[
+			select * from freeboard where writer=#{id}
+		]]>
+	</select>
 </mapper>
 
 

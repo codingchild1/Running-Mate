@@ -251,41 +251,13 @@ public class TodayController {
 		return "redirect:/today";
 	}
 	
-
-	
-	/*
-	 * @PostMapping("/today_write") public ModelAndView route_write(){ ModelAndView
-	 * mv = new ModelAndView("today_make"); try { String user_id = (String)
-	 * session.getAttribute("id"); String user_profile =
-	 * memberService.profileImg(user_id); mv.addObject("profileImg", user_profile);
-	 * } catch(Exception e) { e.printStackTrace(); mv.addObject("err",
-	 * e.getMessage()); }
-	 * 
-	 * return mv; }
-	 */
-	
 	//게시글보기
 	@GetMapping("/today_select/{today_articleNo}")
 	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) throws Exception {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
-	//	System.out.println(today_articleNo);
-	//	System.out.println("page:"+ pageInfo);
-	// 로그인한 유저 아이디 가져오기 (세션)
-	// 지금 들어온 게시물의 no를 통해 작성자 아이디 가져오기
-	//	 String user_id = (String) session.getAttribute("id");
-	//	 String writerid="testUser";
-//		String user_id = (String) session.getAttribute("id");
-//		String user_img2 = memberService.profileImg(user_id);  
-//		mav.addObject("user_id", user_id);
-//		mav.addObject("user_img2",user_img2);
-		
-		
-		
 		String user_id = (String) session.getAttribute("id");
-		
-	// String writer_id = memberService.member(articleNo);
-
+	
 		Boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
 		Boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
 		if(likes==false) {
@@ -308,10 +280,10 @@ public class TodayController {
 		    
 		    String writer_profile = memberService.profileImg(writerId);
 		    mav.addObject("profileImg", writer_profile);
-			System.out.println(page);
-					
-			
-			
+		    
+		    System.out.println(page);
+		    
+		    
 			} catch(Exception e) {
 				e.printStackTrace();
 				mav.addObject("err", e.getMessage());
@@ -319,11 +291,6 @@ public class TodayController {
 			}
 		return mav;
 	}
-
-	// 7.좋아요요청 ajax
-	/*
-	 * @PostMapping("/today_likes") public boolean todayLikes() { return false; }
-	 */
 
 	// 9.수정요청
 	@PostMapping("/today_modify")
@@ -362,10 +329,10 @@ public class TodayController {
 	}
 
 	// 6.신고 (insert alert)
-	@PostMapping("/report")
-	public String report() {
-		return "report";
-	}
+//	@PostMapping("/report")
+//	public String report() {
+//		return "report";
+//	}
 
 	// 7. 목록누르면 today로 돌아가기
 	@GetMapping("/today_list")

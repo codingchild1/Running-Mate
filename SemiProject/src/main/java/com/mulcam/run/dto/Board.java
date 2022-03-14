@@ -3,7 +3,7 @@ package com.mulcam.run.dto;
 import java.sql.Date;
 
 public class Board {
-	private int fb_articleNo;
+	public int fb_articleNo;
 	private String fb_title;
 	private String writer;
 //	private String board_subject;
@@ -14,6 +14,8 @@ public class Board {
 	private String user_img;
 	private String keyword;
 	private String fb_likes;
+	
+	public Board() {}
 	
 	public String getFb_likes() {
 		return fb_likes;

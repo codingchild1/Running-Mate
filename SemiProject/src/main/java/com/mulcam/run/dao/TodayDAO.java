@@ -39,8 +39,9 @@ public interface TodayDAO {
 	public void deleteTBoard(int articleNo) throws Exception;
 	
 	//8. 좋아요 +/-
-	public void updateLikePlus(int articleNo);
-	public void updateLikeMinus(int articleNo);
+	public void updateLikeAdd(int articleNo)throws Exception;
+	public void updateLikeSub(int articleNo) throws Exception;
+	public int SelectLikesCnt() throws Exception;
 
 	//7.신고 (insert alert) 
 	//public Boolean insertTWarn() throws Exception;
