@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.run.dao.BoardDAO;
 import com.mulcam.run.dto.Board;
-import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 
@@ -86,7 +86,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* 메인페이지 번개 모임 */
 	@Override
-	public List<Mate> mate3() throws Exception {
+	public List<GroupAndMate> mate3() throws Exception {
 
 		return boardDAO.materun();
 	}

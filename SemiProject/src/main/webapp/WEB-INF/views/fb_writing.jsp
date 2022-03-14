@@ -64,6 +64,8 @@ a { text-decoration-line: none;}
 		<!-- 이거 없으면 에러남 -->
 		
 		<div>
+		<img src='/profileview/${user_img2}' class="col" />
+		<input type="hidden"name="user_img" id="user_img" value=''>
 			<div class="writing_title">
 				<input type="text" id="title" name="fb_title"
 					placeholder="제목을 입력해 주세요." onfocus="this.placeholder=''"
@@ -100,6 +102,8 @@ a { text-decoration-line: none;}
         	});
 	});
 	
+	 var src = jQuery('#user_img2').attr("src");
+	   $('input[name=user_img]').attr('value',src); 
     </script>
     
 	<%@include file="fotter.jsp"%>

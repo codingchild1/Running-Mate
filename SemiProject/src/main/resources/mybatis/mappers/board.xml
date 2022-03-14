@@ -15,7 +15,7 @@
 	<select resultType="board" id="selectBoardList"
 		parameterType="int">
 		<![CDATA[
-			select fb_articleNO,writer,fb_title,fb_content,fb_img_url, fb_date, fb_views,warning 
+			select fb_articleNO,writer,fb_title,fb_content, fb_date, fb_views,warning 
 				from (select @rownum:=@rownum+1 rnum, tot.* 
 					from (select * from freeboard order by fb_articleNO desc) tot, 
 					(select @rownum:=0) temp) sub
@@ -60,9 +60,18 @@
 	</select>
 
 	<!-- 메인 페이지 번개 모임 -->
-	<select id="materun" resultType="Mate">
+<!-- 	<select id="materun" resultType="Mate">
 		<![CDATA[
-			select * from mate order by mate_date desc limit 3;
+			select * from mate order by mate_date desc limit 6;
+		]]>
+	</select> -->
+	<select id="materun" resultType="GroupAndMate" >
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,warning as warning,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,warning as warning,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			order by regdate desc limit 6;
 		]]>
 	</select>
 
@@ -75,8 +84,8 @@
 	<!-- 자유게시판 게시글 생성 -->
 	<insert id="insertBoard" parameterType="Board" >
 		<![CDATA[
-			insert into freeboard (fb_articleNo,writer,fb_title,fb_content,fb_date,fb_views,warning) 
-				values(null,#{writer},#{fb_title},#{fb_content},now(),0,false)
+			insert into freeboard (fb_articleNo,writer,fb_title,fb_content,fb_date,fb_views,warning,user_img) 
+				values(null,#{writer},#{fb_title},#{fb_content},now(),0,false,#{user_img})
 		]]>
 	</insert>
 

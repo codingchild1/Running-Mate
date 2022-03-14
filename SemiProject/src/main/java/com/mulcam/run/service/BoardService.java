@@ -3,6 +3,7 @@ package com.mulcam.run.service;
 import java.util.List;
 
 import com.mulcam.run.dto.Board;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
@@ -23,5 +24,5 @@ public interface BoardService {
 												//검색
 	
 	List<Today> best3() throws Exception; // 최고의 러너
-	List<Mate> mate3() throws Exception; // 최고의 러너
+	List<GroupAndMate> mate3() throws Exception; // 번개런
 }

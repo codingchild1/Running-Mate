@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.service.BoardService;
+import com.mulcam.run.service.MemberService;
 
 @Controller
 @RequestMapping("/")
@@ -47,8 +48,11 @@ public class FBController {
 	@Autowired
 	HttpSession session;
 	
-	@Autowired() 
+	@Autowired 
 	private HttpServletRequest request;
+	
+	@Autowired
+	MemberService memberService;
 
 	
 	/* 게시글 불러오기 */
@@ -229,8 +233,8 @@ public class FBController {
 	public String write(@ModelAttribute Board board, @RequestParam("fb_title") String title,
 			@RequestParam("fb_content") String content) {
 		HttpSession session = request.getSession(); //세션 요청
+		ModelAndView mv = new ModelAndView("fb_write");
 		String writer = (String)session.getAttribute("id"); // 세션의 id = writer
-
 		System.out.println(title);  // DB저장
 		System.out.println(content.trim());  // DB저장, 반드시 trim()
 		System.out.println(writer);  // DB저장
@@ -238,7 +242,10 @@ public class FBController {
 		board.setFb_content(content);
 		board.setWriter(writer);	// dto에 writer 입력?
 		try {
+			String user_img2 = memberService.profileImg(writer);
+			mv.addObject("user_img2",user_img2);
 			boardService.insertContent(board);
+			
 			/* String writer = (String) session.getAttribute("id"); */
 		} catch(Exception e) {
 			e.printStackTrace();
