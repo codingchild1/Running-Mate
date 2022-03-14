@@ -32,7 +32,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.PageInfo;
+import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.BoardService;
+import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MemberService;
 
 @Controller
@@ -53,6 +55,12 @@ public class FBController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	AlertService alertService;
+
+	@Autowired
+	LikesService likesService;
 
 	
 	/* 게시글 불러오기 */
@@ -75,20 +83,33 @@ public class FBController {
 	}
 	
 	/* 게시글 상세 보기 */
-	@GetMapping(value="/fb_detail")
+	@RequestMapping(value="/fb_detail", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView boardDetail(@RequestParam(value="fb_articleNo") int fb_articleNo,
 			@RequestParam(value="page") int page) {
 		ModelAndView mv = new ModelAndView();
 		try {
 			Board board = boardService.getBoard(fb_articleNo);
 			String writer = (String) session.getAttribute("id");
+			boolean likes = likesService.getLikesTF(writer, "article", fb_articleNo);
+			boolean alert = alertService.getAlertTF(writer, "article", fb_articleNo);
+			if(likes==false) {
+				mv.addObject("likes", "false");
+			} else {
+				mv.addObject("likes", "true");
+			}
+			if(alert==false) {
+				mv.addObject("alert", "false");
+			} else {
+				mv.addObject("alert", "true");
+			}
+			mv.addObject("user_id", writer);
 			mv.addObject("article", board);
 			mv.addObject("page", page);
 			mv.setViewName("/fb_detail");
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
-			mv.setViewName("/board/err");
+			mv.setViewName("/err");
 		}
 		return mv;
 	}
@@ -173,8 +194,17 @@ public class FBController {
 	
 	/* 게시글 등록 하기 */
 	@GetMapping("fb_writing")
-	public String home() {
-		return "fb_writing";
+	public ModelAndView write() {
+		ModelAndView mv = new ModelAndView("fb_writing");
+		String writer = (String)session.getAttribute("id"); // 세션의 id = writer
+		try {
+			String user_img2 = memberService.profileImg(writer);
+			mv.addObject("user_img2",user_img2);
+		}catch(Exception e) {
+			e.printStackTrace();
+
+		}
+		return mv;
 	}
 	
 	@ResponseBody
@@ -230,10 +260,12 @@ public class FBController {
 	}	
 	
 	@PostMapping("fb_write")
-	public String write(@ModelAttribute Board board, @RequestParam("fb_title") String title,
+	public ModelAndView write(@ModelAttribute Board board, @RequestParam("fb_title") String title,
 			@RequestParam("fb_content") String content) {
-		HttpSession session = request.getSession(); //세션 요청
-		ModelAndView mv = new ModelAndView("fb_write");
+		/*
+		 * HttpSession session = request.getSession(); //세션 요청
+		 */		
+		ModelAndView mv = new ModelAndView("redirect:/fb_main");
 		String writer = (String)session.getAttribute("id"); // 세션의 id = writer
 		System.out.println(title);  // DB저장
 		System.out.println(content.trim());  // DB저장, 반드시 trim()
@@ -245,13 +277,16 @@ public class FBController {
 			String user_img2 = memberService.profileImg(writer);
 			mv.addObject("user_img2",user_img2);
 			boardService.insertContent(board);
+			System.out.println(user_img2);
+			System.out.println(writer);
 			
 			/* String writer = (String) session.getAttribute("id"); */
 		} catch(Exception e) {
+			mv.setViewName("fb_writing");
 			e.printStackTrace();
-			return "err";
 		}
-		return "redirect:/fb_main";
+		return mv;
 	}
 	
+
 }

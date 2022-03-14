@@ -90,7 +90,18 @@
 	</insert>
 
 
-
+<!-- 좋아요 -->
+	<update id="updateLikePlus5"  parameterType="int">
+		<![CDATA[
+			update freeboard set fb_likes=fb_likes+1 where fb_articleNo=#{articleNo }
+		]]>
+	</update>
+	
+	<update id="updateLikeMinus5"  parameterType="int">
+		<![CDATA[
+			update freeboard set fb_likes=fb_likes-1 where fb_articleNo=#{articleNo }
+		]]>
+	</update>
 
 
 	<!-- 게시물 수정 -->

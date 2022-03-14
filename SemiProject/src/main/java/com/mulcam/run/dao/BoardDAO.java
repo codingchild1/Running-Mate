@@ -26,4 +26,7 @@ public interface BoardDAO {
 	
 	
 	void insertBoard(Board board) throws Exception; // 작성
+	
+	public void updateLikePlus5(int fb_articleNo);
+	public void updateLikeMinus5(int fb_articleNo);
 }

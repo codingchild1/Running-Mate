@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,7 @@ a { text-decoration-line: none;}
 		<!-- 이거 없으면 에러남 -->
 		
 		<div>
-		<img src='/profileview/${user_img2}' class="col" />
+		<img src="/profileview/${user_img2}" class="col" id="user_img2" name="user_img2"/>
 		<input type="hidden"name="user_img" id="user_img" value=''>
 			<div class="writing_title">
 				<input type="text" id="title" name="fb_title"
@@ -104,6 +105,7 @@ a { text-decoration-line: none;}
 	
 	 var src = jQuery('#user_img2').attr("src");
 	   $('input[name=user_img]').attr('value',src); 
+	   console.log(${user_img2});
     </script>
     
 	<%@include file="fotter.jsp"%>

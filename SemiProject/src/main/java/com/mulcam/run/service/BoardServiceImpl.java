@@ -90,4 +90,16 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardDAO.materun();
 	}
+	
+	@Override
+	public void LikesPlus5(int fb_articleNo) throws Exception {
+		boardDAO.updateLikePlus5(fb_articleNo);
+		
+	}
+
+	@Override
+	public void LikesMinus5(int fb_articleNo) throws Exception {
+		boardDAO.updateLikeMinus5(fb_articleNo);
+		
+	}
 }

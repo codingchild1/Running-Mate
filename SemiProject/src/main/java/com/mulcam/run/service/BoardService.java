@@ -25,4 +25,7 @@ public interface BoardService {
 	
 	List<Today> best3() throws Exception; // 최고의 러너
 	List<GroupAndMate> mate3() throws Exception; // 번개런
+	
+	public void LikesPlus5(int fb_articleNo) throws Exception;
+	public void LikesMinus5(int fb_articleNo) throws Exception;
 }
