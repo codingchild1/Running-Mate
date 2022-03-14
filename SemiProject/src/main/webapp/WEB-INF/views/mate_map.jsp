@@ -234,7 +234,7 @@ input:focus{
             <div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">
                <span><img class="profile" src='${groupandmate.img }' style="width: 40px; height: 40px;margin-top: 10px; margin-right: 10px"></span>
                 <div style=" width: 130px;">
-                    <span><input type="text" id="title" value='${groupandmate.title }' style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled> </span>
+                    <span><input type="text" id="title" value='${groupandmate.title }' style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;width: 130px;text-overflow: ellipsis;" disabled> </span>
                     <span><input type="text" id="id" value='${groupandmate.id }' style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;" disabled> </span>
                 </div>
                <c:choose>
