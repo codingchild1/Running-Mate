@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <title>메이트 구하기</title>
@@ -179,7 +178,6 @@ body {
 
 </style>
 </head>
-
 <body>
 	 <%@include file ="header.jsp" %> 
 	<!--  <form id='form' action="main" method="post">  -->
@@ -369,9 +367,7 @@ body {
     			data:{"no":no},
     			success: function(data, textStatus){ 
     			 	var jdata = JSON.parse(data);
-    			 	/*  console.log(jdata.mate_mapinfo);    */
     			 	var map = JSON.parse(jdata.mate_mapinfo);
-    			  	/*  console.log(map.La); */
     			  
      			 	$('input[name=mate_title]').attr('value',jdata.mate_title);
      			 	$('input[name=user_id]').attr('value',jdata.user_id); 
@@ -384,9 +380,6 @@ body {
      			 	$('input[name=mate_cont]').val(jdata.mate_cont);
      			 	$('input[name=mwarning]').val(jdata.warning);
      			   
-     			 	/*  console.log(jdata.mate_mapinfo);
-     			  	console.log(jdata.mate_cont); */
-     			  	/* console.log($('#mate_cont').val());  */
      			 	var uid = '<%=(String)session.getAttribute("id")%>';
      			  	if($('#user_id').val()==uid){
      				 	$('#delete').show();
@@ -514,11 +507,6 @@ body {
   				 			$('#delete2').hide();
   				 			$('#update2').hide();
   			  			}
-			  			/* if($('#gwarning').val()=='1'){
-  				 			$('#alerts span').html('신고취소');
-  			  			}else{
-  				 			$('#alerts span').html('신고');
-  			  			} */
 			  
 				//그룹게시물에디터 값 넣는 함수
 				g_editor.setData($('#group_cont').val());
@@ -769,9 +757,8 @@ body {
 	        }
   		});
 	});
-		
 
 </script>
-  <%@include file ="fotter.jsp" %> 
+ <%@include file ="fotter.jsp" %> 
 </body>
 </html>

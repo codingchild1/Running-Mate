@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>메이트 구하기</title>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript"src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
 <style>
 body {
 	display: flex;
@@ -117,14 +115,8 @@ height:400px;
 	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
     infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
-	// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-	/* searchAddrFromCoords(map.getCenter(), displayCenterInfo); */
-	
      var src = jQuery('#user_img2').attr("src");
 	 $('input[name=user_img]').attr('value',src);   //이미지주소 관련
-	 
-	/*  var id = "닉네임";
-	 $('input[name=user_id]').attr('value',"닉네임"); */  //value에 id값 넣기
 	 
 	$(document).ready(function(){
 		$('#search2').bind("click", function(){
@@ -151,12 +143,7 @@ height:400px;
 	            	            	// 마커를 클릭한 위치에 표시합니다 
 	            	            	marker.setPosition(mouseEvent.latLng);
 	            	            	marker.setMap(map);
-
-	            	            	// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-	            	            	/* infowindow.setContent(content);
-	            	            	infowindow.open(map, marker); */
 	            	           
-	            	        	/* console.log(result[0].address.address_name); */
 	            	        		$('input[name=mate_address]').attr('value',result[0].address.address_name);
 	            	    	}
 	            	    	console.log($('#mate_address').val());
@@ -167,9 +154,6 @@ height:400px;
 			return false;
 		});
 	});  
-	 /* kakao.maps.event.addListener(map, 'idle', function() {
-		    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-		}); */
 
 	function searchAddrFromCoords(coords, callback) {
 		    // 좌표로 행정동 주소 정보를 요청합니다
