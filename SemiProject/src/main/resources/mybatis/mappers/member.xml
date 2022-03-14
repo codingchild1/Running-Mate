@@ -24,12 +24,7 @@
 			delete from member where id=#{id}
 		]]>
 	</delete>
-	<update id="updateMember" parameterType="Member">
-		<![CDATA[
-		update member set email=#{email}, phone=#{phone}
-		where id = #{id}
-		]]>
-	</update>
+
 	<update id="updateMember" parameterType="Member">
 	<![CDATA[
 		update member set memberthumb=#{memberthumb}, email=#{email}, phone=#{phone} where id = #{id}
