@@ -107,15 +107,13 @@ public class TodayServiceImpl implements TodayService {
 	@Override
 	public void LikesPlus(int articleNo) throws Exception {
 		System.out.println("좋아요 + 들어옴");
-		todayDAO.updateLikePlus(articleNo);
+		todayDAO.updateLikeAdd(articleNo);
 	}
 
 	@Override
 	public void LikesMinus(int articleNo) throws Exception {
 		System.out.println("좋아요 - 들어옴");
-		todayDAO.updateLikeMinus(articleNo);
+		todayDAO.updateLikeSub(articleNo);
 	}
 
-
-	
 }

@@ -57,6 +57,12 @@ main, header, section {
 	position: absolute;
 	top: 870px;
 }
+
+.userProfile { 
+	width:35px;
+	height:35px;
+	border-radius: 70%;
+ }
 </style>
 <script>
         $(function(){
@@ -93,9 +99,10 @@ main, header, section {
 				<ul>
 					<table>
 						<tbody class="container-fluid mt-1">
+							<br>
 							<tr>
 								<td>
-									<img src='/profileview/${user_img2}' class="col" />
+									<img src='/profileview/${user_img2}' class="userProfile"/>
 									<input type="hidden"name="user_img" id="user_img" value=''>
 								</td>
 								<td id="wirte_id" class="col d-flex justify-content-start">
@@ -147,7 +154,7 @@ main, header, section {
 						<!--컨트롤러 목록 today_list 로 이동  -->
 
 						<button class="btn btn-outline-secondary" type="button"
-							style="width: 100px; height: 30px; padding: 5px" id="today_list"  onClick="history.back(); return false;"
+							style="width: 100px; height: 30px; padding: 5px" id="today_list" 
 							name="today_list">목록</button>
 					</div>
 					<br>
@@ -160,6 +167,15 @@ main, header, section {
 <%@include file="fotter.jsp"%>
 
 	<script> 
+	
+	 //목록 버튼
+    $(function(){
+  	  $("#today_list").click(function(){
+  	      location.href="/today";
+  	      });
+  	  }); 
+	 
+	 
 	$(function() {
 		$('#today_file').change(function (event) {
 			var reader = new FileReader();

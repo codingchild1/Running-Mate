@@ -69,17 +69,25 @@
 	</delete>
 	
 	<!--좋아요 +1, -1  -->
-	<update id="updateLikePlus"  parameterType="int">
+	<update id="updateLikeAdd"  parameterType="int" >
 		<![CDATA[
-			update route set route_likes=route_likes+1 where route_articleNo=#{articleNo }
+			update today set today_likes=today_likes+1 where today_articleNo=#{articleNo }
 		]]>
 	</update>
-	<update id="updateLikeMinus"  parameterType="int">
+	<update id="updateLikeSub"  parameterType="int">
 		<![CDATA[
-			update route set route_likes=route_likes-1 where route_articleNo=#{articleNo }
+			update today set today_likes=today_likes-1 where today_articleNo=#{articleNo }
 		]]>
 	</update>
 	
+<!-- 	최고의러너 3개 게시글 가져오는 sql문 
+	<select id="selectTodayCnt"  resultType="int">
+		<![CDATA[
+		select *from today order by today_likes desc limit 3;
+		]]>
+	</select> 
+	
+	-->
 	
 	
 <!-- 	today 신고 
@@ -89,6 +97,8 @@
 		
 		 ]]>
 	</insert> -->
+	
+
 </mapper>
 
 

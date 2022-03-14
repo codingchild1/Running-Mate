@@ -42,28 +42,48 @@ main {
 	float: center;
 	width: 1170px;
 	height: 600px;
-	border: 1px solid red;
+/* 	border: 1px solid red; */
 	margin-top: 10px;
 }
 
 .ck-editor__editable {
 	min-height: 450px;
 	/* min-width: 300px; */
-	max-width:100%;
-} 
+	max-width: 100%;
+}
+ #today_title {
+ 	outline:none;
+ 	text-decoration: none;
+ }
 
-#today_delete, #today_modify, #warning {
+#today_delete, #today_modify, #warning, #today_title {
 	text-decoration: none;
 }
-#todayboardFooter{
-	height : 30px;
-	width : 30px;
+
+#todayboardFooter {
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	margin: 45px 50% 45px 50%;
+	float : center;
 }
+
 header {
 	display: center;
 	padding-top: 50px;
 	width: 1170px;
 }
+
+.userProfile {
+	width: 35px;
+	height: 35px;
+	border-radius: 70%;
+}
+
+.undertitleshow{
+ 	display: inline-block;
+ 	 margin: 10px 5% 10px 4%;
+ 	  }
 </style>
 
 </head>
@@ -78,132 +98,154 @@ header {
 
 			<div class="col-lg-1 "></div>
 			<!---------------헤더 : 타이틀, 아이디, date, 삭제, 수정, 신고, 조회 -->
-			<form action="/today_modify" method="post" enctype="multipart/form-data">
-			<div class="col-lg-11 border">
-				<header>
-			
-					<div class="row">
-						<div class="container fluid border">
- 							<input name="articleNo" id="today_articleNo" type="hidden" value='${todayselect.today_articleNo}'>
-							<ul class="list-inline shop-top-menu pb-3 pt-1">
-								<li><input name="today_title" id="today_title" size="150"
-									value='${todayselect.today_title}'></li>
-							</ul>
-							<table>
-								<tbody class="container mt-1">
+			<form action="/today_modify" method="post"
+				enctype="multipart/form-data">
+				<div class="col-lg-11">
+					<header>
+
+						<div class="row">
+							<div class="container fluid">
+								<input name="articleNo" id="today_articleNo" type="hidden"
+									value='${todayselect.today_articleNo}'>
+								<ul class="list-inline shop-top-menu pb-3 pt-1">
+									<li><input name="today_title" id="today_title" size="145"
+										value='${todayselect.today_title}' style="outline:none;"></li>
+								</ul>
+								<table>
+									<tbody class="container mt-1">
+										<tr>
+											<td><img src="/profileview/${profileImg }"
+												class="userProfile"></td>
+											<td id="user_id" class="col d-flex justify-content-start">${todayselect.user_id}</td>
+
+											<td class="col pl-5">
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+												<button class="col gap-1 rounded btn btn-white"
+													id="today_views" name="today_views" disabled>
+													${todayselect.today_views}</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="row mt-1">
+								<table class="container d-flex">
 									<tr>
-										<td><img src="/profileview/${profileImg }" class="userProfile border"></td>
-										<td id="user_id" class="col d-flex justify-content-start">${todayselect.user_id}</td>
-									
-										<td class="col pl-5">	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-								
-										<button class="col gap-1 rounded btn btn-white"
-											id="today_views" name="today_views"disabled> ${todayselect.today_views}</button></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-						<div class="row mt-1">
-							<table class="container d-flex">
-								<tr>
-								<td class="col">${todayselect.today_date}</td>
-								<td class="d-flex mt-2" style="display:block;">&nbsp&nbsp&nbsp
-										<div id="todayboardFooter" class="todayboardFooter border  d-flex justify-content-center mt-2">
-							       			<div id="likes" onclick=changeImg() style="float:left;">				
-							       				<c:choose>
-													<c:when test="${likes eq true }">
-														<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
-													</c:when>
-												<c:when test="${likes eq false }">
-													<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
-												</c:when>
-												</c:choose>
-											</div>
-											<br><hr>
-										</div>	
-									</td>
-
-									<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-									&nbsp&nbsp&nbsp&nbsp
-									<c:choose>
-										<c:when test= "${id eq todayselect.user_id || id eq 'admin' }">
-											<button type="button" class="col gap-1 rounded btn btn-white"
-												id="today_delete" name="today_delete">
-
-												삭제</button>
-											<input type="submit" class="col gap-1 rounded btn btn-white"
-												id="today_modify" name="today_modify" value="수정"/>
-										</c:when>
-										<c:otherwise>
-												<span id="alerts" onclick=alert()> 
-											    	<c:choose>
-														<c:when test="${alert eq true }">
-															<span id="alert" style="float:right; padding-left:10px;">신고취소</span>
+										<td class="col">${todayselect.today_date}</td>
+<%-- 										<td class="d-flex mt-2" style="display: block;">&nbsp&nbsp&nbsp
+											<div id="todayboardFooter"
+												class="todayboardFooter border  d-flex justify-content-center mt-2">
+												<div id="likes" onclick=changeImg() style="float: left;">
+													<c:choose>
+														<c:when test="${likes eq true }">
+															<img id="like"
+																src="${pageContext.request.contextPath }/images/like.PNG"
+																style="width: 50px;" />
 														</c:when>
-														<c:when test="${alert eq false }">
-															<span id="alert" style="float:right; padding-left:10px;">신고</span>
+														<c:when test="${likes eq false }">
+															<img id="like"
+																src="${pageContext.request.contextPath }/images/nolike.PNG"
+																style="width: 50px;" />
 														</c:when>
 													</c:choose>
-												 </span>
-											<span id="today_list" onclick=today_list()>목록</span>
-										</c:otherwise>
-									</c:choose>										
-								</td>
-								</tr>
-							</table>
-						</div> 	
-					</div> 				
-				</header>
+												</div>
+												<br>
+												<hr>
+											</div>
+										</td> --%>
 
-				<!--------------------------------------------------게시글 ---------------------------- -->
-				<main>
-					<table class="container-fluid">
-						<tr><td>
-							<img class="col" src="/thumbfileview/${todayselect.today_thumb}" id="today_thumb" name="today_thumb"
-							height="100px" width="100px">
-						    <label for="today_file" style="border: solid 1px black;">업로드</label>
-    						<input type="file" name="today_file" id="today_file" accept="image/*" style="position:absolute; clip:rect(0, 0, 0, 0);">
-							
-						</td></tr>		
-								
-						<tr><td>
-						<textarea id="editor" class="ck-editor__editable"name="today_contents" ></textarea>
-						</td></tr>
-						<tr>
-							<td class="d-flex mt-2" style="display:block;">
-								<div id="todayboardFooter" class="todayboardFooter   d-flex justify-content-center mt-2">
-				       				<div id="likes" onclick=changeImg() style="text-align:center;">				
-				       					<c:choose>
-											<c:when test="${likes eq true }">
-												<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
-											</c:when>
-										<c:when test="${likes eq false }">
-											<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
-										</c:when>
-										</c:choose>
+										<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+											 <c:choose>
+												<c:when
+													test="${id eq todayselect.user_id || id eq 'admin' }">
+													<button type="button"
+														class="col gap-1 rounded btn btn-white" id="today_delete"
+														name="today_delete">삭제</button>
+													<input type="submit"
+														class="col gap-1 rounded btn btn-white" id="today_modify"
+														name="today_modify" value="수정" />
+												</c:when>
+												<c:otherwise>
+													<span id="alerts" onclick=alert()>
+													   <c:choose>
+															<c:when test="${alert eq true }">
+																<span id="alert"
+																	style="float: right; padding-left: 10px;">신고취소</span>
+															</c:when>
+															<c:when test="${alert eq false }">
+																<span id="alert"
+																	style="float: right; padding-left: 10px;">신고</span>
+															</c:when>
+														</c:choose>
+													</span>
+													<span id="today_list" onclick=today_list()>목록</span>
+												</c:otherwise>
+											</c:choose>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</header>
+
+					<!--------------------------------------------------게시글 ---------------------------- -->
+					<main>
+						<table class="container-fluid">
+							<tr>
+								<td><img class="col"
+									src="/thumbfileview/${todayselect.today_thumb}"
+									id="today_thumb" name="today_thumb" height="100px"
+									width="100px"> <label for="today_file"
+									style="border: solid 1px black;">업로드</label> <input type="file"
+									name="today_file" id="today_file" accept="image/*"
+									style="position: absolute; clip: rect(0, 0, 0, 0);"></td>
+							</tr>
+
+							<tr>
+								<td><textarea id="editor" class="ck-editor__editable"
+										name="today_contents"></textarea></td>
+							</tr>
+							<tr>
+								<td class="mt-2">
+									<div id="todayboardFooter"	class="todayboardFooter" >
+										<div id="likes" onclick=changeImg()>
+											<c:choose>
+												<c:when test="${likes eq true }" >
+													<img id="like"
+														src="${pageContext.request.contextPath }/images/like.PNG"
+														style="width: 35px;" />
+												</c:when>
+												<c:when test="${likes eq false }">
+													<img id="like"
+														src="${pageContext.request.contextPath }/images/nolike.PNG"
+														style="width: 35px;" />
+												</c:when>
+											</c:choose>
+										</div>
+										<br>
+										
 									</div>
-									<br><hr>
-								</div>
 								</td>
-						</tr>
-					</table>
-				</main>
-			</div>
+							</tr>
+						</table>
+					</main>
+				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
 
 		</div>
 	</div>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
 	  function today_list(){
@@ -215,7 +257,7 @@ header {
   			$.ajax({
   				type:"post",
   				url:"http://localhost:8090/likes",
-  				data: {"user_id": $("#user_id").text(), "board_type" : "today", "board_no": ${todayselect.today_articleNo}},
+  				data: {"user_id": $("#writerId").text(), "board_type" : "today", "board_no": ${todayselect.today_articleNo}},
   				dataType:"text",
   				success:function(data){
   					if(data=="true"){
@@ -225,6 +267,7 @@ header {
   						console.log("false: " + data);
   						$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
   					}
+  					/* 새로고침 window.location.reload(); */
   				}
   			});			 
   		}
@@ -246,9 +289,9 @@ header {
 				dataType:"text",
 				success:function(data){
 					if(data=="true"){
-						$("#alerts span").html("신고취소");
+						$("#alert").html("신고취소");
 					} else {
-						$("#alerts span").html("신고");
+						$("#alert").html("신고");
 					}
 				}
 			});
@@ -344,7 +387,7 @@ header {
  		}); */
 	
 		</script>
-<%-- 	<%@include file="fotter.jsp"%> --%>
+	<%-- 	<%@include file="fotter.jsp"%> --%>
 
 </body>
 </html>

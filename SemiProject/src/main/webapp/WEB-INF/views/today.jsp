@@ -30,11 +30,11 @@ body {
 
 }
 .outer {
-	width:1100px;
+	width:1200px;
 	margin: 0 auto;
 }
 .content {
-	width:1000px;
+	width:1100px;
 	height: 700px;
 	margin: 0 auto;
 }
@@ -90,7 +90,7 @@ body {
 #search{
 	text-align: center;
 }
-.userProfile { width:25px; height:25px; }
+.userProfile { width:35px; height:35px; }
 </style>
 </head>
 <body>
@@ -136,7 +136,7 @@ body {
 										<header	class="">
 											<div class="">
 												<span class="col-lg">
-													<span><img src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
+													<span><img  style="border-radius: 70%;" src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
 												</span>
 											</div>
 											<span class="" id="today_date">${tboard.today_date}</span>
@@ -158,8 +158,8 @@ body {
 											</span>
 											<span>
 												<input type="text" id="today_likes" value='${tboard.today_likes}'
-													style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
-													disabled>
+													style="width: 30px; display: inline-block; vertical-align: right; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
+													disabled>&nbsp&nbsp&nbsp&nbsp&nbsp
 											</span>
 											<span class="d-flex justify-content-end" id="today_views">${tboard.today_views}
 											</span>

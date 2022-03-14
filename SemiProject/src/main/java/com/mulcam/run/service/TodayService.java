@@ -18,7 +18,10 @@ public interface TodayService {
 	void removeTBoard(int articleNo) throws Exception;
 	void inputWarn(boolean a) throws Exception;
 	public void LikesPlus(int articleNo) throws Exception; 
-	public void LikesMinus(int articleNo) throws Exception; 
+	public void LikesMinus(int articleNo) throws Exception;
+	
+
+//	public int SelectLikesCnt() throws Exception;
 //	public void AlertPlus(int articleNo) throws Exception; 
 //	public void AlertMinus(int articleNo) throws Exception;
 	
