@@ -12,29 +12,24 @@
 	/* margin: 0 auto; */
 	box-sizing: border-box;
 }
-
 body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
-
 .post li {
 	float: left;
 	margin: 10px;
 	list-style: none;
 }
-
 ul li a {
 	text-decoration-line: none;
 	color: black;
 }
-
 button a {
 	text-decoration-line: none;
 	color: white;
 }
-
 .post {
 	display: inline-flex;
 	/* flex-direction: column; */
@@ -42,22 +37,18 @@ button a {
 	margin-top: 51px;
 	justify-content: space-between;
 }
-
 .main {
 	position: relative;
 	/* width: 1060px; */
 }
-
 .box {
 	border-radius: 5px;
 	background-color: darkgray;
 }
-
 .container1 {
 	margin: 20px;
 	width: 1060px;
 }
-
 .register {
 	width: 300px;
 	height: 160px;
@@ -69,13 +60,11 @@ button a {
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 	display: inline-block;
 }
-
 .profile {
 	width: 50px;
 	height: 50px;
 	border-radius: 70%;
 }
-
 #modal.modal-overlay {
 	z-index: 8;
 	width: 100%;
@@ -87,49 +76,36 @@ button a {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	/* background: rgba(255, 255, 255, 0.25); */
-	/* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
-	/* backdrop-filter: blur(1.5px); */
-	/* -webkit-backdrop-filter: blur(1.5px); */
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	display: none;
 }
-
 .ptplist {
 	display: none;
 }
-
 .info:hover .ptplist {
 	display: block;
 }
-
 #modal .modal-window {
 	background: #d3d3d3;
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(50px);
-	/* backdrop-filter: none; */
 	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	width: 400px;
-	/* height: 576px; */
-	/* position: relative; */
 	top: -100px;
 	padding: 15px;
 }
-
 #modal .title {
 	padding-left: 10px;
 	display: inline;
 	text-shadow: 1px 1px 2px gray;
 	color: white;
 }
-
 #modal .title h2 {
 	display: inline;
 }
-
 #modal .close-area {
 	display: inline;
 	float: right;
@@ -138,14 +114,12 @@ button a {
 	text-shadow: 1px 1px 2px gray;
 	color: black;
 }
-
 #modal .content {
 	/* margin-top: 20px; */
 	padding: 0px 10px;
 	/* text-shadow: 1px 1px 2px gray;
 color: white; */
 }
-
 #modal2.modal-overlay {
 	z-index: 8;
 	width: 100%;
@@ -157,41 +131,30 @@ color: white; */
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	/* background: rgba(255, 255, 255, 0.25); */
-	/*  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
-	/* backdrop-filter: blur(1.5px); */
-	/* -webkit-backdrop-filter: blur(1.5px); */
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	display: none;
 }
-
 #modal2 .modal-window {
 	background: #d3d3d3;
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(50px);
-	/* backdrop-filter: none; */
 	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	width: 400px;
-	/* height: 542px; */
-	/* position: relative; */
 	top: -100px;
 	padding: 15px;
 }
-
 #modal2 .title {
 	padding-left: 10px;
 	display: inline;
 	text-shadow: 1px 1px 2px gray;
 	color: white;
 }
-
 #modal2 .title h2 {
 	display: inline;
 }
-
 #modal2 .close-area {
 	display: inline;
 	float: right;
@@ -200,17 +163,13 @@ color: white; */
 	text-shadow: 1px 1px 2px gray;
 	color: black;
 }
-
 #modal2 .content {
-	/* margin-top: 20px; */
 	padding: 0px 10px;
-	/* text-shadow: 1px 1px 2px gray;
-color: white; */
 }
 </style>
 </head>
 <body>
-	<%@include file="header.jsp"%>
+<%@include file="header.jsp"%>
 	<div style="width: 1060px; padding: 10px; margin: 20px auto;">
 		<h1>메이트 구하기</h1>
 		<div class="main">
@@ -365,19 +324,18 @@ color: white; */
 		 if(uid=='null'){
 			alert("로그인이 필요한 서비스입니다.");
 			return false;
-			}
+		}
 	});
 	$('#make2').click(function(){
 		var uid = '<%=(String) session.getAttribute("id")%>';
 		 if(uid=='null'){
 			alert("로그인이 필요한 서비스입니다.");
 			return false;
-			}
+		}
 	});
 	
+	//mate ckeditor
     let m_editor;
-	let g_editor;
-	
 	ClassicEditor.create(document.querySelector("#editor"))
     .then(editor=>{
     	window.editor = editor;
@@ -389,6 +347,9 @@ color: white; */
     .catch((error) => {
     	console.error(error);
 	});
+	
+	//group ckeditor
+	let g_editor;
  	ClassicEditor.create(document.querySelector("#editor2"))
     .then(editor=>{
     	window.editor = editor;
@@ -518,7 +479,7 @@ color: white; */
    						alert("실패");
    					}
    				});
-            //소모임 모달폼 ajax
+        //소모임 모달폼 ajax
     	}else{
     		modal2.style.display = "flex";
    		 	$.ajax({
@@ -654,145 +615,151 @@ color: white; */
             }
         }); 
 	   
-        //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
-		$('.ptp').click(function(){
-			var uid = '<%=(String) session.getAttribute("id")%>';
-			if(uid=='null'){
-    			alert("로그인이 필요한 서비스입니다.");
-    			return false;
-			}
-	            $.ajax({
-	        		type:"post",
-	        		dataType:"text",
-	        		async:false,
-	        		url:"http://localhost:8090/Like",
-	        		data:{"no":$('#ptp').val()},
-	        		success: function(data, textStatus){
-	        			if(data=='false') {
-	        				alert("참여가 완료되었습니다.");
-	        				$('.ptp').html('참여취소');
-	        			} else{
-	        				alert("참여가 취소되었습니다.");
-	        				$('.ptp').html('참여');
-	        			}
-	        		},
-	        		error:function(data, textStatus){
-	        			alert("실패");
-	        		}
-        		});
-	          //참여자 리스트
-	    	    $.ajax({     
-	    			type:"post",
-	    			dataType:"text",
-	    			async:false,
-	    			url:"http://localhost:8090/ptplist",
-	    			data:{"no":$('#ptp').val()},
-	    			success: function(data, textStatus){ 
-	    				$('.list').html('');
-	    				var jdata = JSON.parse(data);
-	    				console.log(jdata);
-	    			 	for(let i of jdata) {
-	    				 	var clist = $('.list').html()+'<span style="float: left;">'+i.user_id+"</span><br>";
-	    				 	$('.list').html(clist);
-	    				}
-	    			},
-	    			error:function(data, textStatus){
-	    				alert("실패");
-	    			}
+   //참여버튼 클릭시 참여자 수 +1, ptp테이블에 해당정보 저장 ajax
+	$('.ptp').click(function(){
+		var uid = '<%=(String) session.getAttribute("id")%>';
+		if(uid=='null'){
+    		alert("로그인이 필요한 서비스입니다.");
+    		return false;
+		}
+	    $.ajax({
+	    	type:"post",
+	        dataType:"text",
+	        async:false,
+	        url:"http://localhost:8090/Like",
+	        data:{"no":$('#ptp').val()},
+	        success: function(data, textStatus){
+	        	if(data=='false') {
+	        		alert("참여가 완료되었습니다.");
+	        		$('.ptp').html('참여취소');
+	        	}else{
+	        		alert("참여가 취소되었습니다.");
+	        		$('.ptp').html('참여');
+	        	}
+	        },
+	        error:function(data, textStatus){
+	        	alert("실패");
+	        }
+        });
+	   //참여자 리스트
+	   	$.ajax({     
+	    	type:"post",
+	    	dataType:"text",
+	    	async:false,
+	    	url:"http://localhost:8090/ptplist",
+	    	data:{"no":$('#ptp').val()},
+	    	success: function(data, textStatus){ 
+	    		$('.list').html('');
+	    		var jdata = JSON.parse(data);
+	    		console.log(jdata);
+	    		for(let i of jdata) {
+	    			var clist = $('.list').html()+'<span style="float: left;">'+i.user_id+"</span><br>";
+	    			$('.list').html(clist);
+	    		}
+	    	},
+	    	error:function(data, textStatus){
+	    		alert("실패");
+	    	}
 		});
-		
+	});
+	
+	//mate게시물 삭제
+ 	$('.delete').click(function(){
+		$.ajax({
+	        type:"post",
+	        dataType:"text",
+	        async:false,
+	        url:"http://localhost:8090/deletemate",
+	        data:{"no":$('#ptp').val()},
+	        success: function(data, textStatus){
+	        	alert("성공적으로 삭제되었습니다.");
+	        	location.reload();
+	        },
+	        error:function(data, textStatus){
+	        	alert("실패");
+	        }
+    	 });
 	});
 		
-		//게시물 삭제 기능ajax
- 		$('.delete').click(function(){
-			 $.ajax({
-	        		type:"post",
-	        		dataType:"text",
-	        		async:false,
-	        		url:"http://localhost:8090/deletemate",
-	        		data:{"no":$('#ptp').val()},
-	        		success: function(data, textStatus){
-	        			alert("성공적으로 삭제되었습니다.");
-	        			location.reload();
-	        		},
-	        		error:function(data, textStatus){
-	        			alert("실패");
-	        		}
-     		});
-		}); 
-		$('.delete2').click(function(){
-			 $.ajax({
-	        		type:"post",
-	        		dataType:"text",
-	        		async:false,
-	        		url:"http://localhost:8090/deletegroup",
-	        		data:{"no":$('#ptp').val()},
-	        		success: function(data, textStatus){
-	        			alert("성공적으로 삭제되었습니다.");
-	        			location.reload();
-	        		},
-	        		error:function(data, textStatus){
-	        			alert("실패");
-	        		}
-    		});
-		});
-		$('.alert').click(function(){
-			var uid = '<%=(String) session.getAttribute("id")%>';
-			if(uid=='null'){
-	    		alert("로그인이 필요한 서비스입니다.");
-	    		return false;
-			}
-			 $.ajax({
-	        		type:"post",
-	        		dataType:"text",
-	        		async:false,
-	        		url:"http://localhost:8090/alert",
-	        		data:{"board_no":$('#ptp').val(),
-	        			  "user_id":$("#user_id").val(),
-	        			  "board_type":"mate"},
-	        		success: function(data, textStatus){
-	        			if(data=="true"){
-	        				alert("성공적으로 신고되었습니다.");
-	        				$('#alerts span').html('신고취소');
-	        			}else{
-	        				alert("신고가 취소되었습니다.")
-	        				$('#alerts span').html('신고');
-	        			}
-	        		},
-	        		error:function(data, textStatus){
-	        			alert("실패");
-	        		}
+	//group게시물 삭제
+	$('.delete2').click(function(){
+		$.ajax({
+	        type:"post",
+	        dataType:"text",
+	        async:false,
+	        url:"http://localhost:8090/deletegroup",
+	        data:{"no":$('#ptp').val()},
+	        success: function(data, textStatus){
+	        	alert("성공적으로 삭제되었습니다.");
+	        	location.reload();
+	        },
+	        error:function(data, textStatus){
+	        	alert("실패");
+	        }
+    	});
+	});
+	
+	//mate게시물 신고
+	$('.alert').click(function(){
+		var uid = '<%=(String) session.getAttribute("id")%>';
+		if(uid=='null'){
+	    	alert("로그인이 필요한 서비스입니다.");
+	    	return false;
+		}
+		$.ajax({
+	        type:"post",
+	        dataType:"text",
+	        async:false,
+	        url:"http://localhost:8090/alert",
+	        data:{"board_no":$('#ptp').val(),
+	        	  "user_id":$("#user_id").val(),
+	        	  "board_type":"mate"},
+	        success: function(data, textStatus){
+	        	if(data=="true"){
+	        		alert("성공적으로 신고되었습니다.");
+	        		$('#alerts span').html('신고취소');
+	        	}else{
+	        		alert("신고가 취소되었습니다.")
+	        		$('#alerts span').html('신고');
+	        	}
+	        },
+	        error:function(data, textStatus){
+	        	alert("실패");
+	        }
   		});
-		});
-		$('.alert2').click(function(){
-			var uid = '<%=(String) session.getAttribute("id")%>';
-			if(uid=='null'){
-	    		alert("로그인이 필요한 서비스입니다.");
-	    		return false;
-			}
-			 $.ajax({
-	        		type:"post",
-	        		dataType:"text",
-	        		async:false,
-	        		url:"http://localhost:8090/alert",
-	        		data:{"board_no":$('#ptp').val(),
-	        			  "user_id":$("#user_id").val(),
-	        			  "board_type":"group"},
-	        		success: function(data, textStatus){
-	        			if(data=="true"){
-	        				alert("성공적으로 신고되었습니다.");
-	        				$('#alerts span').html('신고취소');
-	        			}else{
-	        				alert("신고가 취소되었습니다.")
-	        				$('#alerts span').html('신고');
-	        			}
-	        		},
-	        		error:function(data, textStatus){
-	        			alert("실패");
-	        		}
+	});
+	
+	//group게시물 신고
+	$('.alert2').click(function(){
+		var uid = '<%=(String) session.getAttribute("id")%>';
+		if(uid=='null'){
+	    	alert("로그인이 필요한 서비스입니다.");
+	    	return false;
+		}
+		$.ajax({
+	        type:"post",
+	        dataType:"text",
+	        async:false,
+	        url:"http://localhost:8090/alert",
+	        data:{"board_no":$('#ptp').val(),
+	        	  "user_id":$("#user_id").val(),
+	        	  "board_type":"group"},
+	        success: function(data, textStatus){
+	        	if(data=="true"){
+	        		alert("성공적으로 신고되었습니다.");
+	        		$('#alerts span').html('신고취소');
+	        	}else{
+	        		alert("신고가 취소되었습니다.")
+	        		$('#alerts span').html('신고');
+	        	}
+	        },
+	        error:function(data, textStatus){
+	        	alert("실패");
+	        }
  		});
-		});
-    </script>
-	<%@include file="fotter.jsp"%>
+	});
+	
+</script>
+<%@include file="fotter.jsp"%>
 </body>
 </html>

@@ -105,7 +105,7 @@ a { text-decoration-line: none;}
 	
 	 var src = jQuery('#user_img2').attr("src");
 	   $('input[name=user_img]').attr('value',src); 
-	   console.log(${user_img2});
+	  
     </script>
     
 	<%@include file="fotter.jsp"%>

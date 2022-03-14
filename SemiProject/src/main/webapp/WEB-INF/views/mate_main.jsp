@@ -181,8 +181,7 @@ body {
 </head>
 
 <body>
-	 <%@include file ="header.jsp" %> 
-	<!--  <form id='form' action="main" method="post">  -->
+<%@include file ="header.jsp" %> 
 	<div style="width: 1060px; padding: 10px; margin: 20px auto;">
 		<h1>메이트 구하기</h1>
 		<div class="main">
@@ -307,29 +306,29 @@ body {
 		</div>
 	</div>
 	<!-- </form> -->
-	<script type="text/javascript"src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
-	<script>
+<script type="text/javascript"src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+<script>
 	
 	$('#make').click(function(){
 		var uid = '<%=(String)session.getAttribute("id")%>';
 		 if(uid=='null'){
 			alert("로그인이 필요한 서비스입니다.");
 			return false;
-			}
+		}
 	});
 	$('#make2').click(function(){
 		var uid = '<%=(String)session.getAttribute("id")%>';
 		 if(uid=='null'){
 			alert("로그인이 필요한 서비스입니다.");
 			return false;
-			}
+		}
 	});
 		let m_editor;
 		let g_editor;
 	
-		//mate ckeditor
+	//mate ckeditor
     ClassicEditor.create(document.querySelector("#editor"))
         .then(editor=>{
         	window.editor = editor;
@@ -342,8 +341,7 @@ body {
         	console.error(error);
         });
         
-		//group ckeditor
-     
+	//group ckeditor
 	ClassicEditor.create(document.querySelector("#editor2"))
         .then(editor=>{
        		window.editor = editor;
@@ -483,7 +481,7 @@ body {
         			}
         		}); 
 
-            //소모임 모달폼 ajax
+        //소모임 모달폼 ajax
     	}else{
     		modal2.style.display = "flex";
    		 		$.ajax({
@@ -672,7 +670,7 @@ body {
 		}); 
 	});
 		
-		//게시물 삭제 기능ajax
+	//mate게시물 삭제
  	$('.delete').click(function(){
 		$.ajax({
 	        type:"post",
@@ -688,7 +686,9 @@ body {
 	        	alert("실패");
 	        }
      	});
-	}); 
+	});
+	
+ 	//group게시물 삭제
 	$('.delete2').click(function(){
 		$.ajax({
 	        type:"post",
