@@ -8,6 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script>
 		$(function() {
@@ -66,15 +70,15 @@
 </head>
 <body>
 	<h2>회원목록 조회</h2>
-<table border=1 > 
+<table border=1 align="center" class="table table-hover"> 
 <tr>
 	<th>
-	<input id="allCheck" type="checkbox" name="allCheck" />
+	<input id="allCheck" class="form-check-input" type="checkbox" name="allCheck" />
 	</th>
-	<th>아이디</th>
-	<th>게시물</th>
-	<th>신고날짜</th>
-	<th>횟수</th>
+	<th scope="col">아이디</th>
+	<th scope="col">게시물</th>
+	<th scope="col">신고날짜</th>
+	<th scope="col">횟수</th>
 </tr>
 <c:choose>
 	<c:when test="${empty warninglist}">
@@ -86,19 +90,19 @@
 	
 	<c:when test="${!empty warninglist}">
 		<c:forEach var='warning' items="${warninglist}">
-			<tr>
-				<td><input type="checkbox" name="RowCheck" value="${warning.warningid}"/></td>
-    			<td>${warning.warningid}</td>
-	 			<td><a href="http://www.naver.com">${warning.boardtype}</a></td>
-	 			<td>${warning.warningdate}</td>
-	 			<td>${warning.warningcnt}</td>
+			<tr class="table-active">
+				<td scope="row"><input type="checkbox" name="RowCheck" value="${warning.warningid}"/></td>
+    			<td scope="row">${warning.warningid}</td>
+	 			<td scope="row"><a href="http://www.naver.com">${warning.boardtype}</a></td>
+	 			<td scope="row">${warning.warningdate}</td>
+	 			<td scope="row">${warning.warningcnt}</td>
 			</tr>
 		</c:forEach>
 	</c:when>
 </c:choose>	 
 </table>
 <form>
-	<input type="button" value="삭제" onclick="deleteValue();" />
+	<input type="button" class="btn btn-success" value="삭제" onclick="deleteValue();" />
 </form>
 </body>
 </html>
