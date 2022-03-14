@@ -42,6 +42,7 @@ public interface MateService{
 	
 	List<Ptp> ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
 //	Ptp ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
+	public boolean checkptp(String user_id, int mate_articleNO) throws Exception;
 	
 	//게시물 검색
 

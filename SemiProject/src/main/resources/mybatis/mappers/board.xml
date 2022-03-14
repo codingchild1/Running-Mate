@@ -126,10 +126,11 @@ fb_articleNo int(11) not null auto_increment,
 fb_title varchar(255) not null,
 writer varchar(100) not null,
 fb_content longtext,
+fb_likes int(255) default '0',
 warning tinyint(1) not null default '0',
 fb_date DATETIME default CURRENT_TIMESTAMP,
 fb_views int(255) default '0',
-fb_img_url varchar(500),
+user_img varchar(500) not null,
 keyword varchar(100),
 PRIMARY KEY(fb_articleNo)
 );

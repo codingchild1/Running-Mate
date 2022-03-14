@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.mulcam.run.dto.Alert;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
@@ -51,6 +52,8 @@ public interface MateDAO {
 	
 	public List<Ptp> ptpInfo(int mate_articleNO)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
 	public Ptp ptpInfo2(Map map)throws Exception; //참여자 조회 (매개변수 나중에 다시 생각)
+	
+	public boolean checkPtp(Ptp ptp) throws Exception; //참여여부 확인
 	
 	//게시물 검색
 	public List<GroupAndMate> searchList(Map map) throws Exception; 

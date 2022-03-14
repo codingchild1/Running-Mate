@@ -138,6 +138,20 @@ public class MateController {
 		}
 		return islike;
 	}
+	//좋아요 기능
+	@ResponseBody
+	@PostMapping("/Likecheck")
+	public boolean Likecheck(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
+		boolean islike = false;
+		try {
+			HttpSession session = request.getSession();
+			String user_id = (String) session.getAttribute("id");
+			islike= mateService.checkptp(user_id, mate_articleNO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return islike;
+	}
 	
 	//검색창 이동
 	@GetMapping("/mate_search")
@@ -359,5 +373,34 @@ public class MateController {
 			e.printStackTrace();
 		}
 	}
+	
+	//번개 신고버튼 체크
+	@ResponseBody
+	@PostMapping("/alertcheck")
+	public boolean alertcheck(@RequestParam(value="no")int articleNo) {
+		String user_id = (String) session.getAttribute("id");
+		boolean alert =false;
+		try {
+			alert = alertService.getAlertTF(user_id, "mate", articleNo);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alert;
+	}
+	
+	//소모임 신고버튼 체크
+	@ResponseBody
+	@PostMapping("/alertcheck2")
+	public boolean alertcheck2(@RequestParam(value="no")int articleNo) {
+		String user_id = (String) session.getAttribute("id");
+		boolean alert =false;
+		try {
+			alert = alertService.getAlertTF(user_id, "group", articleNo);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alert;
+	}
+	
 
 }

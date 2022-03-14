@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Document</title>
+<title>메이트 구하기</title>
 <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <script type="text/javascript"src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
 <style>
@@ -69,7 +69,7 @@ height:400px;
 				</div>
 				<div style="display: flex; align-items: center; margin-right: 55px; justify-content: center; margin-top: 50px;">
 					<button id="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">수정</button>
-					<button style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;"><a href="mate_main"">취소</a></button>
+					<button style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;"><a href="mate_main" style="color:white;">취소</a></button>
 				</div>
 			</div>
 		</div>
