@@ -201,7 +201,8 @@ color: white; */
 						<option value="title">제목</option>
 						<option value="id">작성자</option>
 						<option value="cont">내용</option>
-					</select> <input id="input" name="input" type="text"style="width: 500px; height: 40px; margin-left: 10px; font-size: 15px;"placeholder="검색어를 입력하세요." value='${input }'>
+					</select>
+					<input id="input" name="input" type="text"style="width: 500px; height: 40px; margin-left: 10px; font-size: 15px;"placeholder="검색어를 입력하세요." value='${input }'>
 				</div>
 				<input type="submit"style="width: 90px; height: 40px; font-size: 15px; border-radius: .25rem; background-color: #59ab6e; border: 1px solid #59ab6e; color: white; margin: auto; display: block; margin-top: 60px; cursor: pointer;"value="검색">
 			</div>

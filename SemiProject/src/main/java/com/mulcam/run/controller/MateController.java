@@ -62,18 +62,6 @@ public class MateController {
 		return mv;
 	}
 	
-//	@RequestMapping(value = "/accmenu", method = RequestMethod.GET)
-//	public String accmenu(HttpServletRequest request, Model model) {
-//		String cpage = request.getParameter("cpage");
-//		HttpSession session = request.getSession();
-//		String id = (String)session.getAttribute("id");
-//		if(id==null || id.equals("")) {
-//			return "login";
-//		}
-//		model.addAttribute("cpage", cpage);
-//		return "mate_main";
-//	}
-	
 	//번개 모달창 띄우는기능
 	@ResponseBody
 	@PostMapping("/Mmodal")
@@ -117,7 +105,7 @@ public class MateController {
 		return result;
 	}
 	
-	//좋아요 기능
+	//참여 기능
 	@ResponseBody
 	@PostMapping("/Like")
 	public boolean Like(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
@@ -138,7 +126,8 @@ public class MateController {
 		}
 		return islike;
 	}
-	//좋아요 기능
+	
+	//참여 기능
 	@ResponseBody
 	@PostMapping("/Likecheck")
 	public boolean Likecheck(@RequestParam(value="no")int mate_articleNO,HttpServletRequest request){
@@ -195,7 +184,6 @@ public class MateController {
 			List<GroupAndMate> mates = mateService.allpostInfo();
 			List<String> mapinfo = mateService.allMapInfo();
 			List<String> titleinfo = mateService.allTitleInfo();
-//			Map<String,Object> map = new HashMap<>();
 			mv.addObject("mates",mates);
 			mv.addObject("mapinfo",mapinfo);
 			mv.addObject("titleinfo",titleinfo);
@@ -242,11 +230,6 @@ public class MateController {
 	}
 	
 	
-	//번개 게시물 작성페이지로 이동
-	/*
-	 * @GetMapping("/mate_makemate") public String mate_makemate() { return
-	 * "mate_makemate"; }
-	 */
 	//번개 게시물 작성페이지로 이동
 	@GetMapping("/mate_makemate")
 	public ModelAndView mate_makemate() {

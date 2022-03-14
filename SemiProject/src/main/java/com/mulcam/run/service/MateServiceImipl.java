@@ -92,26 +92,16 @@ public class MateServiceImipl implements MateService {
 		
 	}
 
-//	@Override
-//	public Warning makeWarning(Warning warning) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {
 		return mateDAO.ptpInfo(mate_articleNO);
 	}
 	
-//	@Override
-//	public Ptp ptpInfo(int mate_articleNO) throws Exception {
-//		return mateDAO.ptpInfo(mate_articleNO);
-//	}
 
 	@Override
 	public void like(int mate_articleNO) throws Exception {
 			mateDAO.like(mate_articleNO);
-//			mateDAO.insertptp(mate_articleNO);
 	}
 
 	@Override
@@ -152,7 +142,6 @@ public class MateServiceImipl implements MateService {
 		map.put("type", type);
 		map.put("option", option);
 		map.put("input", input);
-//		mateDAO.searchList(map);
 		System.out.println(type+" "+option+" "+input);
 		return mateDAO.searchList(map);
 	}
@@ -224,14 +213,5 @@ public class MateServiceImipl implements MateService {
 		return check;
 	}
 
-
-//	@Override
-//	public Ptp ptpInfo(int mate_articleNO, String user_id) throws Exception {
-//		Map<String,Object> ptp = new HashMap<>();
-//		ptp.put("mate_articleNO",mate_articleNO);
-//		ptp.put("user_id",user_id);
-//		if(ptp==null) throw new Exception("정보 없음");
-//		return (com.mulcam.run.dto.Ptp) ptp;
-//	}
 }
 

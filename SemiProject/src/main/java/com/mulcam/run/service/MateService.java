@@ -30,7 +30,6 @@ public interface MateService{
 	void makeMate(Mate mate)throws Exception; //번개 게시물 생성
 	void makeGroup(Group group)throws Exception; //소모임 게시물 생성
 	
-	//Warning makeWarning(Warning warning)throws Exception; //신고 접수
 	void mateWarning(int mate_articleNO)throws Exception; //번개신고 접수
 	void groupWarning(int group_articleNO)throws Exception; //소모임신고 접수
 	
@@ -41,19 +40,15 @@ public interface MateService{
 	void likeCancel(int mate_articleNO) throws Exception; //참여버튼(참여자 수 +1)
 	
 	List<Ptp> ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
-//	Ptp ptpInfo(int mate_articleNO) throws Exception; //참여자 조회
 	public boolean checkptp(String user_id, int mate_articleNO) throws Exception;
-	
-	//게시물 검색
 
-	void makePtp(int mate_articleNO, String user_id)throws Exception;
-	void deletePtp(int mate_articleNO, String user_id)throws Exception;
+	void makePtp(int mate_articleNO, String user_id)throws Exception; //참여자리스트에 추가
+	void deletePtp(int mate_articleNO, String user_id)throws Exception; //참여자리스트에 제거
 
-	Boolean likequery(int mate_articleNO, String user_id)throws Exception;
-//	Ptp ptpInfo(int mate_articleNO, String user_id)throws Exception;
+	Boolean likequery(int mate_articleNO, String user_id)throws Exception; //참여자여부 확인
 	
-	List<GroupAndMate> searchInfo(String type, String option, String input)throws Exception;
-	List<GroupAndMate> searchInfoAll(String option, String input)throws Exception;
+	List<GroupAndMate> searchInfo(String type, String option, String input)throws Exception; //검색
+	List<GroupAndMate> searchInfoAll(String option, String input)throws Exception; //검색2
 	
 	List<String> allMapInfo() throws Exception; //전체 게시물 조회
 	List<String> allTitleInfo() throws Exception; //전체 게시물 조회

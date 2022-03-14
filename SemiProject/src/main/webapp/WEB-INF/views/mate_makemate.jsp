@@ -167,9 +167,6 @@ height:400px;
 			return false;
 		});
 	});  
-	 /* kakao.maps.event.addListener(map, 'idle', function() {
-		    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-		}); */
 
 	function searchAddrFromCoords(coords, callback) {
 		    // 좌표로 행정동 주소 정보를 요청합니다

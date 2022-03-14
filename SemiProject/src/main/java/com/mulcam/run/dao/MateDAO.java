@@ -46,7 +46,6 @@ public interface MateDAO {
 	public void like(int mate_articleNO)throws Exception; //번개참여(참여자수 +1)
 	public void likeCancel(int mate_articleNO)throws Exception; //번개참여취소(참여자수 -1)
 	
-	//연습
 	public void insertptp(Map map)throws Exception; //번개참여시 ptp테이블에 아이디값 저장
 	public void deleteptp(Map map)throws Exception; //번개참여취소시 ptp테이블에 아이디값 삭제
 	
@@ -55,9 +54,8 @@ public interface MateDAO {
 	
 	public boolean checkPtp(Ptp ptp) throws Exception; //참여여부 확인
 	
-	//게시물 검색
-	public List<GroupAndMate> searchList(Map map) throws Exception; 
-	public List<GroupAndMate> searchListAll(Map map) throws Exception; 
+	public List<GroupAndMate> searchList(Map map) throws Exception; //게시물 검색
+	public List<GroupAndMate> searchListAll(Map map) throws Exception; //게시물 검색2
 	
 	public List<String> searchmapInfo() throws Exception; //전체게시물의 맵정보만 조회
 	public List<String> searchtitleInfo() throws Exception; //전체게시물의 맵정보만 조회
