@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.run.dao.MateDAO;
+import com.mulcam.run.dto.Alert;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
@@ -214,6 +215,13 @@ public class MateServiceImipl implements MateService {
 	public void groupWarningCanc(int group_articleNO) throws Exception {
 		mateDAO.groupWarningCanc(group_articleNO);
 		
+	}
+
+	@Override
+	public boolean checkptp(String user_id, int mate_articleNO) throws Exception {
+		Ptp ptp = new Ptp(mate_articleNO,user_id);
+		boolean check = mateDAO.checkPtp(ptp);
+		return check;
 	}
 
 

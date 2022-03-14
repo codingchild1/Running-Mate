@@ -462,6 +462,24 @@ body {
         				alert("실패");
         			}
         		});
+            //참여버튼 체크
+            	 $.ajax({     
+        			type:"post",
+        			dataType:"text",
+        			async:false,
+        			url:"http://localhost:8090/Likecheck",
+        			data:{"no":no},
+        			success: function(data, textStatus){ 
+        				if(data=='true'){
+        					$('.ptp').html('참여취소');
+        				}else{
+        					$('.ptp').html('참여');
+        				}
+        			},
+        			error:function(data, textStatus){
+        				alert("실패");
+        			}
+        		}); 
 
             //소모임 모달폼 ajax
     	}else{

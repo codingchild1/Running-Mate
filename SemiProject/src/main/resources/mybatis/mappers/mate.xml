@@ -179,6 +179,11 @@
 		]]>
 	</select>
 	
+	<select id="checkPtp" parameterType="ptp" resultType="boolean">
+		select EXISTS (select * from ptp 
+			where user_id= #{user_id} and mate_articleNO=#{mate_articleNO} limit 1) as success
+	</select>
+	
 	<!-- mate and group전체게시물 검색기반 조회 -->
  	 <select id="searchList" resultType="GroupAndMate" parameterType="map">
 		<![CDATA[

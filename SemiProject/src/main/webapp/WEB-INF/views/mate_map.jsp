@@ -573,6 +573,24 @@ list-style: none;
       				alert("실패");
       			}
       		});
+          	 //참여버튼 체크
+       	 $.ajax({     
+   			type:"post",
+   			dataType:"text",
+   			async:false,
+   			url:"http://localhost:8090/Likecheck",
+   			data:{"no":no},
+   			success: function(data, textStatus){ 
+   				if(data=='true'){
+   					$('.ptp').html('참여취소');
+   				}else{
+   					$('.ptp').html('참여');
+   				}
+   			},
+   			error:function(data, textStatus){
+   				alert("실패");
+   			}
+   		});
 
             //소모임 모달폼 ajax
     	}else{
@@ -739,7 +757,28 @@ list-style: none;
 	        			alert("실패");
 	        		}
         		});
-		});
+	            //참여자 리스트
+	    	    $.ajax({     
+	    			type:"post",
+	    			dataType:"text",
+	    			async:false,
+	    			url:"http://localhost:8090/ptplist",
+	    			data:{"no":$('#ptp').val()},
+	    			success: function(data, textStatus){ 
+	    				$('.list').html('');
+	    				var jdata = JSON.parse(data);
+	    				console.log(jdata);
+	    			 	for(let i of jdata) {
+	    				 	var clist = $('.list').html()+'<span style="float: left;">'+i.user_id+"</span><br>";
+	    				 	$('.list').html(clist);
+	    				}
+	    			},
+	    			error:function(data, textStatus){
+	    				alert("실패");
+	    			}
+	    		}); 
+		
+	});
 		
 		//게시물 삭제 기능ajax
  		$('.delete').click(function(){
