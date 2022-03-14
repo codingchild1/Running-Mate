@@ -185,9 +185,18 @@ public class RouteController {
 	}
 	
 	
-	@RequestMapping(value="/route_modify", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content) {
+	@PostMapping(value="/route_modify")
+	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content,  @RequestParam(value="route_file") MultipartFile file) {
 		ModelAndView mv = new ModelAndView("route_post");
+		String path = servletContext.getRealPath("/thumb/route/");
+		File destFile = new File(path+file.getOriginalFilename());
+		try {			
+			file.transferTo(destFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		route.setRoute_thumb(file.getOriginalFilename());
+		
 		try {
 			int articleNo = route.getRoute_articleNo();
 			route.setRoute_content(content.trim());
@@ -207,7 +216,7 @@ public class RouteController {
 	
 	// 게시물 등록
 	@PostMapping(value="/route_reg")
-	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
+	public String registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
 		ModelAndView mv = new ModelAndView("route_reg");
 		String path = servletContext.getRealPath("/thumb/route/");
 		File destFile = new File(path+file.getOriginalFilename());
@@ -227,7 +236,7 @@ public class RouteController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return mv;
+		return "redirect:/route";
 	}
 	
 	//코스의 중심 좌표를 통해 주소명 받아오기

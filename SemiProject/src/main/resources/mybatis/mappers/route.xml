@@ -106,7 +106,7 @@
 	
 	<update id="updateRoute" parameterType="route">
 		<![CDATA[
-			update route set route_title=#{route_title},route_content=#{route_content}, route_center=#{route_center},
+			update route set route_title=#{route_title}, route_date=now(), route_thumb=#{route_thumb}, route_content=#{route_content}, route_center=#{route_center},
 							route_area=#{route_area}, route_mapinfo=#{route_mapinfo}, route_distance=#{route_distance}
 				where route_articleNo=#{route_articleNo }
 		]]>

@@ -148,7 +148,7 @@
 			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
 				<h2>회원 정보 수정</h2>
 				<div style="margin: 30px;padding: 10px 10px;">
-					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/다운로드.jpg'" width="100px" height="100px"  />
+					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/다운로드.jpg'" style="width:100px; height:100px;  border-radius:70%;" />
 					<input type="file" id="profile" name="profile" />
 				</div>
 				<div class="textForm">
@@ -170,6 +170,14 @@
 			</form>
 		<script>
 			$(document).ready(function(){
+				$('#profile').change(function(event){
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$("#img").attr("src", e.target.result);	
+					};
+					reader.readAsDataURL(event.target.files[0]);
+				});
+				
 				$('#submit').click(function(){
 					document.form1.action = "update";
 					document.form1.submit();
