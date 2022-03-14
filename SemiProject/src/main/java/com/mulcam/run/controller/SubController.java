@@ -1,16 +1,20 @@
 package com.mulcam.run.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mulcam.run.dto.Warning;
 import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.RouteService;
 import com.mulcam.run.service.TodayService;
+import com.mulcam.run.service.WarningService;
 
 @Controller
 public class SubController {
@@ -29,18 +33,22 @@ public class SubController {
 	@Autowired
 	TodayService todayService;
 
+	@Autowired
+	WarningService warningService;
+	
+	@Autowired
+	HttpSession session;
 	
 	@ResponseBody
 	@PostMapping(value="/likes")
-	public boolean likes(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
+	public boolean likes(@RequestParam("user_id") String user_id ,@RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
 		boolean likes = false;
-		
+		String my_id = (String) session.getAttribute("id");
 		// 현재 게시물에 like에 대한 정보 확인
 		try {
-			System.out.println("좋아요");
-			likes = likesService.getLikesTF(user_id, board_type, board_no);
+			likes = likesService.getLikesTF(my_id, board_type, board_no);
 			if(likes == false) {
-				likesService.insertLikes(user_id, board_type, board_no);
+				likesService.insertLikes(my_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
 					break;
@@ -56,8 +64,7 @@ public class SubController {
 				
 				likes = true;
 			} else {
-				System.out.println("좋아요 취소");
-				likesService.deleteLikes(user_id, board_type, board_no);
+				likesService.deleteLikes(my_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
 					break;
@@ -83,13 +90,12 @@ public class SubController {
 	@PostMapping(value="/alert")
 	public boolean alert(@RequestParam("user_id") String user_id, @RequestParam("board_type") String board_type, @RequestParam("board_no") int board_no) {
 		boolean alert = false;
-		
+		String my_id = (String) session.getAttribute("id");
 		// 현재 게시물에 alert에 대한 정보 확인
 		try {
-			alert = alertService.getAlertTF(user_id, board_type, board_no);
+			alert = alertService.getAlertTF(my_id, board_type, board_no);
 			if(alert == false) {
-				System.out.println("신고");
-				alertService.insertAlert(user_id, board_type, board_no);
+				alertService.insertAlert(my_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
 					mateService.mateWarning(board_no);
@@ -100,15 +106,16 @@ public class SubController {
 				case "today":
 					break;
 				case "route":
-					routeService.LikesPlus(board_no);
+					routeService.routeWarning(board_no);
 					break;
 				default:
 					break;
 				}
 				alert = true;
+				warningService.insert(board_type, board_no, user_id);
+				
 			} else {
-				System.out.println("신고취소");
-				alertService.deleteAlert(user_id, board_type, board_no);
+				alertService.deleteAlert(my_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
 					mateService.mateWarningCanc(board_no);
@@ -119,12 +126,13 @@ public class SubController {
 				case "today":
 					break;
 				case "route":
-					routeService.LikesMinus(board_no);
+					routeService.routeWarningDelete(board_no);
 					break;
 				default:
 					break;
 				}
 				alert = false;
+				warningService.cancel(board_type, board_no, user_id);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

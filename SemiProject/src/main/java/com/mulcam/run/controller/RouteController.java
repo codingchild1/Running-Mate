@@ -150,7 +150,6 @@ public class RouteController {
 			routeService.updateRoutePostView(articleNo);
 			RouteInfo posted = routeService.getRouteInfo(articleNo);
 			mv.addObject("route", posted);	
-			mv.addObject("profileImg", user_profile);	
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());

@@ -123,5 +123,15 @@ public class RouteServiceImpl implements RouteService {
 	public void LikesMinus(int articleNo) throws Exception {
 		routeDAO.updateLikeMinus(articleNo);
 	}
+
+	@Override
+	public void routeWarning(int articleNo) throws Exception {
+		routeDAO.routeWarning(articleNo);		
+	}
+
+	@Override
+	public void routeWarningDelete(int articleNo) throws Exception {
+		routeDAO.routeWarningDelete(articleNo);
+	}
 	
 }

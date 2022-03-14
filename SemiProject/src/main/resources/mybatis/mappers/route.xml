@@ -20,8 +20,10 @@
 	</select>
 			
 	<insert id="insertRoute" parameterType="route">
-		insert into route (user_id, route_title, route_thumb, route_content, route_center, route_area, route_mapinfo, route_distance)
-		values (#{user_id}, #{route_title}, #{route_thumb}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
+		<![CDATA[
+			insert into route (user_id, route_title, route_thumb, route_content, route_center, route_area, route_mapinfo, route_distance)
+			values (#{user_id}, #{route_title}, #{route_thumb}, #{route_content}, #{route_center}, #{route_area}, #{route_mapinfo}, #{route_distance})
+		]]>
 	</insert>
 	
 	<select id="selectRouteList" parameterType="int" resultType="routeinfo">
@@ -115,6 +117,20 @@
 			delete from route where route_articleNo=#{articleNo }
 		]]>
 	</delete>
+	
+	<!-- warning update to true -->
+	<update id="routeWarning" parameterType="int">
+		<![CDATA[
+			update route set warning=true where route_articleNo=#{route_articleNo}
+		]]>
+	</update>
+	
+	<!-- warning update to false -->
+	<update id="routeWarningDelete" parameterType="int">
+		<![CDATA[
+			update route set warning=false where route_articleNo=#{route_articleNo}
+		]]>
+	</update>
 	
 </mapper>
 

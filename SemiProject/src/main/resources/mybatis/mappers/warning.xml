@@ -12,6 +12,43 @@
 			delete from warning where warningid=#{warningid}
 		]]>
 	</delete>
+	
+	
+	<insert id="insert" parameterType="warning">
+		<![CDATA[
+			insert into warning (boardtype, boardno, warningcnt, warningid, warningdate)
+			values (#{boardtype}, #{boardno}, 1, #{warningid}, now())
+		]]>
+	</insert>
+	
+	<select  id="checkWarnings" parameterType="warning" resultType="boolean">
+		<![CDATA[
+			select EXISTS (select * from warning 
+				where boardtype=#{boardtype} and boardno=#{boardno} limit 1) as success
+		]]>
+	</select>
+	
+	<select id="getWarningCnt" parameterType="warning" resultType="int">
+		<![CDATA[
+			select warningcnt from warning where boardtype=#{boardtype} and boardno=#{boardno}
+		]]>
+	</select>
+	
+	<update id="updateWarningPlus"  parameterType="warning">
+		<![CDATA[
+			update warning set warningcnt=warningcnt+1 where boardtype=#{boardtype } and boardno=#{boardno }
+		]]>
+	</update>
+	<update id="updateWarningMinus"  parameterType="warning">
+		<![CDATA[
+			update warning set warningcnt=warningcnt-1 where boardtype=#{boardtype } and boardno=#{boardno }
+		]]>
+	</update>
+	<delete id="deleteWarning" parameterType="warning">
+		<![CDATA[
+			delete from warning where boardtype=#{boardtype } and boardno=#{boardno }
+		]]>
+	</delete>
 </mapper>
 
 <!-- 
