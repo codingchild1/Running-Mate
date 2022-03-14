@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>메이트 구하기</title>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
 <style>
 
 body {
@@ -29,7 +27,7 @@ input:focus {
     height: 400px;
 }
 .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
-height:400px;
+	height:400px;
 }
 </style>
 </head>
