@@ -19,7 +19,7 @@
 			select id, name, password, email, phone, joindate from member order by name
 		]]>
 	</select>
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="Member">
 		<![CDATA[
 			delete from member where id=#{id}
 		]]>
@@ -28,9 +28,11 @@
 		update member set email=#{email}, phone=#{phone}
 		where id = #{id}
 	</update>
-	<update id="changePw" parameterType="String">
-		update member set password=#{newPw}
+	<update id="changePw" parameterType="Member">
+		<![CDATA[
+		update member set password=#{password}
 		where id = #{id}
+		]]>
 	</update>
 	<select id="queryPassword" parameterType="Member" resultType="String">
 		<![CDATA[

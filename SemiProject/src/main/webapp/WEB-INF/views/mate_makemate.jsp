@@ -23,6 +23,13 @@ body {
 input:focus {
 	outline: none;
 }
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border-color: var(--ck-color-base-border);
+    height: 400px;
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
+height:400px;
+}
 </style>
 </head>
 <body>
@@ -50,7 +57,9 @@ input:focus {
 				<div id="mapinfo"style="border: 1px solid; width: 300px; height: 300px; margin-top: 20px;"></div>
 				<input type="hidden" id="mate_mapinfo" name="mate_mapinfo" value="">
 				<input type="hidden" id="mate_address" name="mate_address" value="">
-				<textarea id="editor" name="mate_cont"style="width: 100%; height: 600px;"></textarea>
+				<div>
+				<textarea id="editor" name="mate_cont"style="width: 100%; height: 600px;"  placeholder="내용을 입력하세요"></textarea>
+				</div>
 				<div style="display: flex; align-items: center; margin-right: 55px; justify-content: center; margin-top: 50px;">
 					<button id="submit"style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;">작성</button>
 					<button style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; width: 50px; height: 30px; margin: 15px;"><a href="mate_main">취소</a></button>

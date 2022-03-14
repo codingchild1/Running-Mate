@@ -49,7 +49,7 @@
 			<form name="form1" method="post">
 				<div>
 					<label class="control-label" for="memberthumb">프로필</label>
-					<img src="/profileview/${member.memberthumb }" onerror="this.src='/profile/다운로드.jpg'" width="100px" height="100px"  />
+					<img src="/profileview/${member.memberthumb }" onerror="this.src='/profile/Untitled.png'" width="100px" height="100px"  />
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="id">아이디</label>

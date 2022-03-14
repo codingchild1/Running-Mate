@@ -22,7 +22,14 @@
         input:focus{
             outline: none;
         }
-    </style>
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border-color: var(--ck-color-base-border);
+    height: 400px;
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
+	height:400px;
+}
+</style>
     
 </head>
 <body>

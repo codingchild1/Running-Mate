@@ -95,7 +95,7 @@ list-style: none;
         }
 
         #modal .modal-window {
-            background: rgba(69, 139, 197, 0.70);
+            background: #d3d3d3;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             backdrop-filter: blur(50px);
             /* backdrop-filter: none; */
@@ -103,7 +103,7 @@ list-style: none;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
             width: 400px;
-            height: 576px;
+           /*  height: 576px; */
             /* position: relative; */
             top: -100px;
             padding: 15px;
@@ -127,7 +127,7 @@ list-style: none;
             padding-right: 10px;
             cursor: pointer;
             text-shadow: 1px 1px 2px gray;
-            color: white;
+            color: black;
         }
 
         #modal .content {
@@ -147,8 +147,8 @@ list-style: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            /* background: rgba(255, 255, 255, 0.25); */
+            /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
             /* backdrop-filter: blur(1.5px); */
             /* -webkit-backdrop-filter: blur(1.5px); */
             border-radius: 10px;
@@ -157,7 +157,7 @@ list-style: none;
         }
 
         #modal2 .modal-window {
-            background: rgba(69, 139, 197, 0.70);
+            background:  #d3d3d3;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             backdrop-filter: blur(50px);
             /* backdrop-filter: none; */
@@ -189,7 +189,7 @@ list-style: none;
             padding-right: 10px;
             cursor: pointer;
             text-shadow: 1px 1px 2px gray;
-            color: white;
+            color: black;
         }
 
         #modal2 .content {
@@ -288,12 +288,12 @@ list-style: none;
             <div style=" vertical-align: middle;margin-top: 15px;">
             <c:choose>
 			<c:when test="${groupandmate.type eq 'g'}">
-                <span><img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 5px"></span>
+                <span><img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px"></span>
                 <span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled></span>
           	</c:when>
 			<c:otherwise>
-				<span><img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 5px"></span>
-                <span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 3px;"disabled></span>
+				<span><img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px"></span>
+                <span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 6px;"disabled></span>
 			</c:otherwise>
 			</c:choose>     
                 <button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더보기</button>
@@ -315,26 +315,26 @@ list-style: none;
 		<div class="modal-window">
 			<div class="title">
 				<input name='mate_title' id="mate_title" 
-					style="color: black; border: none; font-size: 20px; font-weight: bold; background-color: rgba(123, 173, 213, 0.70); margin-top: 20px;"
+					style="color: black; border: none; font-size: 20px; font-weight: bold; background-color:#d3d3d3; margin-top: 20px;"
 					value='' >
 				<div class="close-area">X</div>
 			</div>
 			<input name='user_id' id="user_id"
-				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
+				style="color: black; border: none; font-size: 15px; background-color: #d3d3d3;padding-left: 10px; margin-top: 10px;"
 				value=''>
 			<div style="font-size: 13px; float: right;display: flex;">
-				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:5px;"></span> </form>
+				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color: #d3d3d3;cursor:pointer;margin:5px;"></span> </form>
 				<span
-					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span> 
+					id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color: #d3d3d3;cursor:pointer;">삭제</button></span> 
 					<span id="alerts" style="margin: 5px;">
 					<!-- <input type="text" class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;" value="신고"> -->
-					<span class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">신고</span>
+					<span class="alert" style="border:none;background-color: #d3d3d3;cursor:pointer;width: 55px;padding:0px">신고</span>
 					<input type="hidden" id="mwarning" name="mwarning" value=''>
 					<!-- <span class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">취소</span> -->
 					</span>
 			</div>
 			<input name='mate_date' type="text"
-				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba(123, 173, 213, 0.70);"
+				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: #d3d3d3;"
 				value='' disabled>
 			<div class="content">
 				<div id="staticMap"
@@ -349,18 +349,17 @@ list-style: none;
 				<!-- <div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin: 7px; margin-right: 0px; float: right; position: relative; height: 32px;">
-					<div class="info" style="margin: 5px; width: 43px;">
+					<div class="info" style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;line-height: 30px;">
 						조회
 						<div class="ptplist"
-							style="position: relative; border: 1px solid; width: 200px; top: -150px; margin: 10px; background-color: #2b2e4a;">
-							<p style="font-size: 13px; margin: 2px; padding: 5px;">참여자 목록</p>
-							<div class="list" style="margin: 5px;">
+							style="position: relative; border: 1px solid; width: 150px; top: -150px; margin: 10px; background-color: #59ab6e;">
+							<p style="font-size: 13px; margin: 2px; padding: 5px;display:flex;">참여자 목록</p>
+							<div class="list" style="margin: 5px;margin-left:10px">
 								<input type="hidden" id="ptpli" name="ptpli" value=''>
 							</div>
 						</div>
 					</div>
-					<!-- <button class="ptp" style="margin: 5px; width: 43px;">참여</button> -->
-					<input class="ptp" type="text" style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'>
+					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer">참여</button>
 				</div>
 			</div>
 		</div>
@@ -370,27 +369,27 @@ list-style: none;
 		<div class="modal-window">
 			<div class="title">
 				<input name="group_title" id="group_title"
-					style="color: black; border: none; font-size: 20px; font-weight: bold; background-color: rgba(123, 173, 213, 0.70); margin-top: 20px;"
+					style="color: black; border: none; font-size: 20px; font-weight: bold; background-color: #d3d3d3; margin-top: 20px;"
 					value='' disabled>
 				<div class="close-area">X</div>
 			</div>
 			<input name="user_id" id="user_id"
-				style="color: black; border: none; font-size: 15px; background-color: rgba(123, 173, 213, 0.70); padding-left: 10px; margin-top: 10px;"
+				style="color: black; border: none; font-size: 15px; background-color:#d3d3d3; padding-left: 10px; margin-top: 10px;"
 				value=''>
 
 			<div style="font-size: 13px; float: right;display: flex;">
-				<form action="mate_updategroup" method="get"><span id="update2"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:rgba(123, 173, 213, 0.70); cursor:pointer;margin:4px;"></span> </form>
-				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;">삭제</button></span>
+				<form action="mate_updategroup" method="get"><span id="update2"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3;cursor:pointer;margin:4px;"></span> </form>
+				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:#d3d3d3;cursor:pointer;">삭제</button></span>
 				<span id="alerts" style="margin: 5px;">
 					<!-- <input type="text" class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;" value="신고"> -->
-					<span class="alert2" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">신고</span>
+					<span class="alert2" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;">신고</span>
 					<input type="hidden" id="gwarning" name="gwarning" value=''>
 					<!-- <span class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;">취소</span> -->
 					</span>
 
 			</div>
 			<input name="group_date" type="text"
-				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color: rgba(123, 173, 213, 0.70);"
+				style="color: black; height: 20px; margin: 10px; border: none; font-size: 12px; background-color:#d3d3d3;"
 				value='' disabled>
 			<div class="content">
 				<div id="staticMap2"
@@ -549,11 +548,11 @@ list-style: none;
         		url:"http://localhost:8090/ptplist",
         		data:{"no":no},
         		success: function(data, textStatus){ 
+        			$('.list').html('');
         			 var jdata = JSON.parse(data);
         			 for(let i of jdata) {
-        					$('.list').replaceWith('<input type="text" name="ptplist" value=""><br>');
-        					var idx = $('input[name="ptplist"]').index(this);
-        					$('input[name=ptplist]').eq(idx).val(i.user_id);
+        				var clist = $('.list').html()+'<span style="float: left;">'+i.user_id+"</span><br>";
+     				 	$('.list').html(clist);
         				}
         		
         		},
@@ -704,10 +703,10 @@ list-style: none;
 	        		success: function(data, textStatus){
 	        			if(data=='false') {
 	        				alert("참여가 완료되었습니다.");
-	        				$('.ptp').attr('value','참여취소');
+	        				$('.ptp').html('참여취소');
 	        			} else{
 	        				alert("참여가 취소되었습니다.");
-	        				$('.ptp').attr('value','참여');
+	        				$('.ptp').html('참여');
 	        			}
 	        		},
 	        		error:function(data, textStatus){

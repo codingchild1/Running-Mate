@@ -16,7 +16,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 }
-
+.profile {
 	width: 40px;
 	height: 40px;
 	border-radius: 70%;
@@ -24,7 +24,13 @@ body {
 input:focus {
 	outline: none;
 }
-
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border-color: var(--ck-color-base-border);
+    height: 400px;
+}
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
+height:400px;
+}
 </style>
 </head>
 <body>

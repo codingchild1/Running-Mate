@@ -66,7 +66,7 @@ button a {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
+	/* background: rgba(255, 255, 255, 0.25); */
 	/* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
 	/* backdrop-filter: blur(1.5px); */
 	/* -webkit-backdrop-filter: blur(1.5px); */
@@ -109,7 +109,7 @@ button a {
 	padding-right: 10px;
 	cursor: pointer;
 	text-shadow: 1px 1px 2px gray;
-	color: white;
+	color: black;
 }
 #modal .content {
 	padding: 0px 10px;
@@ -124,7 +124,7 @@ button a {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
+	/* background: rgba(255, 255, 255, 0.25); */
 	/* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
@@ -158,7 +158,7 @@ button a {
 	padding-right: 10px;
 	cursor: pointer;
 	text-shadow: 1px 1px 2px gray;
-	color: white;
+	color: black;
 }
 #modal2 .content {
 	/* margin-top: 20px; */
@@ -179,7 +179,7 @@ body {
 </head>
 
 <body>
-	<%-- <%@include file ="header.jsp" %> --%>
+	 <%@include file ="header.jsp" %> 
 	<!--  <form id='form' action="main" method="post">  -->
 	<div style="width: 1060px; padding: 10px; margin: 20px auto;">
 		<h1>메이트 구하기</h1>
@@ -217,11 +217,11 @@ body {
 					<div style="margin: 5px; margin-top: 25px; padding: 5px; vertical-align: middle;">
 						<c:choose>
 							<c:when test="${groupandmate.type eq 'g'}">
-						 		<span><img class="heart" src="images/white.png"style="width: 30px; height: 30px;"></span> 
+						 		<span><img class="heart" src="images/white.png"style="width: 30px; height: 30px;margin-bottom:17px;"></span> 
 								<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px;  vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;color:white;"disabled></span>
 							</c:when>
 							<c:otherwise>
-								<span><img class="heart" src="images/ptp2.png"style="width: 30px; height: 30px;"></span> 
+								<span><img class="heart" src="images/ptp2.png"style="width: 30px; height: 30px;margin-bottom:17px;"></span> 
 								<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px; display: inline-block; vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"disabled></span>
 							</c:otherwise>
 						</c:choose>
@@ -245,7 +245,7 @@ body {
 				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3; cursor:pointer;margin:5px;"></span> </form>
 				<span id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:#d3d3d3;cursor:pointer;">삭제</button></span> 
 					<span id="alerts" style="margin: 5px;">
-						<span class="alert" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;">신고</span>
+						<span class="alert" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;padding:0px">신고</span>
 						<input type="hidden" id="mwarning" name="mwarning" value=''>
 					</span>
 			</div>
@@ -266,7 +266,7 @@ body {
 							</div>
 						</div>
 					</div>
-					<button class="ptp" type="text" style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'>참여</button>
+					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer">참여</button>
 				</div>
 			</div>
 		</div>
@@ -687,6 +687,6 @@ body {
 		
 
 </script>
-<%--  <%@include file ="fotter.jsp" %> --%>
+  <%@include file ="fotter.jsp" %> 
 </body>
 </html>

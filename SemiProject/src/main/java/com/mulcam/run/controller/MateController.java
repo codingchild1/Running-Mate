@@ -158,7 +158,6 @@ public class MateController {
 							@RequestParam(value="option") String option,
 							@RequestParam(value="input") String input,Model model) {
 		try {
-			System.out.println(type);
 			if(type.equals("all")) {
 				List<GroupAndMate> mates = mateService.searchInfoAll(option, input);
 				model.addAttribute("mates",mates);
@@ -333,7 +332,6 @@ public class MateController {
 		ModelAndView mv = new ModelAndView("redirect:/mate_main");
 		try{
 			mateService.updateGroup(group);
-			System.out.println("controller");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
