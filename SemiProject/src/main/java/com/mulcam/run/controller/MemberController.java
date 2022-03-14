@@ -185,13 +185,28 @@ public class MemberController {
 		}
 	}
 
-	//바뀌긴 하는데 경로가 하나도 안 맞음
 	@RequestMapping(value="update", method= {RequestMethod.POST})
-	public String memberUpdate(@ModelAttribute Member mem) {
-		memberService.updateMember(mem);
+	public String memberUpdate(@RequestParam(value="profile") MultipartFile profile, @RequestParam(value="email") String email, @RequestParam(value="phone")
+	String phone, @RequestParam(value="id") String id) {
+		String path = servletContext.getRealPath("/profile/");
+		File destFile = new File(path+profile.getOriginalFilename());
+		try {
+			profile.transferTo(destFile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		Member mem = new Member(profile.getOriginalFilename(), email, phone, id);
+
+		try {
+			memberService.updateMember(mem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/mypage";
+		
+
 	}
-	
 	
 	@GetMapping(value="/delete")
 	public String deleteForm() {
@@ -210,13 +225,12 @@ public class MemberController {
 		return "login";
 	}
 	
-	//비밀번호 변경에서 modify가 안 먹힘
 	@PostMapping(value="/changepw")
-	public String pwChange(@RequestParam("password") String password, @RequestParam("newPw") String newPw, Member mem) {
+	public String pwChange(@RequestParam("password") String password, @RequestParam("newPw") String newPw) {
 		String id = (String) session.getAttribute("id");
 		String pw = memberService.checkPw(id);
+		Member mem = new Member(id, newPw);
 		if(password.equals(pw)) {
-			mem.setPassword(newPw);
 			memberService.modifyPw(mem);
 			session.invalidate();
 			return "login";
@@ -230,8 +244,6 @@ public class MemberController {
 	public String changePw() {
 		return "changepw";
 	}
-	
-	
 	
 	
 }

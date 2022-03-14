@@ -10,10 +10,21 @@ public class Warning {
 	String warningid;
 	Date warningdate;
 	
+	//전체 생성자
+	public Warning() {}
 	public Warning(String boardtype, int boardno, String warningid) {
 		this.boardtype = boardtype;
 		this.boardno = boardno;
 		this.warningid = warningid;
+	}
+	public Warning(int warningno, String boardtype, int boardno, int warningcnt, String warningid,
+			Date warningdate) {
+		this.warningno=warningno;
+		this.boardtype = boardtype;
+		this.boardno = boardno;
+		this.warningcnt=warningcnt;
+		this.warningid = warningid;
+		this.warningdate=warningdate;
 	}
 	
 	public int getWarningno() {
