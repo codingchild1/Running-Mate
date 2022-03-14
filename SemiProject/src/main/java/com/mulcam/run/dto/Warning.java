@@ -9,6 +9,13 @@ public class Warning {
 	int warningcnt;
 	String warningid;
 	Date warningdate;
+	
+	public Warning(String boardtype, int boardno, String warningid) {
+		this.boardtype = boardtype;
+		this.boardno = boardno;
+		this.warningid = warningid;
+	}
+	
 	public int getWarningno() {
 		return warningno;
 	}

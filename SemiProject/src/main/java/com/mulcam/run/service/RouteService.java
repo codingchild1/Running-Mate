@@ -18,4 +18,7 @@ public interface RouteService {
 	public void LikesPlus(int articleNo) throws Exception;
 	public void LikesMinus(int articleNo) throws Exception;
 	public void removeRouteBoard(int articleNo) throws Exception;
+	
+	void routeWarning(int articleNo)throws Exception; 
+	void routeWarningDelete(int articleNo)throws Exception; 
 }

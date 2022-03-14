@@ -27,6 +27,10 @@ public interface RouteDAO {
 	public void updateLikePlus(int articleNo);
 	public void updateLikeMinus(int articleNo);
 	
+	// warning update
+	public void routeWarning(int route_articleNo) throws Exception; 
+	public void routeWarningDelete(int route_articleNo) throws Exception; 
+
 	//public List<Route> selectRoute();			//select 코스 게시물 list 기준 by 지역 & 거리
 	//public void updateViews();				//update 조회수
 	//public List<Route> selectBest3();			//select 기준 = 내 위치 orderby 3

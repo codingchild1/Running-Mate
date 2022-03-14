@@ -63,20 +63,19 @@
 				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a><br>
 			</c:if><br>
         	
-			<img src="/profileview/${profileImg }" class="userProfile">
+			<img src="/profileview/${route.memberthumb }" class="userProfile">
 			<span id="user_id">${route.user_id }</span>
 			<span id="board_time">${route.route_date }</span>
 			
-			<span id="alerts" onclick=alert()>
-			<c:choose>
-			<c:when test="${alert eq true }">
-				<span id="alert" style="float:right; padding-left:10px;">신고취소</span>
-			</c:when>
-			<c:when test="${alert eq false }">
-				<span id="alert" style="float:right; padding-left:10px;">신고</span>
-			</c:when>
-			</c:choose>
-			</span>
+			<c:if test="${!empty id }">
+    			<span id="alerts" onclick=alert()>
+				<c:choose>
+					<c:when test="${alert eq true }"><span id="alert" style="float:right; padding-left:10px;">신고취소</span></c:when>
+					<c:when test="${alert eq false }"><span id="alert" style="float:right; padding-left:10px;">신고</span></c:when>
+				</c:choose>
+				</span>
+    		</c:if>
+			
 			<span style="float:right;">${route.route_views }</span><span style="float:right;">조회</span>
 			
 		</div><br><br>
@@ -86,15 +85,13 @@
 			<div id="map" style="width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; "></div>
     	</div><br><br>
     	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
-       		<div id="likes" onclick=changeImg() style="text-align:center;">				
-       			<c:choose>
-				<c:when test="${likes eq true }">
-					<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
-				</c:when>
-				<c:when test="${likes eq false }">
-					<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
-				</c:when>
+       		<div id="likes" onclick=changeImg() style="text-align:center;">	
+       			<c:if test="${!empty id }">
+	    		<c:choose>
+					<c:when test="${likes eq true }"><img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " /></c:when>
+					<c:when test="${likes eq false }"><img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " /></c:when>
 				</c:choose>
+    			</c:if>	
 			</div>
 			<br><hr>
 		</div>
