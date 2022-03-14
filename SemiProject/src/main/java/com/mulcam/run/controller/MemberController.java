@@ -31,13 +31,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.Member;
+import com.mulcam.run.service.BoardService;
 import com.mulcam.run.service.MemberService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	BoardService boardService;
 	
 	@Autowired
 	HttpSession session;
@@ -148,6 +153,17 @@ public class MemberController {
 		}
 		return "redirect:memberlist";
 	}
+	
+	@GetMapping(value="/fblist")
+	public String fbList(Model model) {
+		String id = (String) session.getAttribute("id");
+		List<Board> fblist = boardService.fbList(id);
+		model.addAttribute("fblist", fblist);
+		for(Board br : fblist) {
+			System.out.println(br.fb_articleNo);
+		}
+		return "fblist";
+		}
 	
 	@GetMapping(value="/profileview/{filename}")
 	public void fileview(@PathVariable String filename,
