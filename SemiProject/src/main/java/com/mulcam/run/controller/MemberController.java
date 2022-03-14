@@ -208,6 +208,7 @@ public class MemberController {
 
 	}
 	
+	
 	@GetMapping(value="/delete")
 	public String deleteForm() {
 		return "delete";
