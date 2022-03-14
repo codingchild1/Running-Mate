@@ -44,7 +44,19 @@
 		max-width:100%;
 	    min-height: 500px;
 	}
+	
+	.user_info { height:80px; display: flex; align-items: center;} 
 	.userProfile { width:25px;; height:25px; }
+	.thumbBox { height:40px; width:40px; overflow:hidden;}
+	.user_id { font-size : 15pt; height:40px; display:inline-block; line-height: 40px; padding-left : 10px;}
+	.route_title { height:50px; font-size:15pt; }
+	.routethumbbox { float:left; width: 30%; height:400px; text-align: center;}
+	.route_thumb { height: 300px; width: 90%;}
+	.thumbfile { text-align: center; }
+	.mapbox { float:right; width: 70%; height:500px; } 
+	
+	.buttons { text-align:center; margin-top:20px; margin-bottom:20px;}
+	.eachbutton { width:15%; display:inline-block;"}
 	</style>
 </head>
 <body>
@@ -57,27 +69,26 @@
         	</div>
 		</div>
 		<div><form id="route_write" action="/route_reg" method="post" enctype="multipart/form-data">
-			<div id="user_info" style="height:80px; display: flex; align-items: center;">
-				<div style="height:40px; width:40px; overflow:hidden;">
-					<img src="/profileview/${profileImg }" id="userImage" class="userProfile">
-				</div>
-				<div id="user_id" style="height:40px; display:inline-block; line-height: 40px; padding-left : 10px;" >${id}</div>
+			<div id="user_info" class="user_info">
+				<div class="thumbBox"><img src="/profileview/${profileImg }" id="userImage" class="userProfile"></div>
+				<div id="user_id" class="user_id">${id }</div>
 			</div>
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
 			<textarea id="editor" name="content"></textarea><br>
 			
 			<div style="height:530px; padding-top: 30px;">
-				<div id="routethumbbox" style="float:left; width: 30%; height:400px; text-align: center;">
+				<div id="routethumbbox" class="routethumbbox">
 					<p id="test" style="text-align: center;">썸네일 이미지</p>
-					<img class="col" src='' id="route_thumb" name="route_thumb" style="height: 300px; width: 90%;">
+					<img src='' id="route_thumb" name="route_thumb" class=" col route_thumb">
 					<br><br><br>
-					<input type="file" id="route_file" name="route_file" style="text-align: center;" />
+					<input type="file" id="route_file" name="route_file" class="thumbfile" />
 				</div>
-				<div id="mapbox" style="float:right; width: 70%; height:500px;">
+				<div id="mapbox" class="mapbox">
 					<p id="test" style="text-align: center;">코스를 그려주세요</p>
 					<div id="map"></div>
 				</div>
 			</div>
+			
 			<input type="hidden" id="form_user_id" name="user_id">
 			<input type="hidden" id="route_center" name="route_center">
 			<input type="hidden" id="route_area" name="route_area">

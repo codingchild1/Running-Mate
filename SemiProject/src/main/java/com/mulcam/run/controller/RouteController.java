@@ -216,7 +216,7 @@ public class RouteController {
 	
 	// 게시물 등록
 	@PostMapping(value="/route_reg")
-	public ModelAndView registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
+	public String registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
 		ModelAndView mv = new ModelAndView("route_reg");
 		String path = servletContext.getRealPath("/thumb/route/");
 		File destFile = new File(path+file.getOriginalFilename());
@@ -236,7 +236,7 @@ public class RouteController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return mv;
+		return "redirect:/route";
 	}
 	
 	//코스의 중심 좌표를 통해 주소명 받아오기

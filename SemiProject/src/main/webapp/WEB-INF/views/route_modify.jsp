@@ -63,7 +63,7 @@
             	<p>나만의 러닝 코스를 공유해주세요!</p>
         	</div>
 		</div>
-		<div><form id="route_modify" action="/route_modify" method="post">
+		<div><form id="route_modify" action="/route_modify" method="post" enctype="multipart/form-data">
 			<div id="user_info" class="user_info">
 				<div class="thumbBox"><img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile"></div>
 				<div id="user_id" class="user_id">${route.user_id}</div>

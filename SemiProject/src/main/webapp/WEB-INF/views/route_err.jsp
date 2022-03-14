@@ -45,7 +45,10 @@
 
 </head>
 <body>
-	<header><%@include file ="header.jsp" %></header>
+	<header>
+		<%@include file ="header.jsp" %>
+		<%@include file ="slides.jsp" %>
+	</header>
 	<main style="width: 70%; margin: 0 auto;">
 		<div class="row align-items-center py-3">
 			<div class="col-md-8 text-black">

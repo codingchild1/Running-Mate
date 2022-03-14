@@ -45,8 +45,11 @@
 		.routeboardHeader { border-bottom: 1px solid gray; padding-bottom:20px; }
 		.userProfile { width:30px; height:30px; }
 		.route_title { height:80px; width: 100%; border: 0px; font-size:23pt; font-weight: bold; margin-bottom: 5px;}
-		.user_id{font-size : 15pt;}
-		.board_time{font-size : 10pt;}
+		.user_id { font-size : 15pt;}
+		.board_time{ font-size : 10pt;}
+		.boardbox { diplay:block; height:580px; }
+		.editorbox { display:inline-block; float:left; width:48%; height:500px;}
+		.mapresult { width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; }
 		input:disabled { background: white; }
 		
 	</style>
@@ -81,9 +84,9 @@
 			<span id="board_time" class="board_time">${route.route_date }</span>		
 		</div><br><br>
 		
-		<div id="routeboardMain" style="diplay:block; height:580px;">
-			<div style="display:inline-block; float:left; width:48%; height:500px;"><textarea id="content" name="content" style="width: 100%; " ></textarea></div>
-			<div id="map" style="width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; "></div>
+		<div id="routeboardMain" class="boardbox">
+			<div class="editorbox"><textarea id="content" name="content" style="width: 100%; " ></textarea></div>
+			<div id="map" class="mapresult"></div>
     	</div><br><br>
     	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
        		<div id="likes" onclick=changeImg() style="text-align:center;">	
