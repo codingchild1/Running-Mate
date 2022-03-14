@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  <title>Document</title>
+  <title>메이트 구하기</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
     <style>
@@ -63,11 +63,11 @@
     <textarea id="editor" name="mate_cont" style="width: 100%;height: 600px;"></textarea>
     <div style=" display: flex;align-items: center;margin-right: 55px;justify-content: center; margin-top: 50px;">
         <button id="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px; margin: 15px;">수정</button>
-        <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;"><a href="mate_main">취소</a></button>
+        <button style="border: 1px solid #59ab6e; background-color: #59ab6e;border-radius:.25rem;color: white; width: 50px; height: 30px;margin: 15px;"><a href="mate_main" style="color:white;">취소</a></button>
     </div>
     </div>
     </div>
-     </form>  
+    </form>  
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a&libraries=services"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>

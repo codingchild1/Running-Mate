@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>메이트 구하기</title>
     <style>
                 * {
             padding: 0;
@@ -686,6 +686,7 @@
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			alert("성공적으로 삭제되었습니다.");
+	        			location.reload();
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
@@ -701,6 +702,7 @@
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			alert("성공적으로 삭제되었습니다.");
+	        			location.reload();
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");

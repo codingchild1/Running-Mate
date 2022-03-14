@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Document</title>
+<title>메이트 구하기</title>
 <style>
 
 * {
@@ -592,6 +592,7 @@ body {
 	        	if(data=='false') {
 	        		alert("참여가 완료되었습니다.");
 	        		$('.ptp').html('참여취소');
+	        		
 	        	} else{
 	        		alert("참여가 취소되었습니다.");
 	        		$('.ptp').html('참여');
@@ -601,6 +602,26 @@ body {
 	        	alert("실패");
 	        }
         });
+	    //참여자 리스트
+	    $.ajax({     
+			type:"post",
+			dataType:"text",
+			async:false,
+			url:"http://localhost:8090/ptplist",
+			data:{"no":$('#ptp').val()},
+			success: function(data, textStatus){ 
+				$('.list').html('');
+				var jdata = JSON.parse(data);
+				console.log(jdata);
+			 	for(let i of jdata) {
+				 	var clist = $('.list').html()+'<span style="float: left;">'+i.user_id+"</span><br>";
+				 	$('.list').html(clist);
+				}
+			},
+			error:function(data, textStatus){
+				alert("실패");
+			}
+		}); 
 	});
 		
 		//게시물 삭제 기능ajax
@@ -613,6 +634,7 @@ body {
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
+	        	location.reload();
 	        },
 	        error:function(data, textStatus){
 	        	alert("실패");
@@ -628,6 +650,7 @@ body {
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
+	        	location.reload();
 	        },
 	        error:function(data, textStatus){
 	        	alert("실패");

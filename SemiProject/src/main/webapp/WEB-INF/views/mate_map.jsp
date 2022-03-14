@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Document</title>
+<title>메이트 구하기</title>
 <style>
  * {
 padding: 0;
@@ -725,6 +725,7 @@ list-style: none;
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			alert("성공적으로 삭제되었습니다.");
+	        			location.reload();
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
@@ -740,6 +741,7 @@ list-style: none;
 	        		data:{"no":$('#ptp').val()},
 	        		success: function(data, textStatus){
 	        			alert("성공적으로 삭제되었습니다.");
+	        			location.reload();
 	        		},
 	        		error:function(data, textStatus){
 	        			alert("실패");
@@ -908,18 +910,30 @@ list-style: none;
 	 	    					accEle += '<div class="register">'
 		 	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
 		 	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
-		 	    					accEle +=' <div style=" width: 150px;">'
+		 	    					accEle +=' <div style=" width: 130px;">'
 		 	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
-		 	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+		 	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
 		 	    					accEle +='</div>'
-		 	    					accEle +=' <div>'+"번개"+'</div>'
+		 	    					
+		 	    					if(i.type=='g'){
+		 	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'소모임'+'</div>'
+		 	    					}else{
+		 	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'번개'+'</div>'
+		 	    					}
+		 	    					
 		 	    					accEle +='</div>'
 		 	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
-		 	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
-		 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
+		 	    					
+		 	    					if(i.type=='g'){
+		 	    					accEle +='<span>'+'<img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'	
+		 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled>'+'</span>'	
+		 	    					}else{
+		 	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'
+		 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 6px;margin-left: 5px;"disabled>'+'</span>'
+		 	    					}
 		 	    					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
 		 	    					accEle +='</div>'
-		 	    					accEle +=' </div>'
+		 	    					accEle +='</div>'
 	 	    				}  
 	 	    				console.log(accEle);
 	 	    				
@@ -1039,21 +1053,32 @@ list-style: none;
     	   					 /* var jdata =JSON.parse(i); */
     	   					/*  console.log(jdata[i].title); */ 
     	   					accEle += '<div class="register">'
-    	   					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
-    	   					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
-    	   					accEle +=' <div style=" width: 150px;">'
-    	   					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
-    	   					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
-    	   					accEle +='</div>'
-    	   					accEle +=' <div>'+"번개"+'</div>'
-    	   					accEle +='</div>'
-    	   					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
-    	   					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
-    	   					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
-    	   					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
-    	   					accEle +='</div>'
-    	   					accEle +='</div>'
-    	   					count++;
+	 	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+	 	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+	 	    					accEle +=' <div style=" width: 130px;">'
+	 	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	 	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+	 	    					accEle +='</div>'
+	 	    					
+	 	    					if(i.type=='g'){
+	 	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'소모임'+'</div>'
+	 	    					}else{
+	 	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'번개'+'</div>'
+	 	    					}
+	 	    					
+	 	    					accEle +='</div>'
+	 	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+	 	    					
+	 	    					if(i.type=='g'){
+	 	    					accEle +='<span>'+'<img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'	
+	 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled>'+'</span>'	
+	 	    					}else{
+	 	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'
+	 	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 6px;margin-left: 5px;"disabled>'+'</span>'
+	 	    					}
+	 	    					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+	 	    					accEle +='</div>'
+	 	    					accEle +='</div>'
     	   				}  
     	   				console.log(accEle);
     	   				$('.register').detach();
@@ -1155,21 +1180,32 @@ list-style: none;
   					 /* var jdata =JSON.parse(i); */
   					/*  console.log(jdata[i].title); */ 
   					accEle += '<div class="register">'
-  					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
-  					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
-  					accEle +=' <div style=" width: 150px;">'
-  					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
-  					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
-  					accEle +='</div>'
-  					accEle +=' <div>'+"번개"+'</div>'
-  					accEle +='</div>'
-  					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
-  					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
-  					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
-  					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
-  					accEle +='</div>'
-  					accEle +=' </div>'
-  					count++;
+	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+	    					accEle +=' <div style=" width: 130px;">'
+	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+	    					accEle +='</div>'
+	    					
+	    					if(i.type=='g'){
+	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'소모임'+'</div>'
+	    					}else{
+	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'번개'+'</div>'
+	    					}
+	    					
+	    					accEle +='</div>'
+	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+	    					
+	    					if(i.type=='g'){
+	    					accEle +='<span>'+'<img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'	
+	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled>'+'</span>'	
+	    					}else{
+	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'
+	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 6px;margin-left: 5px;"disabled>'+'</span>'
+	    					}
+	    					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+	    					accEle +='</div>'
+	    					accEle +='</div>'
   				}  
   				console.log(count);
   				$('.register').detach();
@@ -1203,21 +1239,32 @@ list-style: none;
   					 /* var jdata =JSON.parse(i); */
   					/*  console.log(jdata[i].title); */ 
   					accEle += '<div class="register">'
-  					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
-  					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
-  					accEle +=' <div style=" width: 150px;">'
-  					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
-  					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
-  					accEle +='</div>'
-  					accEle +=' <div>'+"번개"+'</div>'
-  					accEle +='</div>'
-  					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
-  					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
-  					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
-  					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
-  					accEle +='</div>'
-  					accEle +=' </div>'
-  					count++;
+	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+	    					accEle +=' <div style=" width: 130px;">'
+	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+	    					accEle +='</div>'
+	    					
+	    					if(i.type=='g'){
+	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'소모임'+'</div>'
+	    					}else{
+	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'번개'+'</div>'
+	    					}
+	    					
+	    					accEle +='</div>'
+	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+	    					
+	    					if(i.type=='g'){
+	    					accEle +='<span>'+'<img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'	
+	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled>'+'</span>'	
+	    					}else{
+	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'
+	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 6px;margin-left: 5px;"disabled>'+'</span>'
+	    					}
+	    					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+	    					accEle +='</div>'
+	    					accEle +='</div>'
   				}  
   				console.log(count);
   				$('.register').detach();
@@ -1251,21 +1298,32 @@ list-style: none;
   					 /* var jdata =JSON.parse(i); */
   					/*  console.log(jdata[i].title); */ 
   					accEle += '<div class="register">'
-  					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
-  					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
-  					accEle +=' <div style=" width: 150px;">'
-  					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
-  					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:190px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
-  					accEle +='</div>'
-  					accEle +=' <div>'+"번개"+'</div>'
-  					accEle +='</div>'
-  					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
-  					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;">'+'</span>'
-  					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'" style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;"disabled>'+'</span>'
-  					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
-  					accEle +='</div>'
-  					accEle +='</div>'
-  					count++;
+	    					accEle += '<div style="padding: 2px;  display: flex; align-items:flex-start;justify-content: space-between;">'
+	    					accEle += '<span>'+'<img class="profile" src="'+i.img+'" style="width:40px; height: 40px;margin-top: 10px; margin-right: 10px">'+'</span>'
+	    					accEle +=' <div style=" width: 130px;">'
+	    					accEle +=' <span>'+'<input type="text" id="title" value="'+i.title+'" style="width:150px; height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border:none; background-color: white;" disabled>'+'</span>'
+	    					accEle +='<span>'+'<input type="text" id="id" value="'+i.id+'" style="width:180px; height: 20px;vertical-align: middle; border:none; background-color: white;"disabled>'+'</span>'
+	    					accEle +='</div>'
+	    					
+	    					if(i.type=='g'){
+	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'소모임'+'</div>'
+	    					}else{
+	    					accEle +='<div style="display: inline-block;line-height: 35px;">'+'번개'+'</div>'
+	    					}
+	    					
+	    					accEle +='</div>'
+	    					accEle +=' <div style=" vertical-align: middle;margin-top: 15px;">'
+	    					
+	    					if(i.type=='g'){
+	    					accEle +='<span>'+'<img class="heart" src="images/white.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'	
+	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;color:white;"disabled>'+'</span>'	
+	    					}else{
+	    					accEle +='<span>'+'<img class="heart" src="images/ptp2.png" style="width: 23px; height: 23px;margin-left: 5px;margin-bottom: 6px">'+'</span>'
+	    					accEle +='<span>'+'<input type="text" id="like" value="'+i.likeno+'"style="width: 30px; display: inline-block; vertical-align: middle;font-size: 15px; font-weight: bold; border:none; background-color: white;margin-bottom: 6px;margin-left: 5px;"disabled>'+'</span>'
+	    					}
+	    					accEle +='<button id="btn-modal" class="more"style="float: right;border:none; background-color: white;color: rgba(var(--f52,142,142,142),1);" onclick="detailModal('+i.no+',\''+i.type+'\')">'+"더보기"+'</button>' 
+	    					accEle +='</div>'
+	    					accEle +='</div>'
   				}  
   				console.log(accEle);
   				$('.register').detach();
