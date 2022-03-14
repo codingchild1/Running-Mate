@@ -69,6 +69,7 @@
             border-radius: 70%;
         }
         #modal.modal-overlay {
+        z-index: 8;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -136,6 +137,7 @@
             color: white; */
         }
         #modal2.modal-overlay {
+        z-index: 8;
             width: 100%;
             height: 100%;
             position: absolute;
@@ -314,7 +316,7 @@
 				<!-- <div id="editor" style="width: 352px; height: 190px;border:1px solid black;"></div> -->
 				<div
 					style="display: flex; flex-direction: row-reverse; margin: 7px; margin-right: 0px; float: right; position: relative; height: 32px;">
-					<div class="info" style="margin: 5px; width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;line-height: 30px;">
+					<div class="info" style="margin: 5px; width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;line-height: 30px;font-size:13px;">
 						조회
 						<div class="ptplist"style="position: relative; border: 1px solid; width: 150px; top: -150px; margin: 10px; background-color: #59ab6e;">
 							<p style="font-size: 13px; margin: 2px; padding: 5px;display:flex;">참여자 목록</p>
@@ -323,7 +325,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'>참여</button>
+					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;font-size:13px;">참여</button>
 					<!-- <input class="ptp" type="text" style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer" value='참여'> -->
 				</div>
 			</div>
