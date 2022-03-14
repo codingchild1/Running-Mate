@@ -46,6 +46,7 @@ public class SubController {
 		String my_id = (String) session.getAttribute("id");
 		// 현재 게시물에 like에 대한 정보 확인
 		try {
+			
 			likes = likesService.getLikesTF(my_id, board_type, board_no);
 			if(likes == false) {
 				likesService.insertLikes(my_id, board_type, board_no);
@@ -98,10 +99,10 @@ public class SubController {
 				alertService.insertAlert(my_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
-					mateService.mateWarning(board_no);
+					//mateService.mateWarning(board_no);
 					break;
 				case "group":
-					mateService.groupWarning(board_no);
+					//mateService.groupWarning(board_no);
 					break;
 				case "today":
 					break;
@@ -118,10 +119,10 @@ public class SubController {
 				alertService.deleteAlert(my_id, board_type, board_no);
 				switch(board_type) {
 				case "mate":
-					mateService.mateWarningCanc(board_no);
+					//mateService.mateWarningCanc(board_no);
 					break;
 				case "group":
-					mateService.groupWarningCanc(board_no);
+					//mateService.groupWarningCanc(board_no);
 					break;
 				case "today":
 					break;

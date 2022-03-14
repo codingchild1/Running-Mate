@@ -359,5 +359,36 @@ public class MateController {
 			e.printStackTrace();
 		}
 	}
+	
+	//번개 신고버튼 체크
+	@ResponseBody
+	@PostMapping("/alertcheck")
+	public boolean alertcheck(@RequestParam(value="no")int articleNo) {
+		String user_id = (String) session.getAttribute("id");
+		boolean alert =false;
+		try {
+			alert = alertService.getAlertTF(user_id, "mate", articleNo);
+			System.out.println(alert);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alert;
+	}
+	
+	//소모임 신고버튼 체크
+	@ResponseBody
+	@PostMapping("/alertcheck2")
+	public boolean alertcheck2(@RequestParam(value="no")int articleNo) {
+		String user_id = (String) session.getAttribute("id");
+		boolean alert =false;
+		try {
+			alert = alertService.getAlertTF(user_id, "group", articleNo);
+			System.out.println(alert);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alert;
+	}
+	
 
 }

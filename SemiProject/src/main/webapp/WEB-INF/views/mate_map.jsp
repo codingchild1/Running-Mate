@@ -504,11 +504,6 @@ list-style: none;
      				 $('#delete').hide();
      				 $('#update').hide();
      			  } 
-     			 if($('#mwarning').val()=='1'){
-     				 $('#alerts span').html('신고취소');
-     			  }else{
-     				 $('#alerts span').html('신고');
-     			  }
      			  
      			//메이트에디터에 값넣어주는 함수	  
        	     	m_editor.setData($('#mate_cont').val());
@@ -559,7 +554,25 @@ list-style: none;
         		error:function(data, textStatus){
         			alert("실패");
         		}
-        		}); 
+        		});
+            //번개 신고버튼 체크
+          	$.ajax({     
+      			type:"post",
+      			dataType:"text",
+      			async:false,
+      			url:"http://localhost:8090/alertcheck",
+      			data:{"no":no},
+      			success: function(data, textStatus){ 
+      				if(data=='true'){
+      					$("#alerts span").html("신고취소");
+      				}else{
+      					$("#alerts span").html("신고");
+      				}
+      			},
+      			error:function(data, textStatus){
+      				alert("실패");
+      			}
+      		});
 
             //소모임 모달폼 ajax
     	}else{
@@ -592,11 +605,6 @@ list-style: none;
   				 $('#delete2').hide();
   				 $('#update2').hide();
   			  }
-			  if($('#gwarning').val()=='1'){
-	  				 $('#alerts span').html('신고취소');
-	  			  }else{
-	  				 $('#alerts span').html('신고');
-	  			  }
 	           
 			//그룹게시물에디터 값 넣는 함수
 			g_editor.setData($('#group_cont').val());
@@ -627,6 +635,24 @@ list-style: none;
  		error:function(data, textStatus){
  			alert("실패");
  		}
+ 		});
+   	//소모임 신고버튼 체크
+     	$.ajax({     
+ 			type:"post",
+ 			dataType:"text",
+ 			async:false,
+ 			url:"http://localhost:8090/alertcheck2",
+ 			data:{"no":no},
+ 			success: function(data, textStatus){ 
+ 				if(data=='true'){
+ 					$("#alerts span").html("신고취소");
+ 				}else{
+ 					$("#alerts span").html("신고");
+ 				}
+ 			},
+ 			error:function(data, textStatus){
+ 				alert("실패");
+ 			}
  		});
     	 
     	}
@@ -749,6 +775,11 @@ list-style: none;
     		});
 		});
 		$('.alert').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+	    		alert("로그인이 필요한 서비스입니다.");
+	    		return false;
+			}
 			 $.ajax({
 	       		type:"post",
 	       		dataType:"text",
@@ -772,6 +803,11 @@ list-style: none;
 			});
 		});
 		$('.alert2').click(function(){
+			var uid = '<%=(String)session.getAttribute("id")%>';
+			if(uid=='null'){
+	    		alert("로그인이 필요한 서비스입니다.");
+	    		return false;
+			}
 			 $.ajax({
 	       		type:"post",
 	       		dataType:"text",

@@ -242,7 +242,7 @@ body {
 			</div>
 			<input name='user_id' id="user_id"style="color: black; border: none; font-size: 15px; background-color: #d3d3d3; padding-left: 10px; margin-top: 10px;"value=''>
 			<div style="font-size: 13px; float: right;display: flex;">
-				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3; cursor:pointer;margin:5px;"></span> </form>
+				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3; cursor:pointer;margin:5px;"></span></form>
 				<span id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:#d3d3d3;cursor:pointer;">삭제</button></span> 
 					<span id="alerts" style="margin: 5px;">
 						<span class="alert" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;padding:0px">신고</span>
@@ -305,8 +305,7 @@ body {
 		</div>
 	</div>
 	<!-- </form> -->
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script>
+	<script type="text/javascript"src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ff3a060b5b1b48bc2f77af63c6fa27a"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 	<script>
@@ -380,8 +379,8 @@ body {
      			 	$('input[name=mapinfo2]').attr('value',map.Ma); 
      			 	$('input[name=mapinfo3]').attr('value',jdata.mate_mapinfo); 
      			 	$('input[name=mate_cont]').val(jdata.mate_cont); 
-     			 	$('input[name=mate_cont]').val(jdata.mate_cont); 
-     			 	$('input[name=mwarning]').val(jdata.warning); 
+     			 	$('input[name=mate_cont]').val(jdata.mate_cont);
+     			 	$('input[name=mwarning]').val(jdata.warning);
      			   
      			 	/*  console.log(jdata.mate_mapinfo);
      			  	console.log(jdata.mate_cont); */
@@ -394,11 +393,6 @@ body {
      				 	$('#delete').hide();
      				 	$('#update').hide();
      			 	}
-     			  	if($('#mwarning').val()=='1'){
-     				 	$('#alerts span').html('신고취소');
-     			  	}else{
-     				 	$('#alerts span').html('신고');
-     			  	}
      			  	
      				//메이트에디터에 값넣어주는 함수	  
      	   			m_editor.setData($('#mate_cont').val());
@@ -449,7 +443,25 @@ body {
         			error:function(data, textStatus){
         				alert("실패");
         			}
-        		}); 
+        		});
+            //번개 신고버튼 체크
+            	$.ajax({     
+        			type:"post",
+        			dataType:"text",
+        			async:false,
+        			url:"http://localhost:8090/alertcheck",
+        			data:{"no":no},
+        			success: function(data, textStatus){ 
+        				if(data=='true'){
+        					$("#alerts span").html("신고취소");
+        				}else{
+        					$("#alerts span").html("신고");
+        				}
+        			},
+        			error:function(data, textStatus){
+        				alert("실패");
+        			}
+        		});
 
             //소모임 모달폼 ajax
     	}else{
@@ -482,11 +494,11 @@ body {
   				 			$('#delete2').hide();
   				 			$('#update2').hide();
   			  			}
-			  			if($('#gwarning').val()=='1'){
+			  			/* if($('#gwarning').val()=='1'){
   				 			$('#alerts span').html('신고취소');
   			  			}else{
   				 			$('#alerts span').html('신고');
-  			  			}
+  			  			} */
 			  
 				//그룹게시물에디터 값 넣는 함수
 				g_editor.setData($('#group_cont').val());
@@ -518,6 +530,24 @@ body {
  					alert("실패");
  				}
  			});
+   		 	//소모임 신고버튼 체크
+            	$.ajax({     
+        			type:"post",
+        			dataType:"text",
+        			async:false,
+        			url:"http://localhost:8090/alertcheck2",
+        			data:{"no":no},
+        			success: function(data, textStatus){ 
+        				if(data=='true'){
+        					$("#alerts span").html("신고취소");
+        				}else{
+        					$("#alerts span").html("신고");
+        				}
+        			},
+        			error:function(data, textStatus){
+        				alert("실패");
+        			}
+        		});
     	}
     }
 	//mate 모달창 함수
@@ -660,6 +690,11 @@ body {
 		
 	//mate게시물 신고
 	$('.alert').click(function(){
+		var uid = '<%=(String)session.getAttribute("id")%>';
+		if(uid=='null'){
+    		alert("로그인이 필요한 서비스입니다.");
+    		return false;
+		}
 		$.ajax({
 	        type:"post",
 	        dataType:"text",
@@ -669,6 +704,7 @@ body {
 	        	  "user_id":$("#user_id").val(),
 	        	  "board_type":"mate"},
 	        success: function(data, textStatus){
+	        	console.log(data);
 	        	if(data=="true"){
 	        		alert("성공적으로 신고되었습니다.");
 	        		$('#alerts span').html('신고취소');
@@ -685,6 +721,11 @@ body {
 		
 	//group게시물 신고
 	$('.alert2').click(function(){
+		var uid = '<%=(String)session.getAttribute("id")%>';
+		if(uid=='null'){
+    		alert("로그인이 필요한 서비스입니다.");
+    		return false;
+		}
 		 $.ajax({
 	        type:"post",
 	        dataType:"text",
@@ -694,6 +735,7 @@ body {
 	        	  "user_id":$("#user_id").val(),
 	        	  "board_type":"group"},
 	        success: function(data, textStatus){
+	        	console.log(data);
 	        	if(data=="true"){
 	        		alert("성공적으로 신고되었습니다.");
 	        		$('#alerts span').html('신고취소');
