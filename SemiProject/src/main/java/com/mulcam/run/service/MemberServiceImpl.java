@@ -73,7 +73,6 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
-	
 	@Override
 	public String profileImg(String user_id) throws Exception {
 		return memberDAO.queryProfile(user_id);

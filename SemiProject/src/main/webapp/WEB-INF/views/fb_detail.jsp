@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
 <title>글 상세페이지</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style>
 .modify {
 	float: right;
@@ -33,7 +34,9 @@ a:hover {
 	font-size: 15px;
 }
 
-
+.alerts{
+	cursor:pointer;
+}
 </style>
 
 <script type="text/javascript">
@@ -50,9 +53,10 @@ a:hover {
 			<div class="detail_title">
 				<h2>${article.fb_title }</h2>
 				<div class="detail_writer">
-					<a href="#"><img src="images/마이페이지.PNG" width="20px"
+					<a href="#"><img src="${article.user_img }" width="20px"
 						height="20px" alt="" />${article.writer }</a>
 				</div>
+				<input type="hidden" id="articleWriter" value="${article.writer }">
 				<div class="modify">
 				
 				<c:if test= "${id eq article.writer }" >	
@@ -68,9 +72,16 @@ a:hover {
 				</div>
 
 				<span class="views1">
-					<input type="button" value="신고" class="warning"
-						onclick="location.href='warning?fb_articleNo=${article.fb_articleNo}'"/>
-						
+					<span id="alerts" onclick=alertpopup()>
+			<c:choose>
+			<c:when test="${alert eq true }">
+				<span id="alert">신고취소</span>
+			</c:when>
+			<c:when test="${alert eq false }">
+				<span id="alert">신고</span>
+			</c:when>
+			</c:choose>
+			</span>	
 					조회 ${article.fb_views }
 						
 				</span>
@@ -91,10 +102,68 @@ a:hover {
 		</table>
 		</section>
 		<section>
+		<div id="likes" onclick=changeImg()>
+		<c:choose>
+				<c:when test="${likes eq true }">
+					<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
+				</c:when>
+				<c:when test="${likes eq false }">
+					<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
+				</c:when>
+				</c:choose>
+		</div>
 			<br><br><br><br><br><br><br><br>
 			<a href="./fb_main?page=${page}"> [목록]</a>&nbsp;&nbsp;
 		</section>
 	</section>
+	<script>
+	function changeImg(){
+		console.log("hello");
+		$.ajax({
+			type:"post",
+			url:"http://localhost:8090/likes",
+			data: {"user_id": $("#articleWriter").val(), "board_type" : "article", "board_no": ${article.fb_articleNo}},
+			dataType:"text",
+			success:function(data){
+				if(data=="true"){
+					console.log("true: " +data);
+					$("#like").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+				} else {
+					console.log("false: " + data);
+					$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+				}
+			}
+		});			 
+	}
+	
+	
+	function alertpopup(){
+		var alert;
+		if($("#alerts span").html() == "신고"){
+			 alert = confirm('정말 게시글을 신고하시겠습니까?');
+		}
+		else if($("#alerts span").html() == "신고취소"){
+			 alert = confirm('게시글을 신고를 취소하시겠습니까?');
+		}
+		
+		if(alert==true){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/alert",
+				data: {"user_id": $("#articleWriter").val(), "board_type" : "article", "board_no": ${article.fb_articleNo}},
+				dataType:"text",
+				success:function(data){
+					console.log(data);
+					if(data=="true"){
+						$("#alerts span").html("신고취소");
+					} else {
+						$("#alerts span").html("신고");
+					}
+				}
+			});
+		}
+	}
+	</script>
 	<%@include file="fotter.jsp"%>
 </body>
 </html>

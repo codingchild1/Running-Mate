@@ -20,6 +20,16 @@ public class Member {
 		this.phone=phone;
 		this.memberthumb=memberthumb;
 	}
+	public Member(String id, String password) {
+		this.id=id;
+		this.password=password;
+	}
+	public Member(String memberthumb, String email, String phone, String id) {
+		this.memberthumb=memberthumb;
+		this.email=email;
+		this.phone=phone;
+		this.id=id;
+	}
 	
 	public Member(String password) {
 		this.password=password;

@@ -95,7 +95,7 @@
     <form name="deleteform" method="post" class="form4" action="delete" onsubmit="return checkValue()">
                 <h2>회원 탈퇴</h2>
                 <div class="textForm">
-               		 <input type="text" id="password" class="password" name="password">
+               		 <input type="password" id="password" class="password" name="password">
                 </div>
 		        <input type="submit" class="btn" value="탈퇴" /> 
 		        <input type="button" class="btn" value="취소" onclick="history.go(-1)">

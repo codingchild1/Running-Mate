@@ -13,9 +13,7 @@ public interface MemberService {
 	public void delete(String id);
 	public String checkPw(String id);
 	public void updateMember(Member mem);
-	public void modifyPw(Member mem);
-	
-	
+	public void modifyPw(Member mem);	
 	
 	//사용자 profile 이미지 정보
 	String profileImg(String user_id) throws Exception;
