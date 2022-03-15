@@ -77,7 +77,7 @@ public class FBController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
-			mv.setViewName("/board/err");
+			mv.setViewName("/err");
 		}
 		
 		return mv;
@@ -96,7 +96,7 @@ public class FBController {
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
-			mv.setViewName("/board/err");
+			mv.setViewName("/err");
 		}
 		
 		return mv;
@@ -197,7 +197,7 @@ public class FBController {
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
-			mv.setViewName("/board/err");	
+			mv.setViewName("/err");	
 		}
 		
 		return mv;

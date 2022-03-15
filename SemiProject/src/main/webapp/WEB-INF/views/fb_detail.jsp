@@ -42,6 +42,14 @@ a:hover {
 	display: inline-block;
 	margin-top: 5px;
 }
+
+li {
+	list-style: none;
+}
+
+.replyd {
+	margin-left: 1em;
+}
 </style>
 
 <script type="text/javascript">
@@ -63,7 +71,7 @@ a:hover {
 			
 				<h2>${article.fb_title }</h2>
 				<div class="detail_writer">
-					<a href="#"><img src="${article.user_img }" width="20px"
+					<a href="#"><img src="${article.user_img }" width="20px;"
 						height="20px" alt="" />${article.writer }</a>
 				</div>
 				<input type="hidden" id="articleWriter" value="${article.writer }">
@@ -112,7 +120,7 @@ a:hover {
 			</table>
 		</section>
 		<section>
-			<div id="likes" onclick=changeImg() style="width: 50px; cursor: pointer; margin-left: 45%;">
+			<div id="likes" onclick=changeImg() style="width: 50px; cursor: pointer; margin-left: 47%;">
 				<c:choose>
 					<c:when test="${likes eq true }">
 						<img id="like"
@@ -125,6 +133,7 @@ a:hover {
 							style="width: 50px;" />
 					</c:when>
 				</c:choose>
+				&nbsp;&nbsp;&nbsp;&nbsp;${article.fb_likes }
 			</div>
 			<br> 	
 		</section>
@@ -135,11 +144,29 @@ a:hover {
 				<i class="fa fa-comment fa"></i> 댓글
 			</div>
 			<div class="card-body">
+			<div style="padding:1em 0 1em 0;">
+			<span class="replyd""><img src="/images/고양이.PNG" style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">작성자1</b><br></span>
+			<span style="font-size: 17px; margin-left: 3.8em;">비밀댓글입니다.</span>
+			</div>
+			<hr></hr>
+			<div style="padding:1em 0 1em 0;">
+			<span class="replyd""><img src="/images/강아지.PNG" style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">작성자2</b><br></span>
+			<span style="font-size: 15px; margin-left: 4.3em;">와 좋은 정보!!<br></span>
+			<span style="font-size: 15px; margin-left: 4.3em;">많은 도움이 됐습니다. 감사합니다.<br></span>
+			<span style="font-size: 10px; margin-left: 6.4em; color: gray">2022-03-15 16:49 &nbsp;&nbsp;답글쓰기</span>
+			</div>
+			<hr></hr>
+			<div style="padding:1em 0 1em 0;">
+			<span class="replyd""><img src="/images/억울이.PNG" style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">작성자3</b><br></span>
+			<span style="font-size: 15px; margin-left: 4.3em;">열심히 운동하셨네요.<br></span>
+			<span style="font-size: 15px; margin-left: 4.3em;">저도 작성자님 못지 않게 앞으로 노력하겠습니다.<br></span>
+			<span style="font-size: 10px; margin-left: 6.4em; color: gray">2022-03-15 16:49 &nbsp;&nbsp;답글쓰기</span>
+			</div>
+			<hr></hr>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">
-						<div class="form-inline mb-2">
-
-
+						<div class="form-inline mb-2" style="margin-top: 2em;">
+						<img src="${article.user_img }" style="width: 20px; height: auto;">${article.writer }
 						</div> <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 						<button type="button" class="btn btn-success" onClick="javascript:addReply();" style="float: right; margin-top: 5px;">등록</button>
 						<span>비밀댓글</span>
