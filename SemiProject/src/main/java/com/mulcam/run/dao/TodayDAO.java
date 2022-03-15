@@ -45,6 +45,7 @@ public interface TodayDAO {
 	
 	
 	//내가 쓴 글
+	public int todayListCount(String id);
 	public List<Today> todayList(String id);
 
 	//7.신고 (insert alert) 

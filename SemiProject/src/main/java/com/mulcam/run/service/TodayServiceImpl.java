@@ -119,7 +119,8 @@ public class TodayServiceImpl implements TodayService {
 
 	//내가 쓴 글
 	@Override
-	public List<Today> todayList(String id) {
+	public List<Today> todayList(String id, int page, PageInfo pageInfo) throws Exception {
+		int listCount = todayDAO.todayListCount(id);
 		// TODO Auto-generated method stub
 		return todayDAO.todayList(id);
 	}

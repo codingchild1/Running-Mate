@@ -33,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.Member;
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.BoardService;
@@ -226,14 +227,22 @@ public class MemberController {
 	}
 	
 	//내가 쓴 글 오늘의 런닝
-	@GetMapping(value="/todaylist")
-	public String todayList(Model model) {
+	@RequestMapping(value="/todaylist", method= {RequestMethod.GET, RequestMethod.POST})
+	public String todayList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
+		PageInfo pageInfo = new PageInfo();
+		
 		String id = (String) session.getAttribute("id");
-		List<Today> todaylist = todayService.todayList(id);
-		model.addAttribute("todaylist", todaylist);
-		for(Today br : todaylist) {
-			System.out.println(br.today_articleNo);
+		try {
+			List<Today> todaylist = todayService.todayList(id, page, pageInfo);
+			model.addAttribute("todaylist", todaylist);
+			for(Today br : todaylist) {
+				System.out.println(br.today_articleNo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("todaylist", null);
 		}
+		
 		return "todaylist";
 	}
 	
