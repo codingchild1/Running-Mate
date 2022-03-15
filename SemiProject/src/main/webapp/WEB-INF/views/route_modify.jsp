@@ -34,6 +34,9 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a41b354b6f502722e91503736b4d238&libraries=services"></script>
 	
 	<style>	
+		#map { top: 0; bottom: 0; height: 400px; }
+		.mapbox { float:right; width: 70%; height:500px; }
+		.ck-editor__editable { min-height: 500px; max-width:100%; }
 		.main { width: 70%; margin: 0 auto; }
 		.container2 { max-width:1024px; margin:30px auto;}
 		.user_info { height:80px; display: flex; align-items: center;} 
@@ -46,9 +49,7 @@
 		.buttons { text-align:center; margin-top:20px; margin-bottom:20px;}
 		.eachbutton { width:15%; display:inline-block;"}
 		
-		#map { top: 0; bottom: 0; height: 400px; }
-		.mapbox { float:right; width: 70%; height:500px; }
-		.ck-editor__editable { min-height: 500px; max-width:100%; }
+		
 	</style>
 </head>
 <body>
@@ -71,7 +72,7 @@
 			<div style="height:530px; padding-top: 30px;">
 				<div id="routethumbbox" class="routethumbbox">
 					<p id="test" style="text-align: center;">썸네일 이미지</p>
-					<img class="col route_thumb" src="/routethumbfileview/thumb_basic.PNG" id="route_thumb" name="route_thumb" >
+					<img src="/routethumbfileview/thumb_basic.PNG" id="route_thumb" name="route_thumb" class="col route_thumb" >
 					<br><br><br>
 					<input type="file" id="route_file" name="route_file" style="text-align: center;" />
 				</div>

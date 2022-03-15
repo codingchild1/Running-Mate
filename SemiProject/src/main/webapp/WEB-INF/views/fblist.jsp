@@ -14,13 +14,31 @@
 	<style>
 			
 	.post li {
+		text-decoration-line: none;
 		float: left;
 		margin: 10px;
 		list-style: none;
 	}
 	.post {
-		display: inline-flex;
-		width: 1060px;
+		position: absolute;
+		left: 25%;
+		width: 1000px;
+		margin-top: 51px;
+		justify-content: space-between;
+	}
+	
+	.get li {
+		text-decoration-line: none;
+		float: left;
+		margin: 10px;
+		list-style: none;
+	}
+	.get {
+		position: absolute;
+		top: 18%;
+		left: 26%;
+		font-size: 12px;
+		width: 1000px;
 		margin-top: 51px;
 		justify-content: space-between;
 	}
@@ -28,7 +46,7 @@
 		text-decoration-line: none;
 		color: black;
 	}
-	<style>
+
   	table {
 	    width: 100%;
 	    border-top: 1px solid #444444;
@@ -38,6 +56,16 @@
     	border-bottom: 1px solid #444444;
    		padding: 10px;
   }
+  	.no{
+	  width:400px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  transform: translate(187%, 50%);
+	  border-radius: 15px;
+		
+	}
 </style>
 	</style>
 <body>
@@ -52,7 +80,7 @@
 					<li><a href="delete">회원 탈퇴</a></li>
 				</ul>
 			</div>
-			<div>
+			<div class="get">
 				<ul>
 					<li><a href="todaylist">오늘의 런닝</a></li>
 					<li><a href="routelist">루트 공유</a></li>
@@ -60,7 +88,7 @@
 					<li><a href="matelist">런닝 메이트</a></li>
 				</ul>
 			</div>
-	
+	<div class="no">
 	<h2>내가 쓴 글</h2>
 	
 	<c:choose>
@@ -120,5 +148,6 @@
 			</tr>
 		</c:otherwise>
 	</c:choose>
+	</div>
 </body>
 </html>

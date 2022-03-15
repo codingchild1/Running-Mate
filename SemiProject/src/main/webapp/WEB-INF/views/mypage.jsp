@@ -3,10 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 	<head>
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>회원가입</title>
@@ -31,7 +27,7 @@
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  top:40%;
+	  top:50%;
 	  left:50%;
 	  transform: translate(-50%,-50%);
 	  border-radius: 15px;
@@ -89,14 +85,15 @@
 	  background: none;
 	}		
 
-	.post li {
+.post li {
 		float: left;
 		margin: 10px;
 		list-style: none;
 	}
 	.post {
-		display: inline-flex;
-		width: 1060px;
+		position: absolute;
+		left: 25%;
+		width: 1000px;
 		margin-top: 51px;
 		justify-content: space-between;
 	}
@@ -104,21 +101,38 @@
 		text-decoration-line: none;
 		color: black;
 	}
-	#submit{
-		border: 0;
-		outline: 0;
-		position:relative;
-		margin-bottom: 40px;
-		right:0%;
-	    width:80%;
-	    height:40px;
-		width: 25;
-		height: 40px;
-		padding: 6px 6px;
-		margin: 7px;
-		background-color: #59ab6e; 
-		border-radius: .25rem;
-		color: white;
+	#submit {
+		  position:relative;
+		  left:21%;
+		  transform: translateX(-50%);
+		  margin-bottom: 40px;
+		  width:165px;
+		  height:30px;
+		  border: none;
+		  font-weight: bold;
+		  transition: 0.4s;
+		  display:inline;
+		  background-color: #59ab6e; 
+		  border-radius: .25rem;
+		  color: white;
+		  
+	}
+	#btn {
+		  position:relative;
+		  left:21%;
+		  top: -18px;
+		  transform: translateX(-50%);
+		  margin-bottom: 40px;
+		  width:165px;
+		  height:30px;
+		  border: none;
+		  font-weight: bold;
+		  transition: 0.4s;
+		  display:inline;
+		  background-color: #59ab6e; 
+		  border-radius: .25rem;
+		  color: white;
+		  
 	}
 	</style>
 	<script type="text/javascript">
@@ -126,7 +140,7 @@
 			// 취소
 			$(".cencle").on("click", function(){
 				
-				location.href = "join";
+				location.href = "main";
 						    
 			})
 		
@@ -184,7 +198,7 @@
 				</div>
 				<div>
 					<button class="btn" type="submit" id="submit">회원정보수정</button>
-					<button class="btn" type="button">취소</button>
+					<button class="cencle" type="button" id="btn">취소</button>
 				</div>
 			</form>
 		<script>
