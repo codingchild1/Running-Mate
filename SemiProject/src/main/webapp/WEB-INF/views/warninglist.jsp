@@ -71,7 +71,23 @@
 		.di{
 			width: 60%;
 		    justify-content: center;
-		    margin: auto;
+		    margin: 130px auto;
+		}
+		.post li {
+			float: left;
+			margin: 10px;
+			list-style: none;
+		}
+		.post {
+			position: absolute;
+			left: 25%;
+			width: 1000px;
+			margin-top: 51px;
+			justify-content: space-between;
+		}
+		ul li a {
+			text-decoration-line: none;
+			color: black;
 		}
 	</style>
 </head>
@@ -79,7 +95,7 @@
 	<header>
 			<%@include file ="header.jsp" %>
 	</header>
-		<div>
+		<div class="post">
 			<ul>
 				<li><a href="memberlist">회원 목록</a></li>
 				<li><a href="warninglist"><b>신고 목록</b></a></li>

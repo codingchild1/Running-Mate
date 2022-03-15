@@ -66,7 +66,6 @@
 	  margin: auto;
 	}
 </style>
-
 <body>
 		<header>
 			<%@include file ="header.jsp" %>
@@ -102,7 +101,7 @@
 					</tr>
 					<c:forEach var="board" items="${fblist}">
 					<tr>
-						<td>${board.fb_articleNo}</td>
+						<td>${board.writer}</td>
 	    				<td><a href="/fb_detail?fb_articleNo=${board.fb_articleNo }&page=1">${board.fb_title}</a></td>
 		 				<td>${board.fb_date}</td>
 					</tr>

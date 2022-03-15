@@ -31,6 +31,12 @@
 		margin: 10px;
 		list-style: none;
 	}
+	
+	table {
+	    width: 100%;
+	    border-top: 1px solid #444444;
+	    border-collapse: collapse;
+  	}
 	.get {
 		position: absolute;
 		top: 18%;
@@ -46,16 +52,14 @@
 	}
 	
 	.no{
-	  padding: 30px, 20px;
-	  background-color:#FFFFFF;
-	  text-align:center;
-	  border-radius: 15px;
 	  width: 60%;
-	  margin: auto;
+	  justify-content: center;
+	  margin: 165px auto;
 	}
-
-
-
+	table {
+	    border-top: 1px solid #444444;
+	    border-collapse: collapse;
+  	}
 	</style>
 <body>
 		<header>
