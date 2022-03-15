@@ -77,6 +77,22 @@
 	.btn:hover {
 	  background-position: right;
 	}
+		
+	.post li {
+		float: left;
+		margin: 10px;
+		list-style: none;
+	}
+	.post {
+		display: inline-flex;
+		width: 1060px;
+		margin-top: 51px;
+		justify-content: space-between;
+	}
+	ul li a {
+		text-decoration-line: none;
+		color: black;
+	}
 	</style>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript">
@@ -92,6 +108,17 @@
     
 </head>
 <body>
+	<header>
+			<%@include file ="header.jsp" %>
+		</header>
+			<div class="post">
+				<ul>
+					<li><a href="mypage">회원 수정</a></li>
+					<li><a href="changepw">비밀번호 변경</a></li>
+					<li><a href="fblist">내가 쓴 글</a></li>
+					<li><a href="delete"><b>회원 탈퇴</b></a></li>
+				</ul>
+			</div>
     <form name="deleteform" method="post" class="form4" action="delete" onsubmit="return checkValue()">
                 <h2>회원 탈퇴</h2>
                 <div class="textForm">

@@ -89,6 +89,9 @@
 	</style>
 </head>
 <body>
+	<header>
+		<%@include file ="header.jsp" %>
+    </header>
        		<form id='form3' action="login" method="post" class="form3">
        		<h2>로그인</h2>
             <div class="textForm">

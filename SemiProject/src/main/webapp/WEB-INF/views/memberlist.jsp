@@ -69,6 +69,7 @@
 	</script>
 </head>
 <body>
+	
 	<h2>회원목록 조회</h2>
 <table border=1 align="center" class="table table-hover"> 
 <tr>

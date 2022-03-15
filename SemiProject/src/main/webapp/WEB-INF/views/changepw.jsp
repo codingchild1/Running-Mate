@@ -92,12 +92,38 @@
 			.btn:hover {
 			  background-position: right;
 			}
+			
+			.post li {
+				float: left;
+				margin: 10px;
+				list-style: none;
+			}
+			.post {
+				display: inline-flex;
+				width: 1060px;
+				margin-top: 51px;
+				justify-content: space-between;
+			}
+			ul li a {
+				text-decoration-line: none;
+				color: black;
+			}
 		</style>
 
 		<title>비밀번호 변경</title>
 	</head>
 	<body>
-
+		<header>
+			<%@include file ="header.jsp" %>
+		</header>
+			<div class="post">
+				<ul>
+					<li><a href="mypage">회원 수정</a></li>
+					<li><a href="changepw"><b>비밀번호 변경</b></a></li>
+					<li><a href="fblist">내가 쓴 글</a></li>
+					<li><a href="delete">회원 탈퇴</a></li>
+				</ul>
+			</div>
 		 <form method="post" name="form2" class="form2">
        		<h2>비밀번호 변경</h2>
 		    <div class="col-sm-8 col-sm-offset-2">
