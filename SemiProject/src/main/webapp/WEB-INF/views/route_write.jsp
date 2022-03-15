@@ -51,7 +51,7 @@
 	.user_id { font-size : 15pt; height:40px; display:inline-block; line-height: 40px; padding-left : 10px;}
 	.route_title { height:50px; font-size:15pt; }
 	.routethumbbox { float:left; width: 30%; height:400px; text-align: center;}
-	.route_thumb { height: 300px; width: 90%;}
+	.route_thumb { width: 90%;}
 	.thumbfile { text-align: center; }
 	.mapbox { float:right; width: 70%; height:500px; } 
 	
@@ -79,7 +79,7 @@
 			<div style="height:530px; padding-top: 30px;">
 				<div id="routethumbbox" class="routethumbbox">
 					<p id="test" style="text-align: center;">썸네일 이미지</p>
-					<img src='' id="route_thumb" name="route_thumb" class=" col route_thumb">
+					<img src="/routethumbfileview/thumb_basic.PNG" id="route_thumb" name="route_thumb" class=" col route_thumb">
 					<br><br><br>
 					<input type="file" id="route_file" name="route_file" class="thumbfile" />
 				</div>

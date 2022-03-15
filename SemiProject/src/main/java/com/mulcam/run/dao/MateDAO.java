@@ -31,9 +31,6 @@ public interface MateDAO {
 	public void deleteMate(int mate_articleNO) throws Exception;  //번개 삭제
 	public void deleteGroup(int group_articleNO) throws Exception; //소모임 삭제
 	
-	public void updateMateviews(Mate mate) throws Exception; //번개 글 삭제시 조회수 -1변경
-	public void updateGroupviews(int group_articleNO) throws Exception; //번개 글 삭제시 조회수 -1변경
-	
 	public void insertMate(Mate mate)throws Exception; //번개 생성
 	public void insertGroup(Group group)throws Exception;  //소모임 생성
 	

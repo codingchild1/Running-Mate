@@ -132,6 +132,12 @@
 		]]>
 	</update>
 	
+	<!-- 내가 쓴 글 목록 -->
+	<select id="routeList" parameterType="String" resultType="Route">
+		<![CDATA[
+			select route_articleNo, route_title, route_date from route where user_id=#{id}
+		]]>
+	</select>
 </mapper>
 
 

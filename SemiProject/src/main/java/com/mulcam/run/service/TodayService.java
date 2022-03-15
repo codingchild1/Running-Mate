@@ -20,6 +20,10 @@ public interface TodayService {
 	public void LikesPlus(int articleNo) throws Exception; 
 	public void LikesMinus(int articleNo) throws Exception;
 	
+	
+	//내가 쓴 글
+	public List<Today> todayList(String id);
+	
 
 //	public int SelectLikesCnt() throws Exception;
 //	public void AlertPlus(int articleNo) throws Exception; 

@@ -37,4 +37,7 @@ public interface RouteDAO {
 	public void insertRoute(Route route);		//insert 코스
 	public void updateRoute(Route route);		//update 코스
 	public void deleteRoute(int articleNo);					//delete 코스
+	
+	//내가 쓴 글 route
+	public List<Route> routeList(String id);
 }

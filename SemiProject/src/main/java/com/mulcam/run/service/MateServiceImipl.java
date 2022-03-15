@@ -68,18 +68,6 @@ public class MateServiceImipl implements MateService {
 	public void removeGroup(int group_articleNO) throws Exception {
 		mateDAO.deleteGroup(group_articleNO);
 	}
-
-	@Override
-	public int viewsMate(int mate_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int viewsGroup(int group_articleNO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	@Override
 	public void makeMate(Mate mate) throws Exception {
@@ -91,7 +79,6 @@ public class MateServiceImipl implements MateService {
 		mateDAO.insertGroup(group);
 		
 	}
-
 
 	@Override
 	public List<Ptp> ptpInfo(int mate_articleNO) throws Exception {

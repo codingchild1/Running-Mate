@@ -110,6 +110,22 @@
 	.btn:hover {
 	  background-position: right;
 	}
+	
+	.post li {
+		float: left;
+		margin: 10px;
+		list-style: none;
+	}
+	.post {
+		display: inline-flex;
+		width: 1060px;
+		margin-top: 51px;
+		justify-content: space-between;
+	}
+	ul li a {
+		text-decoration-line: none;
+		color: black;
+	}
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -143,8 +159,17 @@
 		})
 	</script>
 	<body>
-	<header>
-	<%@include file ="mypageheader.jsp" %></header>
+		<header>
+			<%@include file ="header.jsp" %>
+		</header>
+			<div class="post">
+				<ul>
+					<li><a href="mypage"><b>회원 수정</b></a></li>
+					<li><a href="changepw">비밀번호 변경</a></li>
+					<li><a href="fblist">내가 쓴 글</a></li>
+					<li><a href="delete">회원 탈퇴</a></li>
+				</ul>
+			</div>
 			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
 				<h2>회원 정보 수정</h2>
 				<div style="margin: 30px;padding: 10px 10px;">

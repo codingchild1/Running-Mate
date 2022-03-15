@@ -216,7 +216,12 @@ height:400px;
 				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
+<<<<<<< HEAD
 		<input type="hidden" id="sessionid" value="${id }"/>
+=======
+
+			<input type="hidden" id="sessionid" value="${id }"/>
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -287,6 +292,7 @@ height:400px;
 				};
 				reader.readAsDataURL(event.target.files[0]);
 			});
+<<<<<<< HEAD
  	    	console.log($("#sessionid").val()==$("#user_id").val());
  	    	console.log($("#user_id").val() == "admin");
  	    	
@@ -315,6 +321,64 @@ height:400px;
  	  	          		}
  	  		      	}).then(editor=> {
 	    	    	    editor.ui.view.toolbar.element.style.display = 'none';
+=======
+		});
+		
+		 //목록 버튼
+	      $(function(){
+	    	  $("#today_list").click(function(){
+	    	      location.href="/today";
+	    	      });
+	    	  }); 
+		 
+		 
+ 	      $(function(){
+ 	    	 if($("#sessionid").val()==$("#user_id").val() || $("#user_id").val() == "admin"){
+ 	    		ClassicEditor.create(document.querySelector("#editor"), {
+  		    	  initialData : '${todayselect.today_contents}',
+  		    	  ckfinder : {
+  	          			uploadUrl : "/upload"
+  	          		}
+  		      	}).then(editor=> {
+  	      			window.editor=editor;
+  	      		})
+  			   .catch((error) => {
+  			   		console.error(error);
+  			    });
+ 	    	 } else {
+ 	    		ClassicEditor.create(document.querySelector("#content"))
+    	    	.then(editor=>{
+    	    		window.editor = editor;
+    	    	    editor.isReadOnly = true;
+    	    	    const toolbarElement = editor.ui.view.toolbar.element;
+    	    	    toolbarElement.style.display = 'none';
+    	        	editor.setData('${todayselect.today_contents}');
+    	        })
+    		    .catch((error) => {
+    	    	   	console.error(error);
+    		    });
+ 	    	 }
+ 	    	 
+ 	    	 
+ 	    	 
+ 	    	 /*
+	    	  if (id eqauls todayselect.user_id || id eq 'admin') {
+	    		      ClassicEditor.create(document.querySelector("#editor"), {
+	    		    	  initialData : '${todayselect.today_contents}',
+	    		    	  ckfinder : {
+	    	          			uploadUrl : "/upload"
+	    	          		}
+	    		      }).then(editor=> {
+	    	      		window.editor=editor;
+	    	      		})
+	    			   .catch((error) => {
+	    			   	console.error(error);
+	    			    });
+	    	  } else {
+	    		  ClassicEditor.create(document.querySelector("#content"))
+	    	    	.then(editor=>{
+	    	    		window.editor = editor;
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 	    	    	    editor.isReadOnly = true;
  	  	      		})
  	  			  	  .catch((error) => {
@@ -322,8 +386,39 @@ height:400px;
  	  			    });
  	    	 }
 
+<<<<<<< HEAD
  	    	
  	    	//삭제
+=======
+	    	  }
+ 	    	 */
+	    	
+	      });       
+	     
+	      
+	      
+ 	    /  
+ 	    
+ 	    /*
+	      //ckeditor 작성내용 보여주는부분
+  		$(function(){
+	      ClassicEditor.create(document.querySelector("#editor"), {
+	    	  initialData : '${todayselect.today_contents}',
+	    	  ckfinder : {
+          			uploadUrl : "/upload"
+          		}
+	      }).then(editor=> {
+      		window.editor=editor;
+      		})
+		   .catch((error) => {
+		   	console.error(error);
+		    });
+		});
+
+	     */ 
+	      
+  		$(function() {
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
   			$('#today_delete').click(function (event) {
   				let message = confirm('삭제하시겠습니까?');
   				if(message == false){ 

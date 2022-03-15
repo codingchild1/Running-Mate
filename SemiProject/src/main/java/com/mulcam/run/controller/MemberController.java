@@ -33,8 +33,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.Member;
+import com.mulcam.run.dto.Route;
+import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.BoardService;
 import com.mulcam.run.service.MemberService;
+import com.mulcam.run.service.RouteService;
+import com.mulcam.run.service.TodayService;
 
 @Controller
 public class MemberController {
@@ -45,56 +49,92 @@ public class MemberController {
 	BoardService boardService;
 	
 	@Autowired
+	RouteService routeService;
+	
+	@Autowired
+	TodayService todayService;
+	
+	@Autowired
 	HttpSession session;
 	
 	@Autowired
 	private ServletContext servletContext;
 	
-	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView login(@RequestParam Map<String,String> info) {
-		ModelAndView modelAndView=new ModelAndView("mainpage");
+	
+	//로그인 로그인할 때 물고 가는 것 마이페이지를 눌렀을 때 물고 가야 되는 것
+//	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
+//	public ModelAndView login(@RequestParam Map<String,String> info) {
+//		ModelAndView modelAndView=new ModelAndView("redirect:/mypage");
+//		try {
+//			String id=info.get("id");
+//			String password=info.get("password");
+//			if(memberService.accessMember(id, password)) {
+//				session.setAttribute("id", id);
+//				modelAndView.addObject("mypage");
+//				//
+//				Member member = memberService.queryById(id);
+//				//
+//				modelAndView.addObject("member", member);
+//	
+//			} 
+//			} catch(EmptyResultDataAccessException e) {
+//				modelAndView.addObject("err", "아이디가 존재하지 않습니다");
+//				modelAndView.setViewName("err");
+//			} catch(Exception e){
+//				modelAndView.addObject("err", e.getMessage());
+//				modelAndView.addObject("err", "err");
+//			}
+//		return modelAndView;
+//	}
+	
+	//로그인
+	@GetMapping(value="login")
+	public String login() {
+		return "login";
+	}
+	
+	@PostMapping(value="login")
+	public String loginForm(@RequestParam Map<String,String> info, Model model, HttpSession session) {
 		try {
 			String id=info.get("id");
 			String password=info.get("password");
+			if(id ==null || password==null) {
+				model.addAttribute("error", "아이디 또는 비밀번호를 입력해 주세요.");
+				return "err";
+			}
 			if(memberService.accessMember(id, password)) {
 				session.setAttribute("id", id);
-				modelAndView.addObject("cpage", "mypage");
-				
-				//
-				Member member = memberService.queryById(id);
-				//
-				modelAndView.addObject("member", member);
-
-			} 
-		} catch(EmptyResultDataAccessException e) {
-			modelAndView.addObject("err", "아이디가 존재하지 않습니다");
-			modelAndView.addObject("cpage", "err");
-		} catch(Exception e){
-			modelAndView.addObject("err", e.getMessage());
-			modelAndView.addObject("cpage", "err");
+				int admin = memberService.queryById(id).getAdminCk();
+				session.setAttribute("adminCheck", admin);
+			} else {
+				model.addAttribute("err", "아이디 또는 비밀번호가 올바르지 않습니다.");
+				return "err";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("err", "로그인 중 문제가 발생했습니다.");
+			return "err";
 		}
-		return modelAndView;
+		return "main";
 	}
 	
-	@GetMapping(value="/menu")
-	public String memMenu(HttpServletRequest request, Model model) {
-		String cpage=request.getParameter("cpage");
-		model.addAttribute("cpage", cpage);
-		return "mainpage";
-	}
 	
+	
+	//로그아웃
 	@GetMapping(value="/logout")
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session=request.getSession();
 		session.removeAttribute("id");
-		model.addAttribute("cpage", "login");
-		return "mainpage";
+		return "login";
 	}
+	
+	//회원가입
 	@GetMapping(value="/join")
 	public String joinForm() {
 		return "join";
 	}
 	
+	//회원가입
 	@PostMapping(value="/join")
 	public String join(@RequestParam(value="profile") MultipartFile file,
 			@RequestParam("name") String name, @RequestParam("id") String id, @RequestParam("password") String password, @RequestParam("email") String email, @RequestParam("phone")
@@ -119,13 +159,17 @@ public class MemberController {
 		return "/login";
 	}
 		
-	
+	//err창에 띄워주기
 	@GetMapping(value="/mypage")
-	public String mypage() {
+	public String mypage(Model model) throws Exception {
+		String id = (String) session.getAttribute("id");
+		Member member = memberService.queryById(id);
+		model.addAttribute(member);
+//		modelAndView.addObject("member", member);
 		return "/mypage";
 	}
-	//마이페이지 post도 있어야 될 듯 요청 페이지 프로필도 추가하고...
-	
+
+	//아이디 중복 확인
 	@ResponseBody
 	@PostMapping(value="/memberoverlap")
 	public String memberOverlap(@RequestParam(value="id", required=true)String id) {
@@ -137,12 +181,15 @@ public class MemberController {
 		return String.valueOf(overlap);
 	}
 	
+	//회원 목록
 	@GetMapping(value="/memberlist")
 	public String memberList(Model model) {
 		List<Member> list = memberService.memberList();
 		model.addAttribute("list", list);
 		return "memberlist";
 	}
+	
+	//회원 목록 삭제
 	@RequestMapping(value="/memberdelete", method={RequestMethod.GET, RequestMethod.POST})
 	public String deleteMember(HttpServletRequest request) {
 		
@@ -154,6 +201,7 @@ public class MemberController {
 		return "redirect:memberlist";
 	}
 	
+	//내가 쓴 글 자유게시판
 	@GetMapping(value="/fblist")
 	public String fbList(Model model) {
 		String id = (String) session.getAttribute("id");
@@ -163,8 +211,33 @@ public class MemberController {
 			System.out.println(br.fb_articleNo);
 		}
 		return "fblist";
+	}
+
+	//내가 쓴 글 루트 공유
+	@GetMapping(value="/routelist")
+	public String routeList(Model model) {
+		String id = (String) session.getAttribute("id");
+		List<Route> routelist = routeService.routeList(id);
+		model.addAttribute("routelist", routelist);
+		for(Route br : routelist) {
+			System.out.println(br.route_articleNo);
 		}
+		return "routelist";
+	}
 	
+	//내가 쓴 글 오늘의 런닝
+	@GetMapping(value="/todaylist")
+	public String todayList(Model model) {
+		String id = (String) session.getAttribute("id");
+		List<Today> todaylist = todayService.todayList(id);
+		model.addAttribute("todaylist", todaylist);
+		for(Today br : todaylist) {
+			System.out.println(br.today_articleNo);
+		}
+		return "todaylist";
+	}
+	
+	//프로필 프리뷰
 	@GetMapping(value="/profileview/{filename}")
 	public void fileview(@PathVariable String filename,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -201,6 +274,7 @@ public class MemberController {
 		}
 	}
 
+	//회원 정보 업데이트
 	@RequestMapping(value="update", method= {RequestMethod.POST})
 	public String memberUpdate(@RequestParam(value="profile") MultipartFile profile, @RequestParam(value="email") String email, @RequestParam(value="phone")
 	String phone, @RequestParam(value="id") String id) {
@@ -224,12 +298,13 @@ public class MemberController {
 
 	}
 	
-	
+	//회원 탈퇴
 	@GetMapping(value="/delete")
 	public String deleteForm() {
 		return "delete";
 	}
 	
+	//회원 탈퇴
 	@PostMapping(value="/delete")
 	public String deleteMem(@RequestParam("password") String password) {
 		String id = (String) session.getAttribute("id");
@@ -242,6 +317,13 @@ public class MemberController {
 		return "login";
 	}
 	
+	//비밀번호 변경
+	@GetMapping(value="/changepw")
+	public String changePw() {
+		return "changepw";
+	}
+	
+	//비밀번호 변경
 	@PostMapping(value="/changepw")
 	public String pwChange(@RequestParam("password") String password, @RequestParam("newPw") String newPw) {
 		String id = (String) session.getAttribute("id");
@@ -256,12 +338,7 @@ public class MemberController {
 		return "redirect:/changepw";
 		
 	}
-	
-	@GetMapping(value="/changepw")
-	public String changePw() {
-		return "changepw";
-	}
-	
+		
 	
 }
 

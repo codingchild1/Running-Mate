@@ -20,5 +20,8 @@ public interface RouteService {
 	public void removeRouteBoard(int articleNo) throws Exception;
 	
 	void routeWarning(int articleNo)throws Exception; 
-	void routeWarningDelete(int articleNo)throws Exception; 
+	void routeWarningDelete(int articleNo)throws Exception;
+	
+	//내가 쓴 글 route
+	public List<Route> routeList(String id); 
 }

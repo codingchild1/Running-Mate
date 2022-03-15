@@ -72,20 +72,6 @@
 		]]>
 	</delete>
 	
-		<!-- mate게시물 삭제시 조회수 -1변경 -->
-	<update id="updateMateviews" parameterType="int" >
-		<![CDATA[
-		update mate set mate_views=#{mate_views} where mate_articleNO=#{mate_articleNO}
-		]]>
-	</update>
-	
-		<!-- group게시물 삭제시 조회수 -1변경 -->
-	<update id="updateGroupviews" parameterType="int" >
-		<![CDATA[
-			update group1 set group_views=#{group_views} where group_articleNO=#{group_articleNO}
-		]]>
-	</update>
-	
 	<!-- mate게시물 생성 -->
 	<insert id="insertMate" parameterType="mate">
 		<![CDATA[
@@ -138,13 +124,6 @@
 		]]> 
 	</update> 
 	
-		<!-- 참여버튼 (like +1) -->
-<!--   	<select id="like" parameterType="int">
-		<![CDATA[
-		select count(*) from ptp where mate_articleNO=#{mate_articleNO}
-		]]> 
-	</select> -->
-	
 	<!-- 참여버튼취소 (like -1) -->
 	<update id="likeCancel" parameterType="int">
 		<![CDATA[
@@ -195,6 +174,7 @@
 			order by regdate desc;
 		]]>
 	</select> 
+	
 	<!-- mate and group전체게시물 검색기반 조회(전체) -->
 	 	 <select id="searchListAll" resultType="GroupAndMate" parameterType="map">
 		<![CDATA[

@@ -127,9 +127,12 @@
 	</style>
 </head>
 <body>
+	<header>
+		<%@include file ="header.jsp" %>
+    </header>
         <form id='form' action="join" method="post" enctype="multipart/form-data" class="joinForm" >
                 <h2>회원가입</h2>
-        		<img id="memberthumb" name="memberthumb"  onerror="this.src='/profile/다운로드.jpg'" src="" width=100px height=100px /><br>
+        		<img id="memberthumb" name="memberthumb"  onerror="this.src='/profile/profile.png'" src="" style="width:100px; height:100px;  border-radius:70%;" /><br>
         		<input type="file" name="profile" id="profile"/><br>
             <div class="textForm">
                 <input type="text" id="name" name="name" class="name" placeholder="이름"><br>
@@ -150,7 +153,7 @@
             <div class="textForm">
                 <input type="text" class="cellphoneNo" id="phone" name="phone" placeholder="전화번호">
             </div>                 
-            <div class="d-grid">
+            <div>
                 <input type="submit" id="submit" class="btn" value='회원가입'>
             </div>
         </form>
