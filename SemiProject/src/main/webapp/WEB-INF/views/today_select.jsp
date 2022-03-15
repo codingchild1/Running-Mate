@@ -248,6 +248,7 @@ footer p span {
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
 
+			<input type="hidden" id="sessionid" value="${id }"/>
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -323,7 +324,36 @@ footer p span {
 	    	  }); 
 		 
 		 
-/* 	      $(function(){
+ 	      $(function(){
+ 	    	 if($("#sessionid").val()==$("#user_id").val() || $("#user_id").val() == "admin"){
+ 	    		ClassicEditor.create(document.querySelector("#editor"), {
+  		    	  initialData : '${todayselect.today_contents}',
+  		    	  ckfinder : {
+  	          			uploadUrl : "/upload"
+  	          		}
+  		      	}).then(editor=> {
+  	      			window.editor=editor;
+  	      		})
+  			   .catch((error) => {
+  			   		console.error(error);
+  			    });
+ 	    	 } else {
+ 	    		ClassicEditor.create(document.querySelector("#content"))
+    	    	.then(editor=>{
+    	    		window.editor = editor;
+    	    	    editor.isReadOnly = true;
+    	    	    const toolbarElement = editor.ui.view.toolbar.element;
+    	    	    toolbarElement.style.display = 'none';
+    	        	editor.setData('${todayselect.today_contents}');
+    	        })
+    		    .catch((error) => {
+    	    	   	console.error(error);
+    		    });
+ 	    	 }
+ 	    	 
+ 	    	 
+ 	    	 
+ 	    	 /*
 	    	  if (id eqauls todayselect.user_id || id eq 'admin') {
 	    		      ClassicEditor.create(document.querySelector("#editor"), {
 	    		    	  initialData : '${todayselect.today_contents}',
@@ -350,13 +380,15 @@ footer p span {
 	    		    });
 
 	    	  }
+ 	    	 */
 	    	
-	      }); */
-	      
+	      });       
 	     
 	      
 	      
- 	      
+ 	    /  
+ 	    
+ 	    /*
 	      //ckeditor 작성내용 보여주는부분
   		$(function(){
 	      ClassicEditor.create(document.querySelector("#editor"), {
@@ -372,7 +404,7 @@ footer p span {
 		    });
 		});
 
-	      
+	     */ 
 	      
   		$(function() {
   			$('#today_delete').click(function (event) {
