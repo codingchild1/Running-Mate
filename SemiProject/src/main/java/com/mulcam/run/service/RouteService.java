@@ -23,5 +23,5 @@ public interface RouteService {
 	void routeWarningDelete(int articleNo)throws Exception;
 	
 	//내가 쓴 글 route
-	public List<Route> routeList(String id); 
+	public List<Route> routeList(String id, int page, PageInfo pageInfo)  throws Exception;
 }

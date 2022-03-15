@@ -35,6 +35,7 @@ import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Member;
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.BoardService;
@@ -220,26 +221,44 @@ public class MemberController {
 	}
 
 	//내가 쓴 글 루트 공유
-	@GetMapping(value="/routelist")
-	public String routeList(Model model) {
+	@RequestMapping(value="/routelist", method= {RequestMethod.GET, RequestMethod.POST})
+	public String routeList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
 		String id = (String) session.getAttribute("id");
-		List<Route> routelist = routeService.routeList(id);
-		model.addAttribute("routelist", routelist);
-		for(Route br : routelist) {
-			System.out.println(br.route_articleNo);
-		}
+		PageInfo pageInfo = new PageInfo();
+	
+		try {
+			List<Route> routelist = routeService.routeList(id, page, pageInfo);
+			model.addAttribute("routelist", routelist);
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("count", routelist.size());
+			for(Route br : routelist) {
+				System.out.println(br.route_articleNo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("routelist", null);
+		}		
+		
+		
 		return "routelist";
 	}
 	
 	//내가 쓴 글 오늘의 런닝
-	@GetMapping(value="/todaylist")
-	public String todayList(Model model) {
+	@RequestMapping(value="/todaylist", method= {RequestMethod.GET, RequestMethod.POST})
+	public String todayList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
 		String id = (String) session.getAttribute("id");
-		List<Today> todaylist = todayService.todayList(id);
-		model.addAttribute("todaylist", todaylist);
-		for(Today br : todaylist) {
-			System.out.println(br.today_articleNo);
+		PageInfo pageInfo = new PageInfo();
+		try {
+			List<Today> todaylist = todayService.todayList(id, page, pageInfo);
+			model.addAttribute("todaylist", todaylist);
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("count", todaylist.size());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("todaylist", null);
 		}
+		
 		return "todaylist";
 	}
 	

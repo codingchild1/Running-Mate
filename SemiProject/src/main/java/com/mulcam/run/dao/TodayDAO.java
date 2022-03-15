@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.mulcam.run.dto.MyBoard;
 import com.mulcam.run.dto.Today;
 
 
@@ -45,7 +46,8 @@ public interface TodayDAO {
 	
 	
 	//내가 쓴 글
-	public List<Today> todayList(String id);
+	public int todayListCount(String id);
+	public List<Today> todayList(MyBoard boardinfo);
 
 	//7.신고 (insert alert) 
 	//public Boolean insertTWarn() throws Exception;

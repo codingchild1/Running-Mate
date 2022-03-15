@@ -81,9 +81,15 @@
 	</update>
 	
 	<!-- 내가 쓴 글 -->
-	<select id="todayList" parameterType="String" resultType="Today">
+	<select id="todayListCount" resultType="int" parameterType="String">
+ 		<![CDATA[
+ 			select count(*) from today where user_id=#{id}
+ 		]]>
+ 	</select>
+ 	
+	<select id="todayList" parameterType="MyBoard" resultType="Today">
 		<![CDATA[
-			select today_articleNo, today_title, today_date from today where user_id=#{id}
+			select today_articleNo, today_title, today_date from today where user_id=#{id} limit #{startrow}, 10
 		]]>
 	</select>
 	

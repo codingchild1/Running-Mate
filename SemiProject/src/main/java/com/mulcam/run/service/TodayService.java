@@ -22,7 +22,7 @@ public interface TodayService {
 	
 	
 	//내가 쓴 글
-	public List<Today> todayList(String id);
+	public List<Today> todayList(String id, int page, PageInfo pageInfo)  throws Exception;
 	
 
 //	public int SelectLikesCnt() throws Exception;

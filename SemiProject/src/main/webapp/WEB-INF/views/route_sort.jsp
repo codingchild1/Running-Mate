@@ -26,7 +26,8 @@
 		.routebtns { width: 100%; height:60px; display:inline-block; align-items: center; margin-top:50px; margin-bottom:50px; }
 		.routebtn { width:150px; height:50px; display:inline-block; }
 		.route_mini { width: 31%; height:500px; display: inline-block; border: 1px solid gray; border-radius: 13px; margin: 15px 0.5% 15px 0.5%; }
-		.route_miniTitle { margin-top: 5px; margin-bottom: 10px; font : 18px bold; }
+		.route_miniTitle { margin-top: 5px; margin-bottom: 10px; font : 18px bold; text-overflow: ellipsis;
+			 width: 100%; border: 0px;  }
 		.userProfile { width:25px;; height:25px; }
 		.routeThumbImg { width:100%;height:300px; display:block; margin: auto; }
 		
@@ -36,6 +37,11 @@
 		
 		.distanceButton { width:15%; height:40px; text-align : center; line-height: 20px; display:inline-block;}
 		.buttonTitle { width:10%; margin-left: 10%; display:inline-block;}
+		input:disabled { background: white; }
+		
+		a:link { color:black; text-decoration: none;}
+     	a:visited { color: black; text-decoration: none;}
+	 	a:hover { color: black; text-decoration: none;}
 	</style>
 </head>
 <body>
@@ -104,7 +110,7 @@
                 			<span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
            				 </div>
             			<div id="route_miniInfo" class="route_miniInfo">
-                			<div id="route_miniTitle" style="text">${route.route_title }</div>
+                			<input type="text" id="route_title" name="route_title" class="route_miniTitle" value='${route.route_title }' disabled/>
                 			<div id="route_miniThumbInfo">
               					<img src="/routethumbfileview/${route.route_thumb }" id="routeThumbImg" class="routeThumbImg">
                     			<div id="route_miniContent"></div>
