@@ -181,7 +181,8 @@ body {
 </head>
 
 <body>
-<%@include file ="header.jsp" %> 
+<%@include file ="header.jsp" %>
+<%@include file ="slides.jsp" %>
 	<div style="width: 1060px; padding: 10px; margin: 20px auto;">
 		<h1>메이트 구하기</h1>
 		<div class="main">
