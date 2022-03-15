@@ -6,18 +6,18 @@
 
 <head>
 <meta charset="UTF-8" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<title>Insert title here</title>
+<title>러닝메이트</title>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script
@@ -91,39 +91,7 @@ header {
 .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused{
 height:400px;
 }
- #wrap {
-  padding-top: 10em;
-  position: relative;
-  width: 100%; 
-  background-color: #f2f2f2;
-}
 
-section {
-  padding-bottom: 105px;
-}
-
-footer {
-  width: 100%;
-  height: 90px;
-  bottom: 50px;
-  position: absolute;
-  padding-top: 15px;
-  color: #808080;
-  font-size: 15px;
-  text-align: center;
-}
-
-footer a {
-  display: inline-block;
-  margin: 0 20px 10px 20px;
-  color: #808080; 
-  font-size: 20px;  
-}
-
-footer p span {
-  display: inline-block;
-  margin-left: 20px;
-} 
 </style>
 
 </head>
@@ -179,10 +147,13 @@ footer p span {
 													<input type="submit"
 														class="col gap-1 rounded btn btn-white" id="today_modify"
 														name="today_modify" value="수정" />
+														
 												</c:when>
 												<c:otherwise>
 													<span id="alerts" onclick=alert()>
 													   <c:choose>
+													   		<c:when test="${empty id}" >
+															</c:when>
 															<c:when test="${alert eq true }">
 																<span id="alert"
 																	style="float: right; padding-left: 10px;">신고취소</span>
@@ -225,16 +196,14 @@ footer p span {
 									<div id="todayboardFooter"	class="todayboardFooter" >
 										<div id="likes" onclick=changeImg()>
 											<c:choose>
+												<c:when test="${empty id}" >
+												</c:when>
 												<c:when test="${likes eq true }" >
-													<img id="like"
-														src="${pageContext.request.contextPath }/images/like.PNG"
-														style="width: 35px;" />
+													<img id="like"	src="${pageContext.request.contextPath }/images/like.PNG" style="width: 35px;" />
 												</c:when>
-												<c:when test="${likes eq false }">
-													<img id="like"
-														src="${pageContext.request.contextPath }/images/nolike.PNG"
-														style="width: 35px;" />
-												</c:when>
+												<c:otherwise>
+													<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width: 35px;" />
+												</c:otherwise>
 											</c:choose>
 										</div>
 										<br>
@@ -247,7 +216,7 @@ footer p span {
 				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
-
+		<input type="hidden" id="sessionid" value="${id }"/>
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -304,79 +273,58 @@ footer p span {
 	}
   	  </script>
 	<script>
-	//썸네일 오직 리드만 수행
-		$(function() {
-			$('#today_file').change(function (event) {
+ 	      $(function(){
+ 	    	  //목록버튼
+ 	    	$("#today_list").click(function(){
+	    	      location.href="/today";
+	    	      });
+ 	    	  
+ 	    	  //썸네일 이미지만 리드 
+ 	    	  $('#today_file').change(function (event) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					$('#today_thumb').attr("src", e.target.result);	
 				};
 				reader.readAsDataURL(event.target.files[0]);
 			});
-		});
-		
-		 //목록 버튼
-	      $(function(){
-	    	  $("#today_list").click(function(){
-	    	      location.href="/today";
-	    	      });
-	    	  }); 
-		 
-		 
-/* 	      $(function(){
-	    	  if (id eqauls todayselect.user_id || id eq 'admin') {
-	    		      ClassicEditor.create(document.querySelector("#editor"), {
-	    		    	  initialData : '${todayselect.today_contents}',
-	    		    	  ckfinder : {
-	    	          			uploadUrl : "/upload"
-	    	          		}
-	    		      }).then(editor=> {
-	    	      		window.editor=editor;
-	    	      		})
-	    			   .catch((error) => {
-	    			   	console.error(error);
-	    			    });
-	    	  } else {
-	    		  ClassicEditor.create(document.querySelector("#content"))
-	    	    	.then(editor=>{
-	    	    		window.editor = editor;
+ 	    	console.log($("#sessionid").val()==$("#user_id").val());
+ 	    	console.log($("#user_id").val() == "admin");
+ 	    	
+ 	    	  
+ 	    	  
+ 	    	//ckeditor5 실행  
+	    	if($("#sessionid").val()==$("#user_id").val() || $("#user_id").val() == "admin"){
+ 	    		ClassicEditor.create(document.querySelector("#editor"), {
+  		    	  initialData : '${todayselect.today_contents}',
+  		    	  ckfinder : {
+  	          			uploadUrl : "/upload"
+  	          		}
+  		      	}).then(editor=> {
+  	      			window.editor=editor;
+  	      		})
+  			   .catch((error) => {
+  			   		console.error(error);
+  			    });
+ 	    	 } else {
+ 	    		$('#today_title').attr('readOnly', true);
+ 	    		$('#today_file').attr('disabled', 'disabled'); 	    		 
+ 	    		ClassicEditor.create(document.querySelector("#editor"), {
+ 	  		    	  initialData : '${todayselect.today_contents}',
+ 	  		    	  ckfinder : {
+ 	  	          			uploadUrl : "/upload"
+ 	  	          		}
+ 	  		      	}).then(editor=> {
+	    	    	    editor.ui.view.toolbar.element.style.display = 'none';
 	    	    	    editor.isReadOnly = true;
-	    	    	    const toolbarElement = editor.ui.view.toolbar.element;
-	    	    	    toolbarElement.style.display = 'none';
-	    	        	editor.setData('${route.route_content }');
-	    	        })
-	    		    .catch((error) => {
-	    	    	   	console.error(error);
-	    		    });
+ 	  	      		})
+ 	  			  	  .catch((error) => {
+ 	  			   		console.error(error);
+ 	  			    });
+ 	    	 }
 
-	    	  }
-	    	
-	      }); */
-	      
-	     
-	      
-	      
- 	      
-	      //ckeditor 작성내용 보여주는부분
-  		$(function(){
-	      ClassicEditor.create(document.querySelector("#editor"), {
-	    	  initialData : '${todayselect.today_contents}',
-	    	  ckfinder : {
-          			uploadUrl : "/upload"
-          		}
-	      }).then(editor=> {
-      		window.editor=editor;
-      		})
-		   .catch((error) => {
-		   	console.error(error);
-		    });
-		});
-
-	      
-	      
-  		$(function() {
+ 	    	
+ 	    	//삭제
   			$('#today_delete').click(function (event) {
-  			
   				let message = confirm('삭제하시겠습니까?');
   				if(message == false){ 
   					return 
@@ -397,35 +345,9 @@ footer p span {
   	        		}
   	        	}); 
   			});
-  		});
-  			
-  		
-
-  			
- 		/* $(function() {
-  			$('#today_modify').click(function (event) {
-  				let message = confirm('수정하시겠습니까?');
-  				if(message == false){ 
-  					return 
-  				}
-  			
-  				$.ajax({     
-  	        		type:"post",
-  	        		dataType:"text",
-  	        		async:false,
-  	        		url:"http://localhost:8090/today_modify",
-  	        		data:{"articleNo":${todayselect.today_articleNo}},
-  	        		success: function(data, textStatus){ 
-  	        			 alert(data);
-  	        			 location.href="/today";
-  	        		},
-  	        		error:function(data, textStatus){
- 	        			 alert(data);
-  	        		}
-  	        	}); 
-  			});  
- 		}); */
-	
+	    	
+	      }); 
+	      
 		</script>
 		
 	 <%@include file ="fotter.jsp" %> 
