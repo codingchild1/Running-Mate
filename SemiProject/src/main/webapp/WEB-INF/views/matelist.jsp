@@ -43,10 +43,10 @@
 			</div>
 			<div>
 				<ul>
-					<li><a href="todaylist"><b>오늘의 런닝</b></a></li>
+					<li><a href="todaylist">오늘의 런닝</a></li>
 					<li><a href="routelist">루트 공유</a></li>
 					<li><a href="fblist">자유게시판</a></li>
-					<li><a href="#">런닝 메이트</a></li>
+					<li><a href="matelist"><b>런닝 메이트</b></a></li>
 				</ul>
 			</div>
 	<h2>내가 쓴 글</h2>
@@ -57,7 +57,7 @@
 		<th>날짜</th>
 	</tr>
 	<c:choose>
-		<c:when test='${empty todaylist}'>
+		<c:when test='${empty matelist}'>
 		<tr>
 			<td colspan="3">
 				<b>작성한 글이 없습니다.</b>
@@ -66,11 +66,11 @@
 		</c:when>
 		<!-- db -->
 		<c:otherwise>
-			<c:forEach var="today" items="${todaylist}">
+			<c:forEach var="mate" items="${matelist}">
 				<tr>
-					<td>${today.today_articleNo}</td>
-	    			<td>${today.today_title}</td>
-		 			<td>${today.today_date}</td>
+					<td>${mate.mate_articleNo}</td>
+	    			<td>${mate.mate_title}</td>
+		 			<td>${mate.mate_date}</td>
 				</tr>
 			</c:forEach>
 		</c:otherwise>

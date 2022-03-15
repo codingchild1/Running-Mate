@@ -46,7 +46,7 @@
 					<li><a href="todaylist"><b>오늘의 런닝</b></a></li>
 					<li><a href="routelist">루트 공유</a></li>
 					<li><a href="fblist">자유게시판</a></li>
-					<li><a href="#">런닝 메이트</a></li>
+					<li><a href="matelist">런닝 메이트</a></li>
 				</ul>
 			</div>
 	<h2>내가 쓴 글</h2>

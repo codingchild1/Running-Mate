@@ -38,7 +38,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<title>Insert title here</title>
+<title>러닝메이트</title>
 
 <style>
 main, header, section {
@@ -151,9 +151,7 @@ height:400px;
 					<!--컨트롤러 제출 today_post 로 이동  -->
 
 					<div class="d-flex justify-content-center">
-						<button class="btn btn-outline-secondary" type="submit"
-							style="width: 100px; height: 30px; padding: 5px" id="today_post"
-							name="today_post">제출</button>
+						<button type="submit" style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color:white;">제출</button>
 						&nbsp&nbsp&nbsp&nbsp&nbsp
 
 
@@ -166,15 +164,10 @@ height:400px;
 
 
 						<!--컨트롤러 목록 today_list 로 이동  -->
-
-						<button class="btn btn-outline-secondary" type="button"
-							style="width: 100px; height: 30px; padding: 5px" id="today_list" 
-							name="today_list">목록</button>
+						<button type="submit" style="width: 30; height: 40px; padding: 6px 6px; margin: 7px; border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color:white;">목록</button>
 					</div>
 					<br>
 				</form>
-
-
 			</main>
 		</div>
 	</div>

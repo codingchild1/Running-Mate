@@ -40,11 +40,6 @@
 			select password from member where id=#{id}
 		]]>
 	</select>
-	<select id="getAdminCK" parameterType="Member" resultType="String">
-		<![CDATA[
-			select adminCk from member where id=#{id}
-		]]>
-	</select>
 	<select id="queryProfile" parameterType="String" resultType="String">
 		<![CDATA[
 			select memberthumb from member where id=#{user_id}
@@ -68,5 +63,4 @@
 
 워크벤치에 먼저 등록
 insert into member values(1, 'admin', '관리자', 'admin04', 'admin@naver.com', '01085288525', sysdate(), 1, 'ad.jpg');
-
 -->

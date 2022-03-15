@@ -46,7 +46,7 @@
 					<li><a href="todaylist">오늘의 런닝</a></li>
 					<li><a href="routelist"><b>루트 공유</b></a></li>
 					<li><a href="fblist">자유게시판</a></li>
-					<li><a href="#">런닝 메이트</a></li>
+					<li><a href="matelist">런닝 메이트</a></li>
 				</ul>
 			</div>
 	<h2>내가 쓴 글</h2>
@@ -68,7 +68,7 @@
 		<c:otherwise>
 			<c:forEach var="route" items="${routelist}">
 				<tr>
-					<td>${route.user_id}</td>
+					<td>${route.route_articleNo}</td>
 	    			<td>${route.route_title}</td>
 		 			<td>${route.route_date}</td>
 				</tr>
