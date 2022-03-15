@@ -10,8 +10,28 @@ public class Member {
 	String phone;
 	Date joindate;
 	String memberthumb;
+	int adminCk;
 	
+	public int getAdminCk() {
+		return adminCk;
+	}
+	public void setAdminCk(int adminCk) {
+		this.adminCk = adminCk;
+	}
 	public Member() {}
+	
+	public Member(String id, String name, String password, String email, String phone, Date joindate,
+			String memberthumb, int adminCk) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.email = email;
+		this.phone = phone;
+		this.joindate = joindate;
+		this.memberthumb = memberthumb;
+		this.adminCk = adminCk;
+	}
 	public Member(String id, String name, String password, String email, String phone, String memberthumb) {
 		this.id=id;
 		this.name=name;
@@ -76,6 +96,6 @@ public class Member {
 	public void setMemberthumb(String memberthumb) {
 		this.memberthumb = memberthumb;
 	}
-	
+
 	
 }

@@ -53,8 +53,6 @@
                 <li class="nav-item"><a class="nav-link" href="route">코스공유</a></li>
                 <li class="nav-item"><a class="nav-link" href="fb_main">자유게시판</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">이벤트</a></li>
-                
-                
 			</ul>
             
             </div>
@@ -82,27 +80,27 @@
                         	<i class="">회원가입</i>
                    		</a>
                     </c:when>
-                    
-                    <c:when test="${adminCheck == 0 }">
-                    	 <a class="nav-icon position-relative text-decoration-none" href="logout">
-	                        <i class="">로그아웃</i>
-	                    </a>
-	                    <a class="nav-icon position-relative text-decoration-none" href="mypage">
-                        	<i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        	<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
-                   		</a>
-                    </c:when>
-                    
-		          	<c:otherwise>
-	                   	 <a class="nav-icon position-relative text-decoration-none" href="logout">
-	                        <i class="">로그아웃</i>
-	                    </a>
-	                    <a class="nav-icon position-relative text-decoration-none" href="mypage">
-                        	<i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        	<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
-                   		</a>
-                    </c:otherwise>
-	          	</c:choose>
+                        
+	                    
+	                    <c:when test="${adminCheck == 0 }">
+		                    <a class="nav-icon position-relative text-decoration-none" href="logout">
+		                        <i class="">로그아웃</i>
+		                    </a>
+                        	<a class="nav-icon position-relative text-decoration-none" href="mypage">
+                        		<i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        		<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
+                   			</a>
+                   		</c:when>
+		          		<c:otherwise>
+		          			<a class="nav-icon position-relative text-decoration-none" href="logout">
+	                        	<i class="">로그아웃</i>
+	                    	</a>
+	                   		<a class="nav-icon position-relative text-decoration-none" href="memberlist">
+                        		<i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        		<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
+                   			</a>
+                    	</c:otherwise>
+               </c:choose>
 	          	
                     
                 </div>
