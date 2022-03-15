@@ -49,9 +49,16 @@
 		.board_time{ font-size : 10pt;}
 		.boardbox { diplay:block; height:580px; }
 		.editorbox { display:inline-block; float:left; width:48%; height:500px;}
-		.mapresult { width: 48%; height:550px; margin-bottom:50px; display:inline-block; float:right; }
+		.mapsize { width: 48%; height:550px; float:right;  margin-bottom:50px; display:inline-block;  }
+		.mapresult { width:100%; height:100%; position: relative; }
 		input:disabled { background: white; }
-		
+		.info-box {
+		position: absolute;
+  margin: 20px;
+  width: 25%;
+  top: 900px;;
+  background-color: #fff;
+}
 	</style>
 
 </head>
@@ -88,7 +95,17 @@
 		
 		<div id="routeboardMain" class="boardbox">
 			<div class="editorbox"><textarea id="content" name="content" style="width: 100%; " ></textarea></div>
+			<div id="mapbox" class="mapsize">
+				<div id="map"  class="mapresult"></div>
+				<div class="info-box">
+  		<p><b>거리 : ${route.route_distance } m</b><br>
+    <b>주소정보 : ${route.route_distance } m</b><br>
+ 	 </p>
+  	<div id="directions"></div>
+	</div>
+			</div>
 			<div id="map" class="mapresult"></div>
+			
     	</div><br><br>
     	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
        		<div id="likes" onclick=changeImg() style="text-align:center;">	
@@ -101,8 +118,11 @@
 			</div>
 			<br><hr>
 		</div>
+		<input type="hidden" id="distnace_info" value="${route.route_distance }">
     </div>
 	</main>
+	
+	
 	
 	<script>
 	function deleteArticle(){
@@ -215,7 +235,28 @@
     		]
     	});
     	map.addControl(draw);
+    	
+    	//var distance= $("#distnace_info").val();
+    	//const directions = document.getElementById('directions');
+    	//directions.innerHTML = `<p><strong>Trip duration: min.</strong></p>`;
+    	
 	});
+	
+	function getInstructions(data) {
+		// Target the sidebar to add the instructions
+		const directions = document.getElementById('directions');
+		let tripDirections = '';
+		// Output the instructions for each step of each leg in the response object
+		for (const leg of data.legs) {
+		const steps = leg.steps;
+		for (const step of steps) {
+		tripDirections += `<li>${step.maneuver.instruction}</li>`;
+		}
+		}
+		directions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
+		data.duration / 60
+		)} min.</strong></p><ol>${tripDirections}</ol>`;
+		}
 	</script>
 	
 	
