@@ -274,12 +274,21 @@ public class MemberController {
 	}
 	
 	//내가 쓴 글 메이트
-	@GetMapping(value="/matelist")
-	public ModelAndView mateList() {
+	@RequestMapping(value="/matelist", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView mateList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
 		ModelAndView mv = new ModelAndView("matelist");
 		String id = (String) session.getAttribute("id");
-		List<GroupAndMate> matelist = mateService.mateList(id);
-		mv.addObject("matelist", matelist);
+		PageInfo pageInfo = new PageInfo();
+		try {
+			List<GroupAndMate> matelist = mateService.mateList(id, page, pageInfo);
+			mv.addObject("matelist", matelist);
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("count", matelist.size());
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.addObject("matelist", null);
+		}
+		
 		return mv;
 	}
 	

@@ -10,6 +10,7 @@ import com.mulcam.run.dto.Alert;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.MyBoard;
 import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
@@ -62,5 +63,6 @@ public interface MateDAO {
 	public List<GroupAndMate> searchMap3(String type)throws Exception; //map페이지 주소검색
 
 	//내가 쓴 글
-	public List<GroupAndMate> matewrite(String id);
+	public int mateListCount(String id);
+	public List<GroupAndMate> matewrite(MyBoard boardinfo);
 }

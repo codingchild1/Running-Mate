@@ -244,15 +244,25 @@
 		]]>
 	</select>
 	
-		<!-- 내가 쓴 글 목록 union해서 가지고 오기-->
+	<!-- 내가 쓴 글 목록 union해서 가지고 오기-->
+	<select id="mateListCount" resultType="int" parameterType="String">
+ 		<![CDATA[
+ 			select count(*)  from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,warning as warning,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,warning as warning,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			where id =#{id}
+ 		]]>
+ 	</select>
+ 	
 
-	<select id="matewrite" resultType="GroupAndMate" parameterType="String">
+	<select id="matewrite" resultType="GroupAndMate" parameterType="MyBoard">
 		<![CDATA[
 			select * from 
 			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,warning as warning,group_date as regdate,0 as likeno, 'g' as type from group1)
 			union
 			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,warning as warning,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
-			where id =#{id} order by regdate desc;
+			where id =#{id} order by regdate desc limit #{startrow}, 10
 		]]>
 	</select>
 

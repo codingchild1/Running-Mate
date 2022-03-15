@@ -12,6 +12,8 @@ import com.mulcam.run.dto.Alert;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.MyBoard;
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
@@ -202,9 +204,24 @@ public class MateServiceImipl implements MateService {
 	
 	//내가 쓴 글
 	@Override
-	public List<GroupAndMate> mateList(String id) {
-		// TODO Auto-generated method stub
-		return mateDAO.matewrite(id);
+	public List<GroupAndMate> mateList(String id, int page, PageInfo pageInfo) throws Exception {
+		int listCount = mateDAO.mateListCount(id);
+		int maxPage = (int)Math.ceil((double)listCount/10);
+		int startPage=(((int) ((double)page/10+0.9))-1)*10+1;
+		int endPage=startPage+10-1;
+		
+		if(endPage>maxPage) endPage=maxPage;
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		pageInfo.setListCount(listCount);
+		int startrow = (page-1)*10;
+		MyBoard mypageinfo = new MyBoard(id, startrow);
+		System.out.println("Start" + startrow);
+		System.out.println(listCount);
+		
+		return mateDAO.matewrite(mypageinfo);
 	}
 
 }

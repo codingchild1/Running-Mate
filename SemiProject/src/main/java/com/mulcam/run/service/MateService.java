@@ -6,6 +6,7 @@ import java.util.Map;
 import com.mulcam.run.dto.Group;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.dto.Warning;
 
@@ -56,5 +57,5 @@ public interface MateService{
 
 	
 	//내가 쓴 글 가지고 오기
-	public List<GroupAndMate> mateList(String id);
+	public List<GroupAndMate> mateList(String id, int page, PageInfo pageInfo) throws Exception;
 }
