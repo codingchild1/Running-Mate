@@ -88,17 +88,17 @@
 			</div>
 	<div class="no">
 	<h2>내가 쓴 글</h2>
+	<table border="1" align="center"> 
+		<tr>
+			<th>no</th>
+			<th>제목</th>
+			<th>날짜</th>
+		</tr>
 	
 	<c:choose>
 		<c:when test="${fblist!=null && pageInfo.listCount>0 }">
 			<div style="">
-				
-				<table border="1" align="center"> 
-					<tr>
-						<th>no</th>
-						<th>제목</th>
-						<th>날짜</th>
-					</tr>
+			
 					<c:forEach var="board" items="${fblist}">
 					<tr>
 						<td>${board.writer}</td>
@@ -106,7 +106,6 @@
 		 				<td>${board.fb_date}</td>
 					</tr>
 					</c:forEach>
-				</table>
 			
 			</div>
 			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
@@ -146,6 +145,7 @@
 			</tr>
 		</c:otherwise>
 	</c:choose>
+	</table>
 	</div>
 </body>
 </html>
