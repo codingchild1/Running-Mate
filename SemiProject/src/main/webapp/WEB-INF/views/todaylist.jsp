@@ -57,7 +57,7 @@
 		<th>날짜</th>
 	</tr>
 	<c:choose>
-		<c:when test='${empty fblist}'>
+		<c:when test='${empty todaylist}'>
 		<tr>
 			<td colspan="3">
 				<b>작성한 글이 없습니다.</b>
@@ -66,11 +66,11 @@
 		</c:when>
 		
 		<c:otherwise>
-			<c:forEach var="board" items="${fblist}">
+			<c:forEach var="today" items="${todaylist}">
 				<tr>
-					<td>${board.writer}</td>
-	    			<td>${board.fb_title}</td>
-		 			<td>${board.fb_date}</td>
+					<td>${today.today_articleNo}</td>
+	    			<td>${today.today_title}</td>
+		 			<td>${today.today_date}</td>
 				</tr>
 			</c:forEach>
 		</c:otherwise>

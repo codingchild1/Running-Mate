@@ -116,4 +116,12 @@ public class TodayServiceImpl implements TodayService {
 		todayDAO.updateLikeSub(articleNo);
 	}
 
+
+	//내가 쓴 글
+	@Override
+	public List<Today> todayList(String id) {
+		// TODO Auto-generated method stub
+		return todayDAO.todayList(id);
+	}
+
 }

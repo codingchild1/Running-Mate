@@ -34,9 +34,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.Member;
 import com.mulcam.run.dto.Route;
+import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.BoardService;
 import com.mulcam.run.service.MemberService;
 import com.mulcam.run.service.RouteService;
+import com.mulcam.run.service.TodayService;
 
 @Controller
 public class MemberController {
@@ -48,6 +50,9 @@ public class MemberController {
 	
 	@Autowired
 	RouteService routeService;
+	
+	@Autowired
+	TodayService todayService;
 	
 	@Autowired
 	HttpSession session;
@@ -74,7 +79,7 @@ public class MemberController {
 //			} 
 //			} catch(EmptyResultDataAccessException e) {
 //				modelAndView.addObject("err", "아이디가 존재하지 않습니다");
-//				modelAndView.addObject("err", "err");
+//				modelAndView.setViewName("err");
 //			} catch(Exception e){
 //				modelAndView.addObject("err", e.getMessage());
 //				modelAndView.addObject("err", "err");
@@ -95,20 +100,21 @@ public class MemberController {
 			String password=info.get("password");
 			if(id ==null || password==null) {
 				model.addAttribute("error", "아이디 또는 비밀번호를 입력해 주세요.");
-				return "error";
+				return "err";
 			}
 			if(memberService.accessMember(id, password)) {
 				session.setAttribute("id", id);
+				//admincheck 가지고 오는 서비스
+				session.setAttribute("adminCheck", 0);
+				//id 검색해서 admincheck
 			} else {
 				model.addAttribute("err", "아이디 또는 비밀번호가 올바르지 않습니다.");
-				model.addAttribute("err", "err");
-				return "error";
+				return "err";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("err", "로그인 중 문제가 발생했습니다.");
-			model.addAttribute("err", "err");
-			return "error";
+			return "err";
 		}
 		return "main";
 	}
@@ -120,7 +126,6 @@ public class MemberController {
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session=request.getSession();
 		session.removeAttribute("id");
-//		model.addAttribute("login", "login");
 		return "login";
 	}
 	
@@ -155,10 +160,13 @@ public class MemberController {
 		return "/login";
 	}
 		
-	//마이페이지
+	//err창에 띄워주기
 	@GetMapping(value="/mypage")
-	public String mypage(Model model) {
-		
+	public String mypage(Model model) throws Exception {
+		String id = (String) session.getAttribute("id");
+		Member member = memberService.queryById(id);
+		model.addAttribute(member);
+//		modelAndView.addObject("member", member);
 		return "/mypage";
 	}
 
@@ -204,19 +212,31 @@ public class MemberController {
 			System.out.println(br.fb_articleNo);
 		}
 		return "fblist";
+	}
+
+	//내가 쓴 글 루트 공유
+	@GetMapping(value="/routelist")
+	public String routeList(Model model) {
+		String id = (String) session.getAttribute("id");
+		List<Route> routelist = routeService.routeList(id);
+		model.addAttribute("routelist", routelist);
+		for(Route br : routelist) {
+			System.out.println(br.route_articleNo);
 		}
+		return "routelist";
+	}
 	
-		//내가 쓴 글 루트 공유
-		@GetMapping(value="/routelist")
-		public String routeList(Model model) {
-			String id = (String) session.getAttribute("id");
-			List<Route> routelist = routeService.routeList(id);
-			model.addAttribute("routelist", routelist);
-			for(Route br : routelist) {
-				System.out.println(br.route_articleNo);
-			}
-			return "routelist";
-			}
+	//내가 쓴 글 오늘의 런닝
+	@GetMapping(value="/todaylist")
+	public String todayList(Model model) {
+		String id = (String) session.getAttribute("id");
+		List<Today> todaylist = todayService.todayList(id);
+		model.addAttribute("todaylist", todaylist);
+		for(Today br : todaylist) {
+			System.out.println(br.today_articleNo);
+		}
+		return "todaylist";
+	}
 	
 	//프로필 프리뷰
 	@GetMapping(value="/profileview/{filename}")
