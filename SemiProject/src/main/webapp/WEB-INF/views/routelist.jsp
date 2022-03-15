@@ -45,14 +45,13 @@
 		color: black;
 	}
 	.no{
-	  width:400px;
-	  height:400px;
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  transform: translate(187%, 50%);
 	  border-radius: 15px;
-		
+	  width: 60%;
+	  justify-content: center;
+	  margin: auto;
 	}
 	</style>
 <body>
@@ -92,7 +91,7 @@
 					<c:forEach var="route" items="${routelist}">
 					<tr>
 						<td>${route.route_articleNo}</td>
-	    				<td>${route.route_title}</td>
+	    				<td><a href="/route_post?route_articleNo=${route.route_articleNo}&page=1">${route.route_title}</a></td>
 		 				<td>${route.route_date}</td>
 					</tr>
 					</c:forEach>

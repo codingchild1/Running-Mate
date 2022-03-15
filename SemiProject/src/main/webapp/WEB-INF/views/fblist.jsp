@@ -56,18 +56,17 @@
     	border-bottom: 1px solid #444444;
    		padding: 10px;
   }
-  	.no{
-	  width:400px;
-	  height:400px;
+	.no{
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  transform: translate(187%, 50%);
 	  border-radius: 15px;
-		
+	  width: 60%;
+	  justify-content: center;
+	  margin: auto;
 	}
 </style>
-	</style>
+
 <body>
 		<header>
 			<%@include file ="header.jsp" %>
@@ -103,7 +102,7 @@
 					</tr>
 					<c:forEach var="board" items="${fblist}">
 					<tr>
-						<td>${board.writer}</td>
+						<td>${board.fb_articleNo}</td>
 	    				<td><a href="/fb_detail?fb_articleNo=${board.fb_articleNo }&page=1">${board.fb_title}</a></td>
 		 				<td>${board.fb_date}</td>
 					</tr>

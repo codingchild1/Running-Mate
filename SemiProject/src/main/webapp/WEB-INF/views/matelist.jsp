@@ -157,14 +157,13 @@
 	color: white; */
 }
 	.no{
-	  width:400px;
-	  height:400px;
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  transform: translate(187%, 50%);
 	  border-radius: 15px;
-		
+	  width: 60%;
+	  justify-content: center;
+	  margin: auto;
 	}
 	</style>
 <body>

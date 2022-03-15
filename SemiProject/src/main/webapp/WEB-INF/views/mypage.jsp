@@ -107,7 +107,7 @@
 		  transform: translateX(-50%);
 		  margin-bottom: 40px;
 		  width:165px;
-		  height:30px;
+		  height:35px;
 		  border: none;
 		  font-weight: bold;
 		  transition: 0.4s;
@@ -119,12 +119,12 @@
 	}
 	#btn {
 		  position:relative;
-		  left:21%;
+		  left:20%;
 		  top: -18px;
 		  transform: translateX(-50%);
 		  margin-bottom: 40px;
 		  width:165px;
-		  height:30px;
+		  height:35px;
 		  border: none;
 		  font-weight: bold;
 		  transition: 0.4s;

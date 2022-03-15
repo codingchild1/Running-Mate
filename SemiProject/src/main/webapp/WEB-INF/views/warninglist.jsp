@@ -67,6 +67,13 @@
 			}
 		}
 	</script>
+	<style>
+		.di{
+			width: 60%;
+		    justify-content: center;
+		    margin: auto;
+		}
+	</style>
 </head>
 <body>
 	<header>
@@ -78,6 +85,7 @@
 				<li><a href="warninglist"><b>신고 목록</b></a></li>
 			</ul>
 		</div>
+		<div class="di">
 	<h2>신고목록 조회</h2>
 <table border=1 align="center" class="table table-hover"> 
 <tr>
@@ -113,5 +121,6 @@
 <form>
 	<input type="button" class="btn btn-success" value="삭제" onclick="deleteValue();" />
 </form>
+</div>
 </body>
 </html>

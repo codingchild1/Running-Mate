@@ -46,15 +46,16 @@
 	}
 	
 	.no{
-	  width:400px;
-	  height:400px;
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  transform: translate(187%, 50%);
 	  border-radius: 15px;
-		
+	  width: 60%;
+	  margin: auto;
 	}
+
+
+
 	</style>
 <body>
 		<header>
@@ -95,7 +96,7 @@
 					<c:forEach var="today" items="${todaylist}">
 					<tr>
 						<td>${today.today_articleNo}</td>
-	    				<td>${today.today_title}</td>
+	    				<td><a href="/today_Result?today_articleNo=${today.today_articleNo}&page=1">${today.today_title}</a></td>
 		 				<td>${today.today_date}</td>
 					</tr>
 					</c:forEach>
