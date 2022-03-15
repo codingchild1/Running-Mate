@@ -133,9 +133,15 @@
 	</update>
 	
 	<!-- 내가 쓴 글 목록 -->
-	<select id="routeList" parameterType="String" resultType="Route">
+	<select id="routeListCount" resultType="int" parameterType="String">
+ 		<![CDATA[
+ 			select count(*) from route where user_id=#{id}
+ 		]]>
+ 	</select>
+ 	
+	<select id="routeList" parameterType="MyBoard" resultType="route">
 		<![CDATA[
-			select route_articleNo, route_title, route_date from route where user_id=#{id}
+			select route_articleNo, route_title, route_date from route where user_id=#{id} limit #{startrow}, 10
 		]]>
 	</select>
 </mapper>

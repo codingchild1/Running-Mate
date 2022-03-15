@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.mulcam.run.dto.MyBoard;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.RouteInfo;
 import com.mulcam.run.dto.SearchRoute;
@@ -39,5 +40,6 @@ public interface RouteDAO {
 	public void deleteRoute(int articleNo);					//delete 코스
 	
 	//내가 쓴 글 route
-	public List<Route> routeList(String id);
+	public int routeListCount(String id);
+	public List<Route> routeList(MyBoard boardinfo);
 }

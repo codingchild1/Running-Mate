@@ -49,32 +49,66 @@
 					<li><a href="matelist">런닝 메이트</a></li>
 				</ul>
 			</div>
+	
 	<h2>내가 쓴 글</h2>
-	<table border="1" align="center"> 
-	<tr>
-		<th>no</th>
-		<th>제목</th>
-		<th>날짜</th>
-	</tr>
+	
 	<c:choose>
-		<c:when test='${empty routelist}'>
-		<tr>
-			<td colspan="3">
-				<b>작성한 글이 없습니다.</b>
-			</td>
-		</tr>
-		</c:when>
 		
-		<c:otherwise>
-			<c:forEach var="route" items="${routelist}">
-				<tr>
-					<td>${route.route_articleNo}</td>
-	    			<td>${route.route_title}</td>
-		 			<td>${route.route_date}</td>
-				</tr>
+		<c:when test="${routelist!=null && pageInfo.listCount>0 }">
+			<div style="">
+				
+				<table border="1" align="center"> 
+					<tr>
+						<th>no</th>
+						<th>제목</th>
+						<th>날짜</th>
+					</tr>
+					<c:forEach var="route" items="${routelist}">
+					<tr>
+						<td>${route.route_articleNo}</td>
+	    				<td>${route.route_title}</td>
+		 				<td>${route.route_date}</td>
+					</tr>
+					</c:forEach>
+				</table>
+			
+			</div>
+			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
+			<c:choose>
+				<c:when test="${pageInfo.page<=1}">
+					[이전]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="routelist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<c:choose>
+					<c:when test="${pageInfo.page==i }">
+						[${i }]
+					</c:when>
+					<c:otherwise>
+						<a href="routelist?page=${i}">[${i }]</a>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
+			<c:choose>
+				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+					[다음]
+				</c:when>
+				<c:otherwise>
+					<a href="routelist?page=${pageInfo.page+1}">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td colspan="3">
+					<b>작성한 글이 없습니다.</b>
+				</td>
+			</tr>
 		</c:otherwise>
 	</c:choose>
-	</table>
 </body>
 </html>

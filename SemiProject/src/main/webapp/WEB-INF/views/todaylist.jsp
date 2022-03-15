@@ -111,6 +111,5 @@
 			</tr>
 		</c:otherwise>
 	</c:choose>
-	</table>
 </body>
 </html>

@@ -220,14 +220,25 @@ public class MemberController {
 	}
 
 	//내가 쓴 글 루트 공유
-	@GetMapping(value="/routelist")
-	public String routeList(Model model) {
+	@RequestMapping(value="/routelist", method= {RequestMethod.GET, RequestMethod.POST})
+	public String routeList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
 		String id = (String) session.getAttribute("id");
-		List<Route> routelist = routeService.routeList(id);
-		model.addAttribute("routelist", routelist);
-		for(Route br : routelist) {
-			System.out.println(br.route_articleNo);
-		}
+		PageInfo pageInfo = new PageInfo();
+	
+		try {
+			List<Route> routelist = routeService.routeList(id, page, pageInfo);
+			model.addAttribute("routelist", routelist);
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("count", routelist.size());
+			for(Route br : routelist) {
+				System.out.println(br.route_articleNo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("routelist", null);
+		}		
+		
+		
 		return "routelist";
 	}
 	
@@ -241,9 +252,6 @@ public class MemberController {
 			model.addAttribute("todaylist", todaylist);
 			model.addAttribute("pageInfo", pageInfo);
 			model.addAttribute("count", todaylist.size());
-			for(Today br : todaylist) {
-				System.out.println(br.today_articleNo);
-			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();
