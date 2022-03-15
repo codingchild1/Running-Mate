@@ -71,7 +71,7 @@ button a {
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 400px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -126,7 +126,7 @@ color: white; */
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 400px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
