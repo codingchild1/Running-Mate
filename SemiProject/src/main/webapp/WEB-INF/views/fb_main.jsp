@@ -207,27 +207,27 @@ a {
 					<section id=pageList>
 						<c:choose>
 							<c:when test="${pageInfo.page<=1}">
-					[이전]&nbsp;
+					«&nbsp;
 				</c:when>
 							<c:otherwise>
-								<a href="fb_main?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+								<a href="fb_main?page=${pageInfo.page-1}">«&nbsp;</a>
 				</c:otherwise>
 						</c:choose>
 						<c:forEach var="i" begin="${pageInfo.startPage }"
 							end="${pageInfo.endPage }">
 							<c:choose>
-								<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+								<c:when test="${pageInfo.page==i }">${i}&nbsp;</c:when>
 								<c:otherwise>
-									<a href="fb_main?page=${i}">[${i }]</a>
+									<a href="fb_main?page=${i}">${i}&nbsp;</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						<c:choose>
 							<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[다음]
+					»&nbsp;
 				</c:when>
 							<c:otherwise>
-								<a href="fb_main?page=${pageInfo.page+1}">[다음]</a>
+								<a href="fb_main?page=${pageInfo.page+1}">»&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</section>
