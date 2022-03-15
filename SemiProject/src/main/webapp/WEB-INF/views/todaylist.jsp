@@ -43,9 +43,9 @@
 			</div>
 			<div>
 				<ul>
-					<li><a href="todaylist">오늘의 런닝</a></li>
+					<li><a href="todaylist"><b>오늘의 런닝</b></a></li>
 					<li><a href="routelist">루트 공유</a></li>
-					<li><a href="fblist"><b>자유게시판</b></a></li>
+					<li><a href="fblist">자유게시판</a></li>
 					<li><a href="#">런닝 메이트</a></li>
 				</ul>
 			</div>

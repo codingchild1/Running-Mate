@@ -80,7 +80,7 @@
                     </a>
                     </c:when>
 	          	<c:otherwise>
-                    <a class="nav-icon position-relative text-decoration-none" href="login">
+                    <a class="nav-icon position-relative text-decoration-none" href="logout">
                         <i class="">로그아웃</i>
                     </a>
                     </c:otherwise>
