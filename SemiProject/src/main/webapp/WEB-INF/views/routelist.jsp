@@ -44,8 +44,8 @@
 			<div>
 				<ul>
 					<li><a href="todaylist">오늘의 런닝</a></li>
-					<li><a href="routelist">루트 공유</a></li>
-					<li><a href="fblist"><b>자유게시판</b></a></li>
+					<li><a href="routelist"><b>루트 공유</b></a></li>
+					<li><a href="fblist">자유게시판</a></li>
 					<li><a href="#">런닝 메이트</a></li>
 				</ul>
 			</div>
@@ -57,7 +57,7 @@
 		<th>날짜</th>
 	</tr>
 	<c:choose>
-		<c:when test='${empty fblist}'>
+		<c:when test='${empty routelist}'>
 		<tr>
 			<td colspan="3">
 				<b>작성한 글이 없습니다.</b>
@@ -66,11 +66,11 @@
 		</c:when>
 		
 		<c:otherwise>
-			<c:forEach var="board" items="${fblist}">
+			<c:forEach var="route" items="${routelist}">
 				<tr>
-					<td>${board.writer}</td>
-	    			<td>${board.fb_title}</td>
-		 			<td>${board.fb_date}</td>
+					<td>${route.user_id}</td>
+	    			<td>${route.route_title}</td>
+		 			<td>${route.route_date}</td>
 				</tr>
 			</c:forEach>
 		</c:otherwise>

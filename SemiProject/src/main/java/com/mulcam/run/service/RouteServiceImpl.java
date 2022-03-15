@@ -133,5 +133,12 @@ public class RouteServiceImpl implements RouteService {
 	public void routeWarningDelete(int articleNo) throws Exception {
 		routeDAO.routeWarningDelete(articleNo);
 	}
+
+	//내가 쓴 글 route
+	@Override
+	public List<Route> routeList(String id) {
+		// TODO Auto-generated method stub
+		return routeDAO.routeList(id);
+	}
 	
 }
