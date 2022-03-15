@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mulcam.run.dao.BoardDAO;
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.GroupAndMate;
+import com.mulcam.run.dto.MyBoard;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 
@@ -135,9 +136,21 @@ public class BoardServiceImpl implements BoardService {
 	
 	//내가 쓴 글
 	@Override
-	public List<Board> fbList(String id){
-		// TODO Auto-generated method stub
-		return boardDAO.fbList(id);
+	public List<Board> fbList(String id, int page, PageInfo pageInfo) throws Exception {
+		int listCount = boardDAO.fbListCount(id);
+		int maxPage = (int)Math.ceil((double)listCount/10);
+		int startPage=(((int) ((double)page/10+0.9))-1)*10+1;
+		int endPage=startPage+10-1;
+		
+		if(endPage>maxPage) endPage=maxPage;
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		pageInfo.setListCount(listCount);
+		int startrow = (page-1)*10;
+		MyBoard mypageinfo = new MyBoard(id, startrow);
+		return boardDAO.fbList(mypageinfo);
 	}
 
 	

@@ -130,12 +130,19 @@
 		]]>
 	</update>
 	
-	<!-- 내가 쓴 글 목록 -->
-	<select id="fbList" parameterType="String" resultType="Board">
+	<!-- 내가 쓴 글 -->
+	<select id="fbListCount" resultType="int" parameterType="String">
+ 		<![CDATA[
+ 			select count(*) from freeboard where writer=#{id}
+ 		]]>
+ 	</select>
+ 	
+	<select id="fbList" parameterType="MyBoard" resultType="Board">
 		<![CDATA[
-			select * from freeboard where writer=#{id}
+			select * from freeboard where writer=#{id} limit #{startrow}, 10
 		]]>
 	</select>
+	
 </mapper>
 
 

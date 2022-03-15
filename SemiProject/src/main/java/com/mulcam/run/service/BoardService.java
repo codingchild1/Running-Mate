@@ -30,6 +30,6 @@ public interface BoardService {
 	public void LikesMinus5(int fb_articleNo) throws Exception;
 	
 	//내가 쓴 글
-	public List<Board> fbList(String id);
+	public List<Board> fbList(String id, int page, PageInfo pageInfo) throws Exception;
 	List<Board> getBoardSearchResultList(String column, String keyword, int page, PageInfo pageInfo) throws Exception;
 }

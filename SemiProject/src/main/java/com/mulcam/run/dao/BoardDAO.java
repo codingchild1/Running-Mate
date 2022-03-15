@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
+import com.mulcam.run.dto.MyBoard;
 import com.mulcam.run.dto.Today;
 
 @Mapper
@@ -32,7 +33,8 @@ public interface BoardDAO {
 	public void updateLikeMinus5(int fb_articleNo);
 	
 	//내가 쓴 글 가지고 오기
-	public List<Board> fbList(String id);
+	public int fbListCount(String id);
+	public List<Board> fbList(MyBoard boardinfo);;
 	int selectBoardSearchResultCount(Map<String, Object> mapParam);
 	List<Board> selectBoardSearchResultList(Map<String, Object> mapParam);
 }

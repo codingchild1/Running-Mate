@@ -60,32 +60,65 @@
 					<li><a href="matelist">런닝 메이트</a></li>
 				</ul>
 			</div>
+	
 	<h2>내가 쓴 글</h2>
-	<table border="1" align="center"> 
-	<tr>
-		<th>no</th>
-		<th>제목</th>
-		<th>날짜</th>
-	</tr>
+	
 	<c:choose>
-		<c:when test='${empty fblist}'>
-		<tr>
-			<td colspan="3">
-				<b>작성한 글이 없습니다.</b>
-			</td>
-		</tr>
-		</c:when>
-		
-		<c:otherwise>
-			<c:forEach var="board" items="${fblist}">
-				<tr>
-					<td>${board.writer}</td>
-	    			<td><a href="/fb_detail?fb_articleNo=${board.fb_articleNo }&page=1">${board.fb_title}</a></td>
-		 			<td>${board.fb_date}</td>
-				</tr>
+		<c:when test="${fblist!=null && pageInfo.listCount>0 }">
+			<div style="">
+				
+				<table border="1" align="center"> 
+					<tr>
+						<th>no</th>
+						<th>제목</th>
+						<th>날짜</th>
+					</tr>
+					<c:forEach var="board" items="${fblist}">
+					<tr>
+						<td>${board.writer}</td>
+	    				<td><a href="/fb_detail?fb_articleNo=${board.fb_articleNo }&page=1">${board.fb_title}</a></td>
+		 				<td>${board.fb_date}</td>
+					</tr>
+					</c:forEach>
+				</table>
+			
+			</div>
+			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
+			<c:choose>
+				<c:when test="${pageInfo.page<=1}">
+					[이전]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="fblist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<c:choose>
+					<c:when test="${pageInfo.page==i }">
+						[${i }]
+					</c:when>
+					<c:otherwise>
+						<a href="fblist?page=${i}">[${i }]</a>
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
+			<c:choose>
+				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
+					[다음]
+				</c:when>
+				<c:otherwise>
+					<a href="fblist?page=${pageInfo.page+1}">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td colspan="3">
+					<b>작성한 글이 없습니다.</b>
+				</td>
+			</tr>
 		</c:otherwise>
 	</c:choose>
-	</table>
 </body>
 </html>

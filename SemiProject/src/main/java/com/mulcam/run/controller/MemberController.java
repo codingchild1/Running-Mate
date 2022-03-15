@@ -208,18 +208,29 @@ public class MemberController {
 		return "redirect:memberlist";
 	}
 	
+
+
 	//내가 쓴 글 자유게시판
-	@GetMapping(value="/fblist")
-	public String fbList(Model model) {
+	@RequestMapping(value="/fblist", method= {RequestMethod.GET, RequestMethod.POST})
+	public String fbList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
 		String id = (String) session.getAttribute("id");
-		List<Board> fblist = boardService.fbList(id);
-		model.addAttribute("fblist", fblist);
-		for(Board br : fblist) {
-			System.out.println(br.fb_articleNo);
-		}
+		PageInfo pageInfo = new PageInfo();
+			
+		try {
+			List<Board> fblist = boardService.fbList(id, page, pageInfo);
+			model.addAttribute("fblist", fblist);
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("count", fblist.size());
+			for(Board br : fblist) {
+				System.out.println(br.fb_articleNo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("fblist", null);
+		}		
+	
 		return "fblist";
 	}
-
 	//내가 쓴 글 루트 공유
 	@RequestMapping(value="/routelist", method= {RequestMethod.GET, RequestMethod.POST})
 	public String routeList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
