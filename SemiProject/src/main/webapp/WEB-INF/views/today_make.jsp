@@ -140,8 +140,9 @@ height:400px;
 					<div></div>
 
 					<img class="col" src="" id="today_thumb" name="today_thumb"
-						height="100px" width="100px"> <input type="file"
-						name="today_file" id="today_file" />
+						height="100px" width="100px"><label for="today_file">업로드</label>
+						<input type="file" name="today_file" id="today_file" accept="image/*"
+									style="position: absolute; clip: rect(0, 0, 0, 0);">
 
 					<textarea class="ck-editor__editable" name="today_contents"
 						id="editor"></textarea>

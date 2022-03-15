@@ -99,6 +99,13 @@ public class TodayController {
 			mav.addObject("pageInfo", pageInfo);
 			mav.addObject("todayList", todayList);
 			mav.addObject("todaySearchText", search);
+			Map<String, String> profileImgMap= new HashMap<String, String>();
+			for(int i=0;i<todayList.size();i++) {
+				String writerId = todayList.get(i).getUser_id();
+				String profileImg = memberService.profileImg(writerId);
+				profileImgMap.put(writerId, profileImg);
+			}
+			mav.addObject("profileImgMap", profileImgMap);
 			mav.setViewName("todayResult");
 		} catch(Exception e) {
 			e.printStackTrace();
