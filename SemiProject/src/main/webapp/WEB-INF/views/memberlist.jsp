@@ -69,7 +69,15 @@
 	</script>
 </head>
 <body>
-	
+	<header>
+			<%@include file ="header.jsp" %>
+	</header>
+		<div>
+			<ul>
+				<li><a href="memberlist"><b>회원 목록</b></a></li>
+				<li><a href="warninglist">신고 목록</a></li>
+			</ul>
+		</div>
 	<h2>회원목록 조회</h2>
 <table border=1 align="center" class="table table-hover"> 
 <tr>
