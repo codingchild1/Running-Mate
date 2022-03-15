@@ -23,6 +23,8 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,7 +61,8 @@ public class TodayController {
 	private ServletContext servletContext;
 
 	// 1. 오늘의 러닝 메인페이지, today_list
-	@GetMapping("/today")
+	//@GetMapping("/today")
+	@RequestMapping(value="/today", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView today_list(@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		ModelAndView mav=new ModelAndView();
 		PageInfo pageInfo=new PageInfo();
@@ -86,7 +89,8 @@ public class TodayController {
 
 	// 2.전체페이지 검색정보(search)
 	
-	@GetMapping("/today_search")
+	//@PostMapping("/today_search")
+	@RequestMapping(value="/today_search", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView searchInfo(@RequestParam(value="page", required=false, defaultValue="1") int page, @RequestParam(value="todaySearchText") String search) {
 		ModelAndView mav=new ModelAndView();
 		PageInfo pageInfo=new PageInfo();
@@ -116,7 +120,8 @@ public class TodayController {
 	}
 
 	
-	@GetMapping("/today_make") 
+	//@PostMapping("/today_make") 
+	@RequestMapping(value="/today_make", method= {RequestMethod.GET, RequestMethod.POST})
 	public String todayMake(Model model) {
 		String wirte_id = (String) session.getAttribute("id");
 		String user_img2;

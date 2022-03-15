@@ -216,12 +216,10 @@ height:400px;
 				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
-<<<<<<< HEAD
 		<input type="hidden" id="sessionid" value="${id }"/>
-=======
+
 
 			<input type="hidden" id="sessionid" value="${id }"/>
->>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
