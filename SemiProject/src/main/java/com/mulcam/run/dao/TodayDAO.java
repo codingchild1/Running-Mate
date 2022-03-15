@@ -42,6 +42,10 @@ public interface TodayDAO {
 	public void updateLikeAdd(int articleNo)throws Exception;
 	public void updateLikeSub(int articleNo) throws Exception;
 	public int SelectLikesCnt() throws Exception;
+	
+	
+	//내가 쓴 글
+	public List<Today> todayList(String id);
 
 	//7.신고 (insert alert) 
 	//public Boolean insertTWarn() throws Exception;

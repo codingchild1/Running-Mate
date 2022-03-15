@@ -80,6 +80,13 @@
 		]]>
 	</update>
 	
+	<!-- 내가 쓴 글 -->
+	<select id="todayList" parameterType="String" resultType="Today">
+		<![CDATA[
+			select today_articleNo, today_title, today_date from today where user_id=#{id}
+		]]>
+	</select>
+	
 <!-- 	최고의러너 3개 게시글 가져오는 sql문 
 	<select id="selectTodayCnt"  resultType="int">
 		<![CDATA[

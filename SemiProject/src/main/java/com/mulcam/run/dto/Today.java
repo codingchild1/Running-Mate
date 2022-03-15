@@ -4,7 +4,7 @@ package com.mulcam.run.dto;
 import java.sql.Date;
 
 public class Today {
-	String today_articleNo; 
+	public String today_articleNo; 
 	String user_id;
 	String user_img;
 	String today_title; 

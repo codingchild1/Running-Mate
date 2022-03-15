@@ -69,7 +69,7 @@
 			<c:forEach var="board" items="${fblist}">
 				<tr>
 					<td>${board.writer}</td>
-	    			<td>${board.fb_title}</td>
+	    			<td><a href="/fb_detail?fb_articleNo=${board.fb_articleNo }&page=1">${board.fb_title}</a></td>
 		 			<td>${board.fb_date}</td>
 				</tr>
 			</c:forEach>
