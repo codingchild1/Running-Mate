@@ -3,7 +3,7 @@ package com.mulcam.run.dto;
 import java.sql.Date;
 
 public class Route {
-	int route_articleNo;
+	public int route_articleNo;
 	String user_id;
 	String route_title;
 	Date route_date;

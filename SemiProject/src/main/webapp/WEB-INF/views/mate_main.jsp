@@ -62,7 +62,7 @@ button a {
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 400px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -121,7 +121,7 @@ button a {
 	height: 100%;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 400px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -181,7 +181,8 @@ body {
 </head>
 
 <body>
-<%@include file ="header.jsp" %> 
+<%@include file ="header.jsp" %>
+<%@include file ="slides.jsp" %>
 	<div style="width: 1060px; padding: 10px; margin: 20px auto;">
 		<h1>메이트 구하기</h1>
 		<div class="main">
