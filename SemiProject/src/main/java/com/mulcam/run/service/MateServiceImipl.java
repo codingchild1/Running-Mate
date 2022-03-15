@@ -202,7 +202,7 @@ public class MateServiceImipl implements MateService {
 	
 	//내가 쓴 글
 	@Override
-	public List<Mate> mateList(String id) {
+	public List<GroupAndMate> mateList(String id) {
 		// TODO Auto-generated method stub
 		return mateDAO.matewrite(id);
 	}

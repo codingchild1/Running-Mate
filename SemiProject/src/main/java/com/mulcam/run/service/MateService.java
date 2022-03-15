@@ -56,5 +56,5 @@ public interface MateService{
 
 	
 	//내가 쓴 글 가지고 오기
-	public List<Mate> mateList(String id);
+	public List<GroupAndMate> mateList(String id);
 }

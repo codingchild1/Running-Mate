@@ -103,27 +103,40 @@
 	  background: none;
 	}
 	
-	.btn {
-	  position:relative;
-	  left:40%;
-	  transform: translateX(-50%);
-	  margin-bottom: 40px;
-	  width:80%;
-	  height:40px;
-	  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-	  background-position: left;
-	  background-size: 200%;
-	  color:white;
-	  font-weight: bold;
-	  border:none;
-	  cursor:pointer;
-	  transition: 0.4s;
-	  display:inline;
+	#memidoverlap{
+		border: 0;
+		outline: 0;
+		position:relative;
+		margin-bottom: 40px;
+		left:0%;
+	    width:80%;
+	    height:40px;
+		width: 25;
+		height: 40px;
+		padding: 6px 6px;
+		margin: 7px;
+		background-color: #59ab6e; 
+		border-radius: .25rem;
+		color: white;
 	}
-	
-	.btn:hover {
-	  background-position: right;
+
+	#submit{
+		border: 0;
+		outline: 0;
+		position:relative;
+		margin-bottom: 40px;
+		right:0%;
+	    width:80%;
+	    height:40px;
+		width: 25;
+		height: 40px;
+		padding: 6px 6px;
+		margin: 7px;
+		background-color: #59ab6e; 
+		border-radius: .25rem;
+		color: white;
 	}
+
 	</style>
 </head>
 <body>
@@ -154,7 +167,7 @@
                 <input type="text" class="cellphoneNo" id="phone" name="phone" placeholder="전화번호">
             </div>                 
             <div>
-                <input type="submit" id="submit" class="btn" value='회원가입'>
+                <input type="submit" id="submit" value='회원가입'>
             </div>
         </form>
     </div> 

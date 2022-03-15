@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.run.dto.Board;
+import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Member;
 import com.mulcam.run.dto.Route;
@@ -244,14 +245,12 @@ public class MemberController {
 	
 	//내가 쓴 글 메이트
 	@GetMapping(value="/matelist")
-	public String mateList(Model model) {
+	public ModelAndView mateList() {
+		ModelAndView mv = new ModelAndView("matelist");
 		String id = (String) session.getAttribute("id");
-		List<Mate> matelist = mateService.mateList(id);
-		model.addAttribute("matelist", matelist);
-		for(Mate br : matelist) {
-			System.out.println(br.mate_articleNO);
-		}
-		return "matelist";
+		List<GroupAndMate> matelist = mateService.mateList(id);
+		mv.addObject("matelist", matelist);
+		return mv;
 	}
 	
 	//프로필 프리뷰
