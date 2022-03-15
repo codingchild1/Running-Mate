@@ -104,9 +104,8 @@ public class MemberController {
 			}
 			if(memberService.accessMember(id, password)) {
 				session.setAttribute("id", id);
-				//admincheck 가지고 오는 서비스
-				session.setAttribute("adminCheck", 0);
-				//id 검색해서 admincheck
+				int admin = memberService.queryById(id).getAdminCk();
+				session.setAttribute("adminCheck", admin);
 			} else {
 				model.addAttribute("err", "아이디 또는 비밀번호가 올바르지 않습니다.");
 				return "err";
