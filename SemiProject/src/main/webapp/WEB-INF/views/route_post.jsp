@@ -69,9 +69,10 @@
 			<span id="user_id" class="user_id">${route.user_id }</span>
 			<c:if test= "${id eq route.user_id }">
 				<span id="delete" onclick=deleteArticle() style="float:right; padding-left:10px;">삭제</span>
-				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a><br>
+				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a>
 			</c:if>
 			
+			<br>
 			<c:if test="${!empty id }">
     			<span id="alerts" onclick=alert()>
 				<c:choose>
@@ -80,6 +81,7 @@
 				</c:choose>
 				</span>
     		</c:if>
+    		
     		<span style="float:right;">${route.route_views }</span><span style="float:right;">조회</span>
 			<span id="board_time" class="board_time">${route.route_date }</span>		
 		</div><br><br>
@@ -118,10 +120,8 @@
 			dataType:"text",
 			success:function(data){
 				if(data=="true"){
-					console.log("true: " +data);
 					$("#like").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
 				} else {
-					console.log("false: " + data);
 					$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
 				}
 			}
@@ -217,6 +217,7 @@
     	map.addControl(draw);
 	});
 	</script>
+	
 	
 </body>
 </html>
