@@ -1,6 +1,8 @@
 package com.mulcam.run.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,34 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDAO boardDAO;
 
+	@Override
+	public List<Board> getBoardSearchResultList(String column, String keyword, int page, PageInfo pageInfo) throws Exception {
+		Map<String, Object> mapParam = new HashMap<String, Object>();
+		mapParam.put("keyword", keyword);
+		mapParam.put("column", column);
+		
+		int listCount = boardDAO.selectBoardSearchResultCount(mapParam);
+		//총 페이지 수. 올림처리
+		int maxPage = (int)Math.ceil((double)listCount/10);
+		//현재 페이지에 보여줄 시작 페이지 수(1,11,21...)
+		int startPage=(((int) ((double)page/10+0.9))-1)*10+1;
+		//현재 페이지에 보여줄 마지막 페이지 수(10,20,30,...)
+//			ex) 35페이지 -> 35/10 = 3.5 -> +0.9 = 4.4 -1 = 3.4 여기서 int 하면 = 3 -> 3*10+1 = 31 
+		int endPage=startPage+10-1;
+		
+		if(endPage>maxPage) endPage=maxPage;
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		pageInfo.setListCount(listCount);
+		int startrow = (page-1)*10+1;
+		
+		
+		mapParam.put("startrow", startrow);
+		return boardDAO.selectBoardSearchResultList(mapParam);
+	}
+	
 	@Override
 	public List<Board> getBoardList(int page, PageInfo pageInfo) throws Exception {
 		int listCount = boardDAO.selectBoardCount();
@@ -109,4 +139,6 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.fbList(id);
 	}
+
+	
 }

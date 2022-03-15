@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>러닝 메이트</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script type="text/javascript" src="js/main.js"></script>
     <style>
@@ -67,15 +67,15 @@ body {
 <c:forEach items="${BestList }" var="best">
 	<div class="col-12 col-md-4 mb-4">
 		<div class="card h-100">
-			<a href="#">
+			<a href="/today_select/${best.today_articleNo }">
 				<img src="${pageContext.request.contextPath }/thumb/${best.today_thumb }" class="card-img-top" alt="..." style="width: 100%; height: 400px"/>
 			</a>
 			<div class="card-body">
 				<p class="card-text">
 					${best.today_title }
 				</p>
-				<p class="text-muted">
-					♥ (${best.today_likes })
+				<p class="text-muted" style="color: black;">
+					<img src="images/하트.png" style="width: 30px; height: auto;"> ${best.today_likes }
 				</p>
 			</div>
 		</div>
