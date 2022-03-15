@@ -17,24 +17,23 @@
 	body {
 	  background-image:#34495e;
 	}
-	
+
 	.joinForm {
-	  position:absolute;
 	  width:400px;
 	  height:400px;
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  top:40%;
-	  left:50%;
 	  transform: translate(-50%,-50%);
 	  border-radius: 15px;
+
 	}
 	
 	.joinForm h2 {
 	  text-align: center;
 	  margin: 30px;
 	}
+	
 	
 	.textForm {
 	  border-bottom: 2px solid #adadad;
@@ -137,12 +136,14 @@
 		color: white;
 	}
 
+
 	</style>
 </head>
 <body>
 	<header>
 		<%@include file ="header.jsp" %>
     </header>
+
         <form id='form' action="join" method="post" enctype="multipart/form-data" class="joinForm" >
                 <h2>회원가입</h2>
         		<img id="memberthumb" name="memberthumb"  onerror="this.src='/profile/profile.png'" src="" style="width:100px; height:100px;  border-radius:70%;" /><br>
@@ -170,7 +171,7 @@
                 <input type="submit" id="submit" value='회원가입'>
             </div>
         </form>
-    </div> 
+
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
     	

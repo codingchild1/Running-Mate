@@ -290,7 +290,6 @@ height:400px;
 				};
 				reader.readAsDataURL(event.target.files[0]);
 			});
-<<<<<<< HEAD
  	    	console.log($("#sessionid").val()==$("#user_id").val());
  	    	console.log($("#user_id").val() == "admin");
  	    	
@@ -319,7 +318,7 @@ height:400px;
  	  	          		}
  	  		      	}).then(editor=> {
 	    	    	    editor.ui.view.toolbar.element.style.display = 'none';
-=======
+
 		});
 		
 		 //목록 버튼
@@ -390,7 +389,7 @@ height:400px;
 	    	  }    }); /  
  	    	 */
 	    	
-	      });       
+	        
 	     
 	      
 	      
