@@ -12,8 +12,8 @@
 <title>Insert title here</title>
 </head>
 	<style>
-			
-	.post li {
+.post li {
+		text-decoration-line: none;
 		float: left;
 		margin: 10px;
 		list-style: none;
@@ -25,18 +25,13 @@
 		margin-top: 51px;
 		justify-content: space-between;
 	}
+	
 	.get li {
 		text-decoration-line: none;
 		float: left;
 		margin: 10px;
 		list-style: none;
 	}
-	
-	table {
-	    width: 100%;
-	    border-top: 1px solid #444444;
-	    border-collapse: collapse;
-  	}
 	.get {
 		position: absolute;
 		top: 18%;
@@ -50,16 +45,21 @@
 		text-decoration-line: none;
 		color: black;
 	}
-	
+
+  	table {
+	    width: 100%;
+	    border-top: 1px solid #444444;
+	    border-collapse: collapse;
+  	}
+  	th, td {
+    	border-bottom: 1px solid #444444;
+   		padding: 10px;
+  }
 	.no{
 	  width: 60%;
 	  justify-content: center;
 	  margin: 165px auto;
 	}
-	table {
-	    border-top: 1px solid #444444;
-	    border-collapse: collapse;
-  	}
 	</style>
 <body>
 		<header>
@@ -85,22 +85,26 @@
 	<div class="no">
 	
 	<h2>내가 쓴 글</h2>
-	<table border="1" align="center"> 
-		<tr>
-			<th>no</th>
-			<th>제목</th>
-			<th>날짜</th>
-		</tr>
+	
 	<c:choose>
+		
 		<c:when test="${todaylist!=null && pageInfo.listCount>0 }">
 			<div style="">
+				
+				<table border="1" align="center"> 
+					<tr>
+						<th>no</th>
+						<th>제목</th>
+						<th>날짜</th>
+					</tr>
 					<c:forEach var="today" items="${todaylist}">
 					<tr>
 						<td>${today.today_articleNo}</td>
 	    				<td><a href="/today_Result?today_articleNo=${today.today_articleNo}&page=1">${today.today_title}</a></td>
 		 				<td>${today.today_date}</td>
 					</tr>
-					</c:forEach>			
+					</c:forEach>
+				</table>
 			</div>
 			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
 			<c:choose>
@@ -139,7 +143,6 @@
 			</tr>
 		</c:otherwise>
 	</c:choose>
-	</table>
 	</div>
 </body>
 </html>

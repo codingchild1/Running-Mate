@@ -61,10 +61,7 @@
 	  justify-content: center;
 	  margin: 165px auto;
 	}
-	table {
-	    border-top: 1px solid #444444;
-	    border-collapse: collapse;
-  	}
+
 </style>
 <body>
 		<header>

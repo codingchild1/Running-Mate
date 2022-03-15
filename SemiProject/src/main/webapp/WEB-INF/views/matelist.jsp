@@ -156,15 +156,54 @@
 /* 	text-shadow: 1px 1px 2px gray;
 	color: white; */
 }
+.post li {
+		text-decoration-line: none;
+		float: left;
+		margin: 10px;
+		list-style: none;
+	}
+	.post {
+		position: absolute;
+		left: 25%;
+		width: 1000px;
+		margin-top: 51px;
+		justify-content: space-between;
+	}
+	
+	.get li {
+		text-decoration-line: none;
+		float: left;
+		margin: 10px;
+		list-style: none;
+	}
+	.get {
+		position: absolute;
+		top: 18%;
+		left: 26%;
+		font-size: 12px;
+		width: 1000px;
+		margin-top: 51px;
+		justify-content: space-between;
+	}
+	ul li a {
+		text-decoration-line: none;
+		color: black;
+	}
+
+  	table {
+	    width: 100%;
+	    border-top: 1px solid #444444;
+	    border-collapse: collapse;
+  	}
+  	th, td {
+    	border-bottom: 1px solid #444444;
+   		padding: 10px;
+  }
 	.no{
 	  width: 60%;
 	  justify-content: center;
 	  margin: 165px auto;
 	}
-	table {
-	    border-top: 1px solid #444444;
-	    border-collapse: collapse;
-  	}
 	</style>
 <body>
 		<header>

@@ -8,12 +8,11 @@
 		<title>회원가입</title>
 	</head>
 	<style>
-	 * {
+   * {
 	  margin: 0px;
 	  padding: 0px;
 	  text-decoration: none;
 	  font-family:sans-serif;
-	
 	}
 	
 	body {
@@ -31,6 +30,7 @@
 	  left:50%;
 	  transform: translate(-50%,-50%);
 	  border-radius: 15px;
+	  margin-bottom: 500px;
 	}
 	
 	.form1 h2 {
@@ -85,7 +85,7 @@
 	  background: none;
 	}		
 
-.post li {
+	.post li {
 		float: left;
 		margin: 10px;
 		list-style: none;
