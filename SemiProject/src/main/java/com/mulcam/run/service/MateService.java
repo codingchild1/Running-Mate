@@ -24,9 +24,6 @@ public interface MateService{
 	void removeMate(int mate_articleNO) throws Exception; //번개 게시물 삭제
 	void removeGroup(int group_articleNO) throws Exception; //소모임 게시물 삭제
 	
-	int viewsMate(int mate_articleNO)throws Exception; //번개 글 삭제시 조회수 -1변경
-	int viewsGroup(int group_articleNO)throws Exception; //번개 글 삭제시 조회수 -1변경
-	
 	void makeMate(Mate mate)throws Exception; //번개 게시물 생성
 	void makeGroup(Group group)throws Exception; //소모임 게시물 생성
 	

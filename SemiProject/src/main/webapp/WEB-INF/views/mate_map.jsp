@@ -274,10 +274,10 @@ input:focus{
 	<div id="modal" class="modal-overlay">
 		<div class="modal-window">
 			<div class="title">
-				<input name='mate_title' id="mate_title" style="color: black; border: none; font-size: 20px; font-weight: bold; background-color:#d3d3d3; margin-top: 20px;"value='' >
+				<input name='mate_title' id="mate_title" style="color: black; border: none; font-size: 20px; font-weight: bold; background-color:#d3d3d3; margin-top: 20px;"value='' disabled>
 				<div class="close-area">X</div>
 			</div>
-			<input name='user_id' id="user_id"style="color: black; border: none; font-size: 15px; background-color: #d3d3d3;padding-left: 10px; margin-top: 10px;"value=''>
+			<input name='user_id' id="user_id"style="color: black; border: none; font-size: 15px; background-color: #d3d3d3;padding-left: 10px; margin-top: 10px;"value='' disabled>
 			<div style="font-size: 13px; float: right;display: flex;">
 				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color: #d3d3d3;cursor:pointer;margin:5px;"></span></form>
 				<span id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color: #d3d3d3;cursor:pointer;">삭제</button></span> 
@@ -315,7 +315,7 @@ input:focus{
 				<input name="group_title" id="group_title"style="color: black; border: none; font-size: 20px; font-weight: bold; background-color: #d3d3d3; margin-top: 20px;"value='' disabled>
 				<div class="close-area">X</div>
 			</div>
-			<input name="user_id" id="user_id"style="color: black; border: none; font-size: 15px; background-color:#d3d3d3; padding-left: 10px; margin-top: 10px;"value=''>
+			<input name="user_id" id="user_id"style="color: black; border: none; font-size: 15px; background-color:#d3d3d3; padding-left: 10px; margin-top: 10px;"value='' disabled>
 			<div style="font-size: 13px; float: right;display: flex;">
 				<form action="mate_updategroup" method="get"><span id="update2"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3;cursor:pointer;margin:4px;"></span> </form>
 				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:#d3d3d3;cursor:pointer;">삭제</button></span>
