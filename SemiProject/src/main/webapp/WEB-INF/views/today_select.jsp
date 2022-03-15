@@ -216,12 +216,10 @@ height:400px;
 				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
-<<<<<<< HEAD
 		<input type="hidden" id="sessionid" value="${id }"/>
-=======
+
 
 			<input type="hidden" id="sessionid" value="${id }"/>
->>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -378,7 +376,6 @@ height:400px;
 	    		  ClassicEditor.create(document.querySelector("#content"))
 	    	    	.then(editor=>{
 	    	    		window.editor = editor;
->>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 	    	    	    editor.isReadOnly = true;
  	  	      		})
  	  			  	  .catch((error) => {
@@ -386,18 +383,18 @@ height:400px;
  	  			    });
  	    	 }
 
-<<<<<<< HEAD
+
  	    	
  	    	//삭제
-=======
-	    	  }
+
+	    	  }    }); /  
  	    	 */
 	    	
 	      });       
 	     
 	      
 	      
- 	    /  
+ 	    
  	    
  	    /*
 	      //ckeditor 작성내용 보여주는부분
@@ -418,7 +415,6 @@ height:400px;
 	     */ 
 	      
   		$(function() {
->>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
   			$('#today_delete').click(function (event) {
   				let message = confirm('삭제하시겠습니까?');
   				if(message == false){ 
