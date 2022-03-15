@@ -15,7 +15,7 @@
 	width: 1060px;
 }
 .register {
-	width: 350px;
+	width: 360px;
 	height: 180px;
 	padding: 8px 8px;
 	background: white;
@@ -24,6 +24,7 @@
 	margin: 14px;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 	display: inline-block;
+	margin:30px;
 }
 .profile {
 	width: 60px;
