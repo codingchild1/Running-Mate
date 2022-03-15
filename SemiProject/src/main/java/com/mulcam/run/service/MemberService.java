@@ -14,7 +14,6 @@ public interface MemberService {
 	public String checkPw(String id);
 	public void updateMember(Member mem);
 	public void modifyPw(Member mem);	
-	public Member getAdminCK(String id);
 	
 	//사용자 profile 이미지 정보
 	String profileImg(String user_id) throws Exception;

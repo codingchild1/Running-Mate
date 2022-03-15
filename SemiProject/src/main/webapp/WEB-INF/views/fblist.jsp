@@ -28,6 +28,17 @@
 		text-decoration-line: none;
 		color: black;
 	}
+	<style>
+  	table {
+	    width: 100%;
+	    border-top: 1px solid #444444;
+	    border-collapse: collapse;
+  	}
+  	th, td {
+    	border-bottom: 1px solid #444444;
+   		padding: 10px;
+  }
+</style>
 	</style>
 <body>
 		<header>
@@ -46,7 +57,7 @@
 					<li><a href="todaylist">오늘의 런닝</a></li>
 					<li><a href="routelist">루트 공유</a></li>
 					<li><a href="fblist"><b>자유게시판</b></a></li>
-					<li><a href="#">런닝 메이트</a></li>
+					<li><a href="matelist">런닝 메이트</a></li>
 				</ul>
 			</div>
 	<h2>내가 쓴 글</h2>

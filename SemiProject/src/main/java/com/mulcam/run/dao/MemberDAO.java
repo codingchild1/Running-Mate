@@ -18,7 +18,6 @@ public interface MemberDAO {
 	public void updateMember(Member mem);
 	public String queryPassword(String id);
 	public void changePw(Member mem);
-	public Member getAdminCK(String id);
 	
 	public String queryProfile(String user_id) throws Exception;
 

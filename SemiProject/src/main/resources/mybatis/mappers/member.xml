@@ -40,11 +40,6 @@
 			select password from member where id=#{id}
 		]]>
 	</select>
-	<select id="getAdminCK" parameterType="Member" resultType="String">
-		<![CDATA[
-			select adminCk from member where id=#{id}
-		]]>
-	</select>
 	<select id="queryProfile" parameterType="String" resultType="String">
 		<![CDATA[
 			select memberthumb from member where id=#{user_id}

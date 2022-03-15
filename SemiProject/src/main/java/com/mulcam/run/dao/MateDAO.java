@@ -60,4 +60,7 @@ public interface MateDAO {
 	public List<GroupAndMate> searchMap(String input)throws Exception; //map페이지 주소검색
 	public List<GroupAndMate> searchMap2(Map map)throws Exception; //map페이지 주소검색
 	public List<GroupAndMate> searchMap3(String type)throws Exception; //map페이지 주소검색
+
+	//내가 쓴 글
+	public List<Mate> matewrite(String id);
 }

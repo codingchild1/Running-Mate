@@ -14,6 +14,5 @@
 			<%@include file ="header.jsp" %>
 		</header>
 			<strong>${err }</strong>
-	</div>
 </body>
 </html>

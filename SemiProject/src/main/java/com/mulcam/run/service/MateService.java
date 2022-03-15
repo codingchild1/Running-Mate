@@ -53,4 +53,8 @@ public interface MateService{
 	List<GroupAndMate> addressinfo(String input) throws Exception; //map페이지 주소검색
 	List<GroupAndMate> addressinfo2(String type,String input) throws Exception; //map페이지 주소검색
 	List<GroupAndMate> addressinfo3(String type) throws Exception; //map페이지 주소검색
+
+	
+	//내가 쓴 글 가지고 오기
+	public List<Mate> mateList(String id);
 }
