@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>러닝메이트</title>
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
@@ -32,43 +32,36 @@
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a41b354b6f502722e91503736b4d238&libraries=services"></script>
 	
-
 	<!-- 넓이 높이 조절 -->
 	<style>
-	#map {
-        top: 0;
-        bottom: 0;
-        height: 400px;
-      }
-	.ck-editor__editable {
-		max-width:100%;
-	    min-height: 500px;
-	}
-	
-	.user_info { height:80px; display: flex; align-items: center;} 
-	.userProfile { width:25px;; height:25px; }
-	.thumbBox { height:40px; width:40px; overflow:hidden;}
-	.user_id { font-size : 15pt; height:40px; display:inline-block; line-height: 40px; padding-left : 10px;}
-	.route_title { height:50px; font-size:15pt; }
-	.routethumbbox { float:left; width: 30%; height:400px; text-align: center;}
-	.route_thumb { width: 90%;}
-	.thumbfile { text-align: center; }
-	.mapbox { float:right; width: 70%; height:500px; } 
-	
-	.buttons { text-align:center; margin-top:20px; margin-bottom:20px;}
-	.eachbutton { width:15%; display:inline-block;"}
+		.main { width: 70%; margin: 0 auto; }
+		.container2 { max-width:1024px; margin:30px auto;}
+		.user_info { height:80px; display: flex; align-items: center;} 
+		.userProfile { width:25px; height:25px; }
+		.thumbBox { height:40px; width:40px; overflow:hidden;}
+		.user_id { font-size : 15pt; height:40px; display:inline-block; line-height: 40px; padding-left : 10px;}
+		.route_title { height:50px; font-size:15pt; }
+		.route_thumb { width:80%; height:320px; object-fit: cover;   }
+		.routethumbbox { float:left; width: 30%; height:400px; text-align: center;}
+		.thumbfile { text-align: center; }
+		.buttons { text-align:center; margin-top:20px; margin-bottom:20px;}
+		.eachbutton { width:15%; display:inline-block; }
+		
+		#map { top: 0; bottom: 0; height: 400px; }
+		.mapbox { float:right; width: 70%; height:500px; }
+		.ck-editor__editable { min-height: 500px; max-width:100%; }
 	</style>
 </head>
 <body>
 	<header><%@include file ="header.jsp" %></header>
-	<main style="width: 70%; margin: 0 auto; margin-bottom: 60px;">
-		<div class="row align-items-center py-3">
-			<div class="col-md-8 text-black">
-        		<h2>나처럼 달려</h2>
-            	<p>나만의 러닝 코스를 공유해주세요!</p>
-        	</div>
+	
+	<main class="main">
+		<div class="container2">
+			<h2>나처럼 달려</h2>
+            <p>나만의 러닝 코스를 공유해주세요!</p>
 		</div>
-		<div><form id="route_write" action="/route_reg" method="post" enctype="multipart/form-data">
+		<div class="container2">
+		<form id="route_write" action="/route_reg" method="post" enctype="multipart/form-data">
 			<div id="user_info" class="user_info">
 				<div class="thumbBox"><img src="/profileview/${profileImg }" id="userImage" class="userProfile"></div>
 				<div id="user_id" class="user_id">${id }</div>
@@ -95,12 +88,14 @@
 			<input type="hidden" id="route_mapinfo" name="route_mapinfo">
 			<input type="hidden" id="route_distance" name="route_distance">
 			
-			<div style="text-align:center;">
-				<button id="submit" style="width:15%; display:inline-block;" class="btn btn-dark">등록</button>
-				<button id="reset" type="reset" style="width:15%; display:inline-block;" class="btn btn-dark">취소</button>
+			<div class="buttons">
+				<button id="submit" class="btn btn-dark eachbutton" >수정</button>
+				<button id="reset" type="reset" class="btn btn-dark eachbutton" >취소</button>
 			</div>
-		</form></div>
+		</form>
+		</div>
 	</main>
+	
 	<%@include file="fotter.jsp"%>
 
 	<script>
@@ -338,6 +333,5 @@
 	});
 	</script>
 
-	
 </body>
 </html>

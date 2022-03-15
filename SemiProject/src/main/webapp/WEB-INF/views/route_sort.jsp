@@ -170,6 +170,8 @@
 	</div>
 	</main>
 		
+	<%@include file="fotter.jsp"%>
+		
 	<script>
 	$(function(){
 		$("#btn_length1").click(function(){

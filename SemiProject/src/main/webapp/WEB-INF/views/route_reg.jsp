@@ -89,6 +89,8 @@
     </div>
 	</main>
 
+	<%@include file="fotter.jsp"%>
+	
 	<script>
 	$(function(){
 		ClassicEditor.create(document.querySelector("#content"))

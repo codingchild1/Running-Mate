@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>러닝메이트</title>
+	
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -16,18 +17,15 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     
     <style>
-    	/* margin : 아래 오른쪽 위 왼쪽 */
     	.main { width: 70%; margin: 0 auto; }
 		.container2 { max-width:1024px; margin:30px auto;}
 		.writebtn { text-align: right;  display:inline-block; float:right; margin-right:10%; }
 		.routebtns { width: 100%; height:60px; display:inline-block; align-items: center; margin-top:50px; margin-bottom:50px; }
 		.routebtn { width:150px; height:50px; display:inline-block; }
 		.route_mini { width: 30%; height:500px; display: inline-block; border: 1px solid gray; border-radius: 13px; margin: 15px 0.5% 15px 0.5%; }
-		.route_miniTitle { margin-top: 5px; margin-bottom: 10px; font : 18px bold; text-overflow: ellipsis;
-			 width: 100%; border: 0px;  }
+		.route_miniTitle { margin-top: 5px; margin-bottom: 10px; font : 18px bold; text-overflow: ellipsis; width: 100%; border: 0px;  }
 		.userProfile { width:25px;; height:25px; }
 		.routeThumbImg { width:100%;height:300px; display:block; margin: auto; }
-		
 		.route_miniHeader { margin: 10px 5% 10px 2%; }
 		.route_miniInfo { padding-left:10px; padding-right:10px; } 
 		.route_miniFooter { display: inline-block;  margin: 10px 5% 10px 4%; }
@@ -139,5 +137,6 @@
 	</div>
 	</main>
 	 
+	 <%@include file="fotter.jsp"%>
 </body>
 </html>
