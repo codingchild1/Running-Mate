@@ -242,7 +242,14 @@
 			where type=#{type}
 			order by regdate desc
 		]]>
-	</select> 
+	</select>
+	
+		<!-- 내가 쓴 글 목록 union해서 가지고 오기-->
+	<select id="matewrite" parameterType="String" resultType="Mate">
+		<![CDATA[
+			select mate_articleNO, user_id, mate_title, mate_date from mate user_id=#{id}
+		]]>
+	</select>
 
 </mapper>
 

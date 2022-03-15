@@ -199,6 +199,13 @@ public class MateServiceImipl implements MateService {
 		boolean check = mateDAO.checkPtp(ptp);
 		return check;
 	}
+	
+	//내가 쓴 글
+	@Override
+	public List<Mate> mateList(String id) {
+		// TODO Auto-generated method stub
+		return mateDAO.matewrite(id);
+	}
 
 }
 

@@ -32,11 +32,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mulcam.run.dto.Board;
+import com.mulcam.run.dto.Mate;
 import com.mulcam.run.dto.Member;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.BoardService;
+import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.MemberService;
 import com.mulcam.run.service.RouteService;
 import com.mulcam.run.service.TodayService;
@@ -54,6 +56,9 @@ public class MemberController {
 	
 	@Autowired
 	TodayService todayService;
+	
+	@Autowired
+	MateService mateService;
 	
 	@Autowired
 	HttpSession session;
@@ -229,21 +234,35 @@ public class MemberController {
 	//내가 쓴 글 오늘의 런닝
 	@RequestMapping(value="/todaylist", method= {RequestMethod.GET, RequestMethod.POST})
 	public String todayList(@RequestParam(value="page",required=false, defaultValue = "1") int page, Model model) {
-		PageInfo pageInfo = new PageInfo();
-		
 		String id = (String) session.getAttribute("id");
+		PageInfo pageInfo = new PageInfo();
 		try {
 			List<Today> todaylist = todayService.todayList(id, page, pageInfo);
 			model.addAttribute("todaylist", todaylist);
+			model.addAttribute("pageInfo", pageInfo);
+			model.addAttribute("count", todaylist.size());
 			for(Today br : todaylist) {
 				System.out.println(br.today_articleNo);
 			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			model.addAttribute("todaylist", null);
 		}
 		
 		return "todaylist";
+	}
+	
+	//내가 쓴 글 메이트
+	@GetMapping(value="/matelist")
+	public String mateList(Model model) {
+		String id = (String) session.getAttribute("id");
+		List<Mate> matelist = mateService.mateList(id);
+		model.addAttribute("matelist", matelist);
+		for(Mate br : matelist) {
+			System.out.println(br.mate_articleNO);
+		}
+		return "matelist";
 	}
 	
 	//프로필 프리뷰
@@ -350,4 +369,3 @@ public class MemberController {
 		
 	
 }
-

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mulcam.run.dao.TodayDAO;
+import com.mulcam.run.dto.MyBoard;
 import com.mulcam.run.dto.PageInfo;
 import com.mulcam.run.dto.Today;
 
@@ -121,8 +122,20 @@ public class TodayServiceImpl implements TodayService {
 	@Override
 	public List<Today> todayList(String id, int page, PageInfo pageInfo) throws Exception {
 		int listCount = todayDAO.todayListCount(id);
-		// TODO Auto-generated method stub
-		return todayDAO.todayList(id);
+		int maxPage = (int)Math.ceil((double)listCount/10);
+		int startPage=(((int) ((double)page/10+0.9))-1)*10+1;
+		int endPage=startPage+10-1;
+		
+		if(endPage>maxPage) endPage=maxPage;
+		pageInfo.setStartPage(startPage);
+		pageInfo.setEndPage(endPage);
+		pageInfo.setMaxPage(maxPage);
+		pageInfo.setPage(page);
+		pageInfo.setListCount(listCount);
+		int startrow = (page-1)*10;
+		MyBoard mypageinfo = new MyBoard(id, startrow);
+		
+		return todayDAO.todayList(mypageinfo);
 	}
 
 }

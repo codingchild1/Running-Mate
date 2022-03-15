@@ -3,7 +3,7 @@ package com.mulcam.run.dto;
 import java.sql.Timestamp;
 
 public class Mate {
-	int mate_articleNO;
+	public int mate_articleNO;
 	String user_id;
 	String mate_title;
 	String mate_cont;
@@ -30,6 +30,14 @@ public class Mate {
 		this.mate_mapinfo=mate_mapinfo;
 		this.warning=warning;
 		this.mate_address=mate_address;
+	}
+	
+	public Mate(int mate_articleNO, String user_id, String mate_title, String mate_date) {
+		this.mate_articleNO=mate_articleNO;
+		this.user_id=user_id;
+		this.mate_title=mate_title;
+		this.mate_date=mate_date;
+		
 	}
 
 	public String getMate_address() {
