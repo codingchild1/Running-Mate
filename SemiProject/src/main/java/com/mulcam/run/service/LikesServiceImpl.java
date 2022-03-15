@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.mulcam.run.dao.LikesDAO;
 import com.mulcam.run.dto.Likes;
+import com.mulcam.run.dto.Warning;
 
 @Service 
 public class LikesServiceImpl implements LikesService {

@@ -7,12 +7,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<link
+<!-- <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
 	rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+	rel="stylesheet"> -->
 	
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -93,6 +93,8 @@ body {
 	text-align: center;
 }
 .userProfile { width:35px; height:35px; }
+
+
 </style>
 </head>
 <body>
@@ -142,7 +144,7 @@ body {
 						<div class="" id="container1"> 
 									<!--1행 1열-->
 									<c:forEach var="tboard" items="${todayList}">
-										<div class=" mycard" >
+										<div class=" mycard"	style="margin-bottom:40px;" >
 										<!-- 회원이미지, 아이디, 날짜/시간 -->
 										<header	class="">
 											<div class="">
@@ -155,15 +157,15 @@ body {
 										</header>
 
 										<!--타이틀-->
-										<div class="" id="today_title" >${tboard.today_title }</div>
-										<!--썸네일-->
+										<input class="todaytitle" id="today_title" style="text-overflow: ellipsis; border:none; width:150px;" value="${tboard.today_title }" disabled>
+										<!--썸s네일-->
 										<div class="bg-white">
 													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
-															id="today_thumb" name="today_thumb"  width="120px" height="120px" /></a>
+															id="today_thumb" name="today_thumb"  width="150px" height="150px" /></a>
 										</div>
 
 										<!-- 조회, 좋아요, 숫자 -->
-										<div class="d-flex">
+										<div class="d-flex" ">
 											<span class="d-flex justify-content-start">
 												<img class="heart" src="images/하트.png" style="width: 30px; height: 30px;">
 											</span>
@@ -181,6 +183,8 @@ body {
 					</c:when>
 				</c:choose>
 				
+				
+				
 				<div id="paging">
 					<c:choose>
 						<c:when test="${pageInfo.page<=1}">
@@ -190,6 +194,8 @@ body {
 						<a href="today?page=${pageInfo.page-1}">[pre]</a>&nbsp;
 						</c:otherwise>
 					</c:choose>
+					
+					
 					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 						<c:choose>
 							<c:when test="${pageInfo.page==i }">[${i }]</c:when>
@@ -198,6 +204,8 @@ body {
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
+					
+					
 					<c:choose>
 						<c:when test="${pageInfo.page>=pageInfo.maxPage }">
 						[next]
