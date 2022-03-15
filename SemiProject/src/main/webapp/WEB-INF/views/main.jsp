@@ -16,7 +16,7 @@
 }
 .register {
 	width: 400px;
-	height: 250px;
+	height: 150px;
 	padding: 8px 8px;
 	background: white;
 	color: #2b2e4a;
@@ -110,7 +110,7 @@ body {
 					<div style="margin: 5px; padding: 5px; display: flex; align-items: flex-start; justify-content: space-between;">
 						<span><img class="profile" src='${groupandmate.img }'></span>
 						<div style="width: 150px">
-							<span><input type="text" id="title"value='${groupandmate.title }'style="width:200px;height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border: none; background-color: white;"disabled> </span> 
+							<span><input type="text" id="title"value='${groupandmate.title }'style="width:100px;height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border: none; background-color: white; text-overflow: ellipsis;"disabled> </span> 
 							<span><input type="text" id="id" value='${groupandmate.id }'style="height: 20px; vertical-align: middle; border: none; background-color: white;"disabled> </span>
 						</div>
 						<c:choose>
@@ -125,8 +125,10 @@ body {
 					<div style="margin: 5px; margin-top: 25px; padding: 5px; vertical-align: middle;">
 						<c:choose>
 							<c:when test="${groupandmate.type eq 'g'}">
+							<div class="ptpimg">
 						 		<span><img class="heart" src="images/white.png"style="width: 30px; height: 30px;margin-bottom:17px;"></span> 
 								<span><input type="text" id="like" value='${groupandmate.likeno }'style="width: 30px;  vertical-align: middle; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;color:white;"disabled></span>
+							</div>
 							</c:when>
 							<c:otherwise>
 							<div class="ptpimg">
@@ -135,7 +137,7 @@ body {
 							</div>
 							</c:otherwise>
 						</c:choose>
-					<button id="btn-modal" class="more"style="border: none; float: right; margin-top: 40px; background-color: white; color: rgba(var(- -f52, 142, 142, 142), 1); cursor: pointer;"onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더보기</button>
+					<button id="btn-modal" class="more"style="border: none; float: right; margin-top: 40px; background-color: white; color: rgba(var(- -f52, 142, 142, 142), 1); cursor: pointer;"onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">더보</button>
 						<input type="hidden" id="warning" name="warning" value='${groupandmate.warning}'>
 						<input type="hidden" id="type" name="type" value='${groupandmate.type}'>
 					</div>
