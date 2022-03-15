@@ -78,6 +78,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.queryProfile(user_id);
 	}
 
-
+	@Override
+	public Member getAdminCK(String id) {
+		// TODO Auto-generated method stub
+		return memberDAO.getAdminCK(id);
+	}
 
 }

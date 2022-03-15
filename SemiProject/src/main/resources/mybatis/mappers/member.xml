@@ -63,5 +63,4 @@
 
 워크벤치에 먼저 등록
 insert into member values(1, 'admin', '관리자', 'admin04', 'admin@naver.com', '01085288525', sysdate(), 1, 'ad.jpg');
-
 -->
