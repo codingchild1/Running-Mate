@@ -1,6 +1,7 @@
 package com.mulcam.run.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -32,4 +33,6 @@ public interface BoardDAO {
 	
 	//내가 쓴 글 가지고 오기
 	public List<Board> fbList(String id);
+	int selectBoardSearchResultCount(Map<String, Object> mapParam);
+	List<Board> selectBoardSearchResultList(Map<String, Object> mapParam);
 }

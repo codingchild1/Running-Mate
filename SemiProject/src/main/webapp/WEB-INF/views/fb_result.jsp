@@ -210,7 +210,7 @@ a {
 					[이전]&nbsp;
 				</c:when>
 							<c:otherwise>
-								<a href="fb_main?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+								<a href="fb_result?column=${column}&keyword=${keyword}&page=${pageInfo.page-1}">[이전]</a>&nbsp;
 				</c:otherwise>
 						</c:choose>
 						<c:forEach var="i" begin="${pageInfo.startPage }"
@@ -218,7 +218,7 @@ a {
 							<c:choose>
 								<c:when test="${pageInfo.page==i }">[${i }]</c:when>
 								<c:otherwise>
-									<a href="fb_main?page=${i}">[${i }]</a>
+									<a href="fb_result?column=${column}&keyword=${keyword}&page=${i}">[${i }]</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -227,7 +227,7 @@ a {
 					[다음]
 				</c:when>
 							<c:otherwise>
-								<a href="fb_main?page=${pageInfo.page+1}">[다음]</a>
+								<a href="fb_result?column=${column}&keyword=${keyword}&page=${pageInfo.page+1}">[다음]</a>
 							</c:otherwise>
 						</c:choose>
 					</section>
@@ -239,17 +239,16 @@ a {
 			
 			<div class="search">
 				<form action="/fb_result" method="get">
-					<div style="display: flex; justify-content: center;">
-					<select name="column" style="margin-left: 10px;">
+					<select name="column">
 					    <option value="fb_title">제목</option>
 					    <option value="writer">작성자</option>
 					    <option value="fb_content">내용</option>
 					</select>
-					<input type="text" name="keyword" placeholder="검색어를 입력하세요" style="margin-left: 10px;">
-					<input type="submit" value="검색" style="margin-left: 10px;">
-					</div>
+					<input type="text" name="keyword" placeholder="검색어를 입력하세요">
+					<input type="submit" value="검색">
 				</form>
 			</div>
+			
 			
 			<div class="writebtn">
 				<c:if test="${!empty id }">

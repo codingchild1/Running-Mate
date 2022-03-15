@@ -31,4 +31,5 @@ public interface BoardService {
 	
 	//내가 쓴 글
 	public List<Board> fbList(String id);
+	List<Board> getBoardSearchResultList(String column, String keyword, int page, PageInfo pageInfo) throws Exception;
 }

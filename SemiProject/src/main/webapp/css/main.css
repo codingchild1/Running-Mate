@@ -32,11 +32,11 @@
   padding-top: 10em;
   position: relative;
   width: 100%; 
-  background-color: #f2f2f2;
+  background-color: #212934 !important
 }
 
 section {
-  padding-bottom: 105px;
+  padding-bottom: 30px;
 }
 
 footer {
@@ -74,7 +74,6 @@ footer p span {
 }
 .detail_title{
   text-align: left;
-  padding: 10em 0 0 0;
   
 }
 
@@ -87,6 +86,13 @@ footer p span {
   width: 60%;
   margin-left:auto; 
   margin-right:auto;
+
+}
+
+.a231{
+  box-sizing: border-box;
+  border: 1px solid #dcdcdc; 
+  padding: 20px;
 }
 
 .modify{

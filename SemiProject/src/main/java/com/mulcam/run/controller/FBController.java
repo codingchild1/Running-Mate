@@ -61,7 +61,27 @@ public class FBController {
 
 	@Autowired
 	LikesService likesService;
-
+	
+	@GetMapping("/fb_result")
+	public ModelAndView SearchList(@RequestParam String column, @RequestParam String keyword, @RequestParam(value="page",required=false, defaultValue = "1") int page) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("column:" + column);
+		PageInfo pageInfo = new PageInfo();
+		try {
+			List<Board> articleList = boardService.getBoardSearchResultList(column, keyword, page, pageInfo);
+			mv.addObject("pageInfo", pageInfo);
+			mv.addObject("articleList", articleList);
+			mv.addObject("keyword", keyword);
+			mv.addObject("column", column);
+			mv.setViewName("/fb_result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+			mv.setViewName("/board/err");
+		}
+		
+		return mv;
+	}
 	
 	/* 게시글 불러오기 */
 	@RequestMapping(value="/fb_main", method= {RequestMethod.GET, RequestMethod.POST})

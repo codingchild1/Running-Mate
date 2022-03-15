@@ -12,7 +12,7 @@
 <style>
 .modify {
 	float: right;
-	font-size: 10px;
+	font-size: 15px;
 }
 
 a:link {
@@ -34,8 +34,13 @@ a:hover {
 	font-size: 15px;
 }
 
-.alerts{
-	cursor:pointer;
+.alerts {
+	cursor: pointer;
+}
+
+.rock2{
+	display: inline-block;
+	margin-top: 5px;
 }
 </style>
 
@@ -49,8 +54,13 @@ a:hover {
 <body>
 	<!-- 내용 -->
 	<section class="a123">
+		<div style="padding: 10em 0 0 0;"></div>
+		<button type="button" class="btn btn-success" onclick="location.href='./fb_main?page=${page}'" style= "margin-left: 92%;margin-bottom: 1em;">목록</button>
+		<div class="a231">
 		<div class="fb_detail">
+		
 			<div class="detail_title">
+			
 				<h2>${article.fb_title }</h2>
 				<div class="detail_writer">
 					<a href="#"><img src="${article.user_img }" width="20px"
@@ -58,65 +68,108 @@ a:hover {
 				</div>
 				<input type="hidden" id="articleWriter" value="${article.writer }">
 				<div class="modify">
-				
-				<c:if test= "${id eq article.writer }" >	
-				<%-- <c:when test= "${id  eq todayselect.user_id || id eq 'admin' }"> --%>
-				<!-- 세션 id 랑 글 작성자가 같을 경우 -->
-					<a href="fb_modify?fb_articleNo=${article.fb_articleNo}"> 수정 </a> 
-					<a href="fb_delete?fb_articleNo=${article.fb_articleNo}&page=${page}"onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span id="delete" style="float:right;">삭제</span></a>
-				</c:if>
+
+					<c:if test="${id eq article.writer }">
+						<%-- <c:when test= "${id  eq todayselect.user_id || id eq 'admin' }"> --%>
+						<!-- 세션 id 랑 글 작성자가 같을 경우 -->
+						<a href="fb_modify?fb_articleNo=${article.fb_articleNo}"> 수정&nbsp;&nbsp; </a>
+						<a
+							href="fb_delete?fb_articleNo=${article.fb_articleNo}&page=${page}"
+							onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span
+							id="delete" style="float: right;">삭제</span></a>
+					</c:if>
 				</div>
 				<div>
 					<span id="detail_time" style="color: #A9A9A9; font-size: 12px;">${article.fb_date }</span>
 
 				</div>
 
-				<span class="views1">
-					<span id="alerts" onclick=alertpopup()>
-			<c:choose>
-			<c:when test="${alert eq true }">
-				<span id="alert">신고취소</span>
-			</c:when>
-			<c:when test="${alert eq false }">
-				<span id="alert">신고</span>
-			</c:when>
-			</c:choose>
-			</span>	
-					조회 ${article.fb_views }
-						
+				<span class="views1"> <span id="alerts" onclick=alertpopup() style="cursor: pointer;">
+						<c:choose>
+							<c:when test="${alert eq true }">
+								<span id="alert">신고취소</span>
+							</c:when>
+							<c:when test="${alert eq false }">
+								<span id="alert">신고</span>
+							</c:when>
+						</c:choose>
+				</span> 조회 ${article.fb_views }
+
 				</span>
 
 			</div>
 		</div>
 
 		<section id="line">
-		<hr style="border: 1px color= silver; " width="100%">
-		<table>
-		<tr>
-		<td>
-			
-			${article.fb_content }<br><br><br><br><br><br><br><br>
-			</td>
-			
-		</tr>
-		</table>
+			<hr style="border: 1px;">
+			<table>
+				<tr>
+					<td>${article.fb_content }<br>
+
+					</td>
+
+				</tr>
+			</table>
 		</section>
 		<section>
-		<div id="likes" onclick=changeImg()>
-		<c:choose>
-				<c:when test="${likes eq true }">
-					<img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
-				</c:when>
-				<c:when test="${likes eq false }">
-					<img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " />
-				</c:when>
+			<div id="likes" onclick=changeImg() style="width: 50px; cursor: pointer; margin-left: 45%;">
+				<c:choose>
+					<c:when test="${likes eq true }">
+						<img id="like"
+							src="${pageContext.request.contextPath }/images/like.PNG"
+							style="width: 50px;" />
+					</c:when>
+					<c:when test="${likes eq false }">
+						<img id="like"
+							src="${pageContext.request.contextPath }/images/nolike.PNG"
+							style="width: 50px;" />
+					</c:when>
 				</c:choose>
-		</div>
-			<br><br><br><br><br><br><br><br>
-			<a href="./fb_main?page=${page}"> [목록]</a>&nbsp;&nbsp;
+			</div>
+			<br> 	
 		</section>
+
+
+
+			<div class="card-header bg-light">
+				<i class="fa fa-comment fa"></i> 댓글
+			</div>
+			<div class="card-body">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						<div class="form-inline mb-2">
+
+
+						</div> <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<button type="button" class="btn btn-success" onClick="javascript:addReply();" style="float: right; margin-top: 5px;">등록</button>
+						<span>비밀댓글</span>
+					<div class="rock2" style="position: relative; "><div style="display: inline-block;"><img id="img1" src="/images/rock1.PNG" style="width:13px;"></div>
+   											 <div style="position: absolute; display: inline-block; left:0;"><img id="img2" src="/images/rock2.PNG" style="width:13px;"></div></div>
+					</li>
+				</ul>
+				</div>
+
+		</div>
 	</section>
 	<script>
+	$(document).ready(function(){
+        /*웹페이지 열었을 때*/
+        $("#img1").show();
+        $("#img2").hide();
+
+        /*img1을 클릭했을 때 img2를 보여줌*/
+        $("#img1").click(function(){
+            $("#img1").hide();
+            $("#img2").show();
+        });
+
+        /*img2를 클릭했을 때 img1을 보여줌*/
+        $("#img2").click(function(){
+            $("#img1").show();
+            $("#img2").hide();
+        });
+    });
+	
 	function changeImg(){
 		console.log("hello");
 		$.ajax({
