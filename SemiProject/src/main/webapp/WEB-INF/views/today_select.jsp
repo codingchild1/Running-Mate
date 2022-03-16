@@ -348,7 +348,7 @@ $(function(){
 			success:function(data){				
 			}
 		});		
-		location.href="today_select?articleNo=" + ${todayselect.today_articleNo};
+		location.href="/today_select/" + ${todayselect.today_articleNo};
 	});
 	
 	$(".reply_delete").click(function(){
@@ -362,7 +362,7 @@ $(function(){
 				success:function(data){				
 				}
 			});		
-			location.href="today_select?articleNo=" + ${todayselect.today_articleNo};
+			location.href="/today_select/" + ${todayselect.today_articleNo};
 		}
 		else return false;
 	});
@@ -382,12 +382,12 @@ $(function(){
 			$.ajax({
 				type:"post",
 				url:"http://localhost:8090/reply",
-				data: {"board_type": "today_select", "board_no" : ${todayselect.today_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
+				data: {"board_type": "today", "board_no" : ${todayselect.today_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
 				dataType:"text",
 				success:function(data){				
 				}
-			});		
-			location.href="today_select?articleNo=" + ${todayselect.today_articleNo};
+			});	
+			location.href="http://localhost:8090/today_select/" + ${todayselect.today_articleNo};
 		}
 		
 	});

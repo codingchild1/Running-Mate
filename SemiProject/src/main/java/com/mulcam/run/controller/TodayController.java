@@ -269,7 +269,7 @@ public class TodayController {
 	}
 	
 	//게시글보기
-	@GetMapping("/today_select/{today_articleNo}")
+	@RequestMapping(value="/today_select/{today_articleNo}", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) throws Exception {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();

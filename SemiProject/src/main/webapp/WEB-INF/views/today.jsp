@@ -100,7 +100,7 @@ body {
 </head>
 <body>
 	<%@include file="header.jsp"%>
-	<%-- <%@include file="slides.jsp"%>  --%>
+	<%@include file="slides.jsp"%>
 		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
 
 		<div class="outer">
