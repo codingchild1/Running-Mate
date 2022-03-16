@@ -89,7 +89,7 @@
 				<div class="row">
 					<div class="container fluid">
 						<div style="display: flex; align-items: center;">
-							<span><img class="userProfile" src='/profileview/${profileImg }'></span>
+							<span><img class="userProfile" src='/profileview/${profileImg }' onerror="this.src='/profile/profile.png'"></span>
 							<span><input type="text" id="user_id" name="user_id" value='${todayselect.user_id}' style="height: 20px; border: none; background-color: white;"disabled></span>
 						</div>
 						<input name="articleNo" id="today_articleNo" type="hidden"value='${todayselect.today_articleNo}'>

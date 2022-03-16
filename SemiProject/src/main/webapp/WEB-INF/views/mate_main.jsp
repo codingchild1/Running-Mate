@@ -202,7 +202,7 @@ body {
 			<c:forEach items="${mates }" var="groupandmate">
 				<div class="register">
 					<div style="margin: 5px; padding: 5px; display: flex; align-items: flex-start; justify-content: space-between;">
-						<span><img class="profile" src='${groupandmate.img }'></span>
+						<span><img class="profile" src='${groupandmate.img }' onerror="this.src='/profile/profile.png'"></span>
 						<div style="margin-left: 10px;width: 150px">
 							<span><input type="text" id="title"value='${groupandmate.title }'style="width:150px;height: 35px; vertical-align: middle; font-weight: bold; font-size: 15px; border: none; background-color: white;text-overflow: ellipsis;"disabled> </span> 
 							<span><input type="text" id="id" value='${groupandmate.id }'style="height: 20px; vertical-align: middle; border: none; background-color: white;"disabled> </span>
@@ -387,7 +387,7 @@ body {
      			  	console.log(jdata.mate_cont); */
      			  	/* console.log($('#mate_cont').val());  */
      			 	var uid = '<%=(String)session.getAttribute("id")%>';
-     			  	if($('#user_id').val()==uid){
+     			  	if($('#user_id').val()==uid || uid =='admin'){
      				 	$('#delete').show();
      				 	$('#update').show();
      			  	}else{
@@ -506,7 +506,7 @@ body {
 			 			$('input[name=gwarning]').val(jdata.warning); 
 			 	
 			 			var uid = '<%=(String)session.getAttribute("id")%>';
-			  			if($('#user_id').val()==uid){
+			  			if($('#user_id').val()==uid || uid == 'admin'){
   				 			$('#delete2').show();
   				 			$('#update2').show();
   			  			}else{
