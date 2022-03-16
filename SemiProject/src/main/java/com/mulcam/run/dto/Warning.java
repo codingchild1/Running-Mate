@@ -3,12 +3,12 @@ package com.mulcam.run.dto;
 import java.sql.Date;
 
 public class Warning {
-	int warningno;
-	String boardtype;
-	int boardno;
-	int warningcnt;
-	String warningid;
-	Date warningdate;
+	public int warningno;
+	public String boardtype;
+	public int boardno;
+	public int warningcnt;
+	public String warningid;
+	public Date warningdate;
 	
 	//전체 생성자
 	public Warning() {}

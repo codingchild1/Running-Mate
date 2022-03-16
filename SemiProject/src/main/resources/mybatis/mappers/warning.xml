@@ -4,7 +4,7 @@
 <mapper namespace="com.mulcam.run.dao.WarningDAO">
 	<select id="AllWarninglist" parameterType="Warning"  resultType="com.mulcam.run.dto.Warning">
 		<![CDATA[
-			select warningid, boardtype, warningdate, warningcnt from warning
+			select * from warning
 		]]>
 	</select>
 	<delete id="delete" parameterType="String">

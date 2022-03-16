@@ -19,7 +19,6 @@
 	<select  id="selectAlertNo" parameterType="alert" resultType="int">
 		select alert_no from alert where user_id= #{user_id} and board_type=#{board_type} and board_no=#{board_no} limit 1
 	</select>
-
 </mapper>
 
 <!-- 

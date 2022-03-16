@@ -269,7 +269,7 @@ public class TodayController {
 	}
 	
 	//게시글보기
-	@RequestMapping(value="/today_select/{today_articleNo}", method= {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/today_select/{today_articleNo}")
 	public ModelAndView today_select(@PathVariable int today_articleNo, @RequestParam(value="page", required=false, defaultValue="1")int page) throws Exception {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
@@ -312,6 +312,7 @@ public class TodayController {
 			mav.addObject("replylist", replylist);	
 			mav.addObject("user_profile", user_profile);	
 		    
+			
 			} catch(Exception e) {
 				e.printStackTrace();
 				mav.addObject("err", e.getMessage());
