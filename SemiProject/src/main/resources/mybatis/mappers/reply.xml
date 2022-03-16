@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mulcam.run.dao.ReplyDAO">
+
+	<insert id="insert" parameterType="reply">
+		<![CDATA[
+			insert into reply (board_type, board_no, reply_id, user_img, reply_content)
+			values (#{board_type}, #{board_no}, #{reply_id}, #{user_img}, #{reply_content})
+		]]>
+	</insert>
+	<select id="replyList" parameterType="replyinfo" resultType="reply">
+		<![CDATA[
+			select * from reply where board_type=#{board_type} and board_no=#{board_no}
+		]]>
+	</select>
+	
+	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from reply where reply_no=#{reply_no }
+		]]>
+	</delete>
+	
+	<update id="update"  parameterType="replyinfo">
+		<![CDATA[
+			update reply set reply_content=#{reply_content} where reply_no=#{reply_no }
+		]]>
+	</update>
+	
+	
+<!-- 
+	<select id="AllWarninglist" parameterType="Warning"  resultType="com.mulcam.run.dto.Warning">
+		<![CDATA[
+			select warningid, boardtype, warningdate, warningcnt from warning
+		]]>
+	</select>
+	<delete id="delete" parameterType="String">
+		<![CDATA[
+			delete from warning where warningid=#{warningid}
+		]]>
+	</delete>
+	
+	
+	<insert id="insert" parameterType="warning">
+		<![CDATA[
+			insert into warning (boardtype, boardno, warningcnt, warningid, warningdate)
+			values (#{boardtype}, #{boardno}, 1, #{warningid}, now())
+		]]>
+	</insert>
+	
+	<select  id="checkWarnings" parameterType="warning" resultType="boolean">
+		<![CDATA[
+			select EXISTS (select * from warning 
+				where boardtype=#{boardtype} and boardno=#{boardno} limit 1) as success
+		]]>
+	</select>
+	
+	<select id="getWarningCnt" parameterType="warning" resultType="int">
+		<![CDATA[
+			select warningcnt from warning where boardtype=#{boardtype} and boardno=#{boardno}
+		]]>
+	</select>
+	
+	<update id="updateWarningPlus"  parameterType="warning">
+		<![CDATA[
+			update warning set warningcnt=warningcnt+1 where boardtype=#{boardtype } and boardno=#{boardno }
+		]]>
+	</update>
+	<update id="updateWarningMinus"  parameterType="warning">
+		<![CDATA[
+			update warning set warningcnt=warningcnt-1 where boardtype=#{boardtype } and boardno=#{boardno }
+		]]>
+	</update>
+	<delete id="deleteWarning" parameterType="warning">
+		<![CDATA[
+			delete from warning where boardtype=#{boardtype } and boardno=#{boardno }
+		]]>
+	</delete>
+	 -->
+</mapper>

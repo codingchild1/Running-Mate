@@ -131,9 +131,10 @@
 					</c:when>
 					</c:choose><br>
 					<textarea id="reply_text" style="width: 85%; height:auto; border:none; font-size: 15px; margin-left: 4.3em; background-color:white;" disabled >${reply.reply_content }</textarea>
-					<span class="reply_reg btn btn-light" style="float:right; display:none  margin-right:10%;">등록</span>
+					
 					<br>
 					<span style="font-size: 10px; margin-left: 6.4em; color: gray">${reply.reply_date }</span>
+					<span class="reply_reg btn btn-light" style="float:right; margin-right:10%; display:none;">등록</span>
 					<br><br><hr></hr>
 					<input type="hidden" class="reply_no" value="${reply.reply_no }"/>
 				</div>
@@ -146,7 +147,7 @@
 						<img src="/profileview/${user_profile }" style="width: 20px; height: auto;">${id }
 					</div> 
 					<textarea id="reply_content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-					<button id="reply_button" class="btn btn-success" style="margin-top: 5px; ">등록</button>
+					<button id="reply_button" class="btn btn-success" style="margin-top: 5px; float:right; ">등록</button>
 					<input id="reply_img" type="hidden" value="${user_profile }" >
 				</li>
 			</ul>
@@ -161,9 +162,26 @@
 		$(".reply_modify").click(function(){
 			if($(this).parent().children(".reply_modify").html()=="수정"){
 				$(this).parent().children(".reply_modify").html("수정취소");	
+				$(this).parent().children(".reply_reg").show();
+				$(this).parent().children("textarea").attr("disabled", false);
 			} else if($(this).parent().children(".reply_modify").html()=="수정취소"){
 				$(this).parent().children(".reply_modify").html("수정");	
+				$(this).parent().children(".reply_reg").hide();
 			} 	
+		});
+		
+		$(".reply_reg").click(function(){
+			$(this).parent().children(".reply_modify").html("수정");	
+			alert($(this).parent().children("textarea").val());
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/replyupdate",
+				data: {"reply_no" : $(this).parent().children("input").val(), "reply_content" : $(this).parent().children("textarea").val() },
+				dataType:"text",
+				success:function(data){				
+				}
+			});		
+			location.href="routepost?articleNo=" + ${route.route_articleNo};
 		});
 		
 		$(".reply_delete").click(function(){

@@ -132,9 +132,19 @@ public class SubController {
 	public void reply(@ModelAttribute Reply reply, Model model) {
 		try {
 			replyService.insertReply(reply);
-			//ReplyInfo replyinfo = new ReplyInfo(reply.getBoard_type(), reply.getBoard_no());
-			//List<Reply> replylist = replyService.replyList(replyinfo);
-			//model.addAttribute("replylist", replylist);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/replyupdate")
+	public void replyupdate(@RequestParam("reply_no") int reply_no, @RequestParam("reply_content") String reply_content) {
+		try {
+			System.out.println(reply_no);
+			System.out.println(reply_content);
+			ReplyInfo replyinfo = new ReplyInfo(reply_no, reply_content);
+			replyService.updateReply(replyinfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
