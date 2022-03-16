@@ -281,7 +281,7 @@ a:active {
 				<form action="mate_updatemate" method="get"><span id="update" ><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3; cursor:pointer;margin:5px;"></span></form>
 				<span id="delete" style="margin: 5px;"><button class="delete" style="border:none;background-color:#d3d3d3;cursor:pointer;">삭제</button></span> 
 					<span id="alerts" style="margin: 5px;">
-						<span class="alert" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;padding:0px">신고</span>
+						<!-- <span class="alert" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;padding:0px">신고</span> -->
 						<input type="hidden" id="mwarning" name="mwarning" value=''>
 					</span>
 			</div>
@@ -302,7 +302,7 @@ a:active {
 							</div>
 						</div>
 					</div>
-					<button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;font-size:13px;">참여</button>
+					<!-- <button class="ptp"  style="margin: 5px;width: 60px;height: 30px;text-align: center;border: 1px solid #59ab6e;background-color: #59ab6e;border-radius: 0.25rem;color:white;cursor:pointer;font-size:13px;">참여</button> -->
 				</div>
 			</div>
 		</div>
@@ -321,7 +321,7 @@ a:active {
 				<form action="mate_updategroup" method="get"><span id="update2"><input type="hidden" id="ptp" name="ptp" value=''><input type="submit" value='수정' style="border:none;background-color:#d3d3d3; cursor:pointer;margin:4px;"></span></form>
 				<span id="delete2" style="margin: 5px; cursor: pointer;"><button class="delete2" style="border:none;background-color:#d3d3d3;cursor:pointer;">삭제</button></span>
 				<span id="alerts" style="margin: 5px;">
-					<span class="alert2" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;">신고</span>
+				<!-- 	<span class="alert2" style="border:none;background-color:#d3d3d3;cursor:pointer;width: 55px;">신고</span> -->
 					<input type="hidden" id="gwarning" name="gwarning" value=''>
 				</span>
 
@@ -657,6 +657,41 @@ window.addEventListener("keyup", e => {
     if (isModalOn1() && e.key === "Escape") {
         modalOff1()
     }
+});
+//mate게시물 삭제
+	$('.delete').click(function(){
+	$.ajax({
+        type:"post",
+        dataType:"text",
+        async:false,
+        url:"http://localhost:8090/deletemate",
+        data:{"no":$('#ptp').val()},
+        success: function(data, textStatus){
+        	alert("성공적으로 삭제되었습니다.");
+        	location.reload();
+        },
+        error:function(data, textStatus){
+        	alert("실패");
+        }
+ 	});
+});
+
+	//group게시물 삭제
+$('.delete2').click(function(){
+	$.ajax({
+        type:"post",
+        dataType:"text",
+        async:false,
+        url:"http://localhost:8090/deletegroup",
+        data:{"no":$('#ptp').val()},
+        success: function(data, textStatus){
+        	alert("성공적으로 삭제되었습니다.");
+        	location.reload();
+        },
+        error:function(data, textStatus){
+        	alert("실패");
+        }
+	});
 });
 		   
 		

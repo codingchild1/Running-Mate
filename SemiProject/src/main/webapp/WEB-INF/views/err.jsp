@@ -13,6 +13,6 @@
 		<header>
 			<%@include file ="header.jsp" %>
 		</header>
-			<div style="margin-left: 460px;margin-top: 200px;font-weight: bold">${err }</div>
+			<div style="margin-left: 45%;margin-top: 200px;font-weight: bold">${err }</div>
 </body>
 </html>

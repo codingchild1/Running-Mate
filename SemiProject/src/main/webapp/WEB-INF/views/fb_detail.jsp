@@ -149,8 +149,8 @@ li {
 					<span class="reply"><img src="/profileview/${reply.user_img }"  style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">${reply.reply_id }</b></span>
 					<c:choose>
 					<c:when test="${user_id eq reply.reply_id }">
-						<span class="reply_delete" style="float:right; padding-left:15px;">삭제</span>
-						<span class="reply_modify" style="float:right; padding-left:10px;">수정</span>
+						<span class="reply_delete" style="float:right; padding-left:15px; cursor: pointer;">삭제</span>
+						<span class="reply_modify" style="float:right; padding-left:10px; cursor: pointer;">수정</span>
 					</c:when>
 					</c:choose><br>
 					<textarea id="reply_text" style="width: 85%; height:auto; border:none; font-size: 15px; margin-left: 4.3em; background-color:white;" disabled >${reply.reply_content }</textarea>
@@ -181,6 +181,7 @@ li {
 	</section>
 	
 	<script>
+	
 	$(function(){
 		var content;
 		$(".reply_modify").click(function(){
@@ -285,9 +286,13 @@ li {
 				if(data=="true"){
 					console.log("true: " +data);
 					$("#like").attr("src", "${pageContext.request.contextPath }/images/like.PNG");
+					alert("해당 게시글에 좋아요를 했습니다.");
+					location.reload();
 				} else {
 					console.log("false: " + data);
 					$("#like").attr("src", "${pageContext.request.contextPath }/images/nolike.PNG");
+					alert("해당 게시글에 좋아요를 취소했습니다.");
+					location.reload();
 				}
 			}
 		});			 
