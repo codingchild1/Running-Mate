@@ -256,7 +256,7 @@ color: white; */
 				<form action="mate_updatemate" method="get"><span id="update"><input type="hidden" id="ptp" name="ptp"value=''><input type="submit" value='수정'style="border: none; background-color: #d3d3d3; cursor: pointer; margin: 5px;"></span></form>
 				<span id="delete" style="margin: 5px;"><button class="delete"style="border: none; background-color: #d3d3d3; cursor: pointer;">삭제</button></span>
 				<span id="alerts" style="margin: 5px;"> <!-- <input type="text" class="alert" style="border:none;background-color:rgba(123, 173, 213, 0.70);cursor:pointer;width: 55px;" value="신고"> -->
-					<span class="alert"style="border: none; background-color: #d3d3d3; cursor: pointer; width: 55px; padding: 0px">신고</span>
+					<span class="alert" id="alert" style="border: none; background-color: #d3d3d3; cursor: pointer; width: 55px; padding: 0px">신고</span>
 					<input type="hidden" id="mwarning" name="mwarning" value=''>
 				</span>
 			</div>
@@ -296,7 +296,7 @@ color: white; */
 				<button class="delete2"style="border: none; background-color: #d3d3d3; cursor: pointer;">삭제</button>
 				</span>
 				<span id="alerts" style="margin: 5px;">
-					<span class="alert2"style="border: none; background-color: #d3d3d3; cursor: pointer; width: 55px;">신고</span>
+					<span class="alert2" class="alert2" style="border: none; background-color: #d3d3d3; cursor: pointer; width: 55px;">신고</span>
 					<input type="hidden" id="gwarning" name="gwarning" value=''>
 				</span>
 			</div>
@@ -395,6 +395,7 @@ color: white; */
      			  	} else if($('#user_id').val()==uid || uid == 'admin'){
      			  		$('#delete').show();
      				 	$('#update').hide();
+     				 	$('#alert').hide();
      			  	}
      			  	else{
      				 	$('#delete').hide();
@@ -515,6 +516,7 @@ color: white; */
      			  	} else if($('#user_id').val()==uid || uid == 'admin'){
      			  		$('#delete2').show();
      				 	$('#update2').hide();
+     				 	$('#alert2').hide();
      			  	}
      			  	else{
      				 	$('#delete2').hide();
