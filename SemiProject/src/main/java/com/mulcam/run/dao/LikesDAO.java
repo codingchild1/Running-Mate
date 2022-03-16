@@ -1,7 +1,6 @@
 package com.mulcam.run.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.relational.core.sql.Like;
 import org.springframework.stereotype.Repository;
 
 import com.mulcam.run.dto.Likes;

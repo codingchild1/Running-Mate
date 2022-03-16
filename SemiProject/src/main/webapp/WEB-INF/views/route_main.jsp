@@ -73,7 +73,7 @@
 					<a href="routepost?articleNo=${route.route_articleNo}">
 					<div id="route_mini" class="route_mini">
             			<div id="route_miniHeader" class="route_miniHeader">
-                			<img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile">
+                			<img src="/profileview/${route.memberthumb }" style="width:27px; height:27px; border-radius:70%;" onerror="this.src='/profile/profile.png'" id="userImage" class="userProfile">
                 			<span id="route_userName">${route.user_id }</span>
                 			<span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
            				 </div>
@@ -88,8 +88,6 @@
                 			<div id="route_miniFooterLeft" class="route_miniFooter" >
                     			<img src="${pageContext.request.contextPath }/images/like.PNG" class="userProfile" />
                     			<span id="route_likes">${route.route_likes }</span>
-                    			<img src="${pageContext.request.contextPath }/images/reply.PNG" class="userProfile" />
-                   				<span id="route_Replies">4</span>
                 			</div>
                	 			<div id="route_miniFooterRight" class="route_miniFooter" style="float:right;" >
                     			<span>조회</span>
@@ -104,31 +102,31 @@
 			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
 			<c:choose>
 				<c:when test="${pageInfo.page<=1}">
-					[이전]&nbsp;
+					«&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="route?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+					<a href="route?page=${pageInfo.page-1}">«&nbsp;</a>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
 					<c:when test="${pageInfo.page==i }">
-						[${i }]
+						${i}&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="route?page=${i}">[${i }]</a>
+						<a href="route?page=${i}">${i}&nbsp;</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[다음]
+					»&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="route?page=${pageInfo.page+1}">[다음]</a>
+					<a href="route?page=${pageInfo.page+1}">»&nbsp;</a>
 				</c:otherwise>
 			</c:choose>
-		</div>
+			</div>
 			</c:when>	
 			<c:otherwise>
 				<section id="emptyArea">등록된 글이 없습니다.</section>
