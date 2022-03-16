@@ -24,7 +24,9 @@ public interface TodayService {
 	//내가 쓴 글
 	public List<Today> todayList(String id, int page, PageInfo pageInfo)  throws Exception;
 	
-
+	//조회수
+	public void updateTodayView(int articleNo) throws Exception;
+	
 //	public int SelectLikesCnt() throws Exception;
 //	public void AlertPlus(int articleNo) throws Exception; 
 //	public void AlertMinus(int articleNo) throws Exception;

@@ -50,7 +50,7 @@ public class TodayServiceImpl implements TodayService {
 	//해당 글의 DB정보를 select 해온다.
 	@Override
 	public Today getTBoard(int articleNo) throws Exception {
-		todayDAO.updateReadCount(articleNo);
+		
 		return todayDAO.selectTBoard(articleNo);
 	}
 
@@ -137,5 +137,14 @@ public class TodayServiceImpl implements TodayService {
 		
 		return todayDAO.todayList(mypageinfo);
 	}
+
+
+
+	@Override
+	public void updateTodayView(int articleNo) throws Exception {
+		todayDAO.updateReadCount(articleNo);
+	}
+	
+	
 
 }
