@@ -13,8 +13,8 @@
     <div id='wrap'>
         <footer>
             <nav>
-                <a href='#'>광고문의</a>
-                <a href='#'>이용약관</a>
+                <a href='#' style="color: white">광고문의</a>
+                <a href='#' style="color: white">이용약관</a>
             </nav>
             <p>
                 <span>고객센터 :1544-9001</span><br />

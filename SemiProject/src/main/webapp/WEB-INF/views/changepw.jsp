@@ -23,7 +23,7 @@
 			  padding: 30px, 20px;
 			  background-color:#FFFFFF;
 			  text-align:center;
-			  top:40%;
+			  top:50%;
 			  left:50%;
 			  transform: translate(-50%,-50%);
 			  border-radius: 15px;
@@ -71,24 +71,23 @@
 			  background: none;
 			}				
 			
-			.btn {
+			#submit {
 			  position:relative;
 			  left:40%;
 			  transform: translateX(-50%);
 			  margin-bottom: 40px;
 			  width:80%;
 			  height:40px;
-			  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-			  background-position: left;
-			  background-size: 200%;
-			  color:white;
 			  font-weight: bold;
-			  border:none;
-			  cursor:pointer;
 			  transition: 0.4s;
 			  display:inline;
+			  background-color: #59ab6e; 
+			  border-radius: .25rem;
+			  color: white;
 			}
 			
+			
+		
 			.btn:hover {
 			  background-position: right;
 			}
@@ -99,8 +98,9 @@
 				list-style: none;
 			}
 			.post {
-				display: inline-flex;
-				width: 1060px;
+				position: absolute;
+				left: 25%;
+				width: 1000px;
 				margin-top: 51px;
 				justify-content: space-between;
 			}
@@ -108,6 +108,8 @@
 				text-decoration-line: none;
 				color: black;
 			}
+
+
 		</style>
 
 		<title>비밀번호 변경</title>
@@ -126,9 +128,9 @@
 			</div>
 		 <form method="post" name="form2" class="form2">
        		<h2>비밀번호 변경</h2>
-		    <div class="col-sm-8 col-sm-offset-2">
-		        <div class="panel panel-default panel-margin-10">
-		            <div class="panel-body panel-body-content text-center">
+		    <div>
+		        <div>
+		            <div>
 		                <div class="textForm">
 		                    <input type="password" name="password" id="password" class="password" placeholder="현재 비밀번호" />
 		                </div>
@@ -138,7 +140,8 @@
 		                <div class="textForm">
 		                    <input type="password" name="newPwCheck" id="newPwCheck" class="newpassword2" placeholder="새 비밀번호 확인" />
 		                </div>
-		                <button type="submit" id="submit" name="submit" class="btn">비밀번호 변경</button>
+		                <button type="submit" id="submit" name="submit" class="btn" >비밀번호 변경</button>
+		                
 		                <!--  <a href="/member/infoView" class="btn btn-default">취소</a>-->
 		            </div>
 		        </div>

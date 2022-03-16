@@ -91,8 +91,9 @@ footer p span {
 
 .a231{
   box-sizing: border-box;
-  border: 1px solid #dcdcdc; 
+  border: 0.5px solid #dcdcdc; 
   padding: 20px;
+  margin-bottom: 20em;
 }
 
 .modify{

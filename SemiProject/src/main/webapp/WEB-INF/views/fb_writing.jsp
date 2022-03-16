@@ -65,7 +65,7 @@ a { text-decoration-line: none;}
 		<!-- 이거 없으면 에러남 -->
 		
 		<div>
-		<img src="/profileview/${user_img2}" class="col" id="user_img2" name="user_img2"/>
+		<img src="/profileview/${user_img2}" class="col" id="user_img2" name="user_img2" style="width: 100px; height: 100px; display : none;"/>
 		<input type="hidden"name="user_img" id="user_img" value=''>
 			<div class="writing_title">
 				<input type="text" id="title" name="fb_title"
@@ -78,11 +78,12 @@ a { text-decoration-line: none;}
 			<div class="board_detail">
 					<textarea  id="editor" name="fb_content"></textarea>
 			</div>
-			<div class="writebtn">
+			<div class="writebtn" style="margin-bottom: 20em;">
 				<input type="submit" value="저장" class="btn btn-success"/>
 				<input type="button" value="취소" class="btn btn-success"
 					onclick="location.href='fb_main';"/>				
 			</div>
+			
 		</form>
 	</div>
 </main>

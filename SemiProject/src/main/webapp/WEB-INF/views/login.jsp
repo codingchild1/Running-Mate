@@ -78,7 +78,6 @@
 		border-radius: .25rem;
 		color: white;
 	}
-
 	</style>
 </head>
 <body>

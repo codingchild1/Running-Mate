@@ -25,7 +25,7 @@
 	  padding: 30px, 20px;
 	  background-color:#FFFFFF;
 	  text-align:center;
-	  top:40%;
+	  top:50%;
 	  left:50%;
 	  transform: translate(-50%,-50%);
 	  border-radius: 15px;
@@ -56,27 +56,24 @@
 	
 	
 	
-	.btn {
-	  position:relative;
-	  left:40%;
-	  transform: translateX(-50%);
-	  margin-bottom: 40px;
-	  width:80%;
-	  height:40px;
-	  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-	  background-position: left;
-	  background-size: 200%;
-	  color:white;
-	  font-weight: bold;
-	  border:none;
-	  cursor:pointer;
-	  transition: 0.4s;
-	  display:inline;
+	#submit {
+		  position:relative;
+		  left:21%;
+		  transform: translateX(-50%);
+		  margin-bottom: 40px;
+		  width:165px;
+		  height:30px;
+		  border: none;
+		  font-weight: bold;
+		  transition: 0.4s;
+		  display:inline;
+		  background-color: #59ab6e; 
+		  border-radius: .25rem;
+		  color: white;
+		  
 	}
 	
-	.btn:hover {
-	  background-position: right;
-	}
+
 		
 	.post li {
 		float: left;
@@ -84,8 +81,9 @@
 		list-style: none;
 	}
 	.post {
-		display: inline-flex;
-		width: 1060px;
+		position: absolute;
+		left: 25%;
+		width: 1000px;
 		margin-top: 51px;
 		justify-content: space-between;
 	}
@@ -119,14 +117,14 @@
 					<li><a href="delete"><b>회원 탈퇴</b></a></li>
 				</ul>
 			</div>
-    <form name="deleteform" method="post" class="form4" action="delete" onsubmit="return checkValue()">
+    	<form name="deleteform" method="post" class="form4" action="delete" onsubmit="return checkValue()">
                 <h2>회원 탈퇴</h2>
                 <div class="textForm">
                		 <input type="password" id="password" class="password" name="password">
                 </div>
-		        <input type="submit" class="btn" value="탈퇴" /> 
-		        <input type="button" class="btn" value="취소" onclick="history.go(-1)">
-    </form>
+		        <input type="submit" id="submit" value="탈퇴" /> 
+		        <input type="button" id="submit" value="취소" onclick="location.href='mypage'" />
+    	</form>
 
 </body>
 </html>

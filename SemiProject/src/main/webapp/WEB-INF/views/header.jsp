@@ -52,7 +52,11 @@
                 <li class="nav-item"><a class="nav-link" href="/today">오늘의러닝</a></li>
                 <li class="nav-item"><a class="nav-link" href="/route">코스공유</a></li>
                 <li class="nav-item"><a class="nav-link" href="/fb_main">자유게시판</a></li>
+<<<<<<< HEAD
                 <li class="nav-item"><a class="nav-link" href="/#">이벤트</a></li>
+=======
+                <li class="nav-item"><a class="nav-link" href="#">이벤트</a></li>
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 			</ul>
             
             </div>

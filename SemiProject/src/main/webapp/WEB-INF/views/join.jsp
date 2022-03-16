@@ -17,7 +17,7 @@
 	body {
 	  background-image:#34495e;
 	}
-	
+
 	.joinForm {
 	  position:absolute;
 	  width:400px;
@@ -35,6 +35,7 @@
 	  text-align: center;
 	  margin: 30px;
 	}
+	
 	
 	.textForm {
 	  border-bottom: 2px solid #adadad;
@@ -170,7 +171,6 @@
                 <input type="submit" id="submit" value='회원가입'>
             </div>
         </form>
-    </div> 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
     	
