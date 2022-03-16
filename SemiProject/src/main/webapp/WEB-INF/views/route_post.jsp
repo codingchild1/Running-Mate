@@ -178,7 +178,6 @@
 		
 		$(".reply_reg").click(function(){
 			$(this).parent().children(".reply_modify").html("수정");	
-			alert($(this).parent().children("textarea").val());
 			$.ajax({
 				type:"post",
 				url:"http://localhost:8090/replyupdate",
