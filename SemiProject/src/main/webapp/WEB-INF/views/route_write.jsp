@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>러닝메이트</title>
+	
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 

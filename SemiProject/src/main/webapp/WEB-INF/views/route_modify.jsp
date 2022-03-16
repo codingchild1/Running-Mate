@@ -74,7 +74,7 @@
 					<p id="test" style="text-align: center;">썸네일 이미지</p>
 					<img src="/routethumbfileview/thumb_basic.PNG" id="route_thumb" name="route_thumb" class="col route_thumb" >
 					<br><br><br>
-					<input type="file" id="route_file" name="route_file" style="text-align: center;" />
+					<input type="file" id="route_file" name="route_file" style="text-align: center;" accept="thumb/route/*" />
 				</div>
 				<div id="mapbox" class="mapbox">
 					<p id="test" style="text-align: center;">코스를 그려주세요</p>

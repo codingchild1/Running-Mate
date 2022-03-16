@@ -141,46 +141,120 @@ li {
 			<br> 	
 		</section>
 
-
-
-			<div class="card-header bg-light">
-				<i class="fa fa-comment fa"></i> 댓글
-			</div>
-			<div class="card-body">
-			<div style="padding:1em 0 1em 0;">
-			<span class="replyd""><img src="/images/고양이.PNG" style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">작성자1</b><br></span>
-			<span style="font-size: 17px; margin-left: 3.8em;">비밀댓글입니다.</span>
-			</div>
-			<hr></hr>
-			<div style="padding:1em 0 1em 0;">
-			<span class="replyd""><img src="/images/강아지.PNG" style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">작성자2</b><br></span>
-			<span style="font-size: 15px; margin-left: 4.3em;">와 좋은 정보!!<br></span>
-			<span style="font-size: 15px; margin-left: 4.3em;">많은 도움이 됐습니다. 감사합니다.<br></span>
-			<span style="font-size: 10px; margin-left: 6.4em; color: gray">2022-03-15 16:49 &nbsp;&nbsp;답글쓰기</span>
-			</div>
-			<hr></hr>
-			<div style="padding:1em 0 1em 0;">
-			<span class="replyd""><img src="/images/억울이.PNG" style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">작성자3</b><br></span>
-			<span style="font-size: 15px; margin-left: 4.3em;">열심히 운동하셨네요.<br></span>
-			<span style="font-size: 15px; margin-left: 4.3em;">저도 작성자님 못지 않게 앞으로 노력하겠습니다.<br></span>
-			<span style="font-size: 10px; margin-left: 6.4em; color: gray">2022-03-15 16:49 &nbsp;&nbsp;답글쓰기</span>
-			</div>
-			<hr></hr>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">
-						<div class="form-inline mb-2" style="margin-top: 2em;">
-						<img src="${article.user_img }" style="width: 20px; height: auto;">${article.writer }
-						</div> <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-						<button type="button" class="btn btn-success" onClick="javascript:addReply();" style="float: right; margin-top: 5px;">등록</button>
-						<span>비밀댓글</span>
-					<div class="rock2" style="position: relative; "><div style="display: inline-block;"><img id="img1" src="/images/rock1.PNG" style="width:13px;"></div>
-   											 <div style="position: absolute; display: inline-block; left:0;"><img id="img2" src="/images/rock2.PNG" style="width:13px;"></div></div>
-					</li>
-				</ul>
+		<div id="replylist" class="card-body">
+		<c:choose>
+			<c:when test="${replylist!=null}">
+				<c:forEach items="${replylist }" var="reply" varStatus="status">
+				<div id="reply" style="padding:1em 0 1em 0;">
+					<span class="reply"><img src="${reply.user_img }"  style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">${reply.reply_id }</b></span>
+					<c:choose>
+					<c:when test="${user_id eq reply.reply_id }">
+						<span class="reply_delete" style="float:right; padding-left:15px;">삭제</span>
+						<span class="reply_modify" style="float:right; padding-left:10px;">수정</span>
+					</c:when>
+					</c:choose><br>
+					<textarea id="reply_text" style="width: 85%; height:auto; border:none; font-size: 15px; margin-left: 4.3em; background-color:white;" disabled >${reply.reply_content }</textarea>
+					
+					<br>
+					<span style="font-size: 10px; margin-left: 6.4em; color: gray">${reply.reply_date }</span>
+					<span class="reply_reg btn btn-light" style="float:right; margin-right:10%; display:none;">등록</span>
+					<br><br><hr></hr>
+					<input type="hidden" class="reply_no" value="${reply.reply_no }"/>
 				</div>
-
+				</c:forEach>
+			</c:when>
+		</c:choose>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<div class="form-inline mb-2" style="margin-top: 2em;">
+						<img src="${article.user_img }" style="width: 20px; height: auto;">${user_id }
+					</div> 
+					<textarea id="reply_content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<button id="reply_button" class="btn btn-success" style="margin-top: 5px; float:right; ">등록</button>
+					<input id="reply_img" type="hidden" value="${article.user_img }" >
+				</li>
+			</ul>
+		</div>
+		<input type="hidden" id="session_id" value="${user_id }">
+		<input type="hidden" id="reply_date" value="${reply.reply_date }">
 		</div>
 	</section>
+	
+	<script>
+	$(function(){
+		var content;
+		$(".reply_modify").click(function(){
+			if($(this).parent().children(".reply_modify").html()=="수정"){
+				content = $(this).parent().children("textarea").val();
+				$(this).parent().children(".reply_modify").html("수정취소");	
+				$(this).parent().children(".reply_reg").show();
+				$(this).parent().children("textarea").attr("disabled", false);
+			} else if($(this).parent().children(".reply_modify").html()=="수정취소"){
+				$(this).parent().children("textarea").value ='';
+				//$(this).parent().children("textarea").value = content;
+				$(this).parent().children(".reply_modify").html("수정");	
+				$(this).parent().children(".reply_reg").hide();
+				$(this).parent().children("textarea").attr("disabled", true);
+			} 	
+		});
+		
+		$(".reply_reg").click(function(){
+			$(this).parent().children(".reply_modify").html("수정");	
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8090/replyupdate",
+				data: {"reply_no" : $(this).parent().children("input").val(), "reply_content" : $(this).parent().children("textarea").val() },
+				dataType:"text",
+				success:function(data){				
+				}
+			});		
+			location.href="fb_detail?fb_articleNo=" + ${article.fb_articleNo}+"&&page="+${page};
+		});
+		
+		$(".reply_delete").click(function(){
+			alert = confirm('댓글을 정말 삭제하시겠습니까?');
+			if(alert==true){
+				$.ajax({
+					type:"post",
+					url:"http://localhost:8090/replydelete",
+					data: {"reply_no" : $(this).parent().children("input").val() },
+					dataType:"text",
+					success:function(data){				
+					}
+				});		
+				location.href="fb_detail?fb_articleNo=" + ${article.fb_articleNo}+"&&page="+${page};
+			}
+			else return false;
+		});
+				
+		$("#reply_content").click(function(){
+			var login = '<c:out value="${user_id }"/>';
+			if(login==""){
+				alert("로그인 후 사용 가능한 서비스입니다!");
+			}
+		});
+		$("#reply_button").click(function(){
+			var login = '<c:out value="${user_id }"/>';
+			if(login==""){
+				alert("로그인 후 사용 가능한 서비스입니다!");
+				return false;
+			}else{
+				$.ajax({
+					type:"post",
+					url:"http://localhost:8090/reply",
+					data: {"board_type": "freeboard", "board_no" : ${article.fb_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
+					dataType:"text",
+					success:function(data){				
+					}
+				});		
+				location.href="fb_detail?fb_articleNo=" + ${article.fb_articleNo} +"&&page="+${page};
+			}
+			
+		});
+
+	});
+	</script>
+	
 	<script>
 	$(document).ready(function(){
         /*웹페이지 열었을 때*/
