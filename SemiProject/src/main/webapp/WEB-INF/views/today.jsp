@@ -152,7 +152,7 @@ body {
 										<header	class="">
 											<div class="">
 												<span class="col-lg">
-													<span><img  style="border-radius: 70%;" src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
+													<span><img  style="border-radius: 70%;" src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border" onerror="this.src='/profile/profile.png'" ></span> <span id="user_id">${tboard.user_id}</span>
 												</span>
 											</div>
 											<span class="" id="today_date">${tboard.today_date}</span>
