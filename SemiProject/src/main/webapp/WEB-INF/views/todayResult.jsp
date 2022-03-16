@@ -220,26 +220,28 @@ footer p span {
 				<div id="paging">
 					<c:choose>
 						<c:when test="${pageInfo.page<=1}">
-							[pre]&nbsp;
+							«&nbsp;
 						</c:when>
 						<c:otherwise>
-						<a href="today_search?page=${pageInfo.page-1}&todaySearchText=${todaySearchText}">[pre]</a>&nbsp;
+						<a href="today_search?page=${pageInfo.page-1}&todaySearchText=${todaySearchText}">«&nbsp;</a>&nbsp;
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 						<c:choose>
-							<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+							<c:when test="${pageInfo.page==i }">${i }&nbsp;</c:when>
 							<c:otherwise>
-								<a href="today_search?page=${i}&todaySearchText=${todaySearchText}">[${i }]</a>
+								<a href="today_search?page=${i}&todaySearchText=${todaySearchText}">${i }&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
+					
+					
 					<c:choose>
 						<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-						[next]
+							»&nbsp;
 						</c:when>
 						<c:otherwise>
-						<a href="today?page=${pageInfo.page+1}">[next]</a>
+						<a href="today?page=${pageInfo.page+1}">»&nbsp;</a>
 						</c:otherwise>
 					</c:choose>				
 				</div>	
