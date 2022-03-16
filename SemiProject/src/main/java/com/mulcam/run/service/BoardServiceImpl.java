@@ -79,7 +79,7 @@ public class BoardServiceImpl implements BoardService {
 	/* 게시글 삭제 */
 	@Override
 	public void removeBoard(int fb_articleNo) throws Exception {
-
+			boardDAO.deleteBoard2(fb_articleNo);
 			boardDAO.deleteBoard(fb_articleNo);
 		}
 		
