@@ -64,10 +64,11 @@
 		<div class="container2">
 		<form id="route_write" action="/route_reg" method="post" enctype="multipart/form-data">
 			<div id="user_info" class="user_info">
-				<div class="thumbBox"><img src="/profileview/${profileImg }" id="userImage" class="userProfile"></div>
+				<div class="thumbBox"><img src="/profileview/${profileImg }" id="userImage" class="userProfile" onerror="this.src='/profile/profile.png'"
+				style="width:30px; height:30px; border-radius:70%;"/></div>
 				<div id="user_id" class="user_id">${id }</div>
 			</div>
-			<input type="text" id="route_title" name="route_title" class="form-control mt-1" value="제목"/><br>
+			<input type="text" id="route_title" name="route_title" class="form-control mt-1" placeholder="제목"/><br>
 			<textarea id="editor" name="content"></textarea><br>
 			
 			<div style="height:530px; padding-top: 30px;">
