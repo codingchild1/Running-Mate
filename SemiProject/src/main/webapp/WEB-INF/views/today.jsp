@@ -130,7 +130,7 @@ body {
 					<td>
 					<c:choose>
 						<c:when test="${id!=null}">
-							<button id="todayMake" name="todayMake" type="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; height: 38px; margin-left: 5px; margin-top: 19px;">글쓰기</button>
+							<button id="todayMake" name="todayMake" type="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; height: 38px; margin-left: 5px; margin-top: 18px;">글쓰기</button>
 						</c:when>
 					</c:choose>						
 					</td></tr>

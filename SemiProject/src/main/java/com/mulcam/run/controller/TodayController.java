@@ -31,10 +31,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.PageInfo;
+import com.mulcam.run.dto.Reply;
+import com.mulcam.run.dto.ReplyInfo;
 import com.mulcam.run.dto.Today;
 import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MemberService;
+import com.mulcam.run.service.ReplyService;
 import com.mulcam.run.service.TodayService;
 
 
@@ -55,6 +58,9 @@ public class TodayController {
 	
 	@Autowired
 	AlertService alertService;
+
+	@Autowired
+	ReplyService replyService;
 
 	
 	@Autowired
@@ -81,7 +87,7 @@ public class TodayController {
 			mav.setViewName("today");
 		} catch(Exception e) {
 			e.printStackTrace();
-			mav.addObject("err", "오늘의 러닝 메인페이지 에러");
+			mav.addObject("todayList", "오늘의 러닝 메인페이지 에러");
 			mav.setViewName("err");
 		}
 		return mav;
@@ -268,10 +274,11 @@ public class TodayController {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
 		String user_id = (String) session.getAttribute("id");
-		int admin = memberService.queryById(user_id).getAdminCk(); 
-		session.setAttribute("adminCheck", admin); 
-		Boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
-		Boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
+		String user_profile = memberService.profileImg(user_id);
+		
+		boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
+		boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
+		
 		if(likes==false) {
 			mav.addObject("likes", "false");
 		} else {
@@ -295,11 +302,19 @@ public class TodayController {
 		    
 		    System.out.println(page);
 		    
+		    todayService.updateTodayView(today_articleNo);
+		    Today posted = todayService.getTBoard(today_articleNo);
+			mav.addObject("id", user_id);
+			mav.addObject("todayInfo", posted);	
+			
+			ReplyInfo relyinfo = new ReplyInfo("today", today_articleNo);
+			List<Reply> replylist = replyService.replyList(relyinfo);
+			mav.addObject("replylist", replylist);	
+			mav.addObject("user_profile", user_profile);	
 		    
 			} catch(Exception e) {
 				e.printStackTrace();
 				mav.addObject("err", e.getMessage());
-				mav.setViewName("/err");
 			}
 		return mav;
 	}

@@ -99,7 +99,7 @@
 					<c:forEach var="route" items="${routelist}">
 					<tr>
 						<td>${route.route_articleNo}</td>
-	    				<td><a href="/route_post?route_articleNo=${route.route_articleNo}&page=1">${route.route_title}</a></td>
+	    				<td><a href="/routepost?articleNo=${route.route_articleNo}">${route.route_title}</a></td>
 		 				<td>${route.route_date}</td>
 					</tr>
 					</c:forEach>

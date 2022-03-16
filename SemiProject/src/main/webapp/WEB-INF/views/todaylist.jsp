@@ -99,7 +99,7 @@
 					<c:forEach var="today" items="${todaylist}">
 					<tr>
 						<td>${today.today_articleNo}</td>
-	    				<td><a href="/today_Result?today_articleNo=${today.today_articleNo}&page=1">${today.today_title}</a></td>
+	    				<td><a href="/today_select/${today.today_articleNo}">${today.today_title}</a></td>
 		 				<td>${today.today_date}</td>
 					</tr>
 					</c:forEach>
