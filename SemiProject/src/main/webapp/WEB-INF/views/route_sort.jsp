@@ -136,28 +136,28 @@
 			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
 			<c:choose>
 				<c:when test="${pageInfo.page<=1}">
-					[이전]&nbsp;
+					«&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="sortRoutes?page=${pageInfo.page-1}&&area=${area}&&distance_left=${distance_left}&&distance_right=${distance_right}">[이전]</a>&nbsp;
+					<a href="route?page=${pageInfo.page-1}">«&nbsp;</a>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
 					<c:when test="${pageInfo.page==i }">
-						[${i }]
+						${i}&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="sortRoutes?page=${i}&&area=${area}&&distance_left=${distance_left}&&distance_right=${distance_right}">[${i }]</a>
+						<a href="route?page=${i}">${i}&nbsp;</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[다음]
+					»&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="sortRoutes?page=${pageInfo.page+1}&&area=${area}&&distance_left=${distance_left}&&distance_right=${distance_right}">[다음]</a>
+					<a href="route?page=${pageInfo.page+1}">»&nbsp;</a>
 				</c:otherwise>
 			</c:choose>
 			</div>

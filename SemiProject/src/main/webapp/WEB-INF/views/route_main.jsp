@@ -104,31 +104,31 @@
 			<div id="pageList" style="text-align: center; margin-top:30px; margin-bottom :30px;">
 			<c:choose>
 				<c:when test="${pageInfo.page<=1}">
-					[이전]&nbsp;
+					«&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="route?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+					<a href="route?page=${pageInfo.page-1}">«&nbsp;</a>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<c:choose>
 					<c:when test="${pageInfo.page==i }">
-						[${i }]
+						${i}&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="route?page=${i}">[${i }]</a>
+						<a href="route?page=${i}">${i}&nbsp;</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[다음]
+					»&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="route?page=${pageInfo.page+1}">[다음]</a>
+					<a href="route?page=${pageInfo.page+1}">»&nbsp;</a>
 				</c:otherwise>
 			</c:choose>
-		</div>
+			</div>
 			</c:when>	
 			<c:otherwise>
 				<section id="emptyArea">등록된 글이 없습니다.</section>

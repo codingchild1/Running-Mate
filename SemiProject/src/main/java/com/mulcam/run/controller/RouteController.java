@@ -40,11 +40,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mulcam.run.dto.GroupAndMate;
 import com.mulcam.run.dto.Member;
 import com.mulcam.run.dto.PageInfo;
+import com.mulcam.run.dto.Reply;
+import com.mulcam.run.dto.ReplyInfo;
 import com.mulcam.run.dto.Route;
 import com.mulcam.run.dto.RouteInfo;
 import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MemberService;
+import com.mulcam.run.service.ReplyService;
 import com.mulcam.run.service.RouteService;
 
 
@@ -58,6 +61,9 @@ public class RouteController {
 	LikesService likesService;
 	@Autowired
 	AlertService alertService;
+	
+	@Autowired
+	ReplyService replyService;
 
 	@Autowired
 	MemberService memberService;
@@ -149,7 +155,13 @@ public class RouteController {
 			
 			routeService.updateRoutePostView(articleNo);
 			RouteInfo posted = routeService.getRouteInfo(articleNo);
+			mv.addObject("id", user_id);
 			mv.addObject("route", posted);	
+			
+			ReplyInfo relyinfo = new ReplyInfo("route", articleNo);
+			List<Reply> replylist = replyService.replyList(relyinfo);
+			mv.addObject("replylist", replylist);	
+			mv.addObject("user_profile", user_profile);	
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());

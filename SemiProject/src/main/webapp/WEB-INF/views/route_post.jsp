@@ -68,7 +68,7 @@
 			
 			<br>
 			<c:if test="${!empty id }">
-    			<span id="alerts" onclick=alert()>
+    			<span id="alerts" onclick=alerttab()>
 				<c:choose>
 					<c:when test="${alert eq true }"><span id="alert" style="float:right; padding-left:10px;">신고취소</span></c:when>
 					<c:when test="${alert eq false }"><span id="alert" style="float:right; padding-left:10px;">신고</span></c:when>
@@ -96,21 +96,135 @@
     	</div>
     	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
        		<div id="likes" onclick=changeImg() style="text-align:center;">	
-       			<c:if test="${!empty id }">
+       			<c:choose>
+       			<c:when test="${!empty id }">
 	    		<c:choose>
 					<c:when test="${likes eq true }"><img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " /></c:when>
 					<c:when test="${likes eq false }"><img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " /></c:when>
 				</c:choose>
-    			</c:if>	
+    			</c:when>
+    			<c:otherwise><img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
+    			</c:otherwise>
+				</c:choose><br>
+				${route.route_likes }
 			</div>
-			<br><hr>
+			<br>
 		</div>
 		<input type="hidden" id="distnace_info" value="${route.route_distance }">
 	</div>
 	</main>
 	
 	
+	<div class="container2" style="border: 1px gray">
+
+		<div class="card-header bg-light"><i class="fa fa-comment fa"></i> 댓글</div>
+		<div id="replylist" class="card-body">
+		<c:choose>
+			<c:when test="${replylist!=null}">
+				<c:forEach items="${replylist }" var="reply" varStatus="status">
+				<div id="reply" style="padding:1em 0 1em 0;">
+					<span class="reply"><img src="/profileview/${reply.user_img }"  style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">${reply.reply_id }</b></span>
+					<c:choose>
+					<c:when test="${id eq reply.reply_id }">
+						<span class="reply_delete" style="float:right; padding-left:15px;">삭제</span>
+						<span class="reply_modify" style="float:right; padding-left:10px;">수정</span>
+					</c:when>
+					</c:choose><br>
+					<textarea id="reply_text" style="width: 85%; height:auto; border:none; font-size: 15px; margin-left: 4.3em; background-color:white;" disabled >${reply.reply_content }</textarea>
+					<span class="reply_reg btn btn-light" style="float:right; display:none  margin-right:10%;">등록</span>
+					<br>
+					<span style="font-size: 10px; margin-left: 6.4em; color: gray">${reply.reply_date }</span>
+					<br><br><hr></hr>
+					<input type="hidden" class="reply_no" value="${reply.reply_no }"/>
+				</div>
+				</c:forEach>
+			</c:when>
+		</c:choose>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<div class="form-inline mb-2" style="margin-top: 2em;">
+						<img src="/profileview/${user_profile }" style="width: 20px; height: auto;">${id }
+					</div> 
+					<textarea id="reply_content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<button id="reply_button" class="btn btn-success" style="margin-top: 5px; ">등록</button>
+					<input id="reply_img" type="hidden" value="${user_profile }" >
+				</li>
+			</ul>
+		</div>
+		<input type="hidden" id="session_id" value="${id }">
+		<input type="hidden" id="reply_date" value="${reply.reply_date }">
+		
+	</div>
+	
 	<script>
+	$(function(){
+		$(".reply_modify").click(function(){
+			if($(this).parent().children(".reply_modify").html()=="수정"){
+				$(this).parent().children(".reply_modify").html("수정취소");	
+			} else if($(this).parent().children(".reply_modify").html()=="수정취소"){
+				$(this).parent().children(".reply_modify").html("수정");	
+			} 	
+		});
+		
+		$(".reply_delete").click(function(){
+			alert = confirm('댓글을 정말 삭제하시겠습니까?');
+			if(alert==true){
+				$.ajax({
+					type:"post",
+					url:"http://localhost:8090/replydelete",
+					data: {"reply_no" : $(this).parent().children("input").val() },
+					dataType:"text",
+					success:function(data){				
+					}
+				});		
+				location.href="routepost?articleNo=" + ${route.route_articleNo};
+			}
+			else return false;
+		});
+				
+		$("#reply_content").click(function(){
+			var login = '<c:out value="${id}"/>';
+			if(login==""){
+				alert("로그인 후 사용 가능한 서비스입니다!");
+			}
+		});
+		$("#reply_button").click(function(){
+			var login = '<c:out value="${id}"/>';
+			if(login==""){
+				alert("로그인 후 사용 가능한 서비스입니다!");
+				return false;
+			}else{
+				$.ajax({
+					type:"post",
+					url:"http://localhost:8090/reply",
+					data: {"board_type": "route", "board_no" : ${route.route_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
+					dataType:"text",
+					success:function(data){				
+					}
+				});		
+				location.href="routepost?articleNo=" + ${route.route_articleNo};
+			}
+			
+		});
+
+	});
+	</script>
+	
+	<script>
+	/*
+	function addReply(){
+		$.ajax({
+			type:"post",
+			url:"http://localhost:8090/reply",
+			data: {"board_type": "route", "board_no" : ${route.route_articleNo}, "reply_id": ${id }, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
+			dataType:"text",
+			success:function(data){				
+			}
+		});		
+		
+		location.href="routepost?articleNo=" + ${route.route_articleNo};
+	}
+	*/
 	function deleteArticle(){
 		alert = confirm('게시글을 정말 삭제하시겠습니까?');
 		if(alert==true){
@@ -133,7 +247,7 @@
 			}
 		});			 
 	}
-	function alert(){
+	function alerttab(){
 		var alert;
 		if($("#alerts span").html() == "신고"){
 			 alert = confirm('정말 게시글을 신고하시겠습니까?');
@@ -220,29 +334,8 @@
     			}
     		]
     	});
-    	map.addControl(draw);
-    	
-    	//var distance= $("#distnace_info").val();
-    	//const directions = document.getElementById('directions');
-    	//directions.innerHTML = `<p><strong>Trip duration: min.</strong></p>`;
-    	
+    	map.addControl(draw);    	
 	});
-	
-	function getInstructions(data) {
-		// Target the sidebar to add the instructions
-		const directions = document.getElementById('directions');
-		let tripDirections = '';
-		// Output the instructions for each step of each leg in the response object
-		for (const leg of data.legs) {
-		const steps = leg.steps;
-		for (const step of steps) {
-		tripDirections += `<li>${step.maneuver.instruction}</li>`;
-		}
-		}
-		directions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
-		data.duration / 60
-		)} min.</strong></p><ol>${tripDirections}</ol>`;
-		}
 	</script>
 	
 
