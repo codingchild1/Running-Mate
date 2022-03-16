@@ -77,6 +77,9 @@
 			<c:if test="${!empty id }">
     			<span id="alerts" onclick=alerttab()>
 				<c:choose>
+				<c:when test="${id eq route.user_id || adminCheck eq 1}">
+							<span id="alert"></span>
+						</c:when>
 					<c:when test="${alert eq true }"><span id="alert" style="float:right; padding-left:10px; cursor: pointer;">신고취소</span></c:when>
 					<c:when test="${alert eq false }"><span id="alert" style="float:right; padding-left:10px; cursor: pointer;">신고</span></c:when>
 				</c:choose>

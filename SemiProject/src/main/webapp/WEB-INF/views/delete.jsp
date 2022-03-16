@@ -161,7 +161,7 @@ a:active {
     	<form name="deleteform" method="post" class="form4" action="delete" onsubmit="return checkValue()">
                 <h2>회원 탈퇴</h2>
                 <div class="textForm">
-               		 <input type="password" id="password" class="password" name="password">
+               		 <input type="password" id="password" class="password" name="password" placeholder="비밀번호를 입력하세요">
                 </div>
 		        <input type="submit" id="submit" value="탈퇴" /> 
 		        <input type="button" id="submit" value="취소" onclick="location.href='mypage'" />
