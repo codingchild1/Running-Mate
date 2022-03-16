@@ -8,6 +8,119 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	#modal.modal-overlay {
+	z-index: 8;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* background: rgba(255, 255, 255, 0.25); */
+	/* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+	/* backdrop-filter: blur(1.5px); */
+	/* -webkit-backdrop-filter: blur(1.5px); */
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	display: none;
+}
+ .ptplist {
+	display: none;
+} 
+ .info:hover .ptplist {
+	display: block;
+} 
+#modal .modal-window {
+	background: #d3d3d3;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(50px);
+	/* backdrop-filter: none; */
+	-webkit-backdrop-filter: blur(13.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	width: 400px;
+	/* height: 576px; */
+	/* position: relative; */
+	top: -100px;
+	padding: 15px;
+}
+#modal .title {
+	padding-left: 10px;
+	display: inline;
+	text-shadow: 1px 1px 2px gray;
+	color: white;
+}
+#modal .title h2 {
+	display: inline;
+}
+#modal .close-area {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	text-shadow: 1px 1px 2px gray;
+	color: black;
+}
+#modal .content {
+	padding: 0px 10px;
+}
+#modal2.modal-overlay {
+	z-index: 8;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	display: none;
+}
+#modal2 .modal-window {
+	background: #d3d3d3;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(50px);
+	-webkit-backdrop-filter: blur(13.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	width: 400px;
+	/* height: 542px; */
+	/* position: relative; */
+	top: -100px;
+	padding: 15px;
+}
+#modal2 .title {
+	padding-left: 10px;
+	display: inline;
+	text-shadow: 1px 1px 2px gray;
+	color: white;
+}
+#modal2 .title h2 {
+	display: inline;
+}
+#modal2 .close-area {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	text-shadow: 1px 1px 2px gray;
+	color: black;
+}
+#modal2 .content {
+	/* margin-top: 20px; */
+	padding: 0px 10px;
+/* 	text-shadow: 1px 1px 2px gray;
+	color: white; */
+}
+
+	</style>
 <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Latest compiled JavaScript -->
@@ -137,7 +250,7 @@
 	 			<td scope="row"><a href="/fb_detail?fb_articleNo=${warning.boardno}&page=1">${warning.boardtype}</a></td>
 	 			</c:when>
 	 			<c:otherwise>
-	 			<td scope="row"><a href="#">${warning.boardtype}</a></td>
+	 			<td scope="row"><a href="#" onclick="detailModal('${groupandmate.no}','${groupandmate.type }')">${warning.boardtype}</a></td>
 	 			</c:otherwise>
 	 			</c:choose>
 	 			<td scope="row">${warning.warningdate}</td>
@@ -148,7 +261,7 @@
 </c:choose>	 
 </table>
 <form>
-	<input type="button" class="btn btn-success" value="삭제" onclick="deleteValue();" />
+	<input type="button" class="btn btn-success" value="처리" onclick="deleteValue();" />
 </form>
 </div>
 
