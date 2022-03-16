@@ -171,7 +171,7 @@ a {
 
 	<Section class="top">
 		<div class="container2">
-			<h2>게시글 목록</h2>
+			<div class="d-flex justify-content-center"><h2>게시글 목록</h2></div>
 			<c:choose>
 				<c:when test="${articleList!=null && pageInfo.listCount>0 }">
 					<table class="board_list">
@@ -233,7 +233,7 @@ a {
 					</section>
 				</c:when>
 				<c:otherwise>
-					<section id="emptyArea">등록된 글이 없습니다.</section>
+					<section id="emptyArea" style="text-align: center;">등록된 글이 없습니다.</section>
 				</c:otherwise>
 			</c:choose>
 			
