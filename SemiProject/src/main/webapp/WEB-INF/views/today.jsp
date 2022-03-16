@@ -7,18 +7,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<!-- <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"> -->
+
 	
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<title>Insert title here</title>
+<title>오늘의러닝</title>
 
 <style>
 .profile {
@@ -157,7 +160,7 @@ body {
 										</header>
 
 										<!--타이틀-->
-										<input class="todaytitle" id="today_title" style="text-overflow: ellipsis; border:none; width:150px;" value="${tboard.today_title }" disabled>
+										<input class="todaytitle" id="today_title" style="text-overflow: ellipsis; border:none; width:150px; background-color:white;" value="${tboard.today_title }" disabled>
 										<!--썸s네일-->
 										<div class="bg-white">
 													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
@@ -221,7 +224,7 @@ body {
 		</div>
 	<br>	<br>	<br>
 	
-		
+	
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 	//console.log(${pageInfo.page});
