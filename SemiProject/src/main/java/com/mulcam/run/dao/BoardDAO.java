@@ -20,6 +20,7 @@ public interface BoardDAO {
 	Board selectBoard(int fb_articleNo) throws Exception;			// 상세페이지
 	void updateReadCount(int fb_views) throws Exception;		// 조회수
 	void deleteBoard(int fb_articleNo) throws Exception;	//삭제
+	void deleteBoard2(int fb_articleNo) throws Exception;	//좋아요 삭제
 	List<Today> bestrun() throws Exception;			// 최고의 러너
 	List<GroupAndMate> materun() throws Exception;			// 메인페이지 번개 모임
 	

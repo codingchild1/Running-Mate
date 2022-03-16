@@ -309,7 +309,7 @@ function alert(){
 		$.ajax({
 			type:"post",
 			url:"http://localhost:8090/alert",
-			data: {"user_id": $("#user_id").text(), "board_type" : "today_select", "board_no": ${todayselect.today_articleNo}},
+			data: {"user_id": $("#user_id").val(), "board_type" : "today", "board_no": ${todayselect.today_articleNo}},
 			dataType:"text",
 			success:function(data){
 				if(data=="true"){

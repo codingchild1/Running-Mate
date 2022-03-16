@@ -118,6 +118,12 @@
 		]]>
 	</delete>
 	
+	<delete id="deleteRoute2" parameterType="int">
+		<![CDATA[
+			delete from likes where board_type = 'route' and board_no =#{article_No};
+		]]>
+	</delete>
+	
 	<!-- warning update to true -->
 	<update id="routeWarning" parameterType="int">
 		<![CDATA[
