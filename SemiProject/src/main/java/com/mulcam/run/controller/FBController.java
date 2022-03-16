@@ -144,7 +144,7 @@ public class FBController {
 			mv.setViewName("/fb_detail");
 		} catch(Exception e) {
 			e.printStackTrace();
-			mv.addObject("err", e.getMessage());
+			mv.addObject("err", "로그인이 필요한 기능입니다.");
 			mv.setViewName("/err");
 		}
 		return mv;
