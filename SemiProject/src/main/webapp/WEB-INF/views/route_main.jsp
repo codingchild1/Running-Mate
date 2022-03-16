@@ -73,7 +73,7 @@
 					<a href="routepost?articleNo=${route.route_articleNo}">
 					<div id="route_mini" class="route_mini">
             			<div id="route_miniHeader" class="route_miniHeader">
-                			<img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile">
+                			<img src="/profileview/${route.memberthumb }" style="width:27px; height:27px; border-radius:70%;" onerror="this.src='/profile/profile.png'" id="userImage" class="userProfile">
                 			<span id="route_userName">${route.user_id }</span>
                 			<span id="route_uploadTime" style="float:right;">${route.route_date }</span> 
            				 </div>

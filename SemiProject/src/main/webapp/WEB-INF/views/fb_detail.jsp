@@ -71,8 +71,8 @@ li {
 			
 				<h2>${article.fb_title }</h2>
 				<div class="detail_writer">
-					<a href="#"><img src="${article.user_img }" width="20px;"
-						height="20px" alt="" />${article.writer }</a>
+					<a href="#"><img src="${article.user_img }" 
+					style="width:27px; height:27px; border-radius:70%;" alt="" onerror="this.src='/profile/profile.png'" /> ${article.writer }</a>
 				</div>
 				<input type="hidden" id="articleWriter" value="${article.writer }">
 				<div class="modify">

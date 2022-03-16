@@ -63,7 +63,7 @@
 		<div class="container2">
 		<form id="route_modify" action="/route_modify" method="post" enctype="multipart/form-data">
 			<div id="user_info" class="user_info">
-				<div class="thumbBox"><img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile"></div>
+				<div class="thumbBox"><img src="/profileview/${route.memberthumb }" id="userImage" class="userProfile" style="width:30px; height:30px; border-radius:70%;" onerror="this.src='/profile/profile.png'" /></div>
 				<div id="user_id" class="user_id">${route.user_id}</div>
 			</div>
 			<input type="text" id="route_title" name="route_title" class="form-control mt-1 route_title" value="${route.route_title} "/><br>

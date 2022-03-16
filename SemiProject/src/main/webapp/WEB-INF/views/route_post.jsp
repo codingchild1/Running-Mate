@@ -59,7 +59,7 @@
         
         <div id="routeboardHeader" class="routeboardHeader">
         	<input type="text" id="route_title" name="route_title" class="route_title" value="${route.route_title}" disabled/>
-        	<img src="/profileview/${route.memberthumb }" class="userProfile">
+        	<img src="/profileview/${route.memberthumb }" class="userProfile" style="width:27px; height:27px; border-radius:70%;" onerror="this.src='/profile/profile.png'" />
 			<span id="user_id" class="user_id">${route.user_id }</span>
 			<c:if test= "${id eq route.user_id || adminCheck eq 1}">
 				<span id="delete" onclick=deleteArticle() style="float:right; padding-left:10px;">삭제</span>
