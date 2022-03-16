@@ -246,7 +246,7 @@ a {
 					    <option value="fb_content">내용</option>
 					</select>
 					<input type="text" name="keyword" placeholder="검색어를 입력하세요" style="margin-left: 10px;">
-					<input type="submit" value="검색" style="margin-left: 10px;">
+					<input type="submit" value="검색" style="margin-left: 10px;background-color: #59ab6e;color: white;border: 1px solid #59ab6e">
 					</div>
 				</form>
 			</div>
