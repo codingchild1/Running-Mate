@@ -67,6 +67,7 @@
  		display: inline-block;
  	 	margin: 10px 5% 10px 4%;
  	} 					
+<<<<<<< HEAD
  /* footer */
 
 
@@ -182,6 +183,9 @@ footer p span {
 a {
   text-decoration-line: none;
   }
+=======
+ 
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 	</style>
 
 </head>
@@ -201,7 +205,7 @@ a {
 				<div class="row">
 					<div class="container fluid">
 						<div style="display: flex; align-items: center;">
-							<span><img class="userProfile" src='/profileview/${profileImg }'></span>
+							<span><img class="userProfile" src='/profileview/${profileImg }' onerror="this.src='/profile/profile.png'"></span>
 							<span><input type="text" id="user_id" name="user_id" value='${todayselect.user_id}' style="height: 20px; border: none; background-color: white;"disabled></span>
 						</div>
 						<input name="articleNo" id="today_articleNo" type="hidden"value='${todayselect.today_articleNo}'>
@@ -282,7 +286,11 @@ a {
 							</td>
 						</tr>
 					</table>
+<<<<<<< HEAD
 				
+=======
+				</div>
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -398,7 +406,7 @@ a {
  	    }
  	    
 	    $('#today_delete').click(function (event) {
-			let message = confirm('삭제하시겠습니까?');
+			let messagce = confirm('삭제하시겠습니까?');
 			if(message == false){ 
 				return;
 			}
@@ -422,6 +430,7 @@ a {
  	});
 	      
 	</script>
+	
 		
 <%-- <%@include file="fotter.jsp"%>  --%>
 

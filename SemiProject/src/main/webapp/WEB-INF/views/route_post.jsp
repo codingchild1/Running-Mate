@@ -59,7 +59,7 @@
         
         <div id="routeboardHeader" class="routeboardHeader">
         	<input type="text" id="route_title" name="route_title" class="route_title" value="${route.route_title}" disabled/>
-        	<img src="/profileview/${route.memberthumb }" class="userProfile">
+        	<img src="/profileview/${route.memberthumb }" class="userProfile" style="width:27px; height:27px; border-radius:70%;" onerror="this.src='/profile/profile.png'" />
 			<span id="user_id" class="user_id">${route.user_id }</span>
 			<c:if test= "${id eq route.user_id || adminCheck eq 1}">
 				<span id="delete" onclick=deleteArticle() style="float:right; padding-left:10px;">삭제</span>
@@ -96,7 +96,7 @@
 			
     	</div><br><br>
     	</div>
-    	<div id="routeboardFooter" class="routeboardFooter" style="display:block;">
+    	<div id="routeboardFooter" style="display:block;">
        		<div id="likes" onclick=changeImg() style="text-align:center;">	
        			<c:choose>
        			<c:when test="${!empty id }">
@@ -163,12 +163,16 @@
 	$(function(){
 		$(".reply_modify").click(function(){
 			if($(this).parent().children(".reply_modify").html()=="수정"){
+				content = $(this).parent().children("textarea").val();
 				$(this).parent().children(".reply_modify").html("수정취소");	
 				$(this).parent().children(".reply_reg").show();
 				$(this).parent().children("textarea").attr("disabled", false);
 			} else if($(this).parent().children(".reply_modify").html()=="수정취소"){
+				$(this).parent().children("textarea").value ='';
+				//$(this).parent().children("textarea").value = content;
 				$(this).parent().children(".reply_modify").html("수정");	
 				$(this).parent().children(".reply_reg").hide();
+				$(this).parent().children("textarea").attr("disabled", true);
 			} 	
 		});
 		

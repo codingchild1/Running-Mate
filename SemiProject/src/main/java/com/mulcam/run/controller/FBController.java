@@ -32,10 +32,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mulcam.run.dto.Board;
 import com.mulcam.run.dto.PageInfo;
+import com.mulcam.run.dto.Reply;
+import com.mulcam.run.dto.ReplyInfo;
 import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.BoardService;
 import com.mulcam.run.service.LikesService;
 import com.mulcam.run.service.MemberService;
+import com.mulcam.run.service.ReplyService;
 
 @Controller
 @RequestMapping("/")
@@ -61,6 +64,9 @@ public class FBController {
 
 	@Autowired
 	LikesService likesService;
+	
+	@Autowired
+	ReplyService replyService;
 	
 	@GetMapping("/fb_result")
 	public ModelAndView SearchList(@RequestParam String column, @RequestParam String keyword, @RequestParam(value="page",required=false, defaultValue = "1") int page) {
@@ -110,6 +116,7 @@ public class FBController {
 		try {
 			Board board = boardService.getBoard(fb_articleNo);
 			String writer = (String) session.getAttribute("id");
+			
 			int admin = memberService.queryById(writer).getAdminCk();
 			session.setAttribute("adminCheck", admin);
 			boolean likes = likesService.getLikesTF(writer, "article", fb_articleNo);
@@ -127,6 +134,12 @@ public class FBController {
 			mv.addObject("user_id", writer);
 			mv.addObject("article", board);
 			mv.addObject("page", page);
+			
+			ReplyInfo relyinfo = new ReplyInfo("freeboard", fb_articleNo);
+			List<Reply> replylist = replyService.replyList(relyinfo);
+			mv.addObject("replylist", replylist);	
+			mv.addObject("user_profile", writer);	
+			
 			mv.setViewName("/fb_detail");
 		} catch(Exception e) {
 			e.printStackTrace();
