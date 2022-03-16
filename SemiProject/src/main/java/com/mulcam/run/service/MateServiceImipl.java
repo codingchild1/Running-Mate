@@ -224,5 +224,10 @@ public class MateServiceImipl implements MateService {
 		return mateDAO.matewrite(mypageinfo);
 	}
 
+	@Override
+	public List<GroupAndMate> mateList2() throws Exception {
+		return mateDAO.matewrite2();
+	}
+
 }
 

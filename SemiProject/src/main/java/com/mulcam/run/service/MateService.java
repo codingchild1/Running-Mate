@@ -58,4 +58,5 @@ public interface MateService{
 	
 	//내가 쓴 글 가지고 오기
 	public List<GroupAndMate> mateList(String id, int page, PageInfo pageInfo) throws Exception;
+	public List<GroupAndMate> mateList2() throws Exception;
 }

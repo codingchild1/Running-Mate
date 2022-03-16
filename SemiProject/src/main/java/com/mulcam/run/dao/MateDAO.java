@@ -65,4 +65,5 @@ public interface MateDAO {
 	//내가 쓴 글
 	public int mateListCount(String id);
 	public List<GroupAndMate> matewrite(MyBoard boardinfo);
+	public List<GroupAndMate> matewrite2();
 }

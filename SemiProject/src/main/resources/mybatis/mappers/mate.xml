@@ -265,6 +265,16 @@
 			where id =#{id} order by regdate desc limit #{startrow}, 10
 		]]>
 	</select>
+	
+		<select id="matewrite2" resultType="GroupAndMate" >
+		<![CDATA[
+			select * from 
+			((select group_articleNO as no,user_id as id, user_img as img, group_title as title,group_area as mapinfo,warning as warning,group_date as regdate,0 as likeno, 'g' as type from group1)
+			union
+			(select mate_articleNO as no,user_id as id, user_img as img, mate_title as title,mate_mapinfo as mapinfo,warning as warning,mate_date as regdate,mate_like as likeno, 'm' as type from mate)) temp
+			order by regdate desc 
+		]]>
+	</select>
 
 </mapper>
 
