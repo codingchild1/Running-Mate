@@ -113,7 +113,7 @@
 				<ul>
 					<li><a href="mypage">회원 수정</a></li>
 					<li><a href="changepw">비밀번호 변경</a></li>
-					<li><a href="fblist">내가 쓴 글</a></li>
+					<li><a href="todaylist">내가 쓴 글</a></li>
 					<li><a href="delete"><b>회원 탈퇴</b></a></li>
 				</ul>
 			</div>

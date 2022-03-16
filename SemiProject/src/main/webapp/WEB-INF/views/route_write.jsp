@@ -90,7 +90,7 @@
 			<input type="hidden" id="route_distance" name="route_distance">
 			
 			<div class="buttons">
-				<button id="submit" class="btn btn-dark eachbutton" >수정</button>
+				<button id="submit" class="btn btn-dark eachbutton" >확인</button>
 				<button id="reset" type="reset" class="btn btn-dark eachbutton" >취소</button>
 			</div>
 		</form>

@@ -269,7 +269,8 @@ public class TodayController {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
 		String user_id = (String) session.getAttribute("id");
-	
+		int admin = memberService.queryById(user_id).getAdminCk();
+		session.setAttribute("adminCheck", admin);
 		Boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
 		Boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
 		if(likes==false) {

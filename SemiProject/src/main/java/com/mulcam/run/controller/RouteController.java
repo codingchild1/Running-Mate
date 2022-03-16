@@ -140,6 +140,8 @@ public class RouteController {
 		try {
 			String user_id = (String) session.getAttribute("id");
 			String user_profile = memberService.profileImg(user_id);
+			int admin = memberService.queryById(user_id).getAdminCk();
+			session.setAttribute("adminCheck", admin);
 			boolean likes = likesService.getLikesTF(user_id, "route", articleNo);
 			boolean alert = alertService.getAlertTF(user_id, "route", articleNo);
 			if(likes==false) {
