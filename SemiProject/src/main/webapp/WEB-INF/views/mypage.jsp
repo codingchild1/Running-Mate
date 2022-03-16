@@ -85,22 +85,62 @@
 	  background: none;
 	}		
 
-	.post li {
-		float: left;
-		margin: 10px;
-		list-style: none;
-	}
-	.post {
-		position: absolute;
-		left: 25%;
-		width: 1000px;
-		margin-top: 51px;
-		justify-content: space-between;
-	}
-	ul li a {
-		text-decoration-line: none;
-		color: black;
-	}
+		.post {
+	text-align: center;
+}
+
+.get {
+	text-align: center;
+	font-size: 13px;
+	margin: 10px;
+}
+
+ul li a {
+	text-decoration-line: none;
+	color: black;
+}
+
+table {
+	width: 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-bottom: 1px solid #444444;
+}
+
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+.no {
+	width: 60%;
+	margin-left: 20%
+}
+
+a {
+	text-decoration: none !important;
+}
+
+a:link {
+	color: black;
+}
+
+a:visited {
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+a:active {
+	color: black
+}
+
+.postbtn {
+	padding-left: 5px;
+	padding-right: 5px;
+}
 	#submit {
 		  position:relative;
 		  left:21%;
@@ -170,14 +210,15 @@
 		<header>
 			<%@include file ="header.jsp" %>
 		</header>
+			<div style="width: 100%; margin-top: 5em;">
 			<div class="post">
-				<ul>
-					<li><a href="mypage"><b>회원 수정</b></a></li>
-					<li><a href="changepw">비밀번호 변경</a></li>
-					<li><a href="todaylist">내가 쓴 글</a></li>
-					<li><a href="delete">회원 탈퇴</a></li>
-				</ul>
-			</div>
+			<span> <span class="postbtn"><a href="mypage">회원 수정</a></span>
+				<span class="postbtn"><a href="changepw">비밀번호 변경</a></span> <span
+				class="postbtn"><a href="fblist"><b>내가 쓴 글</b></a></span> <span
+				class="postbtn"><a href="delete">회원 탈퇴</a></span>
+			</span>
+		</div>
+		</div>
 			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
 				<input type="hidden" value="1" id="fileChange" name="fileChange" />
 				<h2>회원 정보 수정</h2>
