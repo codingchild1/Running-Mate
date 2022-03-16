@@ -88,8 +88,6 @@
                 			<div id="route_miniFooterLeft" class="route_miniFooter" >
                     			<img src="${pageContext.request.contextPath }/images/like.PNG" class="userProfile" />
                     			<span id="route_likes">${route.route_likes }</span>
-                    			<img src="${pageContext.request.contextPath }/images/reply.PNG" class="userProfile" />
-                   				<span id="route_Replies">4</span>
                 			</div>
                	 			<div id="route_miniFooterRight" class="route_miniFooter" style="float:right;" >
                     			<span>조회</span>
