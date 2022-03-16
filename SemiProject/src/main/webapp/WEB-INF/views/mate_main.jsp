@@ -76,7 +76,7 @@ button a {
 	display: none;
 }
  .ptplist {
-	display: none;
+	 display: none; 
 } 
  .info:hover .ptplist {
 	display: block;
