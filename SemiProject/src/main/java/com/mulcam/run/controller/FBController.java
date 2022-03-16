@@ -116,6 +116,7 @@ public class FBController {
 		try {
 			Board board = boardService.getBoard(fb_articleNo);
 			String writer = (String) session.getAttribute("id");
+			String user_profile = memberService.profileImg(writer);
 			
 			int admin = memberService.queryById(writer).getAdminCk();
 			session.setAttribute("adminCheck", admin);
@@ -138,7 +139,7 @@ public class FBController {
 			ReplyInfo relyinfo = new ReplyInfo("freeboard", fb_articleNo);
 			List<Reply> replylist = replyService.replyList(relyinfo);
 			mv.addObject("replylist", replylist);	
-			mv.addObject("user_profile", writer);	
+			mv.addObject("user_profile", user_profile);	
 			
 			mv.setViewName("/fb_detail");
 		} catch(Exception e) {
