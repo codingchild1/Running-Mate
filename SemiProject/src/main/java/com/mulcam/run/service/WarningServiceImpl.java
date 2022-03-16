@@ -54,6 +54,10 @@ public class WarningServiceImpl implements WarningService {
 			if(warningcnt<1) warningDAO.deleteWarning(warning);
 		}
 	}
+
+
+
+
 	
 	
 }
