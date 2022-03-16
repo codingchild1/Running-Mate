@@ -324,25 +324,28 @@ $(function() {
     }
 	      
     $('#today_delete').click(function (event) {
-		let messagce = confirm('삭제하시겠습니까?');
+		let message = confirm('삭제하시겠습니까?');
 		if(message == false){ 
 			return;
 		}
+		else{
+			alert(${todayselect.today_articleNo});
+			$.ajax({     
+	        	type:"post",
+	        	dataType:"text",
+	        	async:false,
+	        	url:"http://localhost:8090/today_delete",
+	        	data:{"articleNo":${todayselect.today_articleNo}},
+	        	success: function(data, textStatus){ 
+	        		alert(data);
+	        			location.href="/today";
+	        	},
+	        	error:function(data, textStatus){
+	        		alert(data);
+	        	}
+	        }); 
+		}
 		
-		$.ajax({     
-        	type:"post",
-        	dataType:"text",
-        	async:false,
-        	url:"http://localhost:8090/today_delete",
-        	data:{"articleNo":${todayselect.today_articleNo}},
-        	success: function(data, textStatus){ 
-        		alert(data);
-        			location.href="/today";
-        	},
-        	error:function(data, textStatus){
-        		alert(data);
-        	}
-        }); 
 	});
 });
 </script>	
