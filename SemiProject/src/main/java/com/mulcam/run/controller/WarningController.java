@@ -19,12 +19,6 @@ public class WarningController {
 	@Autowired
 	WarningService warningService;
 	
-	@GetMapping(value="warninglist")
-	public String warningList(Model model) throws Exception {
-		List<Warning> warninglist = warningService.AllWarninglist();
-		model.addAttribute("warninglist", warninglist);
-		return "warninglist";
-	}
 	
 	@RequestMapping(value="/warningdelete", method={RequestMethod.GET, RequestMethod.POST})
 	public String deletewarning(HttpServletRequest request) {
@@ -36,4 +30,19 @@ public class WarningController {
 		}
 		return "redirect:warninglist";
 	}
+	
+	@RequestMapping(value="/warninglist", method= {RequestMethod.GET, RequestMethod.POST})
+	public String todayList(Model model) {
+		String id = (String) session.getAttribute("id");
+		try {
+			List<Warning> warninglist = warningService.AllWarninglist();
+			model.addAttribute("warninglist", warninglist);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("warninglist", null);
+		}
+		return "warninglist";
+	}
+	
 }

@@ -126,7 +126,20 @@
 			<tr class="table-active">
 				<td scope="row"><input type="checkbox" name="RowCheck" value="${warning.warningid}"/></td>
     			<td scope="row">${warning.warningid}</td>
-	 			<td scope="row"><a href="http://www.naver.com">${warning.boardtype}</a></td>
+    			<c:choose>
+    			<c:when test="${warning.boardtype eq 'today'}">
+	 			<td scope="row"><a href="/today_select/${warning.boardno}">${warning.boardtype}</a></td>
+	 			</c:when>
+	 			<c:when test="${warning.boardtype eq 'route'}">
+	 			<td scope="row"><a href="/routepost?articleNo=${warning.boardno}">${warning.boardtype}</a></td>
+	 			</c:when>
+	 			<c:when test="${warning.boardtype eq 'article'}">
+	 			<td scope="row"><a href="/fb_detail?fb_articleNo=${warning.boardno}&page=1">${warning.boardtype}</a></td>
+	 			</c:when>
+	 			<c:otherwise>
+	 			<td scope="row"><a href="#">${warning.boardtype}</a></td>
+	 			</c:otherwise>
+	 			</c:choose>
 	 			<td scope="row">${warning.warningdate}</td>
 	 			<td scope="row">${warning.warningcnt}</td>
 			</tr>
@@ -138,5 +151,6 @@
 	<input type="button" class="btn btn-success" value="삭제" onclick="deleteValue();" />
 </form>
 </div>
+
 </body>
 </html>
