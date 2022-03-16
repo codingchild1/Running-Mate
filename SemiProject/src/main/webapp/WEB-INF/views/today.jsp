@@ -160,7 +160,7 @@ body {
 										</header>
 
 										<!--타이틀-->
-										<input class="todaytitle" id="today_title" style="text-overflow: ellipsis; border:none; width:150px;" value="${tboard.today_title }" disabled>
+										<input class="todaytitle" id="today_title" style="text-overflow: ellipsis; border:none; width:150px; background-color:white;" value="${tboard.today_title }" disabled>
 										<!--썸s네일-->
 										<div class="bg-white">
 													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
