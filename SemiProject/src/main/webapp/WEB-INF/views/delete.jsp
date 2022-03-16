@@ -153,8 +153,8 @@ a:active {
 			<div class="post">
 			<span> <span class="postbtn"><a href="mypage">회원 수정</a></span>
 				<span class="postbtn"><a href="changepw">비밀번호 변경</a></span> <span
-				class="postbtn"><a href="fblist"><b>내가 쓴 글</b></a></span> <span
-				class="postbtn"><a href="delete">회원 탈퇴</a></span>
+				class="postbtn"><a href="fblist">내가 쓴 글</a></span> <span
+				class="postbtn"><a href="delete"><b>회원 탈퇴</b></a></span>
 			</span>
 		</div>
 		</div>
