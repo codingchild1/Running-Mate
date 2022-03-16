@@ -8,37 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-
-<link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-<link rel="shortcut icon" type="image/x-icon"
-	href="assets/img/favicon.ico">
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet" />
-
-
-<!-- Load fonts style after rendering the layout styles -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-
-<!-- Latest compiled and minified CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
-
-<!-- Latest compiled JavaScript -->
+	
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/templatemo.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<title>러닝메이트</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<title>오늘의러닝</title>
 
 <style>
 main, header, section {
