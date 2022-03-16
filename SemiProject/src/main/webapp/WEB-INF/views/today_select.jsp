@@ -420,7 +420,7 @@ $(function(){
 	      		window.editor=editor;
 	      	}).catch((error) => {
 				console.error(error);
-				});
+			});
     } else {
     	$('#today_title').attr('readOnly', true);
     	$('#today_file').attr('disabled', 'disabled'); 	    		 
@@ -430,8 +430,8 @@ $(function(){
   	       		uploadUrl : "/upload"
   	        }
   		}).then(editor=> {
-   		editor.ui.view.toolbar.element.style.display = 'none';
-  		}
+   			editor.ui.view.toolbar.element.style.display = 'none';
+  		})
 	}
 	      
     $('#today_delete').click(function (event) {
@@ -456,7 +456,6 @@ $(function(){
 	        	}
 	        }); 
 		}
-		
 	});
 
 });
