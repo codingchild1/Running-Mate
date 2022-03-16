@@ -16,10 +16,9 @@
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
     
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 <title>오늘의러닝</title>
 
 <style>
@@ -104,9 +103,9 @@ height:400px;
 					</table> --%>
 					
 					<div style="display: flex; margin-left:330px; align-items: center;">
-					<span><img class="userProfile" src='/profileview/${user_img2 }'id="user_img2" name="user_img2" onerror="this.src='/profile/profile.png'"></span>
+					<span><img class="userProfile" src='/profileview/${user_img2 }'id="user_img2" name="user_img2"></span>
 						<input type="hidden"name="user_img" id="user_img" value=''>
-					 <span><input type="text" id="user_id" name="user_id" value='${wirte_id}'style="height: 20px; border: none; background-color: white;"disabled></span>
+					<span><input type="text" id="user_id" name="user_id" value='${wirte_id}'style="height: 20px; border: none; background-color: white;"disabled></span>
 						<input type="hidden" id="user_id"name="user_id" value='${wirte_id}'>
 				</div>
 			<!--------------------------------------------------게시글 ---------------------------- -->
@@ -153,9 +152,8 @@ height:400px;
 			</main>
 		</div>
 	</div>
+<%@include file="fotter.jsp"%>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 	<script> 
 	
 	 //목록 버튼
@@ -190,6 +188,5 @@ height:400px;
 	}); */
 	
 </script>
-<%@include file="fotter.jsp"%>
 </body>
 </html>

@@ -100,7 +100,7 @@ body {
 </head>
 <body>
 	<%@include file="header.jsp"%>
-	<%@include file="slides.jsp"%>
+	<%@include file="slides.jsp"%> 
 		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
 
 		<div class="outer">
@@ -166,13 +166,13 @@ body {
 										</div>
 
 										<!-- 조회, 좋아요, 숫자 -->
-										<div class="d-flex" ">
+										<div class="d-flex">
 											<span class="d-flex justify-content-start">
 												<img class="heart" src="images/하트.png" style="width: 30px; height: 30px;">
 											</span>
 											<span>
 												<input type="text" id="today_likes" value='${tboard.today_likes}'
-													style="width: 30px; display: inline-block; vertical-align: right; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
+													style="width:30px; display: inline-block; vertical-align: right; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
 													disabled>&nbsp&nbsp&nbsp&nbsp&nbsp
 											</span>
 											<span class="d-flex justify-content-end" id="today_views">${tboard.today_views}
@@ -226,16 +226,16 @@ body {
 	
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
-		$(document).ready(function(){
-			//console.log("${todayList[0].today_title}");
-			$('#todayMake').on('click',function(){
-				location.href="today_make";
+			$(document).ready(function(){
+				//console.log("${todayList[0].today_title}");
+				$('#todayMake').on('click',function(){
+					location.href="today_make";
+				});
+	
+	
 			});
-
-
-		});
-		
-	</script>
+			
+		</script>
 	 <%@include file ="fotter.jsp" %>
 </body>
 </html>

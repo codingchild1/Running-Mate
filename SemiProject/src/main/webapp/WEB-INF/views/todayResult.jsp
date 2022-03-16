@@ -8,20 +8,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-	
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/templatemo.css">
-    <link rel="stylesheet" href="/assets/css/custom.css">
+
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
     
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <title>오늘의러닝</title>
 
 <style>
+
 .profile {
 	width: 50px;
 	height: 50px;
@@ -95,44 +95,12 @@ body {
 }
 .userProfile { width:35px; height:35px; }
 
- #wrap {
-  padding-top: 10em;
-  position: relative;
-  width: 100%; 
-  background-color: #f2f2f2;
-}
 
-section {
-  padding-bottom: 105px;
-}
-
-footer {
-  width: 100%;
-  height: 90px;
-  bottom: 50px;
-  position: absolute;
-  padding-top: 15px;
-  color: #808080;
-  font-size: 15px;
-  text-align: center;
-}
-
-footer a {
-  display: inline-block;
-  margin: 0 20px 10px 20px;
-  color: #808080; 
-  font-size: 20px;  
-}
-
-footer p span {
-  display: inline-block;
-  margin-left: 20px;
-} 
 </style>
 </head>
 <body>
 	<%@include file="header.jsp"%>
-	<%-- <%@include file="slides.jsp"%>  --%>
+	<%@include file="slides.jsp"%> 
 		<!---------------헤더 : 오늘의런닝, 검색(formsearch), 글쓰기(button:todayMake)  -->
 
 		<div class="outer">
@@ -162,7 +130,7 @@ footer p span {
 					<td>
 					<c:choose>
 						<c:when test="${id!=null}">
-							<button id="todayMake" name="todayMake" type="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; height: 38px; margin-left: 5px; margin-top: 19px;">글쓰기</button>
+							<button id="todayMake" name="todayMake" type="submit" style="border: 1px solid #59ab6e; background-color: #59ab6e; border-radius: .25rem; color: white; height: 38px; margin-left: 5px; margin-top: 18px;">글쓰기</button>
 						</c:when>
 					</c:choose>						
 					</td></tr>
@@ -177,12 +145,12 @@ footer p span {
 						<div class="" id="container1"> 
 									<!--1행 1열-->
 									<c:forEach var="tboard" items="${todayList}">
-										<div class=" mycard" >
+										<div class=" mycard"	style="margin-bottom:40px;" >
 										<!-- 회원이미지, 아이디, 날짜/시간 -->
 										<header	class="">
 											<div class="">
 												<span class="col-lg">
-													<span><img  style="border-radius: 70%;" src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border"></span> <span id="user_id">${tboard.user_id}</span>
+													<span><img  style="border-radius: 70%;" src="/profileview/${profileImgMap[tboard.user_id]}" class="userProfile border" onerror="this.src='/profile/profile.png'" ></span> <span id="user_id">${tboard.user_id}</span>
 												</span>
 											</div>
 											<span class="" id="today_date">${tboard.today_date}</span>
@@ -190,11 +158,11 @@ footer p span {
 										</header>
 
 										<!--타이틀-->
-										<div class="" id="today_title" >${tboard.today_title }</div>
-										<!--썸네일-->
+										<input class="todaytitle" id="today_title" style="text-overflow: ellipsis; border:none; width:150px; background-color:white;" value="${tboard.today_title }" disabled>
+										<!--썸s네일-->
 										<div class="bg-white">
 													<a href="today_select/${tboard.today_articleNo}"><img src="/thumbfileview/${tboard.today_thumb}"
-															id="today_thumb" name="today_thumb"  width="120px" height="120px" /></a>
+															id="today_thumb" name="today_thumb"  width="150px" height="150px" /></a>
 										</div>
 
 										<!-- 조회, 좋아요, 숫자 -->
@@ -204,7 +172,7 @@ footer p span {
 											</span>
 											<span>
 												<input type="text" id="today_likes" value='${tboard.today_likes}'
-													style="width: 30px; display: inline-block; vertical-align: right; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
+													style="width:30px; display: inline-block; vertical-align: right; margin-bottom: 20px; font-size: 15px; font-weight: bold; border: none; background-color: white;"
 													disabled>&nbsp&nbsp&nbsp&nbsp&nbsp
 											</span>
 											<span class="d-flex justify-content-end" id="today_views">${tboard.today_views}
@@ -216,7 +184,7 @@ footer p span {
 					</c:when>
 				</c:choose>
 				
-				
+					
 				<div id="paging">
 					<c:choose>
 						<c:when test="${pageInfo.page<=1}">
@@ -267,50 +235,15 @@ footer p span {
 		
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
-	//console.log(${pageInfo.page});
-	//console.log(${user_id});
-/* 		$(function(){
-			$("#todayMake").click(function(){
-				let id = $('#user_id').val();
-				if(id == ''){
-					alert("로그인 먼저 진행해주세요");
-				}else{
-					console.log("값넘기는거확인1");
-					return "today_make";
-				}
-			});
-		}); */
-		
-		
-		/* $(document).on('click', '#todaySearch', function(e) {
- 				$.ajax({     
-  	        		type:"post",
-  	        		dataType:"text",
-  	        		async:false,
-  	        		url:"http://localhost:8090/today_search",
-  	        		//data:{"todaySearchText":??},
-  	        		success: function(data, textStatus){ 
-  	        			
-  	        			var todaySearchText = $('form input[name=todaySearch]').val();
-						console.log(todaySearchText);	
-  	        		},
-  	        		error:function(data, textStatus){
- 	        			
-  	        		}
-  	        	}); 
-  			});
-  		}); */
 		
 		$(document).ready(function(){
 			//console.log("${todayList[0].today_title}");
 			$('#todayMake').on('click',function(){
 				location.href="today_make";
 			});
-
-
 		});
 		
-	</script>
-
+</script>
+	<%@include file ="fotter.jsp" %>
 </body>
 </html>
