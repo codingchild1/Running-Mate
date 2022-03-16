@@ -61,8 +61,10 @@
         	<input type="text" id="route_title" name="route_title" class="route_title" value="${route.route_title}" disabled/>
         	<img src="/profileview/${route.memberthumb }" class="userProfile">
 			<span id="user_id" class="user_id">${route.user_id }</span>
-			<c:if test= "${id eq route.user_id }">
+			<c:if test= "${id eq route.user_id || adminCheck eq 1}">
 				<span id="delete" onclick=deleteArticle() style="float:right; padding-left:10px;">삭제</span>
+			</c:if>
+			<c:if test="${id eq route.user_id}">
 				<a href="routeModify?articleNo=${route.route_articleNo}"><span id="modify" style="float:right;">수정</span></a>
 			</c:if>
 			
