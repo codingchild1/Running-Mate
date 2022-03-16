@@ -387,13 +387,17 @@ body {
      			  	console.log(jdata.mate_cont); */
      			  	/* console.log($('#mate_cont').val());  */
      			 	var uid = '<%=(String)session.getAttribute("id")%>';
-     			  	if($('#user_id').val()==uid || uid =='admin'){
+     			  	if($('#user_id').val()==uid || uid == 'admin'){
      				 	$('#delete').show();
+     				 	$('#update').hide();
+     			  	} else if($('#user_id').val()==uid){
+     			  		$('#delete').show();
      				 	$('#update').show();
-     			  	}else{
+     			  	}
+     			  	else{
      				 	$('#delete').hide();
      				 	$('#update').hide();
-     			 	}
+     			  	} 
      			  	
      				//메이트에디터에 값넣어주는 함수	  
      	   			m_editor.setData($('#mate_cont').val());
@@ -505,14 +509,17 @@ body {
 			 			$("#group_cont").val(jdata.group_cont); 
 			 			$('input[name=gwarning]').val(jdata.warning); 
 			 	
-			 			var uid = '<%=(String)session.getAttribute("id")%>';
-			  			if($('#user_id').val()==uid || uid == 'admin'){
-  				 			$('#delete2').show();
-  				 			$('#update2').show();
-  			  			}else{
-  				 			$('#delete2').hide();
-  				 			$('#update2').hide();
-  			  			}
+						var uid = '<%=(String)session.getAttribute("id")%>';
+			 			 if($('#user_id').val()==uid || uid == 'admin'){
+ 				 			$('#delete2').show();
+ 				 			$('#update2').show();
+ 			  			} else if($('#user_id').val()==uid){
+ 	     			  		$('#delete2').show();
+ 	     				 	$('#update2').show();
+ 	     			  	} else{
+ 				 			$('#delete2').hide();
+ 				 			$('#update2').hide();
+ 			  			}
 			  			/* if($('#gwarning').val()=='1'){
   				 			$('#alerts span').html('신고취소');
   			  			}else{
