@@ -324,7 +324,7 @@ $(function() {
     }
 	      
     $('#today_delete').click(function (event) {
-		let messagce = confirm('삭제하시겠습니까?');
+		let message = confirm('삭제하시겠습니까?');
 		if(message == false){ 
 			return;
 		}

@@ -88,8 +88,7 @@ public class TodayController {
 	}
 
 	// 2.전체페이지 검색정보(search)
-	
-	//@PostMapping("/today_search")
+
 	@RequestMapping(value="/today_search", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView searchInfo(@RequestParam(value="page", required=false, defaultValue="1") int page, @RequestParam(value="todaySearchText") String search) {
 		ModelAndView mav=new ModelAndView();
@@ -269,8 +268,8 @@ public class TodayController {
 		ModelAndView mav =new ModelAndView("today_select");						
 		PageInfo pageInfo = new PageInfo();
 		String user_id = (String) session.getAttribute("id");
-		int admin = memberService.queryById(user_id).getAdminCk();
-		session.setAttribute("adminCheck", admin);
+		int admin = memberService.queryById(user_id).getAdminCk(); 
+		session.setAttribute("adminCheck", admin); 
 		Boolean likes = likesService.getLikesTF(user_id, "today", today_articleNo);
 		Boolean alert = alertService.getAlertTF(user_id, "today", today_articleNo);
 		if(likes==false) {
