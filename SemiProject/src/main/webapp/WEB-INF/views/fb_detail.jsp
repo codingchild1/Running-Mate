@@ -77,14 +77,17 @@ li {
 				<input type="hidden" id="articleWriter" value="${article.writer }">
 				<div class="modify">
 
-					<c:if test="${id eq article.writer }">
+					<c:if test="${id eq article.writer || adminCheck eq 1}">
 						<%-- <c:when test= "${id  eq todayselect.user_id || id eq 'admin' }"> --%>
 						<!-- 세션 id 랑 글 작성자가 같을 경우 -->
-						<a href="fb_modify?fb_articleNo=${article.fb_articleNo}"> 수정&nbsp;&nbsp; </a>
 						<a
 							href="fb_delete?fb_articleNo=${article.fb_articleNo}&page=${page}"
 							onclick="return confirm('정말 게시글을 삭제하시겠습니까?')"><span
 							id="delete" style="float: right;">삭제</span></a>
+					</c:if>
+					<c:if test="${id eq article.writer}">
+						<a href="fb_modify?fb_articleNo=${article.fb_articleNo}"> 수정&nbsp;&nbsp; </a>
+
 					</c:if>
 				</div>
 				<div>

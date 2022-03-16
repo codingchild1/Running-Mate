@@ -110,6 +110,8 @@ public class FBController {
 		try {
 			Board board = boardService.getBoard(fb_articleNo);
 			String writer = (String) session.getAttribute("id");
+			int admin = memberService.queryById(writer).getAdminCk();
+			session.setAttribute("adminCheck", admin);
 			boolean likes = likesService.getLikesTF(writer, "article", fb_articleNo);
 			boolean alert = alertService.getAlertTF(writer, "article", fb_articleNo);
 			if(likes==false) {
