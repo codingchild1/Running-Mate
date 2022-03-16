@@ -111,9 +111,11 @@
 									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 									&nbsp&nbsp
 									<c:choose>
-										<c:when	test="${id eq todayselect.user_id || id eq 'admin' }">
+										<c:when	test="${id eq todayselect.user_id || adminCheck eq 1 }">
 											<button type="button" class="col gap-1 rounded btn btn-white" id="today_delete" name="today_delete">삭제</button>
+										<c:if test="${id eq todayselect.user_id}">
 											<input type="submit" class="col gap-1 rounded btn btn-white" id="today_modify" name="today_modify" value="수정" />
+										</c:if>
 										</c:when>
 										<c:otherwise>
 											<span id="alerts" onclick=alert()>
