@@ -33,7 +33,6 @@ public class WarningController {
 	
 	@RequestMapping(value="/warninglist", method= {RequestMethod.GET, RequestMethod.POST})
 	public String todayList(Model model) {
-		String id = (String) session.getAttribute("id");
 		try {
 			List<Warning> warninglist = warningService.AllWarninglist();
 			model.addAttribute("warninglist", warninglist);
