@@ -68,7 +68,12 @@
 			delete from freeboard where fb_articleNO=#{fb_articleNO}
 		]]>
 	</delete>
-
+		<!-- 좋아요 삭제 -->
+	<delete id="deleteBoard2" parameterType="int">
+		<![CDATA[
+			delete from likes where board_type = 'article' and board_no =#{article_No};
+		]]>
+	</delete>
 	
 	<!-- 최고의 러너 -->
 	<select id="bestrun" resultType="Today">

@@ -113,6 +113,7 @@ public class RouteServiceImpl implements RouteService {
 	@Override
 	public void removeRouteBoard(int articleNo) throws Exception {
 		routeDAO.deleteRoute(articleNo);
+		routeDAO.deleteRoute2(articleNo); //좋아요 삭제
 	}
 
 	@Override
