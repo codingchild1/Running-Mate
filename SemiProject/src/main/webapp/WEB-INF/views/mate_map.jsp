@@ -414,12 +414,12 @@ input:focus{
      				$('input[name=mwarning]').val(jdata.warning); 
      				
      			 	var uid = '<%=(String)session.getAttribute("id")%>';
-     			  	if($('#user_id').val()==uid || uid == 'admin'){
+     			  	if($('#user_id').val()==uid){
      				 	$('#delete').show();
-     				 	$('#update').hide();
-     			  	} else if($('#user_id').val()==uid){
-     			  		$('#delete').show();
      				 	$('#update').show();
+     			  	} else if($('#user_id').val()==uid || uid == 'admin'){
+     			  		$('#delete').show();
+     				 	$('#update').hide();
      			  	}
      			  	else{
      				 	$('#delete').hide();
@@ -536,13 +536,13 @@ input:focus{
 			 			$("#group_cont").val(jdata.group_cont); 
 			 			$('input[name=gwarning]').val(jdata.warning); 
 			 
-						var uid = '<%=(String)session.getAttribute("id")%>';
-	     			  	if($('#user_id').val()==uid || uid == 'admin'){
+	     			 	var uid = '<%=(String)session.getAttribute("id")%>';
+	     			  	if($('#user_id').val()==uid){
 	     				 	$('#delete2').show();
-	     				 	$('#update2').hide();
-	     			  	} else if($('#user_id').val()==uid){
-	     			  		$('#delete2').show();
 	     				 	$('#update2').show();
+	     			  	} else if($('#user_id').val()==uid || uid == 'admin'){
+	     			  		$('#delete2').show();
+	     				 	$('#update2').hide();
 	     			  	}
 	     			  	else{
 	     				 	$('#delete2').hide();
