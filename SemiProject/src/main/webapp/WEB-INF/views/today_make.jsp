@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
     
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 <title>오늘의러닝</title>
 
 <style>
@@ -152,8 +153,9 @@ height:400px;
 			</main>
 		</div>
 	</div>
-<%@include file="fotter.jsp"%>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script	src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 	<script> 
 	
 	 //목록 버튼
@@ -188,5 +190,6 @@ height:400px;
 	}); */
 	
 </script>
+<%@include file="fotter.jsp"%>
 </body>
 </html>
