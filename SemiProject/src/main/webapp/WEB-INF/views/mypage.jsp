@@ -174,14 +174,14 @@
 				<ul>
 					<li><a href="mypage"><b>회원 수정</b></a></li>
 					<li><a href="changepw">비밀번호 변경</a></li>
-					<li><a href="fblist">내가 쓴 글</a></li>
+					<li><a href="todaylist">내가 쓴 글</a></li>
 					<li><a href="delete">회원 탈퇴</a></li>
 				</ul>
 			</div>
 			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
 				<h2>회원 정보 수정</h2>
 				<div style="margin: 30px;padding: 10px 10px;">
-					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/다운로드.jpg'" style="width:100px; height:100px;  border-radius:70%;" />
+					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/profile.png'" style="width:100px; height:100px;  border-radius:70%;" />
 					<input type="file" id="profile" name="profile" />
 				</div>
 				<div class="textForm">

@@ -68,32 +68,6 @@ public class MemberController {
 	private ServletContext servletContext;
 	
 	
-	//로그인 로그인할 때 물고 가는 것 마이페이지를 눌렀을 때 물고 가야 되는 것
-//	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
-//	public ModelAndView login(@RequestParam Map<String,String> info) {
-//		ModelAndView modelAndView=new ModelAndView("redirect:/mypage");
-//		try {
-//			String id=info.get("id");
-//			String password=info.get("password");
-//			if(memberService.accessMember(id, password)) {
-//				session.setAttribute("id", id);
-//				modelAndView.addObject("mypage");
-//				//
-//				Member member = memberService.queryById(id);
-//				//
-//				modelAndView.addObject("member", member);
-//	
-//			} 
-//			} catch(EmptyResultDataAccessException e) {
-//				modelAndView.addObject("err", "아이디가 존재하지 않습니다");
-//				modelAndView.setViewName("err");
-//			} catch(Exception e){
-//				modelAndView.addObject("err", e.getMessage());
-//				modelAndView.addObject("err", "err");
-//			}
-//		return modelAndView;
-//	}
-	
 	//로그인
 	@GetMapping(value="login")
 	public String login() {

@@ -95,7 +95,7 @@
 		
 		<c:when test="${routelist!=null && pageInfo.listCount>0 }">
 			<div style="">
-		
+					
 					<c:forEach var="route" items="${routelist}">
 					<tr>
 						<td>${route.route_articleNo}</td>
