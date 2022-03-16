@@ -255,7 +255,7 @@
 					[이전]&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="todaylist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
+					<a href="matelist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
@@ -264,7 +264,7 @@
 						[${i }]
 					</c:when>
 					<c:otherwise>
-						<a href="todaylist?page=${i}">[${i }]</a>
+						<a href="matelist?page=${i}">[${i }]</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -273,7 +273,7 @@
 					[다음]
 				</c:when>
 				<c:otherwise>
-					<a href="todaylist?page=${pageInfo.page+1}">[다음]</a>
+					<a href="matelist?page=${pageInfo.page+1}">[다음]</a>
 				</c:otherwise>
 			</c:choose>
 			</div>
