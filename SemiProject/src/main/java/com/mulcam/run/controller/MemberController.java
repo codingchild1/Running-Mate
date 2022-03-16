@@ -146,7 +146,6 @@ public class MemberController {
 		String id = (String) session.getAttribute("id");
 		Member member = memberService.queryById(id);
 		model.addAttribute(member);
-//		modelAndView.addObject("member", member);
 		return "/mypage";
 	}
 
