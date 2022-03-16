@@ -4,44 +4,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+<meta charset="UTF-8" />
 	
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<!-- zag bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/templatemo.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/templatemo.css">
-    <link rel="stylesheet" href="/assets/css/custom.css">
-    
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/img/apple-icon.png">
 
-
-	<title>오늘의러닝</title>
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
 	<!-- ckeditor5 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
-	
+	<title>오늘의러닝</title>
+
+
 	<style>
 
-	main {
+ 	#main {
 		display: flex;
 		justify-content: center;
 		float: center;
 		width: 1170px;
 		height: 600px;
 		margin-top: 10px;
-	} 
+	}  
 
 	.ck-editor__editable {
 		min-height: 450px;
-		/* min-width: 300px; */
 		max-width: 100%;
 	}
- 	#today_title {
- 		outline:none;
- 		text-decoration: none;
- 	}
 
-	#today_delete, #today_modify, #warning, #today_title {
+
+	#today_delete, #today_modify, #warning {
 		text-decoration: none;
 	}
 
@@ -53,23 +51,141 @@
 		float : center;
 	}
 
-	header {
+	#headers {
 		display: center;
 		padding-top: 50px;
 		width: 1170px;
 	}
 
-	.userProfile {
+ 	.userProfile {
 		width: 35px;
 		height: 35px;
-	border-radius: 70%;
+		 border-radius: 70%;
 	}
 
 	.undertitleshow{
  		display: inline-block;
  	 	margin: 10px 5% 10px 4%;
- 	}
- 	  
+ 	} 					
+<<<<<<< HEAD
+ /* footer */
+
+
+#wrap {
+  padding-top: 10em;
+  position: relative;
+  width: 100%; 
+  background-color: #212934 !important
+}
+
+section {
+  padding-bottom: 30px;
+}
+
+footer {
+  width: 100%;
+  height: 90px;
+  bottom: 50px;
+  position: absolute;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 15px;
+  text-align: center;
+}
+
+footer a {
+  display: inline-block;
+  margin: 0 20px 10px 20px;
+  color: #808080; 
+  font-size: 20px;  
+}
+
+footer p span {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+
+
+
+/* 게시글 읽기(detail) */
+
+.fb_detail {
+  text-align: center;
+  width: 100%;
+  
+}
+.detail_title{
+  text-align: left;
+  
+}
+
+.detail_writer{
+  display: vertical-align;
+  display: inline-block;
+}
+
+.a123{
+  width: 60%;
+  margin-left:auto; 
+  margin-right:auto;
+
+}
+
+.a231{
+  box-sizing: border-box;
+  border: 0.5px solid #dcdcdc; 
+  padding: 20px;
+  margin-bottom: 20em;
+}
+
+.modify{
+  float: right;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.delete{
+  float: right;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+#detail_time{
+  display: inline-block;
+  color: #A9A9A9;
+  
+}
+
+.warning{
+  border: none;
+  background-color: white;
+  cursor: pointer;
+	position: relative;
+	display: inline-block;
+  
+}
+
+#detail_view{
+  float: right;
+  margin-top: 5px;
+}
+
+#line{
+  margin-top: 3em;
+}
+
+
+
+/* href 밑줄 없애기 */
+a {
+  text-decoration-line: none;
+  }
+=======
+ 
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 	</style>
 
 </head>
@@ -85,7 +201,7 @@
 			<!---------------헤더 : 타이틀, 아이디, date, 삭제, 수정, 신고, 조회 -->
 			<form action="/today_modify" method="post" enctype="multipart/form-data">
 			<div class="col-lg-11">
-				<header>
+				<div id="headers">
 				<div class="row">
 					<div class="container fluid">
 						<div style="display: flex; align-items: center;">
@@ -137,10 +253,10 @@
 						</table>
 					</div>
 				</div>
-				</header>
+				</div>
 
 				<!------------------------ 게시글 ---------------------------- -->
-				<main>
+				<div id="contents">
 					<table class="container-fluid">
 						<tr>
 							<td>
@@ -170,7 +286,11 @@
 							</td>
 						</tr>
 					</table>
-				</main>
+<<<<<<< HEAD
+				
+=======
+				</div>
+>>>>>>> branch 'backup' of https://github.com/codingchild1/1-4.git
 				</div>
 			</form>
 			&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -178,6 +298,21 @@
 			<input type="hidden" id="sessionid" value="${id }"/>
 		</div>
 	</div>
+	
+	<!-- footer -->
+    <div id='wrap'>
+        <footer>
+            <nav>
+                <a href='#' style="color: white">광고문의</a>
+                <a href='#' style="color: white">이용약관</a>
+            </nav>
+            <p>
+                <span>고객센터 :1544-9001</span><br />
+                <span>이메일 : 1stone4birds@mulcam.com</span><br />
+                <span>주소: 서울특별시 강남구 언주로 508 14층 (역삼동, 서울상록빌딩) </span>
+            </p>
+        </footer>
+    </div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
@@ -271,7 +406,7 @@
  	    }
  	    
 	    $('#today_delete').click(function (event) {
-			let message = confirm('삭제하시겠습니까?');
+			let messagce = confirm('삭제하시겠습니까?');
 			if(message == false){ 
 				return;
 			}
@@ -295,8 +430,9 @@
  	});
 	      
 	</script>
+	
 		
-	 <%@include file ="fotter.jsp" %> 
+<%-- <%@include file="fotter.jsp"%>  --%>
 
 </body>
 </html>
