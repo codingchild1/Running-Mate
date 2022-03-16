@@ -42,16 +42,16 @@
 <div id="nav-container">
         <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand text-success logo h1 align-self-center" href="main">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="${pageContext.request.contextPath}/main">
                 Run
             </a>
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
             <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                <li class="nav-item"><a class="nav-link" href="/mate_main">메이트구하기</a></li>
-                <li class="nav-item"><a class="nav-link" href="/today">오늘의러닝</a></li>
-                <li class="nav-item"><a class="nav-link" href="/route">코스공유</a></li>
-                <li class="nav-item"><a class="nav-link" href="/fb_main">자유게시판</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mate_main">메이트구하기</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/today">오늘의러닝</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/route">코스공유</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/fb_main">자유게시판</a></li>
 			</ul>
             </div>
             
@@ -71,29 +71,28 @@
                     </a>
 				<c:choose>
 		          	<c:when test="${empty id}">
-	                    <a class="nav-icon position-relative text-decoration-none" href="login">
+	                    <a class="nav-icon position-relative text-decoration-none" href="${pageContext.request.contextPath}/login">
 	                        <i class="">로그인</i>
 	                    </a>
-	                    <a class="nav-icon position-relative text-decoration-none" href="join">
+	                    <a class="nav-icon position-relative text-decoration-none" href="${pageContext.request.contextPath}/join">
                         	<i class="">회원가입</i>
                    		</a>
                     </c:when>
-                        
 	                    
 	                    <c:when test="${adminCheck == 0 }">
-		                    <a class="nav-icon position-relative text-decoration-none" href="logout">
+		                    <a class="nav-icon position-relative text-decoration-none" href="${pageContext.request.contextPath}/logout">
 		                        <i class="">로그아웃</i>
 		                    </a>
-                        	<a class="nav-icon position-relative text-decoration-none" href="mypage">
+                        	<a class="nav-icon position-relative text-decoration-none" href="${pageContext.request.contextPath}/mypage">
                         		<i class="fa fa-fw fa-user text-dark mr-3"></i>
                         		<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
                    			</a>
                    		</c:when>
 		          		<c:otherwise>
-		          			<a class="nav-icon position-relative text-decoration-none" href="logout">
+		          			<a class="nav-icon position-relative text-decoration-none" href="${pageContext.request.contextPath}/logout">
 	                        	<i class="">로그아웃</i>
 	                    	</a>
-	                   		<a class="nav-icon position-relative text-decoration-none" href="memberlist">
+	                   		<a class="nav-icon position-relative text-decoration-none" href="${pageContext.request.contextPath}/memberlist">
                         		<i class="fa fa-fw fa-user text-dark mr-3"></i>
                         		<span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+2</span>
                    			</a>
