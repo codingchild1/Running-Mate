@@ -30,7 +30,6 @@
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="3"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="4"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -103,25 +102,6 @@
                                 <p>
                                     필요한 정보가 있으신가요?<br>
                                     여기 다른 사람들이 남긴 지식을 찾아보세요.<br> <b style="color: green">자유게시판</b> 만약 원하는 정보가 없다면 직접 물어보세요.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5" >
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last";" >
-                            <a href="#"><img class="img-fluid" src="/images/이벤트.jpg" alt="이벤트" ></a>
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1 text-success"><b>이벤트</b></h1>
-                                <h3 class="h2">이벤트 참여하세요.</h3>
-                                <p>
-                                    그냥 달리기만 하는건 질린다고요?<br>
-                                    다양한 이벤트에 참여해서 색다른 목표를 가져보세요.<br> <b style="color: green">이벤트</b> 좋은 이벤트 많습니다.<br>한 번씩 들렸다가세요~~
                                 </p>
                             </div>
                         </div>
