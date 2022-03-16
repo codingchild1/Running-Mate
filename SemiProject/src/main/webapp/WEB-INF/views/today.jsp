@@ -186,22 +186,23 @@ body {
 				
 				
 				
-				<div id="paging">
+				<div id="paging" style="text-align: center; margin-top:30px; margin-bottom :30px;">
 					<c:choose>
 						<c:when test="${pageInfo.page<=1}">
-							[pre]&nbsp;
+							«&nbsp;
 						</c:when>
 						<c:otherwise>
-						<a href="today?page=${pageInfo.page-1}">[pre]</a>&nbsp;
+						<a href="today?page=${pageInfo.page-1}">«&nbsp;</a>&nbsp;
 						</c:otherwise>
 					</c:choose>
 					
 					
 					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 						<c:choose>
-							<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+							<c:when test="${pageInfo.page==i }">
+							${i }&nbsp;</c:when>
 							<c:otherwise>
-								<a href="today?page=${i}">[${i }]</a>
+								<a href="today?page=${i}">${i }&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -209,10 +210,10 @@ body {
 					
 					<c:choose>
 						<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-						[next]
+							»&nbsp;
 						</c:when>
 						<c:otherwise>
-						<a href="today?page=${pageInfo.page+1}">[next]</a>
+						<a href="today?page=${pageInfo.page+1}">»&nbsp;</a>
 						</c:otherwise>
 					</c:choose>				
 				</div>	
@@ -225,40 +226,6 @@ body {
 	
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
-	//console.log(${pageInfo.page});
-	//console.log(${user_id});
-/* 		$(function(){
-			$("#todayMake").click(function(){
-				let id = $('#user_id').val();
-				if(id == ''){
-					alert("로그인 먼저 진행해주세요");
-				}else{
-					console.log("값넘기는거확인1");
-					return "today_make";
-				}
-			});
-		}); */
-		
-		
-		/* $(document).on('click', '#todaySearch', function(e) {
- 				$.ajax({     
-  	        		type:"post",
-  	        		dataType:"text",
-  	        		async:false,
-  	        		url:"http://localhost:8090/today_search",
-  	        		//data:{"todaySearchText":??},
-  	        		success: function(data, textStatus){ 
-  	        			
-  	        			var todaySearchText = $('form input[name=todaySearch]').val();
-						console.log(todaySearchText);	
-  	        		},
-  	        		error:function(data, textStatus){
- 	        			
-  	        		}
-  	        	}); 
-  			});
-  		}); */
-		
 		$(document).ready(function(){
 			//console.log("${todayList[0].today_title}");
 			$('#todayMake').on('click',function(){
