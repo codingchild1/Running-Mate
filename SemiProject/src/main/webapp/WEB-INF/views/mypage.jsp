@@ -179,6 +179,7 @@
 				</ul>
 			</div>
 			<form name="form1" method="post" class="form1" enctype="multipart/form-data">
+				<input type="hidden" value="1" id="fileChange" name="fileChange" />
 				<h2>회원 정보 수정</h2>
 				<div style="margin: 30px;padding: 10px 10px;">
 					<img src="/profileview/${member.memberthumb }" id="img" onerror="this.src='/profile/profile.png'" style="width:100px; height:100px;  border-radius:70%;" />
@@ -206,8 +207,9 @@
 				$('#profile').change(function(event){
 					var reader = new FileReader();
 					reader.onload = function(e) {
-						$("#img").attr("src", e.target.result);	
+						$("#img").attr("src", e.target.result);
 					};
+					$("#fileChange").val("0");
 					reader.readAsDataURL(event.target.files[0]);
 				});
 				
