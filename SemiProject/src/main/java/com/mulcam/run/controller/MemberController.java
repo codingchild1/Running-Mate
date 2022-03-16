@@ -146,7 +146,6 @@ public class MemberController {
 		String id = (String) session.getAttribute("id");
 		Member member = memberService.queryById(id);
 		model.addAttribute(member);
-//		modelAndView.addObject("member", member);
 		return "/mypage";
 	}
 
@@ -306,18 +305,27 @@ public class MemberController {
 	//회원 정보 업데이트
 	@RequestMapping(value="update", method= {RequestMethod.POST})
 	public String memberUpdate(@RequestParam(value="profile") MultipartFile profile, @RequestParam(value="email") String email, @RequestParam(value="phone")
-	String phone, @RequestParam(value="id") String id) {
+	String phone, @RequestParam(value="id") String id, @RequestParam(value="fileChange") String file) {
 		String path = servletContext.getRealPath("/profile/");
-		File destFile = new File(path+profile.getOriginalFilename());
+		String fileName = profile.getOriginalFilename();
+		System.out.println(id);
+		System.out.println("현재 바꾸려는 프사 정보 :" +fileName);
+		File destFile = new File(path+fileName);
 		try {
-			profile.transferTo(destFile);
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-		
-		Member mem = new Member(profile.getOriginalFilename(), email, phone, id);
+			Member mem = memberService.queryById(id);
+			System.out.println("현재 로그인한 사람의 프사 정보 :" + mem.getMemberthumb());
+			System.out.println(file);
+			if(file.equals("0")) {
+				//이미지가 있을 때 0 이미지업로드시사용
+				mem = new Member(fileName, email, phone, id);
+				profile.transferTo(destFile);
+			} else {
+				fileName =  mem.getMemberthumb();
+			} //프론
+			
 
-		try {
+			
+
 			memberService.updateMember(mem);
 		} catch (Exception e) {
 			e.printStackTrace();

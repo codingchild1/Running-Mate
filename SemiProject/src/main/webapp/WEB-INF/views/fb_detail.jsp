@@ -146,7 +146,7 @@ li {
 			<c:when test="${replylist!=null}">
 				<c:forEach items="${replylist }" var="reply" varStatus="status">
 				<div id="reply" style="padding:1em 0 1em 0;">
-					<span class="reply"><img src="${reply.user_img }"  style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">${reply.reply_id }</b></span>
+					<span class="reply"><img src="/profileview/${reply.user_img }"  style="width: 40px; height: auto; border-radius: 70%;"><b style="font-size: 12px; margin-left: 10px;">${reply.reply_id }</b></span>
 					<c:choose>
 					<c:when test="${user_id eq reply.reply_id }">
 						<span class="reply_delete" style="float:right; padding-left:15px;">삭제</span>
@@ -167,11 +167,11 @@ li {
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
 					<div class="form-inline mb-2" style="margin-top: 2em;">
-						<img src="${article.user_img }" style="width: 20px; height: auto;">${user_id }
+						<img src="/profileview/${user_profile }" style="width: 20px; height: auto;">${user_id }
 					</div> 
 					<textarea id="reply_content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 					<button id="reply_button" class="btn btn-success" style="margin-top: 5px; float:right; ">등록</button>
-					<input id="reply_img" type="hidden" value="${article.user_img }" >
+					<input id="reply_img" type="hidden" value="${user_profile }" >
 				</li>
 			</ul>
 		</div>

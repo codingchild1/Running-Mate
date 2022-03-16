@@ -39,7 +39,7 @@ height:400px;
 			<h1>번개 글쓰기</h1>
 			<div style="margin-top: 100px;">
 				<div style="display: flex; align-items: center;">
-					<span><img class="profile" src='/profileview/${user_img2 }'id="user_img2" name="user_img2"></span>
+					<span><img class="profile" src='/profileview/${user_img2 }'id="user_img2" name="user_img2" onerror="this.src='/profile/profile.png'"></span>
 						<input type="hidden"name="user_img" id="user_img" value=''>
 					<span><input type="text" id="user_id" name="user_id" value='${id }'style="height: 20px; border: none; background-color: white;"disabled></span>
 						<input type="hidden" id="user_id"name="user_id" value='${id }'>

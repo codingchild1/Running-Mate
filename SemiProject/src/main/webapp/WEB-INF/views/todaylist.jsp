@@ -85,7 +85,7 @@
 	<div class="no">
 	
 	<h2>내가 쓴 글</h2>
-	<table border="1" align="center"> 
+	<table border=1 align="center" class="table table-hover"> 
 	<tr>
 		<th>no</th>
 		<th>제목</th>
