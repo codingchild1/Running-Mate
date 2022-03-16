@@ -52,9 +52,7 @@
                 <li class="nav-item"><a class="nav-link" href="/today">오늘의러닝</a></li>
                 <li class="nav-item"><a class="nav-link" href="/route">코스공유</a></li>
                 <li class="nav-item"><a class="nav-link" href="/fb_main">자유게시판</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#">이벤트</a></li>
 			</ul>
-            
             </div>
             
             <div class="navbar align-self-center d-flex">
