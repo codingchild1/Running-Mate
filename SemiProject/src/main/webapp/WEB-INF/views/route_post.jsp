@@ -110,7 +110,7 @@
        			<c:when test="${!empty id }">
 	    		<c:choose>
 					<c:when test="${likes eq true }"><img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " /></c:when>
-					<c:when test="${likes eq false }"><img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; " /></c:when>
+					<c:when test="${likes eq false }"><img id="like" src="${pageContext.request.contextPath }/images/nolike.PNG" style="width:50px; cursor:pointer;" /></c:when>
 				</c:choose>
     			</c:when>
     			<c:otherwise><img id="like" src="${pageContext.request.contextPath }/images/like.PNG" style="width:50px; " />
