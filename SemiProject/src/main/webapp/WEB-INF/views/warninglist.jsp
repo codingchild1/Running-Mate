@@ -159,7 +159,6 @@
 				alert("선택한 글이 없습니다.");
 			}
 			else {
-				var chk = confirm("정말 삭제하시겠습니까?");
 				$.ajax({
 					url: url,
 					type: 'POST',
@@ -169,11 +168,10 @@
 					},
 					success: function(jdata){
 						if(jdata=1){
-							alert("삭제 성공");
 							location.replace("warninglist")
 						}
 						else{
-							alert("삭제 실패");
+							alert("처리 실패");
 						}
 					}
 				});

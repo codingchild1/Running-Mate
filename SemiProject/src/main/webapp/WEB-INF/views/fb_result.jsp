@@ -171,7 +171,7 @@ a {
 
 	<Section class="top">
 		<div class="container2">
-			<h2>게시글 목록</h2>
+			<div class="d-flex justify-content-center"><h2>게시글 목록</h2></div>
 			<c:choose>
 				<c:when test="${articleList!=null && pageInfo.listCount>0 }">
 					<table class="board_list">
@@ -207,45 +207,47 @@ a {
 					<section id=pageList>
 						<c:choose>
 							<c:when test="${pageInfo.page<=1}">
-					[이전]&nbsp;
+					«&nbsp;
 				</c:when>
 							<c:otherwise>
-								<a href="fb_result?column=${column}&keyword=${keyword}&page=${pageInfo.page-1}">[이전]</a>&nbsp;
+								<a href="fb_result?column=${column}&keyword=${keyword}&page=${pageInfo.page-1}">«&nbsp;</a>
 				</c:otherwise>
 						</c:choose>
 						<c:forEach var="i" begin="${pageInfo.startPage }"
 							end="${pageInfo.endPage }">
 							<c:choose>
-								<c:when test="${pageInfo.page==i }">[${i }]</c:when>
+								<c:when test="${pageInfo.page==i }">${i }&nbsp;</c:when>
 								<c:otherwise>
-									<a href="fb_result?column=${column}&keyword=${keyword}&page=${i}">[${i }]</a>
+									<a href="fb_result?column=${column}&keyword=${keyword}&page=${i}">${i }&nbsp;</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						<c:choose>
 							<c:when test="${pageInfo.page>=pageInfo.maxPage }">
-					[다음]
+					»&nbsp;
 				</c:when>
 							<c:otherwise>
-								<a href="fb_result?column=${column}&keyword=${keyword}&page=${pageInfo.page+1}">[다음]</a>
+								<a href="fb_result?column=${column}&keyword=${keyword}&page=${pageInfo.page+1}">»&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</section>
 				</c:when>
 				<c:otherwise>
-					<section id="emptyArea">등록된 글이 없습니다.</section>
+					<section id="emptyArea" style="text-align: center;">등록된 글이 없습니다.</section>
 				</c:otherwise>
 			</c:choose>
 			
 			<div class="search">
 				<form action="/fb_result" method="get">
-					<select name="column">
+				<div style="display: flex; justify-content: center;">
+					<select name="column" style="margin-left: 10px;">
 					    <option value="fb_title">제목</option>
 					    <option value="writer">작성자</option>
 					    <option value="fb_content">내용</option>
 					</select>
-					<input type="text" name="keyword" placeholder="검색어를 입력하세요">
-					<input type="submit" value="검색">
+					<input type="text" name="keyword" placeholder="검색어를 입력하세요" style="margin-left: 10px;">
+					<input type="submit" value="검색" style="margin-left: 10px;background-color: #59ab6e;color: white;border: 1px solid #59ab6e">
+					</div>
 				</form>
 			</div>
 			

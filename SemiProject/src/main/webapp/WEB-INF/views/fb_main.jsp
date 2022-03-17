@@ -171,7 +171,7 @@ a {
 
 	<Section class="top">
 		<div class="container2">
-			<h2>게시글 목록</h2>
+			<div class="d-flex justify-content-center"><h2>게시글 목록</h2></div>
 			<c:choose>
 				<c:when test="${articleList!=null && pageInfo.listCount>0 }">
 					<table class="board_list">
@@ -233,7 +233,7 @@ a {
 					</section>
 				</c:when>
 				<c:otherwise>
-					<section id="emptyArea">등록된 글이 없습니다.</section>
+					<section id="emptyArea" style="text-align: center;">등록된 글이 없습니다.</section>
 				</c:otherwise>
 			</c:choose>
 			
@@ -246,7 +246,7 @@ a {
 					    <option value="fb_content">내용</option>
 					</select>
 					<input type="text" name="keyword" placeholder="검색어를 입력하세요" style="margin-left: 10px;">
-					<input type="submit" value="검색" style="margin-left: 10px;">
+					<input type="submit" value="검색" style="margin-left: 10px;background-color: #59ab6e;color: white;border: 1px solid #59ab6e">
 					</div>
 				</form>
 			</div>
