@@ -1,7 +1,7 @@
 package com.mulcam.run.dto;
 
 public class Alert {
-	int alert_no;
+	public int alert_no;
 	String user_id;
 	String board_type;
 	int board_no;

@@ -43,10 +43,10 @@
 				}
 			}
 			if(valueArr.length == 0){
-				alert("선택한 글이 없습니다.");
+				alert("회원을 선택해 주세요.");
 			}
 			else {
-				var chk = confirm("정말 삭제하시겠습니까?");
+				var chk = confirm("회원을 삭제하시겠습니까?");
 				$.ajax({
 					url: url,
 					type: 'POST',
@@ -56,7 +56,6 @@
 					},
 					success: function(jdata){
 						if(jdata=1){
-							 alert("삭제 성공");
 							location.replace("memberlist")
 						}
 						else{
