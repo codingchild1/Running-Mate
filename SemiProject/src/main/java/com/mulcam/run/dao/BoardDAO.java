@@ -35,7 +35,7 @@ public interface BoardDAO {
 	
 	//내가 쓴 글 가지고 오기
 	public int fbListCount(String id);
-	public List<Board> fbList(MyBoard boardinfo);;
+	public List<Board> fbList(MyBoard boardinfo);
 	int selectBoardSearchResultCount(Map<String, Object> mapParam);
 	List<Board> selectBoardSearchResultList(Map<String, Object> mapParam);
 }
