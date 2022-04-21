@@ -120,7 +120,8 @@ public class MemberController {
 	public String join(@RequestParam(value="profile") MultipartFile file,
 			@RequestParam("name") String name, @RequestParam("id") String id, @RequestParam("password") String password, @RequestParam("email") String email, @RequestParam("phone")
 		String phone, Model model) {
-		String path = servletContext.getRealPath("/profile/");
+//		String path = servletContext.getRealPath("/profile/");
+		String path = "/profile/";
 		File destFile = new File(path+file.getOriginalFilename());
 		try {
 			file.transferTo(destFile);
@@ -272,7 +273,8 @@ public class MemberController {
 	/*현재 /fileview/board/${file.originalFilename } 경로로 요청이 들어왔는데,
 	${file.originalFilename }은 URL에 변수를 담은 템플릿변수에 해당한다. 이를 filename이라는 변수로 받은 것이고
 	요청을 처리하는 메서드에서 이를 파라미터로 받아서 처리해야하기 때문에 PathVaribale이라는 어노테이션을 사용한다. */
-		String path=servletContext.getRealPath("/profile/");
+//		String path=servletContext.getRealPath("/profile/");
+		String path="/profile/";
 		File file=new File(path+filename); 
 		String sfilename=null;
 		FileInputStream fis=null;
@@ -306,7 +308,8 @@ public class MemberController {
 	@RequestMapping(value="update", method= {RequestMethod.POST})
 	public String memberUpdate(@RequestParam(value="profile") MultipartFile profile, @RequestParam(value="email") String email, @RequestParam(value="phone")
 	String phone, @RequestParam(value="id") String id, @RequestParam(value="fileChange") String file) {
-		String path = servletContext.getRealPath("/profile/");
+//		String path = servletContext.getRealPath("/profile/");
+		String path ="/profile/";
 		String fileName = profile.getOriginalFilename();
 		System.out.println(id);
 		System.out.println("현재 바꾸려는 프사 정보 :" +fileName);

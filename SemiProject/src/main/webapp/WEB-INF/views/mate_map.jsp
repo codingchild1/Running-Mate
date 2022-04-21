@@ -397,7 +397,7 @@ input:focus{
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/Mmodal",
+    			url:"${pageContext.request.contextPath}/Mmodal",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     				var jdata = JSON.parse(data);
@@ -462,7 +462,7 @@ input:focus{
         			type:"post",
         			dataType:"text",
         			async:false,
-        			url:"http://localhost:8090/ptplist",
+        			url:"${pageContext.request.contextPath}/ptplist",
         			data:{"no":no},
         			success: function(data, textStatus){ 
         				$('.list').html('');
@@ -482,7 +482,7 @@ input:focus{
       				type:"post",
       				dataType:"text",
       				async:false,
-      				url:"http://localhost:8090/alertcheck",
+      				url:"${pageContext.request.contextPath}/alertcheck",
       				data:{"no":no},
       				success: function(data, textStatus){ 
       					if(data=='true'){
@@ -500,7 +500,7 @@ input:focus{
    					type:"post",
    					dataType:"text",
    					async:false,
-   					url:"http://localhost:8090/Likecheck",
+   					url:"${pageContext.request.contextPath}/Likecheck",
    					data:{"no":no},
    					success: function(data, textStatus){ 
    						if(data=='true'){
@@ -521,7 +521,7 @@ input:focus{
  					type:"post",
  					dataType:"text",
  					async:false,
- 					url:"http://localhost:8090/Gmodal",
+ 					url:"${pageContext.request.contextPath}/Gmodal",
  					data:{"no":no},
  					success: function(data, textStatus){ 
  			 			var jdata = JSON.parse(data); 
@@ -586,7 +586,7 @@ input:focus{
  					type:"post",
  					dataType:"text",
  					async:false,
- 					url:"http://localhost:8090/alertcheck2",
+ 					url:"${pageContext.request.contextPath}/alertcheck2",
  					data:{"no":no},
  					success: function(data, textStatus){ 
  						if(data=='true'){
@@ -667,7 +667,7 @@ input:focus{
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/Like",
+	        url:"${pageContext.request.contextPath}/Like",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	if(data=='false') {
@@ -687,7 +687,7 @@ input:focus{
 	    	type:"post",
 	    	dataType:"text",
 	    	async:false,
-	    	url:"http://localhost:8090/ptplist",
+	    	url:"${pageContext.request.contextPath}/ptplist",
 	    	data:{"no":$('#ptp').val()},
 	    	success: function(data, textStatus){ 
 	    		$('.list').html('');
@@ -710,7 +710,7 @@ input:focus{
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/deletemate",
+	        url:"${pageContext.request.contextPath}/deletemate",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
@@ -726,7 +726,7 @@ input:focus{
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/deletegroup",
+	        url:"${pageContext.request.contextPath}/deletegroup",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
@@ -747,7 +747,7 @@ input:focus{
 	       	type:"post",
 	       	dataType:"text",
 	       	async:false,
-	       	url:"http://localhost:8090/alert",
+	       	url:"${pageContext.request.contextPath}/alert",
 	       	data:{"board_no":$('#ptp').val(),
 	       		  "user_id":$("#user_id").val(),
 	       		  "board_type":"mate"},
@@ -775,7 +775,7 @@ input:focus{
 	       	type:"post",
 	       	dataType:"text",
 	       	async:false,
-	       	url:"http://localhost:8090/alert",
+	       	url:"${pageContext.request.contextPath}/alert",
 	       	data:{"board_no":$('#ptp').val(),
 	       		  "user_id":$("#user_id").val(),
 	       		  "board_type":"group"},
@@ -843,9 +843,6 @@ input:focus{
 	        		    var infowindow = new kakao.maps.InfoWindow({
 	        		        content: positions[i].content // 인포윈도우에 표시할 내용
 	        		    });
-	        		    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-	        		    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-	        		    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 	        		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 	        		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 	        		}
@@ -868,7 +865,7 @@ input:focus{
 	 	  			 $.ajax({
 	 	    			async:false,
 	 	    			type:"GET",
-	 	    			url:"http://localhost:8090/mate_mapsearch",
+	 	    			url:"${pageContext.request.contextPath}/mate_mapsearch",
 	 	    			dataType:"text",
 	 	    			contentType : 'application/json; charset=UTF-8', 
 	 	    			data:{"input":$('#mysearch').val(),
@@ -964,7 +961,7 @@ input:focus{
     	   		 $.ajax({
     	   			async:false,
     	   			type:"GET",
-    	   			url:"http://localhost:8090/mate_mapsearch",
+    	   			url:"${pageContext.request.contextPath}/mate_mapsearch",
     	   			dataType:"text",
     	   			contentType : 'application/json; charset=UTF-8', 
     	   			data:{"input":$('#mysearch').val(),
@@ -1075,7 +1072,7 @@ input:focus{
  		 $.ajax({
   			async:false,
   			type:"GET",
-  			url:"http://localhost:8090/mate_mapsearch",
+  			url:"${pageContext.request.contextPath}/mate_mapsearch",
   			dataType:"text",
   			contentType : 'application/json; charset=UTF-8', 
   			data:{"input":$('#mysearch').val(),
@@ -1125,7 +1122,7 @@ input:focus{
 		 $.ajax({
   			async:false,
   			type:"GET",
-  			url:"http://localhost:8090/mate_mapsearch",
+  			url:"${pageContext.request.contextPath}/mate_mapsearch",
   			dataType:"text",
   			contentType : 'application/json; charset=UTF-8', 
   			data:{"input":$('#mysearch').val(),
@@ -1175,7 +1172,7 @@ input:focus{
 		 $.ajax({
   			async:false,
   			type:"GET",
-  			url:"http://localhost:8090/mate_mapsearch",
+  			url:"${pageContext.request.contextPath}/mate_mapsearch",
   			dataType:"text",
   			contentType : 'application/json; charset=UTF-8', 
   			data:{"input":$('#mysearch').val(),

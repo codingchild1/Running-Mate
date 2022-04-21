@@ -309,7 +309,7 @@ button a {
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/Mmodal",
+    			url:"${pageContext.request.contextPath}/Mmodal",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     			 	var jdata = JSON.parse(data);
@@ -375,7 +375,7 @@ button a {
         		type:"post",
         		dataType:"text",
         		async:false,
-        		url:"http://localhost:8090/ptplist",
+        		url:"${pageContext.request.contextPath}/ptplist",
         		data:{"no":no},
         		success: function(data, textStatus){ 
         			var jdata = JSON.parse(data);
@@ -398,7 +398,7 @@ button a {
  				type:"post",
  				dataType:"text",
  				async:false,
- 				url:"http://localhost:8090/Gmodal",
+ 				url:"${pageContext.request.contextPath}/Gmodal",
  				data:{"no":no},
  				success: function(data, textStatus){ 
  			 	var jdata = JSON.parse(data); 
@@ -520,7 +520,7 @@ button a {
 	    	type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/Like",
+	        url:"${pageContext.request.contextPath}/Like",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	if(data=='false') {
@@ -541,7 +541,7 @@ button a {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/deletemate",
+	        url:"${pageContext.request.contextPath}/deletemate",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
@@ -558,7 +558,7 @@ button a {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/deletegroup",
+	        url:"${pageContext.request.contextPath}/deletegroup",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");

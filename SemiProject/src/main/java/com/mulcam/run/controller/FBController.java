@@ -246,7 +246,8 @@ public class FBController {
 	@ResponseBody
 	@PostMapping("/fb_upload")
 	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
-		String path = servletContext.getRealPath("/upload/");
+//		String path = servletContext.getRealPath("/upload/");
+		String path = "/upload/";
 		String filename = file.getOriginalFilename();
 		File destFile = new File(path+filename);
 		Map<String, Object> json = new HashMap<>();
@@ -265,7 +266,8 @@ public class FBController {
 	public void fileview(@PathVariable String filename, 
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		String path = servletContext.getRealPath("/upload/");
+//		String path = servletContext.getRealPath("/upload/");
+		String path = "/upload/";
 		File file = new File(path+filename);
 		String sfilename = null;
 		FileInputStream fis = null;

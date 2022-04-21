@@ -32,7 +32,7 @@ import com.mulcam.run.dto.Ptp;
 import com.mulcam.run.service.AlertService;
 import com.mulcam.run.service.MateService;
 import com.mulcam.run.service.MemberService;
-import com.mysql.cj.Session;
+//import com.mysql.cj.Session;
 
 @Controller
 public class MateController {

@@ -400,7 +400,7 @@ function detailModal(no,type){
 			type:"post",
 			dataType:"text",
 			async:false,
-			url:"http://localhost:8090/Mmodal",
+			url:"${pageContext.request.contextPath}/Mmodal",
 			data:{"no":no},
 			success: function(data, textStatus){ 
 			 	var jdata = JSON.parse(data);
@@ -466,7 +466,7 @@ function detailModal(no,type){
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/ptplist",
+    			url:"${pageContext.request.contextPath}/ptplist",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     				$('.list').html('');
@@ -486,7 +486,7 @@ function detailModal(no,type){
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/alertcheck",
+    			url:"${pageContext.request.contextPath}/alertcheck",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     				if(data=='true'){
@@ -504,7 +504,7 @@ function detailModal(no,type){
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/Likecheck",
+    			url:"${pageContext.request.contextPath}/Likecheck",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     				if(data=='true'){
@@ -525,7 +525,7 @@ function detailModal(no,type){
 					type:"post",
 					dataType:"text",
 					async:false,
-					url:"http://localhost:8090/Gmodal",
+					url:"${pageContext.request.contextPath}/Gmodal",
 					data:{"no":no},
 					success: function(data, textStatus){ 
 			 			var jdata = JSON.parse(data); 
@@ -590,7 +590,7 @@ function detailModal(no,type){
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/alertcheck2",
+    			url:"${pageContext.request.contextPath}/alertcheck2",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     				if(data=='true'){
@@ -664,7 +664,7 @@ window.addEventListener("keyup", e => {
         type:"post",
         dataType:"text",
         async:false,
-        url:"http://localhost:8090/deletemate",
+        url:"${pageContext.request.contextPath}/deletemate",
         data:{"no":$('#ptp').val()},
         success: function(data, textStatus){
         	alert("성공적으로 삭제되었습니다.");
@@ -682,7 +682,7 @@ $('.delete2').click(function(){
         type:"post",
         dataType:"text",
         async:false,
-        url:"http://localhost:8090/deletegroup",
+        url:"${pageContext.request.contextPath}/deletegroup",
         data:{"no":$('#ptp').val()},
         success: function(data, textStatus){
         	alert("성공적으로 삭제되었습니다.");

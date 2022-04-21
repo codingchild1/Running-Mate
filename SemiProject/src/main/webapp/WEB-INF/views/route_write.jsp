@@ -127,7 +127,7 @@
 		});
 		
 		$("#reset").click(function(){
-			window.location.href = 'http://localhost:8090/route';
+			window.location.href = '${pageContext.request.contextPath}/route';
 		});
 	
 		$("#submit").click(function(){
@@ -143,7 +143,7 @@
 			$.ajax({
 				async:false,
 				type:"post",
-				url:"http://localhost:8090/route/routeCoords",
+				url:"${pageContext.request.contextPath}/route/routeCoords",
 				traditional:true,
 				data: {"longitude" : center_lo, "latitude" : center_la},
 				dataType:"text",
