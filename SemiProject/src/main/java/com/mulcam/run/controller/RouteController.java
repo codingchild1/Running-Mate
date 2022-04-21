@@ -203,7 +203,8 @@ public class RouteController {
 	@PostMapping(value="/route_modify")
 	public ModelAndView route_modifyReg(@ModelAttribute Route route, @RequestParam("content") String content,  @RequestParam(value="route_file") MultipartFile file) {
 		ModelAndView mv = new ModelAndView("route_post");
-		String path = servletContext.getRealPath("/thumb/route/");
+//		String path = servletContext.getRealPath("/thumb/route/");
+		String path = "/thumb/route/";
 		File destFile = new File(path+file.getOriginalFilename());
 		try {			
 			file.transferTo(destFile);
@@ -233,7 +234,8 @@ public class RouteController {
 	@PostMapping(value="/route_reg")
 	public String registerRoute(@ModelAttribute Route route, @RequestParam("content") String content, @RequestParam(value="route_file") MultipartFile file) throws Exception {
 		ModelAndView mv = new ModelAndView("route_reg");
-		String path = servletContext.getRealPath("/thumb/route/");
+//		String path = servletContext.getRealPath("/thumb/route/");
+		String path = "/thumb/route/";
 		File destFile = new File(path+file.getOriginalFilename());
 		try {			
 			file.transferTo(destFile);
@@ -274,7 +276,8 @@ public class RouteController {
 	public void thumbfileview(@PathVariable String filename, 
 			HttpServletRequest request, HttpServletResponse response)
 	{			
-		String path = servletContext.getRealPath("/thumb/route/");
+//		String path = servletContext.getRealPath("/thumb/route/");
+		String path = "/thumb/route/";
 		File file = new File(path+filename);
 		String sfilename = null;
 		FileInputStream fis = null;

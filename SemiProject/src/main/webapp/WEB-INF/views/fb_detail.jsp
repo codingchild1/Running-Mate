@@ -205,7 +205,7 @@ li {
 			$(this).parent().children(".reply_modify").html("수정");	
 			$.ajax({
 				type:"post",
-				url:"http://localhost:8090/replyupdate",
+				url:"${pageContext.request.contextPath}/replyupdate",
 				data: {"reply_no" : $(this).parent().children("input").val(), "reply_content" : $(this).parent().children("textarea").val() },
 				dataType:"text",
 				success:function(data){				
@@ -219,7 +219,7 @@ li {
 			if(alert==true){
 				$.ajax({
 					type:"post",
-					url:"http://localhost:8090/replydelete",
+					url:"${pageContext.request.contextPath}/replydelete",
 					data: {"reply_no" : $(this).parent().children("input").val() },
 					dataType:"text",
 					success:function(data){				
@@ -244,7 +244,7 @@ li {
 			}else{
 				$.ajax({
 					type:"post",
-					url:"http://localhost:8090/reply",
+					url:"${pageContext.request.contextPath}/reply",
 					data: {"board_type": "freeboard", "board_no" : ${article.fb_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
 					dataType:"text",
 					success:function(data){				
@@ -281,7 +281,7 @@ li {
 		console.log("hello");
 		$.ajax({
 			type:"post",
-			url:"http://localhost:8090/likes",
+			url:"${pageContext.request.contextPath}/likes",
 			data: {"user_id": $("#articleWriter").val(), "board_type" : "article", "board_no": ${article.fb_articleNo}},
 			dataType:"text",
 			success:function(data){
@@ -313,7 +313,7 @@ li {
 		if(alert==true){
 			$.ajax({
 				type:"post",
-				url:"http://localhost:8090/alert",
+				url:"${pageContext.request.contextPath}/alert",
 				data: {"user_id": $("#articleWriter").val(), "board_type" : "article", "board_no": ${article.fb_articleNo}},
 				dataType:"text",
 				success:function(data){

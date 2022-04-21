@@ -124,7 +124,7 @@
 		});
 		
 		$("#reset").click(function(){
-			window.location.href = 'http://localhost:8090/routepost?articleNo='+${route.route_articleNo};
+			window.location.href = '${pageContext.request.contextPath}/routepost?articleNo='+${route.route_articleNo};
 		});
 		$("#submit").click(function(){	
 			if(center_lo ==null || center_la ==null){
@@ -139,7 +139,7 @@
 			$.ajax({
 				async:false,
 				type:"post",
-				url:"http://localhost:8090/route/routeCoords",
+				url:"${pageContext.request.contextPath}/route/routeCoords",
 				traditional:true,
 				data: {"longitude" : center_lo, "latitude" : center_la},
 				dataType:"text",

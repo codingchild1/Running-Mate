@@ -96,7 +96,7 @@
 				<div id="map"  class="mapresult"></div>
 				<div class="info-box">
   					<p>
-  						<b>거리 : ${route.route_distance } m</b><br>
+  						<b>거리 : ${(route.route_distance % 1) > 0.5 ? route.route_distance + (1 - (route.route_distance%1) ) % 1 : route.route_distance - (route.route_distance % 1) } m</b><br>
    						<b>주소정보 : ${route.route_area } </b><br>
  	 				</p>
 				</div>
@@ -188,7 +188,7 @@
 			$(this).parent().children(".reply_modify").html("수정");	
 			$.ajax({
 				type:"post",
-				url:"http://localhost:8090/replyupdate",
+				url:"${pageContext.request.contextPath}/replyupdate",
 				data: {"reply_no" : $(this).parent().children("input").val(), "reply_content" : $(this).parent().children("textarea").val() },
 				dataType:"text",
 				success:function(data){				
@@ -202,7 +202,7 @@
 			if(alert==true){
 				$.ajax({
 					type:"post",
-					url:"http://localhost:8090/replydelete",
+					url:"${pageContext.request.contextPath}/replydelete",
 					data: {"reply_no" : $(this).parent().children("input").val() },
 					dataType:"text",
 					success:function(data){				
@@ -227,7 +227,7 @@
 			}else{
 				$.ajax({
 					type:"post",
-					url:"http://localhost:8090/reply",
+					url:"${pageContext.request.contextPath}/reply",
 					data: {"board_type": "route", "board_no" : ${route.route_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
 					dataType:"text",
 					success:function(data){				
@@ -259,14 +259,14 @@
 	function deleteArticle(){
 		alert = confirm('게시글을 정말 삭제하시겠습니까?');
 		if(alert==true){
-			window.location.href = 'http://localhost:8090/routeDelete?articleNo='+${route.route_articleNo};
+			window.location.href = '${pageContext.request.contextPath }/routeDelete?articleNo='+${route.route_articleNo};
 		}
 		else return false;
 	}
 	function changeImg(){
 		$.ajax({
 			type:"post",
-			url:"http://localhost:8090/likes",
+			url:"${pageContext.request.contextPath }/likes",
 			data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
 			dataType:"text",
 			success:function(data){
@@ -296,7 +296,7 @@
 		if(alert==true){
 			$.ajax({
 				type:"post",
-				url:"http://localhost:8090/alert",
+				url:"${pageContext.request.contextPath }/alert",
 				data: {"user_id": $("#user_id").text(), "board_type" : "route", "board_no": ${route.route_articleNo}},
 				dataType:"text",
 				success:function(data){

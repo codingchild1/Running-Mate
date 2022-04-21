@@ -147,7 +147,8 @@ public class TodayController {
 	@PostMapping("/upload")
 	public Map<String, Object> fileupload(@RequestParam(value="upload") MultipartFile file) {
 		System.out.println(file.getOriginalFilename()+"---------------------");
-		String path = servletContext.getRealPath("/upload/");
+//		String path = servletContext.getRealPath("/upload/");
+		String path = "/upload/";
 		String filename = file.getOriginalFilename();
 		File destFile = new File(path+filename);
 		Map<String, Object> json = new HashMap<>();
@@ -167,7 +168,8 @@ public class TodayController {
 	public void fileview(@PathVariable String filename, 
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		String path = servletContext.getRealPath("/upload/");
+//		String path = servletContext.getRealPath("/upload/");
+		String path = "/upload/";
 		File file = new File(path+filename);
 		String sfilename = null;
 		FileInputStream fis = null;
@@ -202,7 +204,8 @@ public class TodayController {
 	public void thumbfileview(@PathVariable String filename, 
 			HttpServletRequest request, HttpServletResponse response)
 	{
-		String path = servletContext.getRealPath("/thumb/");
+//		String path = servletContext.getRealPath("/thumb/");
+		String path = "/thumb/";
 		File file = new File(path+filename);
 		String sfilename = null;
 		FileInputStream fis = null;
@@ -239,7 +242,8 @@ public class TodayController {
 			@RequestParam("today_contents")String today_contents,
 			@RequestParam(value="today_file") MultipartFile file,
 			Model model) throws Exception {
-		String path = servletContext.getRealPath("/thumb/");
+//		String path = servletContext.getRealPath("/thumb/");
+		String path = "/thumb/";
 		File destFile = new File(path+file.getOriginalFilename());
 		
 		String wirte_id = (String) session.getAttribute("id");
@@ -330,7 +334,8 @@ public class TodayController {
 		try {
 			Today tboard = todayService.getTBoard(articleNo);
 			if(!file.isEmpty()) {
-				String path = servletContext.getRealPath("/thumb/");
+//				String path = servletContext.getRealPath("/thumb/");
+				String path = "/thumb/";
 				File destFile = new File(path+file.getOriginalFilename());
 				file.transferTo(destFile);
 				tboard.setToday_thumb(file.getOriginalFilename());

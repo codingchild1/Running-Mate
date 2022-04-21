@@ -364,7 +364,7 @@ body {
     			type:"post",
     			dataType:"text",
     			async:false,
-    			url:"http://localhost:8090/Mmodal",
+    			url:"${pageContext.request.contextPath}/Mmodal",
     			data:{"no":no},
     			success: function(data, textStatus){ 
     			 	var jdata = JSON.parse(data);
@@ -435,7 +435,7 @@ body {
         			type:"post",
         			dataType:"text",
         			async:false,
-        			url:"http://localhost:8090/ptplist",
+        			url:"${pageContext.request.contextPath}/ptplist",
         			data:{"no":no},
         			success: function(data, textStatus){ 
         				$('.list').html('');
@@ -455,7 +455,7 @@ body {
         			type:"post",
         			dataType:"text",
         			async:false,
-        			url:"http://localhost:8090/alertcheck",
+        			url:"${pageContext.request.contextPath}/alertcheck",
         			data:{"no":no},
         			success: function(data, textStatus){ 
         				if(data=='true'){
@@ -473,7 +473,7 @@ body {
         			type:"post",
         			dataType:"text",
         			async:false,
-        			url:"http://localhost:8090/Likecheck",
+        			url:"${pageContext.request.contextPath}/Likecheck",
         			data:{"no":no},
         			success: function(data, textStatus){ 
         				if(data=='true'){
@@ -494,7 +494,7 @@ body {
  					type:"post",
  					dataType:"text",
  					async:false,
- 					url:"http://localhost:8090/Gmodal",
+ 					url:"${pageContext.request.contextPath}/Gmodal",
  					data:{"no":no},
  					success: function(data, textStatus){ 
  			 			var jdata = JSON.parse(data); 
@@ -565,7 +565,7 @@ body {
         			type:"post",
         			dataType:"text",
         			async:false,
-        			url:"http://localhost:8090/alertcheck2",
+        			url:"${pageContext.request.contextPath}/alertcheck2",
         			data:{"no":no},
         			success: function(data, textStatus){ 
         				if(data=='true'){
@@ -645,7 +645,7 @@ body {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/Like",
+	        url:"${pageContext.request.contextPath}/Like",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	if(data=='false') {
@@ -665,7 +665,7 @@ body {
 			type:"post",
 			dataType:"text",
 			async:false,
-			url:"http://localhost:8090/ptplist",
+			url:"${pageContext.request.contextPath}/ptplist",
 			data:{"no":$('#ptp').val()},
 			success: function(data, textStatus){ 
 				$('.list').html('');
@@ -688,7 +688,7 @@ body {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/deletemate",
+	        url:"${pageContext.request.contextPath}/deletemate",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
@@ -706,7 +706,7 @@ body {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/deletegroup",
+	        url:"${pageContext.request.contextPath}/deletegroup",
 	        data:{"no":$('#ptp').val()},
 	        success: function(data, textStatus){
 	        	alert("성공적으로 삭제되었습니다.");
@@ -729,7 +729,7 @@ body {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/alert",
+	        url:"${pageContext.request.contextPath}/alert",
 	        data:{"board_no":$('#ptp').val(),
 	        	  "user_id":$("#user_id").val(),
 	        	  "board_type":"mate"},
@@ -760,7 +760,7 @@ body {
 	        type:"post",
 	        dataType:"text",
 	        async:false,
-	        url:"http://localhost:8090/alert",
+	        url:"${pageContext.request.contextPath}/alert",
 	        data:{"board_no":$('#ptp').val(),
 	        	  "user_id":$("#user_id").val(),
 	        	  "board_type":"group"},
