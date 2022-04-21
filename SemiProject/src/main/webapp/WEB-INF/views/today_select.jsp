@@ -282,7 +282,7 @@ function today_list(){
 function changeImg(){
 	$.ajax({
 		type:"post",
-		url:"${pageContext.request.contextPath}/likes",
+		url:"http://localhost:8090/likes",
 		data: {"user_id": $("#writerId").text(), "board_type" : "today_select", "board_no": ${todayselect.today_articleNo}},
 		dataType:"text",
 		success:function(data){
@@ -308,7 +308,7 @@ function alert(){
 	if(alert==true){
 		$.ajax({
 			type:"post",
-			url:"${pageContext.request.contextPath }/alert",
+			url:"http://localhost:8090/alert",
 			data: {"user_id": $("#user_id").val(), "board_type" : "today", "board_no": ${todayselect.today_articleNo}},
 			dataType:"text",
 			success:function(data){
@@ -342,13 +342,13 @@ $(function(){
 		alert($(this).parent().children("textarea").val());
 		$.ajax({
 			type:"post",
-			url:"${pageContext.request.contextPath}/replyupdate",
+			url:"http://localhost:8090/replyupdate",
 			data: {"reply_no" : $(this).parent().children("input").val(), "reply_content" : $(this).parent().children("textarea").val() },
 			dataType:"text",
 			success:function(data){				
 			}
 		});		
-		location.href="/today_select/" + ${todayselect.today_articleNo};
+		location.href="today_select?articleNo=" + ${todayselect.today_articleNo};
 	});
 	
 	$(".reply_delete").click(function(){
@@ -356,13 +356,13 @@ $(function(){
 		if(alert==true){
 			$.ajax({
 				type:"post",
-				url:"${pageContext.request.contextPath }/replydelete",
+				url:"http://localhost:8090/replydelete",
 				data: {"reply_no" : $(this).parent().children("input").val() },
 				dataType:"text",
 				success:function(data){				
 				}
 			});		
-			location.href="/today_select/" + ${todayselect.today_articleNo};
+			location.href="today_select?articleNo=" + ${todayselect.today_articleNo};
 		}
 		else return false;
 	});
@@ -381,13 +381,13 @@ $(function(){
 		}else{
 			$.ajax({
 				type:"post",
-				url:"${pageContext.request.contextPath }/reply",
-				data: {"board_type": "today", "board_no" : ${todayselect.today_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
+				url:"http://localhost:8090/reply",
+				data: {"board_type": "today_select", "board_no" : ${todayselect.today_articleNo}, "reply_id": login, "user_img": $("#reply_img").val(), "reply_content": $('#reply_content').val()},
 				dataType:"text",
 				success:function(data){				
 				}
-			});	
-			location.href="${pageContext.request.contextPath }/today_select/" + ${todayselect.today_articleNo};
+			});		
+			location.href="today_select?articleNo=" + ${todayselect.today_articleNo};
 		}
 		
 	});
@@ -445,7 +445,7 @@ $(function(){
 	        	type:"post",
 	        	dataType:"text",
 	        	async:false,
-	        	url:"${pageContext.request.contextPath }/today_delete",
+	        	url:"http://localhost:8090/today_delete",
 	        	data:{"articleNo":${todayselect.today_articleNo}},
 	        	success: function(data, textStatus){ 
 	        		alert(data);
