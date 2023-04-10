@@ -26,7 +26,7 @@
 
 <br>
 
-# Function Architecture
+# 기능 구조
 
 <details><summary> <b>메인, 회원, 마이페이지, 관리자</b> </summary>
 
@@ -50,7 +50,7 @@
 <br>
 <br>
 
-# Class Architecture
+# 클래스 구조
 
 <details><summary> <b>메인페이지, 멤버</b> </summary>
 
@@ -81,7 +81,7 @@
 <br>
 <br>
 
-# Database Schema
+# 데이터베이스
 
 <details><summary> <b>회원</b> </summary>
 
@@ -114,7 +114,7 @@
 <br>
 <br>
 
-# Team & Contribution
+# 팀원 및 
 
 <details><summary> <b>강경필(PL)</b> </summary>
 
@@ -163,7 +163,7 @@
 <br>
 <br>
 
-# Skill & Tools
+# 기술스택
 
 <details><summary> <b>Back-end</b> </summary>
 
