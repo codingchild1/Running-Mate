@@ -22,7 +22,7 @@
 <br>
 
 # Demo
-[![RunningMate Demo](images/image102.PNG)](https://www.youtube.com/watch?v=7uexY16tpgA&t=225s)) 
+[![RunningMate Demo](images/image102.PNG)](https://www.youtube.com/watch?v=7uexY16tpgA&t=225s)
 
 <br>
 
@@ -83,19 +83,12 @@
 
 # 데이터베이스
 
-<details><summary> <b>회원</b> </summary>
-
 ![test](images/Picture1.png)
 
-</details>
 <br>
 
-<details><summary> <b>피드백</b> </summary>
-
-|![test](images/image14.png)|![test](images/image15.png)|
 |---|---|
 
-</details>
 <br>
 <br>
 
