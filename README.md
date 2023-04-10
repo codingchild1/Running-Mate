@@ -12,7 +12,7 @@
 - 운동을 혼자 하다가 흥미를 갖기전에 관두는 경우가 多
 - 러닝코스 공유등과 운동할 메이트를 만들 수 있는 플랫폼을 만들고자 프로젝트를 시작함
 
-<img src="images/image101.PNG" width="400" height="400"/>       <img src="images/image100.PNG" width="400" height="400"/>
+<img src="images/image101.PNG" width="400" height="400"/>&ensp;&ensp;<img src="images/image100.PNG" width="400" height="400"/>
 
 <br>
 
