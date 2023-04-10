@@ -181,7 +181,6 @@
 * JAVA SE-11
 * Spring Boot
 * Spring MVC
-* Spring Security
 * Tomcat
 
 </details>
@@ -209,6 +208,9 @@
 
 * Git/GitHub
 * Naver Works
+* oven.app
+* erdcloud
+* googleSheet
 
 </details>
 <br>
