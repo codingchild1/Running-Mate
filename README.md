@@ -28,6 +28,12 @@
 
 # 기능 구조
 
+<details><summary> <b>다이어그램</b> </summary>
+
+
+![test](images/diagram.PNG)
+<br>
+
 <details><summary> <b>메인, 회원, 마이페이지, 관리자</b> </summary>
 
 ![test](images/image4.png)
