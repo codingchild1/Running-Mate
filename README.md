@@ -217,13 +217,9 @@
 
 <details><summary> <b>API & Library</b> </summary>
 
-* Naver API - CAPTCHA
-* Kakao API - Login
-* Riot API - Summoner-V4
-* Riot API - Champion-Mastery-V4
-* Riot API - League-V4
-* Google SMTP
-* Toast UI Editor  
+* API Docs - mapbox
+* Kakao API - KakaoMap
+* Ck Editor  
   
 </details>
 
