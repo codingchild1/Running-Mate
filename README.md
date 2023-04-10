@@ -116,17 +116,18 @@
 
 # 팀원 및 
 
-<details><summary> <b>강경필(PL)</b> </summary>
+<details><summary> <b>채효주(PL)</b> </summary>
 
-* 메인 페이지 전체(F, B) / 마이 페이지 전체(F, B) / 듀오 매칭 전체(B)
-* 로그인/회원가입 – 카카오 연동, SMTP(주, B)
-* 피드백게시판, 자유게시판 – 입력 유효성 검사(주, F)
-* 웹 페이지 전체 CSS 및 디자인 통합(보조, F)
+* 로그인, 회원가입 CRUD 구현
+* 마이페이지 JSP 디자인 설계 및 구현
+* 내가 쓴 글 보기
+* 회원목록 조회 / 회원 강제 탈퇴
+* 신고목록 조회 및 해당 게시물 삭제
 
 </details>
 <br>
 
-<details><summary> <b>박진석</b> </summary>
+<details><summary> <b>홍성호</b> </summary>
 
 * 자유게시판 전체(B)
 * 피드백 게시판 전체(B)
@@ -136,7 +137,7 @@
 </details>
 <br>
 
-<details><summary> <b>신명환</b> </summary>
+<details><summary> <b>김상원</b> </summary>
 
 * 듀오매칭 전체(F), 듀오매칭 DAO, Mapper(보조, B)
 * 정적 이미지 구현(보조)
@@ -144,7 +145,7 @@
 </details>
 <br>
 
-<details><summary> <b>이상훈</b> </summary>
+<details><summary> <b>김민정</b> </summary>
 
 * 자유게시판 전체(주, F) / 피드백게시판 전체(주, F)
 * 웹페이지 전체 CSS 및 디자인 통합(주, F)
@@ -153,7 +154,7 @@
 </details>
 <br>
 
-<details><summary> <b>임종우</b> </summary> 
+<details><summary> <b>조예선</b> </summary> 
 
 * 로그인/회원가입 전체(F, B)
 * 로그인/회원가입 – 카카오 연동, SMTP(보조, B)
