@@ -80,10 +80,6 @@
 ![test](images/Picture1.png)
 
 <br>
-
-|---|---|
-
-<br>
 <br>
 
 # 팀원 및 
