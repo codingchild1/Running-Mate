@@ -24,6 +24,8 @@
 # Demo
 [![RunningMate Demo](images/image102.PNG)]([https://www.youtube.com/watch?v=aholtN0kiyw](https://www.youtube.com/watch?v=7uexY16tpgA&t=225s)) 
 
+<br>
+
 # Function Architecture
 
 <details><summary> <b>메인, 회원, 마이페이지, 관리자</b> </summary>
