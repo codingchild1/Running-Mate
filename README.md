@@ -85,22 +85,7 @@
 
 <details><summary> <b>회원</b> </summary>
 
-![test](images/image10.png)
-
-</details>
-<br>
-
-<details><summary> <b>듀오매칭</b> </summary>
-
-![test](images/image11.png)
-
-</details>
-<br>
-
-<details><summary> <b>자유게시판</b> </summary>
-
-|![test](images/image12.png)|![test](images/image13.png)|
-|---|---|
+![test](images/Picture1.png)
 
 </details>
 <br>
