@@ -11,7 +11,7 @@
 - 그 중에 가장 높은 비율의 운동은 걷기 및 조깅(러닝)
 - 운동을 혼자 하다가 흥미를 갖기전에 관두는 경우가 多
 - 러닝코스 공유등과 운동할 메이트를 만들 수 있는 플랫폼을 만들고자 프로젝트를 시작함
-![image](https://user-images.githubusercontent.com/99957228/230900500-8317bc83-5520-4054-b6f6-4201caaf8a30.png){: width="100" height="100"}
+![image]{: width="100" height="100"}(https://user-images.githubusercontent.com/99957228/230900500-8317bc83-5520-4054-b6f6-4201caaf8a30.png)
 
 <br>
 
