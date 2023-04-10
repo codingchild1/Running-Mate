@@ -42,12 +42,6 @@
 </details>
 <br>
 
-<details><summary> <b>피드백 게시판</b> </summary>
-
-![test](images/image6.png)
-
-</details>
-<br>
 <br>
 
 # 클래스 구조
