@@ -30,9 +30,13 @@
 
 <details><summary> <b>다이어그램</b> </summary>
 <br>
+  
+![test](images/diagram.PNG)
+  
+<br>
 
 # 러닝메이트
-- 메이트 구하기
+
 <detail>
 - 메이트 전체 보기
 - 메이트 검색
@@ -40,7 +44,7 @@
 </detail>
 
 
-![test](images/diagram.PNG)
+
 
 </details>
 <br>
