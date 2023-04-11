@@ -26,6 +26,12 @@
 
 <br>
 
+# 프로젝트 일정
+
+<img src="images/image103.PNG" width="800" height="500"/>
+
+<br>
+
 # 기능 구조
 
 <details><summary> <b>다이어그램</b> </summary>
