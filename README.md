@@ -35,18 +35,12 @@
   
 <br>
 
-# 러닝메이트
-
+</details>
 <detail>
 - 메이트 전체 보기
 - 메이트 검색
 - 메이트 지도로 검색
 </detail>
-
-
-
-
-</details>
 <br>
 
 <br>
