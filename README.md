@@ -36,7 +36,7 @@
 <br>
 
 </details>
-<detail>
+<detail><summary> <b>메이트</b> </summary>
 - 메이트 전체 보기
 - 메이트 검색
 - 메이트 지도로 검색
