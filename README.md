@@ -17,7 +17,7 @@
 
 <br>
 
-<img src="images/image101.PNG" width="300" height="300"/>&ensp;&ensp;&ensp;&ensp;&ensp;<img src="images/image100.PNG" width="300" height="300"/>
+<img src="images/image101.PNG" width="1000" height="500"/>&ensp;&ensp;&ensp;&ensp;&ensp;<img src="images/image103.PNG" width="300" height="300"/>
 
 <br>
 
