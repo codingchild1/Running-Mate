@@ -28,7 +28,7 @@
 
 # 프로젝트 일정
 
-<img src="images/image101.PNG" width="400" height="400"/>
+<img src="images/image103.PNG" width="400" height="400"/>
 
 <br>
 
