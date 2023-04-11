@@ -83,6 +83,38 @@
 <br>
 <br>
 
+## 기능
+<details><summary> <b>메인, 회원, 마이페이지, 관리자 페이지</b> </summary>
+
+<img src="images/image10.png"/>
+
+</details>
+
+<details><summary> <b>메이트 구하기</b> </summary>
+
+<img src="images/image11.png"/>
+ 
+</details>
+
+<details><summary> <b>오늘의 러닝</b> </summary>
+
+<img src="images/image13.png"/>
+
+</details>
+
+<details><summary> <b>코스 공유</b> </summary>
+
+<img src="images/image14.png"/>
+
+</details>
+
+<details><summary> <b>자유게시판</b> </summary>
+
+<img src="images/image15.png"/>
+ 
+</details>
+
+<br>
 
 # 클래스 구조
 
