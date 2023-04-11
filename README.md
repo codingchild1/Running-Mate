@@ -36,20 +36,6 @@
 </details>
 <br>
 
-<details><summary> <b>메인, 회원, 마이페이지, 관리자</b> </summary>
-
-![test](images/image4.png)
-
-</details>
-<br>
-
-<details><summary> <b>자유게시판, 듀오매칭</b> </summary>
-
-![test](images/image5.png)
-
-</details>
-<br>
-
 <br>
 
 # 클래스 구조
