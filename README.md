@@ -77,6 +77,59 @@
 
 <br>
 
+# 클래스 구조
+
+<details><summary> <b>메인페이지</b> </summary>
+
+<img src="images/Main.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<details><summary> <b>멤버</b> </summary>
+
+<img src="images/Member.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<details><summary> <b>자유게시판</b> </summary>
+
+<img src="images/FBboard.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<details><summary> <b>오늘의러닝</b> </summary>
+
+<img src="images/Today.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<details><summary> <b>메이트구하기</b> </summary>
+
+<img src="images/Mate.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<details><summary> <b>공통기능</b> </summary>
+
+<img src="images/Sub.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<details><summary> <b>코스공유</b> </summary>
+
+<img src="images/Route.PNG" width="100%" height="100%"/>
+
+</details>
+<br>
+
+<br>
+
 # 데이터베이스
 
 ![test](images/Picture1.png)
